@@ -1,0 +1,154 @@
+\documentclass[xelatex,ja=standard, b5paper]{bxjsbook}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+% \usepackage[no]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{}
+    \pretitle{\vspace{\droptitle}}
+  \posttitle{}
+    \author{}
+    \preauthor{}\postauthor{}
+    \date{}
+    \predate{}\postdate{}
+  
+\makeatletter
+\def\emptypage@emptypage{%
+    \hbox{}%
+    \thispagestyle{headings}%
+    \newpage%    
+}%
+\def\cleardoublepage{%
+        \clearpage%
+        \if@twoside%
+            \ifodd\c@page%
+                % do nothing
+            \else%
+                \emptypage@emptypage%
+            \fi%
+        \fi%
+    }%
+\makeatother
+
+\begin{document}
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{hajimeni}{%
+\chapter*{はじめに}\label{hajimeni}}
+\addcontentsline{toc}{chapter}{はじめに}
+
+本テンプレートは同人誌の原稿を書くためのテンプレートです。
+
+\hypertarget{ux3068ux3066ux3082ux304aux4e16ux8a71ux306bux306aux3063ux305fux30b5ux30a4ux30c8}{%
+\section{とてもお世話になったサイト}\label{ux3068ux3066ux3082ux304aux4e16ux8a71ux306bux306aux3063ux305fux30b5ux30a4ux30c8}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://teastat.blogspot.com/2019/01/bookdown.html}{Bookdownによる技術系同人誌執筆}
+\end{itemize}
+
+\hypertarget{setting}{%
+\chapter{設定}\label{setting}}
+
+\hypertarget{setting_japanese}{%
+\section{日本語}\label{setting_japanese}}
+
+\hypertarget{caution}{%
+\chapter{注意事項}\label{caution}}
+
+\begin{itemize}
+\tightlist
+\item
+  奇数ページだと1ページ白紙になるので，偶数ページにしないとだめ
+\end{itemize}
+
+\clearpage
+\vspace*{\stretch{1}}
+\begin{flushright}
+\begin{minipage}{0.5\hsize}
+\begin{description}
+  \item{著者：} 著者名
+  \item{発行：} 2019年11月18日
+  \item{サークル名：} サークル名
+  \item{連絡先：} メールアドレス
+  \item{印刷：} 印刷所名
+\end{description}
+\end{minipage}
+\end{flushright}
+\clearpage
+
+
+\end{document}
