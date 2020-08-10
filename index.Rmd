@@ -2,18 +2,13 @@
 # title:  "タイトル"
 #author: "著者名"
 site: bookdown::bookdown_site
-output: 
-    bookdown::gitbook: default
-    bookdown::pdf_book:
-      latex_engine: xelatex
-      keep_tex: yes
-      pandoc_args: --top-level-division=chapter
-      includes: 
-        in_header: preamble.tex
-        after_body: after.tex
 documentclass: bxjsbook
 classoption: xelatex,ja=standard, b5paper
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
 
 # はじめに {-#hajimeni}
 
@@ -30,7 +25,9 @@ classoption: xelatex,ja=standard, b5paper
 
 そこで本書では目的を絞って、Rを使いたいと思わせる部分を解説することを目指します。Rでどんな便利なことができるか、入門書などでもあまり深く解説されてない部分にフォーカスして紹介します。
 
-便利なことといってもいろいろあるので、その中でも、つまづくと嫌になってしまうことの多そうな、「手元のexcelデータを読み込む」所に着目しました。データさえスムーズに読み込めれば、後はすぐれた解説がネット上でもたくさんあり、やりたいことが可能になる環境が整うからです。
+便利なことといってもいろいろあるので、その中でも、つまづくと嫌になってしまうことの多そうな、「手元のexcelデータを読み込む」所に着目しました。解析したいデータは山ほどあれど、世の中綺麗なデータばかりとは限りません。その読み込みの際にいかに楽をできるかという点を意識しています。
+
+データさえスムーズに読み込めれば、後はすぐれた解説がネット上でもたくさんあり、やりたいことが可能になる環境が整うからです。
 
 excelファイルをただ読みこむといってもいろんなバリエーションが考えられます。その単なる読みこみプロセスを通じて、Rを使う上で便利な様々な関数や手続きを学ぶこともできるでしょう。戦いの中で自然に強くなった的な効果も見込めるかもしれません。
 
@@ -46,5 +43,6 @@ RとRStudioのインストールや基本的な使い方は、上記で紹介し
 * 複数のファイル、または複数シートに分かれた
 
 
-
+* 免責事項
+  + この本に書いてある内容は、やわらかクジラが学習したことをまとめているものにすぎないため、正常な動作の保証はできません。使用する際は、自己責任でお願いします。 
 

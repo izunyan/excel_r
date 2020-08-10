@@ -27,7 +27,8 @@ penguins %>% count(island)
 
 
 library(writexl)
-library(lubridate)
+library(tidyverse)
+# library(lubridate)
 
 penguins <- penguins
 
@@ -37,16 +38,33 @@ penguins <-
                           species == "Chinstrap" ~ "ヒゲ",
                           species == "Gentoo"    ~ "ジェンツー"))
 
-penguins <- 
-  penguins %>% 
-  select(-species)
+# penguins <- 
+#   penguins %>% 
+#   select(-species)
 
 penguins %>% count(種類)
+
+penguins <- 
+penguins %>% 
+  select(species,種類, everything())
 
 write_xlsx(penguins, "data/ペンギン.xlsx")
 
 
+library(readxl)
+
+df <- 
+read_xlsx("data/ペンギン.xlsx")
 
 
+# シート別にデータがあるexcelファイル作成
+library(writexl)
 
+p_list <- 
+  split(df, df$種類)
 
+write_xlsx(p_list, "data/ペンギン（シート別）.xlsx")
+
+library(stringi)
+
+stri_trans_nfkc("ﾍﾟﾝｷﾞﾝ")

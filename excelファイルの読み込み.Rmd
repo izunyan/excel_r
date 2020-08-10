@@ -1,65 +1,162 @@
+
 # Excelファイルを読み込む {#readingexcel}
+
+Excelファイルを読みこむには、`readxl`パッケージを使います。
 
 ## 一つのExcelファイルを読み込む
 
-* dataフォルダに入っている「データ.xlsx」を開く
-* デフォルトでは一番最初のシートのデータが読みこまれる
+* dataフォルダ（`data/`で表現）に入っている「ペンギン.xlsx」を開く
 
-```{r eval=FALSE, include=FALSE}
+```{r}
 library(readxl)
-df_a <- 
-  read_excel("data/データ.xlsx")
-df_a
+
+# excelファイルの読み込み
+df <- 
+ read_xlsx("data/ペンギン.xlsx")
+
+# データの表示
+head(df)
+``` 
+
+上記コードを実行すると、RStudioの右上（デフォルトの配置であれば）のEnvironmentタブに、
+
+`df  344 obs. of 9 variables`
+
+という表示が出ると思います。つまり、344行のデータと9列の変数が入っているデータということを示しています。
+
+`head(df)`と打つことで、最初の6行分のデータが表示されます。
+
+### パスの自動補完
+
+ * `read_xlsx("")`と打った後に、`" "`の中にカーソルを置いて、tabキーを打つと、プロジェクトの中身が一覧で表示されるので、選んでいくだけで目的のファイルがキーボードを打つことなしに選べます！
+
+*  上の階層のフォルダに行きたいときは、`../`と打てば可能です
+
+### 列名がひどい場合の読み込み
+```{r}
+read_xlsx("data/ペンギン（ひどい列名）ver.xlsx")
 ```
+
+読めることは読めるが、今後のデータ処理を進めるうえで不安が残る。
+
+#### スペースや記号などを自動的に変換してくれる関数できれいに
+```{r}
+library(tidyverse)
+library(janitor)
+
+read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") %>% 
+  clean_names(case = "old_janitor")
+```
+
+`janitor`パッケージ
+
+##### %>% とは？
+
+
+#### 半角←→全角を自動で
+```{r}
+library(stringi)
+read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") %>% 
+  rename_with(~stri_trans_nfkc(.),
+              everything())
+  
+```
+
+#### 上記の合わせ技
+```{r}
+read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") %>% 
+  rename_with(~stri_trans_nfkc(.),
+              everything()) %>% 
+    clean_names(case = "old_janitor")
+
+```
+
+
 
 ## シートを指定して読みこむ
 ### シート名の確認
 
-readxl::excel_sheets
+`readxl`の`excel_sheets()`関数でシート名の一覧を取得できます。
 
-```{r eval=FALSE, include=FALSE}
-excel_sheets("data/データ.xlsx")
+```{r}
+excel_sheets("data/ペンギン（シート別）.xlsx")
 ```
 
-
-### 読み込み
-```{r eval=FALSE, include=FALSE}
-df_m <- 
-  read_excel("data/データ.xlsx", sheet = "μ's" )
-df_m
+### 普通の読み込み
+```{r}
+read_xlsx("data/ペンギン（シート別）.xlsx")
 ```
 
+デフォルトでは一番最初のシートのデータが読みこまれます。ここでは、シート「アデリー」が読み込まれました。
 
-## すべてのシートから読みこんで1つのデータセットにまとめる
+
+
+
+### シートを指定した読み込み
+```{r}
+read_excel("data/ペンギン（シート別）.xlsx", sheet = "ジェンツー" )
+```
+
+引数の`sheet =`にシート名を指定することで読み込めます。 
+
+
 ### すべてのシートから読み込み
 
-* 
+ここで一気にレベルが上がりますが、これこそがRを使ってexcelファイルを読みこむ便利な部分なので、その魅力をみていきましょう。
 
-```{r eval=FALSE, include=FALSE}
+```{r}
 library(tidyverse)
 library(janitor)   # clean_names()を使うため
-path_name <- "data/データ.xlsx" # データのパスを格納
+
+path_name <- "data/ペンギン（シート別）.xlsx" # データのパスを格納
+
 # シート名を取得しそれぞれから読み込んでリストにまとめる
 df_all <-
-  excel_sheets(path_name) %>%               # すべてのシートから読む方法（helpより）      
-  set_names() %>%                           # 名前付きベクトルにする、↓で作成されるリストの要素名にもなる
-  map(read_excel, path =  path_name) %>%
-  map(clean_names, case = "old_janitor")    # エラーになる文字を自動で整形。日本語の場合，case = "old_janitor"を引数に入れた方がいい場合も
-# 読みこんだデータ全体の構造を表示
+  excel_sheets(path_name) %>%                     
+  set_names() %>%                           # 名前付きベクトルにする、↓で作成されるリストの要素名に
+  map(read_excel, path =  path_name)
+
+# 読みこんだデータ全体のリスト構造を表示
 str(df_all)
 ```
 
+それぞれのexcelシートから読みこまれた3つのデータ（アデリー、ジェンツー、ヒゲ）はデータフレームとして、`df_all`にリストとしてまとめて格納されています。リストは最初は理解が難しいですが、慣れるとなんでもリストにしたくなるくらい便利なものです。個別に取り出してみてみましょう
 
-### 個別でExcelファイルに保存する
-
-* リストの要素名をファイル名にする
-
-```{r eval = FALSE}
-library(writexl)
-imap(df_all, ~write_xlsx(.x, path = str_c("result/",.y , ".xlsx")))
+```{r}
+df_all$ジェンツー
 ```
 
-### 一つのデータフレームにする
+これは、df_allというリストの中の、ジェンツーという要素を取り出す、というコードです。`$`が「の中の」という意味を表しています。自分でコードを打つと、`df_all$`と打った時点で、中の要素の一覧が表示されるはずなので、そこからクリックして選ぶこともできます。
+
+それでは、先ほど実行した読み込みコードの解説をします。
+
+```{r eval = FALSE}
+path_name <- "data/ペンギン（シート別）.xlsx"
+```
+
+これは、単にファイルの場所を`path_name`に格納しただけです。
+
+```{r eval = FALSE}
+df_all <-
+  excel_sheets(path_name) %>%                    
+  set_names() %>%                           
+  map(read_excel, path =  path_name) 
+```
+
+
+
+
+```{r}
+df_all <-
+  excel_sheets(path_name) %>%                    
+  set_names() %>%                           
+  map(read_excel, path =  path_name) %>%
+  map(clean_names, case = "old_janitor")    # エラーになる文字を自動で整形。日本語の場合，case = "old_janitor"を引数に入れた方がいい場合も
+```
+
+
+
+#### 一つのデータフレームにする
 
 * 引数`.id =`で、リストの要素名を変数の値として入れられる 
 
