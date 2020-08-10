@@ -1,0 +1,107 @@
+# Excelファイルを読み込む {#readingexcel}
+
+## 一つのExcelファイルを読み込む
+
+* dataフォルダに入っている「データ.xlsx」を開く
+* デフォルトでは一番最初のシートのデータが読みこまれる
+
+```{r eval=FALSE, include=FALSE}
+library(readxl)
+df_a <- 
+  read_excel("data/データ.xlsx")
+df_a
+```
+
+## シートを指定して読みこむ
+### シート名の確認
+
+readxl::excel_sheets
+
+```{r eval=FALSE, include=FALSE}
+excel_sheets("data/データ.xlsx")
+```
+
+
+### 読み込み
+```{r eval=FALSE, include=FALSE}
+df_m <- 
+  read_excel("data/データ.xlsx", sheet = "μ's" )
+df_m
+```
+
+
+## すべてのシートから読みこんで1つのデータセットにまとめる
+### すべてのシートから読み込み
+
+* 
+
+```{r eval=FALSE, include=FALSE}
+library(tidyverse)
+library(janitor)   # clean_names()を使うため
+path_name <- "data/データ.xlsx" # データのパスを格納
+# シート名を取得しそれぞれから読み込んでリストにまとめる
+df_all <-
+  excel_sheets(path_name) %>%               # すべてのシートから読む方法（helpより）      
+  set_names() %>%                           # 名前付きベクトルにする、↓で作成されるリストの要素名にもなる
+  map(read_excel, path =  path_name) %>%
+  map(clean_names, case = "old_janitor")    # エラーになる文字を自動で整形。日本語の場合，case = "old_janitor"を引数に入れた方がいい場合も
+# 読みこんだデータ全体の構造を表示
+str(df_all)
+```
+
+
+### 個別でExcelファイルに保存する
+
+* リストの要素名をファイル名にする
+
+```{r eval = FALSE}
+library(writexl)
+imap(df_all, ~write_xlsx(.x, path = str_c("result/",.y , ".xlsx")))
+```
+
+### 一つのデータフレームにする
+
+* 引数`.id =`で、リストの要素名を変数の値として入れられる 
+
+```{r eval=FALSE, include=FALSE}
+bind_rows(df_all, .id = "group")
+```
+
+
+
+## 複数のExcelファイルを読み込む
+### 読み込むファイル名の一覧のオブジェクト作成
+```{r eval=FALSE, include=FALSE}
+  files <-
+    list.files(path = "result/", full.names = TRUE) # resultフォルダから
+```
+
+### ファイルを一括で読み込む
+```{r eval=FALSE, include=FALSE}
+ldata <-
+    map(files, ~read_xlsx(.))
+```
+
+### ファイル名抽出
+```{r eval=FALSE, include=FALSE}
+file_name <- 
+  str_replace(files, ".xlsx", "") %>% 
+  str_replace("result/", "")
+```
+
+### リストの要素名にファイル名を付与
+```{r eval=FALSE, include=FALSE}
+ldata <-
+    set_names(ldata, file_name)
+```
+
+### リストの各要素を1つのデータフレームに統合
+```{r eval=FALSE, include=FALSE}
+bind_rows(ldata, .id = "group")
+```
+
+
+
+
+
+

@@ -1,0 +1,76 @@
+---
+title: "test"
+output: html_document
+---
+
+
+
+
+
+# csvファイルの読み込み
+
+* 文字化け注意！
+* WindowsおよびExcelで作成したファイルは多くの場合SHIT-JISで作られていることが多い
+* 以下のコード実行の前提として，Rstudioの設定を変更しておく
+  + Tools > Global Options > Code > Saving > Default text encodingsをUTF-8に
+
+## read_csv()
+### utf-8でエンコードされたcsvファイル
+
+* `readr::read_csv()`は，utf-8でエンコードされたファイルが前提
+* WindowsでExcel等で作った場合はこれじゃないことが多いはず
+
+```{r eval=FALSE, include=FALSE}
+library(readr)
+read_csv("data/データ（UTF-8）.csv")
+```
+
+
+
+### 【文字化けの例】SHIT-JISでエンコードされたcsvファイル
+
+* 正確にはSHIT-JISの拡張版であるcp932
+* 変数名も文字化けして読めなくなるので、`clean_names()`で読める形式に変換している
+
+```{r eval=FALSE, include=FALSE}
+read_csv("data/データ（SHIT-JIS）.csv") %>% 
+  clean_names(case = "old_janitor")
+```
+
+### SHIT-JISでエンコードされたcsvファイル
+
+* これを読むためには，引数でSHIT-JISのファイルであることを指定する必要がある
+  + 正確にはSHIT-JISの拡張版であるcp932
+
+
+```{r eval=FALSE, include=FALSE}
+read_csv("data/データ（SHIT-JIS）.csv", locale = locale(encoding = "cp932") )
+```
+
+## read.csv
+
+* 従来のcsvを読む関数`read.csv()`を使えば，デフォルトでSHIT-JISのファイルは読める
+
+```{r eval=FALSE, include=FALSE}
+read.csv("data/データ（SHIT-JIS）.csv")
+```
+
+* UTF-8を読む場合
+
+```{r eval=FALSE, include=FALSE}
+read.csv("data/データ（UTF-8）.csv", encoding = "UTF-8")
+```
+
+
+
+# その他
+## 複数シートにデータが入ったExcelファイルを作成（データ作成用のためここでは実行しない）
+
+* データフレーム内の特定の変数で分割したデータフレームのリストを作成
+
+```{r eval = FALSE}
+iris_list <- 
+  split(iris, iris$Species)
+write_xlsx(iris_list, "data/iris.xlsx")
+rm(iris_list) # いったん削除
+```
