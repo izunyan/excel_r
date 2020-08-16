@@ -159,11 +159,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>II excelファイルを保存する</b></span></li>
 <li class="chapter" data-level="5" data-path="一つのexcelファイルを保存する.html"><a href="一つのexcelファイルを保存する.html"><i class="fa fa-check"></i><b>5</b> 一つのexcelファイルを保存する</a></li>
-<li class="chapter" data-level="6" data-path="リスト内の複数のファイルを保存する.html"><a href="リスト内の複数のファイルを保存する.html"><i class="fa fa-check"></i><b>6</b> リスト内の複数のファイルを保存する</a><ul>
-<li class="chapter" data-level="6.1" data-path="リスト内の複数のファイルを保存する.html"><a href="リスト内の複数のファイルを保存する.html#カテゴリ別平均値の作成"><i class="fa fa-check"></i><b>6.1</b> カテゴリ別平均値の作成</a></li>
-<li class="chapter" data-level="6.2" data-path="リスト内の複数のファイルを保存する.html"><a href="リスト内の複数のファイルを保存する.html#データフレームをカテゴリ別に分割する"><i class="fa fa-check"></i><b>6.2</b> データフレームをカテゴリ別に分割する</a></li>
-<li class="chapter" data-level="6.3" data-path="リスト内の複数のファイルを保存する.html"><a href="リスト内の複数のファイルを保存する.html#個別でexcelファイルに保存する"><i class="fa fa-check"></i><b>6.3</b> 個別でExcelファイルに保存する</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="リスト内の複数のファイルを保存する.html"><a href="リスト内の複数のファイルを保存する.html#サンプルデータセット作成コード"><i class="fa fa-check"></i><b>6.3.1</b> サンプルデータセット作成コード</a></li>
+<li class="chapter" data-level="6" data-path="複数のファイルを一度に保存する.html"><a href="複数のファイルを一度に保存する.html"><i class="fa fa-check"></i><b>6</b> 複数のファイルを一度に保存する</a><ul>
+<li class="chapter" data-level="6.1" data-path="複数のファイルを一度に保存する.html"><a href="複数のファイルを一度に保存する.html#カテゴリ別平均値の作成"><i class="fa fa-check"></i><b>6.1</b> カテゴリ別平均値の作成</a></li>
+<li class="chapter" data-level="6.2" data-path="複数のファイルを一度に保存する.html"><a href="複数のファイルを一度に保存する.html#データフレームをカテゴリ別に分割する"><i class="fa fa-check"></i><b>6.2</b> データフレームをカテゴリ別に分割する</a></li>
+<li class="chapter" data-level="6.3" data-path="複数のファイルを一度に保存する.html"><a href="複数のファイルを一度に保存する.html#個別でexcelファイルに保存する"><i class="fa fa-check"></i><b>6.3</b> 個別でExcelファイルに保存する</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="複数のファイルを一度に保存する.html"><a href="複数のファイルを一度に保存する.html#サンプルデータセット作成コード"><i class="fa fa-check"></i><b>6.3.1</b> サンプルデータセット作成コード</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -299,7 +299,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb27-2"><a href="シートを指定して読みこむ.html#cb27-2"></a><span class="st">  </span><span class="kw">set_names</span>()</span></code></pre></div>
 <pre><code>##     アデリー   ジェンツー         ヒゲ 
 ##   &quot;アデリー&quot; &quot;ジェンツー&quot;       &quot;ヒゲ&quot;</code></pre>
-<p>です。それぞれについて<code>map()</code>を使って<code>read_excel()</code>を1つ1つのシート（ここでは作成した名前付きベクトルの要素）に適用していき、データを読み込みデータフレームにし、1つのリストにまとめるという作業をします。</p>
+<p>です。それぞれについて<code>purrr</code>パッケージの<code>map()</code>関数を使って<code>read_excel()</code>を1つ1つのシート（ここでは作成した名前付きベクトルの要素）に適用していき、データを読み込みデータフレームにし、1つのリストにまとめるという作業をします。</p>
 <div id="onedflist" class="section level3">
 <h3><span class="header-section-number">3.4.1</span> 一つのデータフレームにする</h3>
 <p><code>bind_rows()</code>は、データフレームを縦に連結します。データフレームがリストになったものが引数にくると、それらをすべて縦につなげてくれます。引数<code>.id =</code>で、リストの要素名を変数の値として入れることができるので、どのデータフレームから来たのか識別することが可能になります。ここでは<code>group</code>という名前にしています。</p>
@@ -342,7 +342,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3 ヒゲ  Chinst~ ヒゲ  Dream            50.2          18.7
 ## # ... with 4 more variables: flipper_length_mm &lt;dbl&gt;,
 ## #   body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
-
 </div>
 </div>
 </div>
@@ -395,7 +394,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["excel_r.pdf"],
 "toc": {
 "collapse": "subsection"
 }

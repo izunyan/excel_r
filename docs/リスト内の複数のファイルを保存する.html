@@ -188,11 +188,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>これが活躍する場面としては、たとえばカテゴリ別（例：会社の部署別など）に集計した要約値をそのカテゴリ別にファイルにするといった状況が思いつきますので、それをやってみます。</p>
 <div id="カテゴリ別平均値の作成" class="section level2">
 <h2><span class="header-section-number">6.1</span> カテゴリ別平均値の作成</h2>
+<p>クチバシの長さと大きさを表す変数である、<code>bill_length_mm</code>、<code>bill_depth_mm</code>について、平均値と欠損を抜いたサンプルサイズを種類別に計算します。</p>
+<p><code>group_by()</code>でカテゴリ別にしたい変数を指定し、<code>summarise()</code>で平均値とサンプルサイズを計算するコードが以下になります。</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="リスト内の複数のファイルを保存する.html#cb46-1"></a>df_group_mean &lt;-<span class="st"> </span></span>
 <span id="cb46-2"><a href="リスト内の複数のファイルを保存する.html#cb46-2"></a><span class="st">  </span>df <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb46-3"><a href="リスト内の複数のファイルを保存する.html#cb46-3"></a><span class="st">  </span><span class="kw">group_by</span>(種類) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb46-4"><a href="リスト内の複数のファイルを保存する.html#cb46-4"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="kw">across</span>(</span>
-<span id="cb46-5"><a href="リスト内の複数のファイルを保存する.html#cb46-5"></a>                   <span class="kw">c</span>(bill_length_mm, bill_depth_mm,),</span>
+<span id="cb46-5"><a href="リスト内の複数のファイルを保存する.html#cb46-5"></a>                   <span class="kw">c</span>(bill_length_mm, bill_depth_mm),</span>
 <span id="cb46-6"><a href="リスト内の複数のファイルを保存する.html#cb46-6"></a>                   <span class="kw">list</span>(<span class="dt">m =</span> <span class="op">~</span><span class="kw">mean</span>(., <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
 <span id="cb46-7"><a href="リスト内の複数のファイルを保存する.html#cb46-7"></a>                        <span class="dt">n =</span> <span class="op">~</span><span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(.))))</span>
 <span id="cb46-8"><a href="リスト内の複数のファイルを保存する.html#cb46-8"></a>           )</span>
