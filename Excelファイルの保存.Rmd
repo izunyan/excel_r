@@ -1,13 +1,71 @@
 # (PART) excelファイルを保存する {-#writingexcel}
 
+# 一つのexcelファイルを保存する
 
+`writexl`パッケージの`write_xlsx()`関数で、直接excelファイルとして出力ができます。ここでは、最初の6行に制限したデータフレームをexcelファイルとして保存してみます。
+```{r}
+library(writexl)
+```
 
-# 個別でExcelファイルに保存する
-
-* リストの要素名をファイル名にする
 
 ```{r eval = FALSE}
-library(writexl)
+# 最初の6行だけのデータに
+df_head <- head(df)
+
+write_xlsx(df_head, "out/df_head.xlsx")
+```
+
+`out/`の部分が出力先のフォルダを示しています。
+
+# リスト内の複数のファイルを保存する
+
+これが活躍する場面としては、たとえばカテゴリ別（例：会社の部署別など）に集計した要約値をそのカテゴリ別にファイルにするといった状況が思いつきますので、それをやってみます。
+
+## カテゴリ別平均値の作成
+```{r}
+df_group_mean <- 
+  df %>% 
+  group_by(種類) %>% 
+  summarise(across(
+                   c(bill_length_mm, bill_depth_mm,),
+                   list(m = ~mean(., na.rm = TRUE),
+                        n = ~sum(!is.na(.))))
+           )
+
+df_group_mean
+```
+
+
+## データフレームをカテゴリ別に分割する
+
+`split()`関数を使うことで、カテゴリ別にデータフレームを分割し、リストにまとめた結果を作成できます。
+
+分割に使う変数は、`df_group_mean$species`のように、データフレーム名の後に`$`をつけてその後に指定します。この変数の中身が、そのままリストの要素名になるので、後の処理がとても楽になります。
+
+
+```{r}
+
+df_gmean_list <- 
+  split(df_group_mean, df_group_mean$種類)
+
+df_gmean_list
+```
+
+## 個別でExcelファイルに保存する
+
+`purrr`パッケージの`imap()`関数を使って、リスト内の各データフレームに、それぞれの要素名をファイル名として、excelファイルに出力します。
+
+ここでは、リスト内の各要素を示すのが`.x`、要素名（位置）に当たるのは`.y`です。次々に代わるファイル名を作るのに、`str_c()`関数で文字列を結合しています。
+
+```{r results = 'hide'}
+imap(df_gmean_list, ~write_xlsx(.x, path = str_c("out/", .y , ".xlsx")))
+```
+
+### サンプルデータセット作成コード
+
+ちなみに`data/複数/`フォルダにあるサンプルデータセットは以下のコードで作りました。
+
+```{r eval = FALSE}
 imap(df_list, ~write_xlsx(.x, path = str_c("data/複数/",.y , ".xlsx")))
 ```
 

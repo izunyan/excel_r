@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1 前提：プロジェクトの設定 | index.split</title>
+  <title>6 リスト内の複数のファイルを保存する | index.split</title>
   <meta name="description" content="" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1 前提：プロジェクトの設定 | index.split" />
+  <meta property="og:title" content="6 リスト内の複数のファイルを保存する | index.split" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1 前提：プロジェクトの設定 | index.split" />
+  <meta name="twitter:title" content="6 リスト内の複数のファイルを保存する | index.split" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="一つのexcelファイルを読み込む.html"/>
+<link rel="prev" href="一つのexcelファイルを保存する.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -183,33 +183,78 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="project" class="section level1">
-<h1><span class="header-section-number">1</span> 前提：プロジェクトの設定</h1>
-<p>Rの基本的な使い方は他の情報源にゆだねていますが、ここだけは避けて通れないので解説しておきます。</p>
-<div id="どのフォルダのファイルかの指定" class="section level2">
-<h2><span class="header-section-number">1.1</span> どのフォルダのファイルかの指定</h2>
-<p>excelファイルに限らず、ファイルをRに読み込む際は、どのフォルダから読むのか、位置を正確に指定する必要があります。</p>
-<p>そこで重要となる概念が、「作業フォルダ」というものです。</p>
-<p>コンソールに<code>getwd()</code>と打って出てくるフォルダが現在の作業フォルダになります。</p>
+<div id="リスト内の複数のファイルを保存する" class="section level1">
+<h1><span class="header-section-number">6</span> リスト内の複数のファイルを保存する</h1>
+<p>これが活躍する場面としては、たとえばカテゴリ別（例：会社の部署別など）に集計した要約値をそのカテゴリ別にファイルにするといった状況が思いつきますので、それをやってみます。</p>
+<div id="カテゴリ別平均値の作成" class="section level2">
+<h2><span class="header-section-number">6.1</span> カテゴリ別平均値の作成</h2>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="リスト内の複数のファイルを保存する.html#cb46-1"></a>df_group_mean &lt;-<span class="st"> </span></span>
+<span id="cb46-2"><a href="リスト内の複数のファイルを保存する.html#cb46-2"></a><span class="st">  </span>df <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb46-3"><a href="リスト内の複数のファイルを保存する.html#cb46-3"></a><span class="st">  </span><span class="kw">group_by</span>(種類) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb46-4"><a href="リスト内の複数のファイルを保存する.html#cb46-4"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="kw">across</span>(</span>
+<span id="cb46-5"><a href="リスト内の複数のファイルを保存する.html#cb46-5"></a>                   <span class="kw">c</span>(bill_length_mm, bill_depth_mm,),</span>
+<span id="cb46-6"><a href="リスト内の複数のファイルを保存する.html#cb46-6"></a>                   <span class="kw">list</span>(<span class="dt">m =</span> <span class="op">~</span><span class="kw">mean</span>(., <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb46-7"><a href="リスト内の複数のファイルを保存する.html#cb46-7"></a>                        <span class="dt">n =</span> <span class="op">~</span><span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(.))))</span>
+<span id="cb46-8"><a href="リスト内の複数のファイルを保存する.html#cb46-8"></a>           )</span>
+<span id="cb46-9"><a href="リスト内の複数のファイルを保存する.html#cb46-9"></a></span>
+<span id="cb46-10"><a href="リスト内の複数のファイルを保存する.html#cb46-10"></a>df_group_mean</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 5
+##   種類  bill_length_mm_m bill_length_mm_n bill_depth_mm_m
+##   &lt;chr&gt;            &lt;dbl&gt;            &lt;int&gt;           &lt;dbl&gt;
+## 1 アデリー~             38.8              151            18.3
+## 2 ジェンツ~             47.5              123            15.0
+## 3 ヒゲ              48.8               68            18.4
+## # ... with 1 more variable: bill_depth_mm_n &lt;int&gt;</code></pre>
 </div>
-<div id="プロジェクトとは" class="section level2">
-<h2><span class="header-section-number">1.2</span> プロジェクトとは</h2>
-<p>RStudioの「プロジェクト」とは、作業フォルダにまつわる面倒な設定を意識しないですむ非常に便利な機能です。</p>
-<p>ざっくり説明すると、データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコード、出力をまとめておき、そのフォルダをプロジェクトとして設定することで、ファイルの読み書きの際の場所指定をいちいち意識しないで作業できるようになります。</p>
+<div id="データフレームをカテゴリ別に分割する" class="section level2">
+<h2><span class="header-section-number">6.2</span> データフレームをカテゴリ別に分割する</h2>
+<p><code>split()</code>関数を使うことで、カテゴリ別にデータフレームを分割し、リストにまとめた結果を作成できます。</p>
+<p>分割に使う変数は、<code>df_group_mean$species</code>のように、データフレーム名の後に<code>$</code>をつけてその後に指定します。この変数の中身が、そのままリストの要素名になるので、後の処理がとても楽になります。</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="リスト内の複数のファイルを保存する.html#cb48-1"></a>df_gmean_list &lt;-<span class="st"> </span></span>
+<span id="cb48-2"><a href="リスト内の複数のファイルを保存する.html#cb48-2"></a><span class="st">  </span><span class="kw">split</span>(df_group_mean, df_group_mean<span class="op">$</span>種類)</span>
+<span id="cb48-3"><a href="リスト内の複数のファイルを保存する.html#cb48-3"></a></span>
+<span id="cb48-4"><a href="リスト内の複数のファイルを保存する.html#cb48-4"></a>df_gmean_list</span></code></pre></div>
+<pre><code>## $アデリー
+## # A tibble: 1 x 5
+##   種類  bill_length_mm_m bill_length_mm_n bill_depth_mm_m
+##   &lt;chr&gt;            &lt;dbl&gt;            &lt;int&gt;           &lt;dbl&gt;
+## 1 アデリー~             38.8              151            18.3
+## # ... with 1 more variable: bill_depth_mm_n &lt;int&gt;
+## 
+## $ジェンツー
+## # A tibble: 1 x 5
+##   種類  bill_length_mm_m bill_length_mm_n bill_depth_mm_m
+##   &lt;chr&gt;            &lt;dbl&gt;            &lt;int&gt;           &lt;dbl&gt;
+## 1 ジェンツ~             47.5              123            15.0
+## # ... with 1 more variable: bill_depth_mm_n &lt;int&gt;
+## 
+## $ヒゲ
+## # A tibble: 1 x 5
+##   種類  bill_length_mm_m bill_length_mm_n bill_depth_mm_m
+##   &lt;chr&gt;            &lt;dbl&gt;            &lt;int&gt;           &lt;dbl&gt;
+## 1 ヒゲ              48.8               68            18.4
+## # ... with 1 more variable: bill_depth_mm_n &lt;int&gt;</code></pre>
+</div>
+<div id="個別でexcelファイルに保存する" class="section level2">
+<h2><span class="header-section-number">6.3</span> 個別でExcelファイルに保存する</h2>
+<p><code>purrr</code>パッケージの<code>imap()</code>関数を使って、リスト内の各データフレームに、それぞれの要素名をファイル名として、excelファイルに出力します。</p>
+<p>ここでは、リスト内の各要素を示すのが<code>.x</code>、要素名（位置）に当たるのは<code>.y</code>です。次々に代わるファイル名を作るのに、<code>str_c()</code>関数で文字列を結合しています。</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="リスト内の複数のファイルを保存する.html#cb50-1"></a><span class="kw">imap</span>(df_gmean_list, <span class="op">~</span><span class="kw">write_xlsx</span>(.x, <span class="dt">path =</span> <span class="kw">str_c</span>(<span class="st">&quot;out/&quot;</span>, .y , <span class="st">&quot;.xlsx&quot;</span>)))</span></code></pre></div>
+<div id="サンプルデータセット作成コード" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> サンプルデータセット作成コード</h3>
+<p>ちなみに<code>data/複数/</code>フォルダにあるサンプルデータセットは以下のコードで作りました。</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="リスト内の複数のファイルを保存する.html#cb51-1"></a><span class="kw">imap</span>(df_list, <span class="op">~</span><span class="kw">write_xlsx</span>(.x, <span class="dt">path =</span> <span class="kw">str_c</span>(<span class="st">&quot;data/複数/&quot;</span>,.y , <span class="st">&quot;.xlsx&quot;</span>)))</span></code></pre></div>
 
 </div>
 </div>
-
-
-
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="一つのexcelファイルを読み込む.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="一つのexcelファイルを保存する.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

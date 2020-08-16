@@ -24,7 +24,7 @@ ldata <-
 
 ### ファイル名抽出
 
-先ほど作成した`files`から、ファイル名部分だけに加工します。`str_replace()`は、文字の置換をする関数です。ここでは、拡張子とパス名をそれぞれ`""`、つまり空白に置換しています。
+先ほど作成した`files`から、ファイル名部分だけに加工します。`str_replace()`は、`stringr`パッケージの、文字の置換をする関数です。ここでは、拡張子とパス名をそれぞれ`""`、つまり空白に置換しています。
 
 ```{r}
 file_name <- 
@@ -42,7 +42,17 @@ ldata <-
 ldata
 ```
 
-## リストの各要素を1つのデータフレームに統合
-```{r eval=FALSE, include=FALSE}
+```{r  eval=FALSE, include=FALSE}
+# 読みこんだデータ全体のリスト構造を表示
+str(ldata,
+    width = 80,   # 幅の指定
+    vec.len = 2,  # 行数
+    list.len = 3) # 列数
+```
+
+これらを1つのデータフレームにまとめるには、 \@ref(onedflist)と同じ手順でできます。
+
+
+```{r eval = FALSE}
 bind_rows(ldata, .id = "group")
 ```

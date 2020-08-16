@@ -147,7 +147,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#普通の読み込み"><i class="fa fa-check"></i><b>3.2</b> 普通の読み込み</a></li>
 <li class="chapter" data-level="3.3" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#シートを指定した読み込み"><i class="fa fa-check"></i><b>3.3</b> シートを指定した読み込み</a></li>
 <li class="chapter" data-level="3.4" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#dflist"><i class="fa fa-check"></i><b>3.4</b> すべてのシートから読み込み</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#一つのデータフレームにする"><i class="fa fa-check"></i><b>3.4.1</b> 一つのデータフレームにする</a></li>
+<li class="chapter" data-level="3.4.1" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#onedflist"><i class="fa fa-check"></i><b>3.4.1</b> 一つのデータフレームにする</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="複数のexcelファイルを読み込む.html"><a href="複数のexcelファイルを読み込む.html"><i class="fa fa-check"></i><b>4</b> 複数のexcelファイルを読み込む</a><ul>
@@ -156,7 +156,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.1" data-path="複数のexcelファイルを読み込む.html"><a href="複数のexcelファイルを読み込む.html#ファイル名抽出"><i class="fa fa-check"></i><b>4.2.1</b> ファイル名抽出</a></li>
 <li class="chapter" data-level="4.2.2" data-path="複数のexcelファイルを読み込む.html"><a href="複数のexcelファイルを読み込む.html#リストの要素名にファイル名を付与"><i class="fa fa-check"></i><b>4.2.2</b> リストの要素名にファイル名を付与</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="複数のexcelファイルを読み込む.html"><a href="複数のexcelファイルを読み込む.html#リストの各要素を1つのデータフレームに統合"><i class="fa fa-check"></i><b>4.3</b> リストの各要素を1つのデータフレームに統合</a></li>
 </ul></li>
 <li class="part"><span><b>II excelファイルを保存する</b></span></li>
 <li class="chapter" data-level="5" data-path="個別でexcelファイルに保存する.html"><a href="個別でexcelファイルに保存する.html"><i class="fa fa-check"></i><b>5</b> 個別でExcelファイルに保存する</a></li>
@@ -182,8 +181,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>リストの要素名をファイル名にする</li>
 </ul>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="個別でexcelファイルに保存する.html#cb43-1"></a><span class="kw">library</span>(writexl)</span>
-<span id="cb43-2"><a href="個別でexcelファイルに保存する.html#cb43-2"></a><span class="kw">imap</span>(df_list, <span class="op">~</span><span class="kw">write_xlsx</span>(.x, <span class="dt">path =</span> <span class="kw">str_c</span>(<span class="st">&quot;data/複数/&quot;</span>,.y , <span class="st">&quot;.xlsx&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="個別でexcelファイルに保存する.html#cb44-1"></a><span class="kw">library</span>(writexl)</span>
+<span id="cb44-2"><a href="個別でexcelファイルに保存する.html#cb44-2"></a><span class="kw">imap</span>(df_list, <span class="op">~</span><span class="kw">write_xlsx</span>(.x, <span class="dt">path =</span> <span class="kw">str_c</span>(<span class="st">&quot;data/複数/&quot;</span>,.y , <span class="st">&quot;.xlsx&quot;</span>)))</span></code></pre></div>
 
 </div>
             </section>
@@ -234,7 +233,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["excel_r.pdf"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 }

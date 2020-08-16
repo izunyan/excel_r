@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="シートを指定して読みこむ.html"/>
-<link rel="next" href="個別でexcelファイルに保存する.html"/>
+<link rel="next" href="一つのexcelファイルを保存する.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -147,7 +147,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#普通の読み込み"><i class="fa fa-check"></i><b>3.2</b> 普通の読み込み</a></li>
 <li class="chapter" data-level="3.3" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#シートを指定した読み込み"><i class="fa fa-check"></i><b>3.3</b> シートを指定した読み込み</a></li>
 <li class="chapter" data-level="3.4" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#dflist"><i class="fa fa-check"></i><b>3.4</b> すべてのシートから読み込み</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#一つのデータフレームにする"><i class="fa fa-check"></i><b>3.4.1</b> 一つのデータフレームにする</a></li>
+<li class="chapter" data-level="3.4.1" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#onedflist"><i class="fa fa-check"></i><b>3.4.1</b> 一つのデータフレームにする</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="複数のexcelファイルを読み込む.html"><a href="複数のexcelファイルを読み込む.html"><i class="fa fa-check"></i><b>4</b> 複数のexcelファイルを読み込む</a><ul>
@@ -156,10 +156,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.1" data-path="複数のexcelファイルを読み込む.html"><a href="複数のexcelファイルを読み込む.html#ファイル名抽出"><i class="fa fa-check"></i><b>4.2.1</b> ファイル名抽出</a></li>
 <li class="chapter" data-level="4.2.2" data-path="複数のexcelファイルを読み込む.html"><a href="複数のexcelファイルを読み込む.html#リストの要素名にファイル名を付与"><i class="fa fa-check"></i><b>4.2.2</b> リストの要素名にファイル名を付与</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="複数のexcelファイルを読み込む.html"><a href="複数のexcelファイルを読み込む.html#リストの各要素を1つのデータフレームに統合"><i class="fa fa-check"></i><b>4.3</b> リストの各要素を1つのデータフレームに統合</a></li>
 </ul></li>
 <li class="part"><span><b>II excelファイルを保存する</b></span></li>
-<li class="chapter" data-level="5" data-path="個別でexcelファイルに保存する.html"><a href="個別でexcelファイルに保存する.html"><i class="fa fa-check"></i><b>5</b> 個別でExcelファイルに保存する</a></li>
+<li class="chapter" data-level="5" data-path="一つのexcelファイルを保存する.html"><a href="一つのexcelファイルを保存する.html"><i class="fa fa-check"></i><b>5</b> 一つのexcelファイルを保存する</a></li>
+<li class="chapter" data-level="6" data-path="リスト内の複数のファイルを保存する.html"><a href="リスト内の複数のファイルを保存する.html"><i class="fa fa-check"></i><b>6</b> リスト内の複数のファイルを保存する</a><ul>
+<li class="chapter" data-level="6.1" data-path="リスト内の複数のファイルを保存する.html"><a href="リスト内の複数のファイルを保存する.html#カテゴリ別平均値の作成"><i class="fa fa-check"></i><b>6.1</b> カテゴリ別平均値の作成</a></li>
+<li class="chapter" data-level="6.2" data-path="リスト内の複数のファイルを保存する.html"><a href="リスト内の複数のファイルを保存する.html#データフレームをカテゴリ別に分割する"><i class="fa fa-check"></i><b>6.2</b> データフレームをカテゴリ別に分割する</a></li>
+<li class="chapter" data-level="6.3" data-path="リスト内の複数のファイルを保存する.html"><a href="リスト内の複数のファイルを保存する.html#個別でexcelファイルに保存する"><i class="fa fa-check"></i><b>6.3</b> 個別でExcelファイルに保存する</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="リスト内の複数のファイルを保存する.html"><a href="リスト内の複数のファイルを保存する.html#サンプルデータセット作成コード"><i class="fa fa-check"></i><b>6.3.1</b> サンプルデータセット作成コード</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -197,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>ここでできた<code>ldata</code>は、<a href="シートを指定して読みこむ.html#dflist">3.4</a>で作成した<code>df_list</code>と同じ構造です。違いはそれぞれのデータフレームの要素名（アデリー、ジェンツー、ヒゲ）が入っていない点です。これは不便なので、以下で要素名を改めてつけます。</p>
 <div id="ファイル名抽出" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> ファイル名抽出</h3>
-<p>先ほど作成した<code>files</code>から、ファイル名部分だけに加工します。<code>str_replace()</code>は、文字の置換をする関数です。ここでは、拡張子とパス名をそれぞれ<code>""</code>、つまり空白に置換しています。</p>
+<p>先ほど作成した<code>files</code>から、ファイル名部分だけに加工します。<code>str_replace()</code>は、<code>stringr</code>パッケージの、文字の置換をする関数です。ここでは、拡張子とパス名をそれぞれ<code>""</code>、つまり空白に置換しています。</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="複数のexcelファイルを読み込む.html#cb39-1"></a>file_name &lt;-<span class="st"> </span></span>
 <span id="cb39-2"><a href="複数のexcelファイルを読み込む.html#cb39-2"></a><span class="st">  </span><span class="kw">str_replace</span>(files, <span class="st">&quot;.xlsx&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb39-3"><a href="複数のexcelファイルを読み込む.html#cb39-3"></a><span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;data/複数/&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
@@ -213,44 +219,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb41-4"><a href="複数のexcelファイルを読み込む.html#cb41-4"></a>ldata</span></code></pre></div>
 <pre><code>## $アデリー
 ## # A tibble: 152 x 9
-##   species 種類  island bill_length_mm bill_depth_mm flipper_length_~
-##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
-## 1 Adelie  アデリー~ Torge~           39.1          18.7              181
-## 2 Adelie  アデリー~ Torge~           39.5          17.4              186
-## 3 Adelie  アデリー~ Torge~           40.3          18                195
-## 4 Adelie  アデリー~ Torge~           NA            NA                 NA
-## 5 Adelie  アデリー~ Torge~           36.7          19.3              193
-## # ... with 147 more rows, and 3 more variables: body_mass_g &lt;dbl&gt;,
-## #   sex &lt;chr&gt;, year &lt;dbl&gt;
+##   species 種類  island bill_length_mm bill_depth_mm
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Adelie  アデリー~ Torge~           39.1          18.7
+## 2 Adelie  アデリー~ Torge~           39.5          17.4
+## 3 Adelie  アデリー~ Torge~           40.3          18  
+## 4 Adelie  アデリー~ Torge~           NA            NA  
+## 5 Adelie  アデリー~ Torge~           36.7          19.3
+## # ... with 147 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   year &lt;dbl&gt;
 ## 
 ## $ジェンツー
 ## # A tibble: 124 x 9
-##   species 種類  island bill_length_mm bill_depth_mm flipper_length_~
-##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
-## 1 Gentoo  ジェンツ~ Biscoe           46.1          13.2              211
-## 2 Gentoo  ジェンツ~ Biscoe           50            16.3              230
-## 3 Gentoo  ジェンツ~ Biscoe           48.7          14.1              210
-## 4 Gentoo  ジェンツ~ Biscoe           50            15.2              218
-## 5 Gentoo  ジェンツ~ Biscoe           47.6          14.5              215
-## # ... with 119 more rows, and 3 more variables: body_mass_g &lt;dbl&gt;,
-## #   sex &lt;chr&gt;, year &lt;dbl&gt;
+##   species 種類  island bill_length_mm bill_depth_mm
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Gentoo  ジェンツ~ Biscoe           46.1          13.2
+## 2 Gentoo  ジェンツ~ Biscoe           50            16.3
+## 3 Gentoo  ジェンツ~ Biscoe           48.7          14.1
+## 4 Gentoo  ジェンツ~ Biscoe           50            15.2
+## 5 Gentoo  ジェンツ~ Biscoe           47.6          14.5
+## # ... with 119 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   year &lt;dbl&gt;
 ## 
 ## $ヒゲ
 ## # A tibble: 68 x 9
-##   species 種類  island bill_length_mm bill_depth_mm flipper_length_~
-##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
-## 1 Chinst~ ヒゲ  Dream            46.5          17.9              192
-## 2 Chinst~ ヒゲ  Dream            50            19.5              196
-## 3 Chinst~ ヒゲ  Dream            51.3          19.2              193
-## 4 Chinst~ ヒゲ  Dream            45.4          18.7              188
-## 5 Chinst~ ヒゲ  Dream            52.7          19.8              197
-## # ... with 63 more rows, and 3 more variables: body_mass_g &lt;dbl&gt;,
-## #   sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
-</div>
-</div>
-<div id="リストの各要素を1つのデータフレームに統合" class="section level2">
-<h2><span class="header-section-number">4.3</span> リストの各要素を1つのデータフレームに統合</h2>
+##   species 種類  island bill_length_mm bill_depth_mm
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Chinst~ ヒゲ  Dream            46.5          17.9
+## 2 Chinst~ ヒゲ  Dream            50            19.5
+## 3 Chinst~ ヒゲ  Dream            51.3          19.2
+## 4 Chinst~ ヒゲ  Dream            45.4          18.7
+## 5 Chinst~ ヒゲ  Dream            52.7          19.8
+## # ... with 63 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   year &lt;dbl&gt;</code></pre>
+<p>これらを1つのデータフレームにまとめるには、 <a href="シートを指定して読みこむ.html#onedflist">3.4.1</a>と同じ手順でできます。</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="複数のexcelファイルを読み込む.html#cb43-1"></a><span class="kw">bind_rows</span>(ldata, <span class="dt">.id =</span> <span class="st">&quot;group&quot;</span>)</span></code></pre></div>
 
+</div>
 </div>
 </div>
 
@@ -262,7 +270,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="シートを指定して読みこむ.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="個別でexcelファイルに保存する.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="一つのexcelファイルを保存する.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -304,7 +312,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["excel_r.pdf"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 }

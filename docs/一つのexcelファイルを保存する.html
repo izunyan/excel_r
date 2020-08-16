@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1 前提：プロジェクトの設定 | index.split</title>
+  <title>5 一つのexcelファイルを保存する | index.split</title>
   <meta name="description" content="" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1 前提：プロジェクトの設定 | index.split" />
+  <meta property="og:title" content="5 一つのexcelファイルを保存する | index.split" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1 前提：プロジェクトの設定 | index.split" />
+  <meta name="twitter:title" content="5 一つのexcelファイルを保存する | index.split" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="一つのexcelファイルを読み込む.html"/>
+<link rel="prev" href="複数のexcelファイルを読み込む.html"/>
+<link rel="next" href="リスト内の複数のファイルを保存する.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -183,33 +183,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="project" class="section level1">
-<h1><span class="header-section-number">1</span> 前提：プロジェクトの設定</h1>
-<p>Rの基本的な使い方は他の情報源にゆだねていますが、ここだけは避けて通れないので解説しておきます。</p>
-<div id="どのフォルダのファイルかの指定" class="section level2">
-<h2><span class="header-section-number">1.1</span> どのフォルダのファイルかの指定</h2>
-<p>excelファイルに限らず、ファイルをRに読み込む際は、どのフォルダから読むのか、位置を正確に指定する必要があります。</p>
-<p>そこで重要となる概念が、「作業フォルダ」というものです。</p>
-<p>コンソールに<code>getwd()</code>と打って出てくるフォルダが現在の作業フォルダになります。</p>
-</div>
-<div id="プロジェクトとは" class="section level2">
-<h2><span class="header-section-number">1.2</span> プロジェクトとは</h2>
-<p>RStudioの「プロジェクト」とは、作業フォルダにまつわる面倒な設定を意識しないですむ非常に便利な機能です。</p>
-<p>ざっくり説明すると、データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコード、出力をまとめておき、そのフォルダをプロジェクトとして設定することで、ファイルの読み書きの際の場所指定をいちいち意識しないで作業できるようになります。</p>
-
-</div>
-</div>
-
-
-
+<div id="一つのexcelファイルを保存する" class="section level1">
+<h1><span class="header-section-number">5</span> 一つのexcelファイルを保存する</h1>
+<p><code>writexl</code>パッケージの<code>write_xlsx()</code>関数で、直接excelファイルとして出力ができます。ここでは、最初の6行に制限したデータフレームをexcelファイルとして保存してみます。</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="一つのexcelファイルを保存する.html#cb44-1"></a><span class="kw">library</span>(writexl)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="一つのexcelファイルを保存する.html#cb45-1"></a><span class="co"># 最初の6行だけのデータに</span></span>
+<span id="cb45-2"><a href="一つのexcelファイルを保存する.html#cb45-2"></a>df_head &lt;-<span class="st"> </span><span class="kw">head</span>(df)</span>
+<span id="cb45-3"><a href="一つのexcelファイルを保存する.html#cb45-3"></a></span>
+<span id="cb45-4"><a href="一つのexcelファイルを保存する.html#cb45-4"></a><span class="kw">write_xlsx</span>(df_head, <span class="st">&quot;out/df_head.xlsx&quot;</span>)</span></code></pre></div>
+<p><code>out/</code>の部分が出力先のフォルダを示しています。</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="一つのexcelファイルを読み込む.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="複数のexcelファイルを読み込む.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="リスト内の複数のファイルを保存する.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

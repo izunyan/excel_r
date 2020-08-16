@@ -147,7 +147,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#普通の読み込み"><i class="fa fa-check"></i><b>3.2</b> 普通の読み込み</a></li>
 <li class="chapter" data-level="3.3" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#シートを指定した読み込み"><i class="fa fa-check"></i><b>3.3</b> シートを指定した読み込み</a></li>
 <li class="chapter" data-level="3.4" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#dflist"><i class="fa fa-check"></i><b>3.4</b> すべてのシートから読み込み</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#一つのデータフレームにする"><i class="fa fa-check"></i><b>3.4.1</b> 一つのデータフレームにする</a></li>
+<li class="chapter" data-level="3.4.1" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#onedflist"><i class="fa fa-check"></i><b>3.4.1</b> 一つのデータフレームにする</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="複数のexcelファイルを読み込む.html"><a href="複数のexcelファイルを読み込む.html"><i class="fa fa-check"></i><b>4</b> 複数のexcelファイルを読み込む</a><ul>
@@ -156,10 +156,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.1" data-path="複数のexcelファイルを読み込む.html"><a href="複数のexcelファイルを読み込む.html#ファイル名抽出"><i class="fa fa-check"></i><b>4.2.1</b> ファイル名抽出</a></li>
 <li class="chapter" data-level="4.2.2" data-path="複数のexcelファイルを読み込む.html"><a href="複数のexcelファイルを読み込む.html#リストの要素名にファイル名を付与"><i class="fa fa-check"></i><b>4.2.2</b> リストの要素名にファイル名を付与</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="複数のexcelファイルを読み込む.html"><a href="複数のexcelファイルを読み込む.html#リストの各要素を1つのデータフレームに統合"><i class="fa fa-check"></i><b>4.3</b> リストの各要素を1つのデータフレームに統合</a></li>
 </ul></li>
 <li class="part"><span><b>II excelファイルを保存する</b></span></li>
-<li class="chapter" data-level="5" data-path="個別でexcelファイルに保存する.html"><a href="個別でexcelファイルに保存する.html"><i class="fa fa-check"></i><b>5</b> 個別でExcelファイルに保存する</a></li>
+<li class="chapter" data-level="5" data-path="一つのexcelファイルを保存する.html"><a href="一つのexcelファイルを保存する.html"><i class="fa fa-check"></i><b>5</b> 一つのexcelファイルを保存する</a></li>
+<li class="chapter" data-level="6" data-path="リスト内の複数のファイルを保存する.html"><a href="リスト内の複数のファイルを保存する.html"><i class="fa fa-check"></i><b>6</b> リスト内の複数のファイルを保存する</a><ul>
+<li class="chapter" data-level="6.1" data-path="リスト内の複数のファイルを保存する.html"><a href="リスト内の複数のファイルを保存する.html#カテゴリ別平均値の作成"><i class="fa fa-check"></i><b>6.1</b> カテゴリ別平均値の作成</a></li>
+<li class="chapter" data-level="6.2" data-path="リスト内の複数のファイルを保存する.html"><a href="リスト内の複数のファイルを保存する.html#データフレームをカテゴリ別に分割する"><i class="fa fa-check"></i><b>6.2</b> データフレームをカテゴリ別に分割する</a></li>
+<li class="chapter" data-level="6.3" data-path="リスト内の複数のファイルを保存する.html"><a href="リスト内の複数のファイルを保存する.html#個別でexcelファイルに保存する"><i class="fa fa-check"></i><b>6.3</b> 個別でExcelファイルに保存する</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="リスト内の複数のファイルを保存する.html"><a href="リスト内の複数のファイルを保存する.html#サンプルデータセット作成コード"><i class="fa fa-check"></i><b>6.3.1</b> サンプルデータセット作成コード</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -181,6 +187,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">2</span> 一つのexcelファイルを読み込む</h1>
 <ul>
 <li>dataフォルダ（<code>data/</code>で表現）に入っている「ペンギン.xlsx」を開きます。</li>
+<li><code>read_xlsx()</code>関数を使います。したがって、以下すべてファイル形式は<code>.xlsx</code>を想定します。
+<ul>
+<li><code>read_xls()</code>や<code>read_excel()</code>もあるので、用途によって使い分けられます。ファイル形式が混ざっている時は<code>read_excel()</code>が有用かもしれません。</li>
+</ul></li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="一つのexcelファイルを読み込む.html#cb1-1"></a><span class="kw">library</span>(readxl)</span>
 <span id="cb1-2"><a href="一つのexcelファイルを読み込む.html#cb1-2"></a></span>
@@ -191,15 +201,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-7"><a href="一つのexcelファイルを読み込む.html#cb1-7"></a><span class="co"># データの表示</span></span>
 <span id="cb1-8"><a href="一つのexcelファイルを読み込む.html#cb1-8"></a>df</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 9
-##   species 種類  island bill_length_mm bill_depth_mm flipper_length_~
-##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
-## 1 Adelie  アデリー~ Torge~           39.1          18.7              181
-## 2 Adelie  アデリー~ Torge~           39.5          17.4              186
-## 3 Adelie  アデリー~ Torge~           40.3          18                195
-## 4 Adelie  アデリー~ Torge~           NA            NA                 NA
-## 5 Adelie  アデリー~ Torge~           36.7          19.3              193
-## # ... with 339 more rows, and 3 more variables: body_mass_g &lt;dbl&gt;,
-## #   sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
+##   species 種類  island bill_length_mm bill_depth_mm
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Adelie  アデリー~ Torge~           39.1          18.7
+## 2 Adelie  アデリー~ Torge~           39.5          17.4
+## 3 Adelie  アデリー~ Torge~           40.3          18  
+## 4 Adelie  アデリー~ Torge~           NA            NA  
+## 5 Adelie  アデリー~ Torge~           36.7          19.3
+## # ... with 339 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   year &lt;dbl&gt;</code></pre>
 <p>上記コードを実行すると、RStudioの右上（デフォルトの配置であれば）のEnvironmentタブに、</p>
 <p><code>df  344 obs. of 9 variables</code></p>
 <p>という表示が出ると思います。つまり、344行のデータと9列の変数が入っているデータということを示しています。</p>
@@ -207,22 +218,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="最高な機能だよパスの自動補完" class="section level2">
 <h2><span class="header-section-number">2.1</span> 最高な機能だよ！パスの自動補完</h2>
 <ul>
-<li><p><code>read_xlsx("")</code>と打った後に、<code>" "</code>の中にカーソルを置いて、tabキーを押すと、プロジェクトの中身が一覧で表示されるので、選んでいくだけで目的のファイルがキーボードを打つことなしに選べます！</p></li>
-<li><p>上の階層のフォルダに行きたいときは、<code>" "</code>の中に<code>../</code>と打てば可能です。その後にtabキーを押せば上の階層のフォルダが選べます。</p></li>
+<li><code>read_xlsx("")</code>と打った後に、<code>" "</code>の中にカーソルを置いて、tabキーを押すと、プロジェクトの中身が一覧で表示されるので、選んでいくだけで目的のファイルがキーボードを打つことなしに選べます！
+<ul>
+<li>RStudioは<code>" "</code>と打てばどこでもこの補完が可能です</li>
+</ul></li>
+<li>上の階層のフォルダに行きたいときは、<code>" "</code>の中に<code>../</code>と打てば可能です。その後にtabキーを押せば上の階層のフォルダが選べます。</li>
 </ul>
 </div>
 <div id="列名がひどい場合の読み込み" class="section level2">
 <h2><span class="header-section-number">2.2</span> 列名がひどい場合の読み込み</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="一つのexcelファイルを読み込む.html#cb3-1"></a><span class="kw">read_xlsx</span>(<span class="st">&quot;data/ペンギン（ひどい列名）ver.xlsx&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 9
-##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`~ `②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）~
-##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                  &lt;dbl&gt;            &lt;dbl&gt;
-## 1 Adelie        アデリー Torgersen               39.1             18.7
-## 2 Adelie        アデリー Torgersen               39.5             17.4
-## 3 Adelie        アデリー Torgersen               40.3             18  
-## 4 Adelie        アデリー Torgersen               NA               NA  
-## 5 Adelie        アデリー Torgersen               36.7             19.3
-## # ... with 339 more rows, and 4 more variables: `翼：長さ(mm)` &lt;dbl&gt;,
+##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`~
+##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                  &lt;dbl&gt;
+## 1 Adelie        アデリー Torgersen               39.1
+## 2 Adelie        アデリー Torgersen               39.5
+## 3 Adelie        アデリー Torgersen               40.3
+## 4 Adelie        アデリー Torgersen               NA  
+## 5 Adelie        アデリー Torgersen               36.7
+## # ... with 339 more rows, and 5 more variables:
+## #   `②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）` &lt;dbl&gt;, `翼：長さ(mm)` &lt;dbl&gt;,
 ## #   `■体重　単位はｇ` &lt;dbl&gt;, `&lt;U+329B&gt;&lt;U+329A&gt;` &lt;chr&gt;,
 ## #   `２００７～２００９` &lt;dbl&gt;</code></pre>
 <p>読めることは読めますが、今後のデータ処理を進めるうえで不安が残ります。</p>
@@ -236,18 +251,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-4"><a href="一つのexcelファイルを読み込む.html#cb5-4"></a><span class="kw">read_xlsx</span>(<span class="st">&quot;data/ペンギン（ひどい列名）ver.xlsx&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb5-5"><a href="一つのexcelファイルを読み込む.html#cb5-5"></a><span class="st">  </span><span class="kw">clean_names</span>(<span class="dt">case =</span> <span class="st">&quot;old_janitor&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 9
-##   sｐｅｃｉｅｓ 種_類 x_島の名前 x_クチバシ_長さ_ｍｍ~ x_ｸﾁﾊﾞｼ_大きさ_ｍｍ~
-##   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt;                 &lt;dbl&gt;            &lt;dbl&gt;
-## 1 Adelie        アデリー~ Torgersen              39.1             18.7
-## 2 Adelie        アデリー~ Torgersen              39.5             17.4
-## 3 Adelie        アデリー~ Torgersen              40.3             18  
-## 4 Adelie        アデリー~ Torgersen              NA               NA  
-## 5 Adelie        アデリー~ Torgersen              36.7             19.3
-## # ... with 339 more rows, and 4 more variables: 翼_長さ_mm &lt;dbl&gt;,
+##   sｐｅｃｉｅｓ 種_類 x_島の名前 x_クチバシ_長さ_ｍｍ~
+##   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt;                 &lt;dbl&gt;
+## 1 Adelie        アデリー~ Torgersen              39.1
+## 2 Adelie        アデリー~ Torgersen              39.5
+## 3 Adelie        アデリー~ Torgersen              40.3
+## 4 Adelie        アデリー~ Torgersen              NA  
+## 5 Adelie        アデリー~ Torgersen              36.7
+## # ... with 339 more rows, and 5 more variables:
+## #   x_ｸﾁﾊﾞｼ_大きさ_ｍｍ &lt;dbl&gt;, 翼_長さ_mm &lt;dbl&gt;,
 ## #   x_体重_単位はｇ &lt;dbl&gt;, x_u_329b_u_329a &lt;chr&gt;,
 ## #   ２００７_２００９ &lt;dbl&gt;</code></pre>
 <p>さて、ここで使われている <code>%&gt;%</code> は非常に大事なので解説しておきます。</p>
-<div id="とは" class="section level4">
+<div id="pipe" class="section level4">
 <h4><span class="header-section-number">2.2.1.1</span> %&gt;% とは？</h4>
 <p>「パイプ」と読みます。処理を重ねてコードに書いていきたい際に重宝し、現代の<code>tidyverse</code>を使ったRのコードに欠かせないものです。</p>
 <p>たとえば、dfのspecies列を選択する、という処理の</p>
@@ -278,14 +294,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-3"><a href="一つのexcelファイルを読み込む.html#cb11-3"></a><span class="st">  </span><span class="kw">rename_with</span>(<span class="op">~</span><span class="kw">stri_trans_nfkc</span>(.),</span>
 <span id="cb11-4"><a href="一つのexcelファイルを読み込む.html#cb11-4"></a>              <span class="kw">everything</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 9
-##   Species `種 類` `※島の名前` `1クチバシ 長さ(mm)`~ `2クチバシ_大きさ(mm)`~
-##   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;                  &lt;dbl&gt;            &lt;dbl&gt;
-## 1 Adelie  アデリー~ Torgersen               39.1             18.7
-## 2 Adelie  アデリー~ Torgersen               39.5             17.4
-## 3 Adelie  アデリー~ Torgersen               40.3             18  
-## 4 Adelie  アデリー~ Torgersen               NA               NA  
-## 5 Adelie  アデリー~ Torgersen               36.7             19.3
-## # ... with 339 more rows, and 4 more variables: `翼:長さ(mm)` &lt;dbl&gt;,
+##   Species `種 類` `※島の名前` `1クチバシ 長さ(mm)`~
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;                  &lt;dbl&gt;
+## 1 Adelie  アデリー~ Torgersen               39.1
+## 2 Adelie  アデリー~ Torgersen               39.5
+## 3 Adelie  アデリー~ Torgersen               40.3
+## 4 Adelie  アデリー~ Torgersen               NA  
+## 5 Adelie  アデリー~ Torgersen               36.7
+## # ... with 339 more rows, and 5 more variables:
+## #   `2クチバシ_大きさ(mm)` &lt;dbl&gt;, `翼:長さ(mm)` &lt;dbl&gt;,
 ## #   `■体重 単位はg` &lt;dbl&gt;, 女男 &lt;chr&gt;, `2007~2009` &lt;dbl&gt;</code></pre>
 </div>
 <div id="上記の合わせ技" class="section level3">
@@ -303,8 +320,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3 Adelie  アデリー~ Torgersen              40.3             18  
 ## 4 Adelie  アデリー~ Torgersen              NA               NA  
 ## 5 Adelie  アデリー~ Torgersen              36.7             19.3
-## # ... with 339 more rows, and 4 more variables: 翼_長さ_mm &lt;dbl&gt;,
-## #   x_体重_単位はg &lt;dbl&gt;, 女男 &lt;chr&gt;, x2007_2009 &lt;dbl&gt;</code></pre>
+## # ... with 339 more rows, and 4 more variables:
+## #   翼_長さ_mm &lt;dbl&gt;, x_体重_単位はg &lt;dbl&gt;, 女男 &lt;chr&gt;,
+## #   x2007_2009 &lt;dbl&gt;</code></pre>
 
 </div>
 </div>
@@ -357,7 +375,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["excel_r.pdf"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 }
