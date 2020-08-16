@@ -1,4 +1,7 @@
 book_filename: "excel_r"
 # chapter_name: "ch: " # 自動で章の名前をつける
 output_dir: "docs"   # githubでweb公開するためにdocsフォルダに変更
-rmd_files: ["index.Rmd", "プロジェクト.Rmd", "excelファイルの読み込み.Rmd","excelファイルの保存.Rmd"] # rmdファイルの順番指定
+rmd_files: ["index.Rmd", "プロジェクト.Rmd", "excelファイルの読み込み.Rmd",
+                                             "excelファイルの読み込み_シート.Rmd",
+                                             "excelファイルの読み込み_複数.Rmd",
+                                             "excelファイルの保存.Rmd"] # rmdファイルの順番指定

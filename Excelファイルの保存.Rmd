@@ -1,13 +1,13 @@
-# excelファイルを保存する {#writingexcel}
+# (PART) excelファイルを保存する {-#writingexcel}
 
 
 
-### 個別でExcelファイルに保存する
+# 個別でExcelファイルに保存する
 
 * リストの要素名をファイル名にする
 
 ```{r eval = FALSE}
 library(writexl)
-imap(df_all, ~write_xlsx(.x, path = str_c("result/",.y , ".xlsx")))
+imap(df_list, ~write_xlsx(.x, path = str_c("data/複数/",.y , ".xlsx")))
 ```
 

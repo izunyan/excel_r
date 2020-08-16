@@ -1,11 +1,13 @@
 
-# Excelファイルを読み込む {#readingexcel}
+# (PART) excelファイルを読み込む {-#readingexcel}
 
-Excelファイルを読みこむには、`readxl`パッケージを使います。
+excellファイルを読みこむには、`readxl`パッケージを使います。
 
-## 一つのExcelファイルを読み込む
+# 一つのexcelファイルを読み込む
 
-* dataフォルダ（`data/`で表現）に入っている「ペンギン.xlsx」を開く
+* dataフォルダ（`data/`で表現）に入っている「ペンギン.xlsx」を開きます。
+* `read_xlsx()`関数を使います。したがって、以下すべてファイル形式は`.xlsx`を想定します。
+  + `read_xls()`や`read_excel()`もあるので、用途によって使い分けられます。ファイル形式が混ざっている時は`read_excel()`が有用かもしれません。
 
 ```{r}
 library(readxl)
@@ -15,7 +17,7 @@ df <-
  read_xlsx("data/ペンギン.xlsx")
 
 # データの表示
-head(df)
+df
 ``` 
 
 上記コードを実行すると、RStudioの右上（デフォルトの配置であれば）のEnvironmentタブに、
@@ -24,22 +26,29 @@ head(df)
 
 という表示が出ると思います。つまり、344行のデータと9列の変数が入っているデータということを示しています。
 
-`head(df)`と打つことで、最初の6行分のデータが表示されます。
+`df`と打つことで、デフォルトでは最初の10行分のデータが表示されます。ここでは紙面の都合で設定を変えているので5つだけにしています。表示された最初の行にも、`A tibble: 344 x 9`と、行数x列数の情報が出ています。表示しきれなかった行は、`with 339 more rows`と省略され、表示しきれなかった列は、`body_mass_g <dbl>, sex <chr>, year <dbl>`と、名前と<型名>が表示されます。
 
-### パスの自動補完
+## 最高な機能だよ！パスの自動補完
 
- * `read_xlsx("")`と打った後に、`" "`の中にカーソルを置いて、tabキーを打つと、プロジェクトの中身が一覧で表示されるので、選んでいくだけで目的のファイルがキーボードを打つことなしに選べます！
+ * `read_xlsx("")`と打った後に、`" "`の中にカーソルを置いて、tabキーを押すと、プロジェクトの中身が一覧で表示されるので、選んでいくだけで目的のファイルがキーボードを打つことなしに選べます！
 
-*  上の階層のフォルダに行きたいときは、`../`と打てば可能です
+*  上の階層のフォルダに行きたいときは、`" "`の中に`../`と打てば可能です。その後にtabキーを押せば上の階層のフォルダが選べます。
 
-### 列名がひどい場合の読み込み
+
+## 列名がひどい場合の読み込み
 ```{r}
 read_xlsx("data/ペンギン（ひどい列名）ver.xlsx")
 ```
 
-読めることは読めるが、今後のデータ処理を進めるうえで不安が残る。
+読めることは読めますが、今後のデータ処理を進めるうえで不安が残ります。
 
-#### スペースや記号などを自動的に変換してくれる関数できれいに
+### スペースや記号などを自動的に変換してくれる関数できれいに
+
+`janitor`パッケージの`clean_names()`関数を使って、列名に入り込んでいるスペースや記号などを安全な記号に変換します。
+
+なお、日本語の列名では、引数に`case = "old_janitor"`をつけないと読みにくい結果になります。
+
+
 ```{r}
 library(tidyverse)
 library(janitor)
@@ -48,21 +57,57 @@ read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") %>%
   clean_names(case = "old_janitor")
 ```
 
-`janitor`パッケージ
 
-##### %>% とは？
+さて、ここで使われている `%>%` は非常に大事なので解説しておきます。
+
+#### %>% とは？
+
+「パイプ」と読みます。処理を重ねてコードに書いていきたい際に重宝し、現代の`tidyverse`を使ったRのコードに欠かせないものです。
+
+たとえば、dfのspecies列を選択する、という処理の
+
+```{r eval = FALSE}
+select(df, species)
+```
+
+は
+
+```{r eval = FALSE}
+df %>% select(species)
+```
 
 
-#### 半角←→全角を自動で
+と書けます。 `%>%`の左側にあるものを右側の最初の部分（第1引数）に渡すという働きです。パイプの利点は、いくつもつないで書いていけることです。たとえば、種類別にクチバシの長さの平均値を出したいときには次のようにできます。
+
+```{r}
+df %>% 
+  group_by(species) %>% 
+  summarise(平均値 = mean(bill_length_mm, na.rm = TRUE))
+```
+
+以下では`%>%`を多用していきます。
+
+なお、ショートカット`ctrl + shit + M`で出せます。
+（Macだと `⇧⌘M`らしい）
+
+### 全角←→半角を自動で
+
+`stringi`パッケージの`stri_trans_nfkc()`関数を使って、変数名で全角-半角のばらつきを統一させます。
+
+
+ここでは、変数名をリネームするのに`rename_with()`関数を使いました。すべての変数に対し、全角文字を含んでいたら半角に直すというコードになります。
+
 ```{r}
 library(stringi)
 read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") %>% 
   rename_with(~stri_trans_nfkc(.),
               everything())
-  
 ```
 
-#### 上記の合わせ技
+### 上記の合わせ技
+
+`%>%` でつなぎ合わせて1つの実行で合わせてしまうこともできます。
+
 ```{r}
 read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") %>% 
   rename_with(~stri_trans_nfkc(.),
@@ -70,135 +115,3 @@ read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") %>%
     clean_names(case = "old_janitor")
 
 ```
-
-
-
-## シートを指定して読みこむ
-### シート名の確認
-
-`readxl`の`excel_sheets()`関数でシート名の一覧を取得できます。
-
-```{r}
-excel_sheets("data/ペンギン（シート別）.xlsx")
-```
-
-### 普通の読み込み
-```{r}
-read_xlsx("data/ペンギン（シート別）.xlsx")
-```
-
-デフォルトでは一番最初のシートのデータが読みこまれます。ここでは、シート「アデリー」が読み込まれました。
-
-
-
-
-### シートを指定した読み込み
-```{r}
-read_excel("data/ペンギン（シート別）.xlsx", sheet = "ジェンツー" )
-```
-
-引数の`sheet =`にシート名を指定することで読み込めます。 
-
-
-### すべてのシートから読み込み
-
-ここで一気にレベルが上がりますが、これこそがRを使ってexcelファイルを読みこむ便利な部分なので、その魅力をみていきましょう。
-
-```{r}
-library(tidyverse)
-library(janitor)   # clean_names()を使うため
-
-path_name <- "data/ペンギン（シート別）.xlsx" # データのパスを格納
-
-# シート名を取得しそれぞれから読み込んでリストにまとめる
-df_all <-
-  excel_sheets(path_name) %>%                     
-  set_names() %>%                           # 名前付きベクトルにする、↓で作成されるリストの要素名に
-  map(read_excel, path =  path_name)
-
-# 読みこんだデータ全体のリスト構造を表示
-str(df_all)
-```
-
-それぞれのexcelシートから読みこまれた3つのデータ（アデリー、ジェンツー、ヒゲ）はデータフレームとして、`df_all`にリストとしてまとめて格納されています。リストは最初は理解が難しいですが、慣れるとなんでもリストにしたくなるくらい便利なものです。個別に取り出してみてみましょう
-
-```{r}
-df_all$ジェンツー
-```
-
-これは、df_allというリストの中の、ジェンツーという要素を取り出す、というコードです。`$`が「の中の」という意味を表しています。自分でコードを打つと、`df_all$`と打った時点で、中の要素の一覧が表示されるはずなので、そこからクリックして選ぶこともできます。
-
-それでは、先ほど実行した読み込みコードの解説をします。
-
-```{r eval = FALSE}
-path_name <- "data/ペンギン（シート別）.xlsx"
-```
-
-これは、単にファイルの場所を`path_name`に格納しただけです。
-
-```{r eval = FALSE}
-df_all <-
-  excel_sheets(path_name) %>%                    
-  set_names() %>%                           
-  map(read_excel, path =  path_name) 
-```
-
-
-
-
-```{r}
-df_all <-
-  excel_sheets(path_name) %>%                    
-  set_names() %>%                           
-  map(read_excel, path =  path_name) %>%
-  map(clean_names, case = "old_janitor")    # エラーになる文字を自動で整形。日本語の場合，case = "old_janitor"を引数に入れた方がいい場合も
-```
-
-
-
-#### 一つのデータフレームにする
-
-* 引数`.id =`で、リストの要素名を変数の値として入れられる 
-
-```{r eval=FALSE, include=FALSE}
-bind_rows(df_all, .id = "group")
-```
-
-
-
-## 複数のExcelファイルを読み込む
-### 読み込むファイル名の一覧のオブジェクト作成
-```{r eval=FALSE, include=FALSE}
-  files <-
-    list.files(path = "result/", full.names = TRUE) # resultフォルダから
-```
-
-### ファイルを一括で読み込む
-```{r eval=FALSE, include=FALSE}
-ldata <-
-    map(files, ~read_xlsx(.))
-```
-
-### ファイル名抽出
-```{r eval=FALSE, include=FALSE}
-file_name <- 
-  str_replace(files, ".xlsx", "") %>% 
-  str_replace("result/", "")
-```
-
-### リストの要素名にファイル名を付与
-```{r eval=FALSE, include=FALSE}
-ldata <-
-    set_names(ldata, file_name)
-```
-
-### リストの各要素を1つのデータフレームに統合
-```{r eval=FALSE, include=FALSE}
-bind_rows(ldata, .id = "group")
-```
-
-
-
-
-
-
