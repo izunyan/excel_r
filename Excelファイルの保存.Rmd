@@ -17,7 +17,7 @@ write_xlsx(df_head, "out/df_head.xlsx")
 
 `out/`の部分が出力先のフォルダを示しています。
 
-# リスト内の複数のファイルを保存する
+# 複数のファイルを一度に保存する
 
 これが活躍する場面としては、たとえばカテゴリ別（例：会社の部署別など）に集計した要約値をそのカテゴリ別にファイルにするといった状況が思いつきますので、それをやってみます。
 
@@ -32,7 +32,7 @@ df_group_mean <-
   df %>% 
   group_by(種類) %>% 
   summarise(across(
-                   c(bill_length_mm, bill_depth_mm),
+                   c(bill_length_mm, bill_depth_mm), # ここに変数
                    list(m = ~mean(., na.rm = TRUE),
                         n = ~sum(!is.na(.))))
            )
