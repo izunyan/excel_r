@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1 前提：プロジェクトの設定 | index.split</title>
+  <title>4 複数のexcelファイルを読み込む | index.split</title>
   <meta name="description" content="" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1 前提：プロジェクトの設定 | index.split" />
+  <meta property="og:title" content="4 複数のexcelファイルを読み込む | index.split" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1 前提：プロジェクトの設定 | index.split" />
+  <meta name="twitter:title" content="4 複数のexcelファイルを読み込む | index.split" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="一つのexcelファイルを読み込む.html"/>
+<link rel="prev" href="シートを指定して読みこむ.html"/>
+<link rel="next" href="個別でexcelファイルに保存する.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -177,33 +177,92 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="project" class="section level1">
-<h1><span class="header-section-number">1</span> 前提：プロジェクトの設定</h1>
-<p>Rの基本的な使い方は他の情報源にゆだねていますが、ここだけは避けて通れないので解説しておきます。</p>
-<div id="どのフォルダのファイルかの指定" class="section level2">
-<h2><span class="header-section-number">1.1</span> どのフォルダのファイルかの指定</h2>
-<p>excelファイルに限らず、ファイルをRに読み込む際は、どのフォルダから読むのか、位置を正確に指定する必要があります。</p>
-<p>そこで重要となる概念が、「作業フォルダ」というものです。</p>
-<p>コンソールに<code>getwd()</code>と打って出てくるフォルダが現在の作業フォルダになります。</p>
+<div id="複数のexcelファイルを読み込む" class="section level1">
+<h1><span class="header-section-number">4</span> 複数のexcelファイルを読み込む</h1>
+<div id="読み込むファイル名の一覧のオブジェクト作成" class="section level2">
+<h2><span class="header-section-number">4.1</span> 読み込むファイル名の一覧のオブジェクト作成</h2>
+<p>まず、読みこみたいファイルが格納されているフォルダのファイル名、およびパス名の一覧を取得します。</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="複数のexcelファイルを読み込む.html#cb36-1"></a>files &lt;-</span>
+<span id="cb36-2"><a href="複数のexcelファイルを読み込む.html#cb36-2"></a><span class="st">    </span><span class="kw">list.files</span>(<span class="dt">path =</span> <span class="st">&quot;data/複数/&quot;</span>, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb36-3"><a href="複数のexcelファイルを読み込む.html#cb36-3"></a></span>
+<span id="cb36-4"><a href="複数のexcelファイルを読み込む.html#cb36-4"></a>files</span></code></pre></div>
+<pre><code>## [1] &quot;data/複数/アデリー.xlsx&quot;   &quot;data/複数/ジェンツー.xlsx&quot;
+## [3] &quot;data/複数/ヒゲ.xlsx&quot;</code></pre>
+<p><code>list.files()</code>関数は、<code>path =</code>で指定したフォルダ内の情報を取得します。<code>full.names = TRUE</code>でパスも含めます。これをつけないと、ファイル名と拡張子だけの取得になります。</p>
 </div>
-<div id="プロジェクトとは" class="section level2">
-<h2><span class="header-section-number">1.2</span> プロジェクトとは</h2>
-<p>RStudioの「プロジェクト」とは、作業フォルダにまつわる面倒な設定を意識しないですむ非常に便利な機能です。</p>
-<p>ざっくり説明すると、データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコード、出力をまとめておき、そのフォルダをプロジェクトとして設定することで、ファイルの読み書きの際の場所指定をいちいち意識しないで作業できるようになります。</p>
+<div id="ファイルを一括で読み込む" class="section level2">
+<h2><span class="header-section-number">4.2</span> ファイルを一括で読み込む</h2>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="複数のexcelファイルを読み込む.html#cb38-1"></a>ldata &lt;-</span>
+<span id="cb38-2"><a href="複数のexcelファイルを読み込む.html#cb38-2"></a><span class="st">    </span><span class="kw">map</span>(files, <span class="op">~</span><span class="kw">read_xlsx</span>(.))</span></code></pre></div>
+<p>ここでできた<code>ldata</code>は、<a href="シートを指定して読みこむ.html#dflist">3.4</a>で作成した<code>df_list</code>と同じ構造です。違いはそれぞれのデータフレームの要素名（アデリー、ジェンツー、ヒゲ）が入っていない点です。これは不便なので、以下で要素名を改めてつけます。</p>
+<div id="ファイル名抽出" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> ファイル名抽出</h3>
+<p>先ほど作成した<code>files</code>から、ファイル名部分だけに加工します。<code>str_replace()</code>は、文字の置換をする関数です。ここでは、拡張子とパス名をそれぞれ<code>""</code>、つまり空白に置換しています。</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="複数のexcelファイルを読み込む.html#cb39-1"></a>file_name &lt;-<span class="st"> </span></span>
+<span id="cb39-2"><a href="複数のexcelファイルを読み込む.html#cb39-2"></a><span class="st">  </span><span class="kw">str_replace</span>(files, <span class="st">&quot;.xlsx&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb39-3"><a href="複数のexcelファイルを読み込む.html#cb39-3"></a><span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;data/複数/&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb39-4"><a href="複数のexcelファイルを読み込む.html#cb39-4"></a></span>
+<span id="cb39-5"><a href="複数のexcelファイルを読み込む.html#cb39-5"></a>file_name</span></code></pre></div>
+<pre><code>## [1] &quot;アデリー&quot;   &quot;ジェンツー&quot; &quot;ヒゲ&quot;</code></pre>
+</div>
+<div id="リストの要素名にファイル名を付与" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> リストの要素名にファイル名を付与</h3>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="複数のexcelファイルを読み込む.html#cb41-1"></a>ldata &lt;-</span>
+<span id="cb41-2"><a href="複数のexcelファイルを読み込む.html#cb41-2"></a><span class="st">    </span><span class="kw">set_names</span>(ldata, file_name)</span>
+<span id="cb41-3"><a href="複数のexcelファイルを読み込む.html#cb41-3"></a></span>
+<span id="cb41-4"><a href="複数のexcelファイルを読み込む.html#cb41-4"></a>ldata</span></code></pre></div>
+<pre><code>## $アデリー
+## # A tibble: 152 x 9
+##   species 種類  island bill_length_mm bill_depth_mm flipper_length_~
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Adelie  アデリー~ Torge~           39.1          18.7              181
+## 2 Adelie  アデリー~ Torge~           39.5          17.4              186
+## 3 Adelie  アデリー~ Torge~           40.3          18                195
+## 4 Adelie  アデリー~ Torge~           NA            NA                 NA
+## 5 Adelie  アデリー~ Torge~           36.7          19.3              193
+## # ... with 147 more rows, and 3 more variables: body_mass_g &lt;dbl&gt;,
+## #   sex &lt;chr&gt;, year &lt;dbl&gt;
+## 
+## $ジェンツー
+## # A tibble: 124 x 9
+##   species 種類  island bill_length_mm bill_depth_mm flipper_length_~
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Gentoo  ジェンツ~ Biscoe           46.1          13.2              211
+## 2 Gentoo  ジェンツ~ Biscoe           50            16.3              230
+## 3 Gentoo  ジェンツ~ Biscoe           48.7          14.1              210
+## 4 Gentoo  ジェンツ~ Biscoe           50            15.2              218
+## 5 Gentoo  ジェンツ~ Biscoe           47.6          14.5              215
+## # ... with 119 more rows, and 3 more variables: body_mass_g &lt;dbl&gt;,
+## #   sex &lt;chr&gt;, year &lt;dbl&gt;
+## 
+## $ヒゲ
+## # A tibble: 68 x 9
+##   species 種類  island bill_length_mm bill_depth_mm flipper_length_~
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Chinst~ ヒゲ  Dream            46.5          17.9              192
+## 2 Chinst~ ヒゲ  Dream            50            19.5              196
+## 3 Chinst~ ヒゲ  Dream            51.3          19.2              193
+## 4 Chinst~ ヒゲ  Dream            45.4          18.7              188
+## 5 Chinst~ ヒゲ  Dream            52.7          19.8              197
+## # ... with 63 more rows, and 3 more variables: body_mass_g &lt;dbl&gt;,
+## #   sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div id="リストの各要素を1つのデータフレームに統合" class="section level2">
+<h2><span class="header-section-number">4.3</span> リストの各要素を1つのデータフレームに統合</h2>
 
 </div>
 </div>
 
 
 
-</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="一つのexcelファイルを読み込む.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="シートを指定して読みこむ.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="個別でexcelファイルに保存する.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

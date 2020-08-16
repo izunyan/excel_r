@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 シートを指定して読みこむ | index.split</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 シートを指定して読みこむ | index.split" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 シートを指定して読みこむ | index.split" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="一つのexcelファイルを読み込む.html"/>
+<link rel="next" href="複数のexcelファイルを読み込む.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a></li>
+<li class="chapter" data-level="1" data-path="project.html"><a href="project.html"><i class="fa fa-check"></i><b>1</b> 前提：プロジェクトの設定</a><ul>
+<li class="chapter" data-level="1.1" data-path="project.html"><a href="project.html#どのフォルダのファイルかの指定"><i class="fa fa-check"></i><b>1.1</b> どのフォルダのファイルかの指定</a></li>
+<li class="chapter" data-level="1.2" data-path="project.html"><a href="project.html#プロジェクトとは"><i class="fa fa-check"></i><b>1.2</b> プロジェクトとは</a></li>
+</ul></li>
+<li class="part"><span><b>I excelファイルを読み込む</b></span></li>
+<li class="chapter" data-level="2" data-path="一つのexcelファイルを読み込む.html"><a href="一つのexcelファイルを読み込む.html"><i class="fa fa-check"></i><b>2</b> 一つのexcelファイルを読み込む</a><ul>
+<li class="chapter" data-level="2.1" data-path="一つのexcelファイルを読み込む.html"><a href="一つのexcelファイルを読み込む.html#最高な機能だよパスの自動補完"><i class="fa fa-check"></i><b>2.1</b> 最高な機能だよ！パスの自動補完</a></li>
+<li class="chapter" data-level="2.2" data-path="一つのexcelファイルを読み込む.html"><a href="一つのexcelファイルを読み込む.html#列名がひどい場合の読み込み"><i class="fa fa-check"></i><b>2.2</b> 列名がひどい場合の読み込み</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="一つのexcelファイルを読み込む.html"><a href="一つのexcelファイルを読み込む.html#スペースや記号などを自動的に変換してくれる関数できれいに"><i class="fa fa-check"></i><b>2.2.1</b> スペースや記号などを自動的に変換してくれる関数できれいに</a></li>
+<li class="chapter" data-level="2.2.2" data-path="一つのexcelファイルを読み込む.html"><a href="一つのexcelファイルを読み込む.html#全角半角を自動で"><i class="fa fa-check"></i><b>2.2.2</b> 全角←→半角を自動で</a></li>
+<li class="chapter" data-level="2.2.3" data-path="一つのexcelファイルを読み込む.html"><a href="一つのexcelファイルを読み込む.html#上記の合わせ技"><i class="fa fa-check"></i><b>2.2.3</b> 上記の合わせ技</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html"><i class="fa fa-check"></i><b>3</b> シートを指定して読みこむ</a><ul>
+<li class="chapter" data-level="3.1" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#シート名の確認"><i class="fa fa-check"></i><b>3.1</b> シート名の確認</a></li>
+<li class="chapter" data-level="3.2" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#普通の読み込み"><i class="fa fa-check"></i><b>3.2</b> 普通の読み込み</a></li>
+<li class="chapter" data-level="3.3" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#シートを指定した読み込み"><i class="fa fa-check"></i><b>3.3</b> シートを指定した読み込み</a></li>
+<li class="chapter" data-level="3.4" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#dflist"><i class="fa fa-check"></i><b>3.4</b> すべてのシートから読み込み</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="シートを指定して読みこむ.html"><a href="シートを指定して読みこむ.html#一つのデータフレームにする"><i class="fa fa-check"></i><b>3.4.1</b> 一つのデータフレームにする</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="複数のexcelファイルを読み込む.html"><a href="複数のexcelファイルを読み込む.html"><i class="fa fa-check"></i><b>4</b> 複数のexcelファイルを読み込む</a><ul>
+<li class="chapter" data-level="4.1" data-path="複数のexcelファイルを読み込む.html"><a href="複数のexcelファイルを読み込む.html#読み込むファイル名の一覧のオブジェクト作成"><i class="fa fa-check"></i><b>4.1</b> 読み込むファイル名の一覧のオブジェクト作成</a></li>
+<li class="chapter" data-level="4.2" data-path="複数のexcelファイルを読み込む.html"><a href="複数のexcelファイルを読み込む.html#ファイルを一括で読み込む"><i class="fa fa-check"></i><b>4.2</b> ファイルを一括で読み込む</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="複数のexcelファイルを読み込む.html"><a href="複数のexcelファイルを読み込む.html#ファイル名抽出"><i class="fa fa-check"></i><b>4.2.1</b> ファイル名抽出</a></li>
+<li class="chapter" data-level="4.2.2" data-path="複数のexcelファイルを読み込む.html"><a href="複数のexcelファイルを読み込む.html#リストの要素名にファイル名を付与"><i class="fa fa-check"></i><b>4.2.2</b> リストの要素名にファイル名を付与</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="複数のexcelファイルを読み込む.html"><a href="複数のexcelファイルを読み込む.html#リストの各要素を1つのデータフレームに統合"><i class="fa fa-check"></i><b>4.3</b> リストの各要素を1つのデータフレームに統合</a></li>
+</ul></li>
+<li class="part"><span><b>II excelファイルを保存する</b></span></li>
+<li class="chapter" data-level="5" data-path="個別でexcelファイルに保存する.html"><a href="個別でexcelファイルに保存する.html"><i class="fa fa-check"></i><b>5</b> 個別でExcelファイルに保存する</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="シートを指定して読みこむ" class="section level1">
+<h1><span class="header-section-number">3</span> シートを指定して読みこむ</h1>
+<div id="シート名の確認" class="section level2">
+<h2><span class="header-section-number">3.1</span> シート名の確認</h2>
+<p><code>readxl</code>の<code>excel_sheets()</code>関数でシート名の一覧を取得できます。</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="シートを指定して読みこむ.html#cb15-1"></a><span class="kw">excel_sheets</span>(<span class="st">&quot;data/ペンギン（シート別）.xlsx&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;アデリー&quot;   &quot;ジェンツー&quot; &quot;ヒゲ&quot;</code></pre>
+</div>
+<div id="普通の読み込み" class="section level2">
+<h2><span class="header-section-number">3.2</span> 普通の読み込み</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="シートを指定して読みこむ.html#cb17-1"></a><span class="kw">read_xlsx</span>(<span class="st">&quot;data/ペンギン（シート別）.xlsx&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 152 x 9
+##   species 種類  island bill_length_mm bill_depth_mm flipper_length_~
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Adelie  アデリー~ Torge~           39.1          18.7              181
+## 2 Adelie  アデリー~ Torge~           39.5          17.4              186
+## 3 Adelie  アデリー~ Torge~           40.3          18                195
+## 4 Adelie  アデリー~ Torge~           NA            NA                 NA
+## 5 Adelie  アデリー~ Torge~           36.7          19.3              193
+## # ... with 147 more rows, and 3 more variables: body_mass_g &lt;dbl&gt;,
+## #   sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
+<p>デフォルトでは一番最初のシートのデータが読みこまれます。ここでは、シート「アデリー」が読み込まれました。</p>
+</div>
+<div id="シートを指定した読み込み" class="section level2">
+<h2><span class="header-section-number">3.3</span> シートを指定した読み込み</h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="シートを指定して読みこむ.html#cb19-1"></a><span class="kw">read_excel</span>(<span class="st">&quot;data/ペンギン（シート別）.xlsx&quot;</span>, <span class="dt">sheet =</span> <span class="st">&quot;ジェンツー&quot;</span> )</span></code></pre></div>
+<pre><code>## # A tibble: 124 x 9
+##   species 種類  island bill_length_mm bill_depth_mm flipper_length_~
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Gentoo  ジェンツ~ Biscoe           46.1          13.2              211
+## 2 Gentoo  ジェンツ~ Biscoe           50            16.3              230
+## 3 Gentoo  ジェンツ~ Biscoe           48.7          14.1              210
+## 4 Gentoo  ジェンツ~ Biscoe           50            15.2              218
+## 5 Gentoo  ジェンツ~ Biscoe           47.6          14.5              215
+## # ... with 119 more rows, and 3 more variables: body_mass_g &lt;dbl&gt;,
+## #   sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
+<p>引数の<code>sheet =</code>にシート名を指定することで読み込めます。</p>
+</div>
+<div id="dflist" class="section level2">
+<h2><span class="header-section-number">3.4</span> すべてのシートから読み込み</h2>
+<p>ここで一気にレベルが上がりますが、これこそがRを使ってexcelファイルを読みこむ便利な部分なので、その魅力をみていきましょう。</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="シートを指定して読みこむ.html#cb21-1"></a>path_name &lt;-<span class="st"> &quot;data/ペンギン（シート別）.xlsx&quot;</span> <span class="co"># データのパスを格納</span></span>
+<span id="cb21-2"><a href="シートを指定して読みこむ.html#cb21-2"></a></span>
+<span id="cb21-3"><a href="シートを指定して読みこむ.html#cb21-3"></a><span class="co"># シート名を取得しそれぞれから読み込んでリストにまとめる</span></span>
+<span id="cb21-4"><a href="シートを指定して読みこむ.html#cb21-4"></a>df_list &lt;-</span>
+<span id="cb21-5"><a href="シートを指定して読みこむ.html#cb21-5"></a><span class="st">  </span><span class="kw">excel_sheets</span>(path_name) <span class="op">%&gt;%</span><span class="st">                     </span></span>
+<span id="cb21-6"><a href="シートを指定して読みこむ.html#cb21-6"></a><span class="st">  </span><span class="kw">set_names</span>() <span class="op">%&gt;%</span><span class="st">                           </span><span class="co"># 名前付きベクトルにする、↓で作成されるリストの要素名に</span></span>
+<span id="cb21-7"><a href="シートを指定して読みこむ.html#cb21-7"></a><span class="st">  </span><span class="kw">map</span>(read_excel, <span class="dt">path =</span>  path_name)</span>
+<span id="cb21-8"><a href="シートを指定して読みこむ.html#cb21-8"></a></span>
+<span id="cb21-9"><a href="シートを指定して読みこむ.html#cb21-9"></a><span class="co"># 読みこんだデータ全体のリスト構造を表示</span></span>
+<span id="cb21-10"><a href="シートを指定して読みこむ.html#cb21-10"></a><span class="kw">str</span>(df_list)</span></code></pre></div>
+<pre><code>## List of 3
+##  $ アデリー  : tibble [152 x 9] (S3: tbl_df/tbl/data.frame)
+##   ..$ species          : chr [1:152] &quot;Adelie&quot; &quot;Adelie&quot; &quot;Adelie&quot; &quot;Adelie&quot; ...
+##   ..$ 種類             : chr [1:152] &quot;アデリー&quot; &quot;アデリー&quot; &quot;アデリー&quot; &quot;アデリー&quot; ...
+##   ..$ island           : chr [1:152] &quot;Torgersen&quot; &quot;Torgersen&quot; &quot;Torgersen&quot; &quot;Torgersen&quot; ...
+##   ..$ bill_length_mm   : num [1:152] 39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...
+##   ..$ bill_depth_mm    : num [1:152] 18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...
+##   ..$ flipper_length_mm: num [1:152] 181 186 195 NA 193 190 181 195 193 190 ...
+##   ..$ body_mass_g      : num [1:152] 3750 3800 3250 NA 3450 ...
+##   ..$ sex              : chr [1:152] &quot;male&quot; &quot;female&quot; &quot;female&quot; NA ...
+##   ..$ year             : num [1:152] 2007 2007 2007 2007 2007 ...
+##  $ ジェンツー: tibble [124 x 9] (S3: tbl_df/tbl/data.frame)
+##   ..$ species          : chr [1:124] &quot;Gentoo&quot; &quot;Gentoo&quot; &quot;Gentoo&quot; &quot;Gentoo&quot; ...
+##   ..$ 種類             : chr [1:124] &quot;ジェンツー&quot; &quot;ジェンツー&quot; &quot;ジェンツー&quot; &quot;ジェンツー&quot; ...
+##   ..$ island           : chr [1:124] &quot;Biscoe&quot; &quot;Biscoe&quot; &quot;Biscoe&quot; &quot;Biscoe&quot; ...
+##   ..$ bill_length_mm   : num [1:124] 46.1 50 48.7 50 47.6 46.5 45.4 46.7 43.3 46.8 ...
+##   ..$ bill_depth_mm    : num [1:124] 13.2 16.3 14.1 15.2 14.5 13.5 14.6 15.3 13.4 15.4 ...
+##   ..$ flipper_length_mm: num [1:124] 211 230 210 218 215 210 211 219 209 215 ...
+##   ..$ body_mass_g      : num [1:124] 4500 5700 4450 5700 5400 4550 4800 5200 4400 5150 ...
+##   ..$ sex              : chr [1:124] &quot;female&quot; &quot;male&quot; &quot;female&quot; &quot;male&quot; ...
+##   ..$ year             : num [1:124] 2007 2007 2007 2007 2007 ...
+##  $ ヒゲ      : tibble [68 x 9] (S3: tbl_df/tbl/data.frame)
+##   ..$ species          : chr [1:68] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; ...
+##   ..$ 種類             : chr [1:68] &quot;ヒゲ&quot; &quot;ヒゲ&quot; &quot;ヒゲ&quot; &quot;ヒゲ&quot; ...
+##   ..$ island           : chr [1:68] &quot;Dream&quot; &quot;Dream&quot; &quot;Dream&quot; &quot;Dream&quot; ...
+##   ..$ bill_length_mm   : num [1:68] 46.5 50 51.3 45.4 52.7 45.2 46.1 51.3 46 51.3 ...
+##   ..$ bill_depth_mm    : num [1:68] 17.9 19.5 19.2 18.7 19.8 17.8 18.2 18.2 18.9 19.9 ...
+##   ..$ flipper_length_mm: num [1:68] 192 196 193 188 197 198 178 197 195 198 ...
+##   ..$ body_mass_g      : num [1:68] 3500 3900 3650 3525 3725 ...
+##   ..$ sex              : chr [1:68] &quot;female&quot; &quot;male&quot; &quot;male&quot; &quot;female&quot; ...
+##   ..$ year             : num [1:68] 2007 2007 2007 2007 2007 ...</code></pre>
+<p>それぞれのexcelシートから読みこまれた3つのデータ（アデリー、ジェンツー、ヒゲ）はデータフレームとして、<code>df_all</code>にリストとしてまとめて格納されています。リストは最初は理解が難しいですが、慣れるとなんでもリストにしたくなるくらい便利なものです。リストの中身を個別に取り出してみてみましょう</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="シートを指定して読みこむ.html#cb23-1"></a>df_list<span class="op">$</span>ジェンツー</span></code></pre></div>
+<pre><code>## # A tibble: 124 x 9
+##   species 種類  island bill_length_mm bill_depth_mm flipper_length_~
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Gentoo  ジェンツ~ Biscoe           46.1          13.2              211
+## 2 Gentoo  ジェンツ~ Biscoe           50            16.3              230
+## 3 Gentoo  ジェンツ~ Biscoe           48.7          14.1              210
+## 4 Gentoo  ジェンツ~ Biscoe           50            15.2              218
+## 5 Gentoo  ジェンツ~ Biscoe           47.6          14.5              215
+## # ... with 119 more rows, and 3 more variables: body_mass_g &lt;dbl&gt;,
+## #   sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
+<p>これは、df_allというリストの中の、ジェンツーという要素を取り出す、というコードです。<code>$</code>が「の中の」という意味を表しています。自分でコードを打つと、<code>df_all$</code>と打った時点で、中の要素の一覧が表示されるはずなので、そこからクリックして選ぶこともできます。</p>
+<p>それでは、先ほど実行した読み込みコードの解説をします。</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="シートを指定して読みこむ.html#cb25-1"></a>path_name &lt;-<span class="st"> &quot;data/ペンギン（シート別）.xlsx&quot;</span></span></code></pre></div>
+<p>これは、単にファイルの場所を<code>path_name</code>に格納しただけです。自分のデータで試してみたいときは、基本的にここのパス名を変えるだけで実行できるはずです。</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="シートを指定して読みこむ.html#cb26-1"></a>df_list &lt;-</span>
+<span id="cb26-2"><a href="シートを指定して読みこむ.html#cb26-2"></a><span class="st">  </span><span class="kw">excel_sheets</span>(path_name) <span class="op">%&gt;%</span><span class="st">                    </span></span>
+<span id="cb26-3"><a href="シートを指定して読みこむ.html#cb26-3"></a><span class="st">  </span><span class="kw">set_names</span>() <span class="op">%&gt;%</span><span class="st">                           </span></span>
+<span id="cb26-4"><a href="シートを指定して読みこむ.html#cb26-4"></a><span class="st">  </span><span class="kw">map</span>(read_excel, <span class="dt">path =</span>  path_name) </span></code></pre></div>
+<p><code>excel_sheets()</code>は上で実行したのと同じです。実行結果はベクトルとして保存されています。<code>set_names()</code>は、ベクトルを名前付きベクトルにする働きをします。なので、ここでできるのは、</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="シートを指定して読みこむ.html#cb27-1"></a><span class="kw">excel_sheets</span>(path_name) <span class="op">%&gt;%</span><span class="st">                    </span></span>
+<span id="cb27-2"><a href="シートを指定して読みこむ.html#cb27-2"></a><span class="st">  </span><span class="kw">set_names</span>()</span></code></pre></div>
+<pre><code>##     アデリー   ジェンツー         ヒゲ 
+##   &quot;アデリー&quot; &quot;ジェンツー&quot;       &quot;ヒゲ&quot;</code></pre>
+<p>です。それぞれについて<code>map()</code>を使って<code>read_excel()</code>を1つ1つのシート（ここでは作成した名前付きベクトルの要素）に適用していき、1つのリストにまとめるという作業をします。</p>
+<div id="一つのデータフレームにする" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> 一つのデータフレームにする</h3>
+<p><code>bind_rows()</code>は、データフレームを縦に連結します。データフレームがリストになったものが引数にくると、それらをすべて縦につなげてくれます。引数<code>.id =</code>で、リストの要素名を変数の値として入れることができるので、どのデータフレームから来たのか識別することが可能になります。ここでは<code>group</code>という名前にしています。</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="シートを指定して読みこむ.html#cb29-1"></a>df_all &lt;-<span class="st"> </span></span>
+<span id="cb29-2"><a href="シートを指定して読みこむ.html#cb29-2"></a><span class="kw">bind_rows</span>(df_list, <span class="dt">.id =</span> <span class="st">&quot;group&quot;</span>)</span></code></pre></div>
+<p><code>slice()</code>関数を使って、最初の3行と最後の3行だけを表示してどんなものができたか確認します。<code>1:3</code>は1行目から3行目、<code>(n()-2):n()</code>は、列数（ただし現在のgroup内）を表す<code>n()</code>とそれから-2行した<code>(n()-2)</code>で表されています。</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="シートを指定して読みこむ.html#cb30-1"></a>df_all <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb30-2"><a href="シートを指定して読みこむ.html#cb30-2"></a><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, (<span class="kw">n</span>()<span class="op">-</span><span class="dv">2</span>)<span class="op">:</span><span class="kw">n</span>())</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 10
+##   group species 種類  island bill_length_mm bill_depth_mm
+##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 アデリー~ Adelie  アデリー~ Torge~           39.1          18.7
+## 2 アデリー~ Adelie  アデリー~ Torge~           39.5          17.4
+## 3 アデリー~ Adelie  アデリー~ Torge~           40.3          18  
+## 4 ヒゲ  Chinst~ ヒゲ  Dream            49.6          18.2
+## 5 ヒゲ  Chinst~ ヒゲ  Dream            50.8          19  
+## 6 ヒゲ  Chinst~ ヒゲ  Dream            50.2          18.7
+## # ... with 4 more variables: flipper_length_mm &lt;dbl&gt;,
+## #   body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
+<p>それぞれ、別々に出したほうが分かりやすいかもしれません。</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="シートを指定して読みこむ.html#cb32-1"></a><span class="co"># 最初の3行</span></span>
+<span id="cb32-2"><a href="シートを指定して読みこむ.html#cb32-2"></a>df_all <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice_head</span>(<span class="dt">n =</span> <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 10
+##   group species 種類  island bill_length_mm bill_depth_mm
+##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 アデリー~ Adelie  アデリー~ Torge~           39.1          18.7
+## 2 アデリー~ Adelie  アデリー~ Torge~           39.5          17.4
+## 3 アデリー~ Adelie  アデリー~ Torge~           40.3          18  
+## # ... with 4 more variables: flipper_length_mm &lt;dbl&gt;,
+## #   body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="シートを指定して読みこむ.html#cb34-1"></a><span class="co"># 最後の3行</span></span>
+<span id="cb34-2"><a href="シートを指定して読みこむ.html#cb34-2"></a>df_all <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice_tail</span>(<span class="dt">n =</span> <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 10
+##   group species 種類  island bill_length_mm bill_depth_mm
+##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 ヒゲ  Chinst~ ヒゲ  Dream            49.6          18.2
+## 2 ヒゲ  Chinst~ ヒゲ  Dream            50.8          19  
+## 3 ヒゲ  Chinst~ ヒゲ  Dream            50.2          18.7
+## # ... with 4 more variables: flipper_length_mm &lt;dbl&gt;,
+## #   body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="一つのexcelファイルを読み込む.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="複数のexcelファイルを読み込む.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["excel_r.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -68,3 +68,7 @@ write_xlsx(p_list, "data/ペンギン（シート別）.xlsx")
 library(stringi)
 
 stri_trans_nfkc("ﾍﾟﾝｷﾞﾝ")
+
+to do
+str()の表示列数縮減
+skipの説明

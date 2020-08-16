@@ -1,0 +1,828 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  xelatex,ja=standard, b5paper]{bxjsbook}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\makeatletter
+\def\emptypage@emptypage{%
+    \hbox{}%
+    \thispagestyle{headings}%
+    \newpage%    
+}%
+\def\cleardoublepage{%
+        \clearpage%
+        \if@twoside%
+            \ifodd\c@page%
+                % do nothing
+            \else%
+                \emptypage@emptypage%
+            \fi%
+        \fi%
+    }%
+\makeatother
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{hajimeni}{%
+\chapter*{はじめに}\label{hajimeni}}
+\addcontentsline{toc}{chapter}{はじめに}
+
+本書を書こうと思ったのは「Rを使いたい！と思う人をもっと増やしたい」からです。使う人が多くなれば、新しい知識に出会いやすくなりますし、仕事でも使う機会が増える可能性があります。
+
+使う人を増やすためにはよい入門書やwebサイトが必要ですが、それは巷にあふれていて無料でアクセスできるものも多いです。
+
+例えば
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://r4ds.had.co.nz/}{R for Data Science}\\
+\item
+  \href{https://kazutan.github.io/JSSP2018_spring/index.html}{日本社会心理学会　第5回春の方法論セミナー　RとRstudio入門}
+\end{itemize}
+
+そこで本書では目的を絞って、Rを使いたいと思わせる部分を解説することを目指します。Rでどんな便利なことができるか、入門書などでもあまり深く解説されてない部分にフォーカスして紹介します。
+
+便利なことといってもいろいろあるので、その中でも、つまづくと嫌になってしまうことの多そうな、「手元のexcelデータを読み込む」所に着目しました。解析したいデータは山ほどあれど、世の中綺麗なデータばかりとは限りません。その読み込みの際にいかに楽をできるかという点を意識しています。
+
+データさえスムーズに読み込めれば、後はすぐれた解説がネット上でもたくさんあり、やりたいことが可能になる環境が整うからです。
+
+excelファイルをただ読みこむといってもいろんなバリエーションが考えられます。その単なる読みこみプロセスを通じて、Rを使う上で便利な様々な関数や手続きを学ぶこともできるでしょう。戦いの中で自然に強くなった的な効果も見込めるかもしれません。
+
+なお、筆者はwindows環境しか慣れていないため、本書の内容はすべてwindowsを想定しています。
+
+RとRStudioのインストールや基本的な使い方は、上記で紹介した本やwebサイトにゆだねて、本書では本題の部分から始めます。
+
+\begin{itemize}
+\tightlist
+\item
+  RおよびRStudio、パッケージのバージョン
+\end{itemize}
+
+R version 3.6.1 (2019-07-05)\\
+RStudio Version 1.3.959
+
+readxl\_1.3.1
+
+tidyverse\_1.3.0\\
+dplyr\_1.0.0\\
+janitor\_2.0.1
+
+　この本は、
+
+\begin{itemize}
+\item
+  何かのデータ分析をする際に、日常的にはExcelで作成されたファイルを読み込むことが多いと考えられる。
+\item
+  複数のファイル、または複数シートに分かれた
+\item
+  免責事項
+
+  \begin{itemize}
+  \tightlist
+  \item
+    この本に書いてある内容は、やわらかクジラが学習したことをまとめているものにすぎないため、正常な動作の保証はできません。使用する際は、自己責任でお願いします。
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{project}{%
+\chapter{前提：プロジェクトの設定}\label{project}}
+
+Rの基本的な使い方は他の情報源にゆだねていますが、ここだけは避けて通れないので解説しておきます。
+
+\hypertarget{ux3069ux306eux30d5ux30a9ux30ebux30c0ux306eux30d5ux30a1ux30a4ux30ebux304bux306eux6307ux5b9a}{%
+\section{どのフォルダのファイルかの指定}\label{ux3069ux306eux30d5ux30a9ux30ebux30c0ux306eux30d5ux30a1ux30a4ux30ebux304bux306eux6307ux5b9a}}
+
+excelファイルに限らず、ファイルをRに読み込む際は、どのフォルダから読むのか、位置を正確に指定する必要があります。
+
+そこで重要となる概念が、「作業フォルダ」というものです。
+
+コンソールに\texttt{getwd()}と打って出てくるフォルダが現在の作業フォルダになります。
+
+\hypertarget{ux30d7ux30edux30b8ux30a7ux30afux30c8ux3068ux306f}{%
+\section{プロジェクトとは}\label{ux30d7ux30edux30b8ux30a7ux30afux30c8ux3068ux306f}}
+
+RStudioの「プロジェクト」とは、作業フォルダにまつわる面倒な設定を意識しないですむ非常に便利な機能です。
+
+ざっくり説明すると、データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコード、出力をまとめておき、そのフォルダをプロジェクトとして設定することで、ファイルの読み書きの際の場所指定をいちいち意識しないで作業できるようになります。
+
+\hypertarget{readingexcel}{%
+\part{excelファイルを読み込む}\label{readingexcel}}
+
+excellファイルを読みこむには、\texttt{readxl}パッケージを使います。
+
+\hypertarget{ux4e00ux3064ux306eexcelux30d5ux30a1ux30a4ux30ebux3092ux8aadux307fux8fbcux3080}{%
+\chapter{一つのexcelファイルを読み込む}\label{ux4e00ux3064ux306eexcelux30d5ux30a1ux30a4ux30ebux3092ux8aadux307fux8fbcux3080}}
+
+\begin{itemize}
+\tightlist
+\item
+  dataフォルダ（\texttt{data/}で表現）に入っている「ペンギン.xlsx」を開きます。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readxl)}
+
+\CommentTok{# excelファイルの読み込み}
+\NormalTok{df <-}\StringTok{ }
+\StringTok{ }\KeywordTok{read_xlsx}\NormalTok{(}\StringTok{"data/ペンギン.xlsx"}\NormalTok{)}
+
+\CommentTok{# データの表示}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 9
+##   species 種類  island bill_length_mm bill_depth_mm flipper_length_~
+##   <chr>   <chr> <chr>           <dbl>         <dbl>            <dbl>
+## 1 Adelie  アデリー~ Torge~           39.1          18.7              181
+## 2 Adelie  アデリー~ Torge~           39.5          17.4              186
+## 3 Adelie  アデリー~ Torge~           40.3          18                195
+## 4 Adelie  アデリー~ Torge~           NA            NA                 NA
+## 5 Adelie  アデリー~ Torge~           36.7          19.3              193
+## # ... with 339 more rows, and 3 more variables: body_mass_g <dbl>,
+## #   sex <chr>, year <dbl>
+\end{verbatim}
+
+上記コードを実行すると、RStudioの右上（デフォルトの配置であれば）のEnvironmentタブに、
+
+\texttt{df\ \ 344\ obs.\ of\ 9\ variables}
+
+という表示が出ると思います。つまり、344行のデータと9列の変数が入っているデータということを示しています。
+
+\texttt{df}と打つことで、デフォルトでは最初の10行分のデータが表示されます。ここでは紙面の都合で設定を変えているので5つだけにしています。表示された最初の行にも、\texttt{A\ tibble:\ 344\ x\ 9}と、行数x列数の情報が出ています。表示しきれなかった行は、\texttt{with\ 339\ more\ rows}と省略され、表示しきれなかった列は、\texttt{body\_mass\_g\ \textless{}dbl\textgreater{},\ sex\ \textless{}chr\textgreater{},\ year\ \textless{}dbl\textgreater{}}と、名前とが表示されます。
+
+\hypertarget{ux6700ux9ad8ux306aux6a5fux80fdux3060ux3088ux30d1ux30b9ux306eux81eaux52d5ux88dcux5b8c}{%
+\section{最高な機能だよ！パスの自動補完}\label{ux6700ux9ad8ux306aux6a5fux80fdux3060ux3088ux30d1ux30b9ux306eux81eaux52d5ux88dcux5b8c}}
+
+\begin{itemize}
+\item
+  \texttt{read\_xlsx("")}と打った後に、\texttt{"\ "}の中にカーソルを置いて、tabキーを押すと、プロジェクトの中身が一覧で表示されるので、選んでいくだけで目的のファイルがキーボードを打つことなしに選べます！
+\item
+  上の階層のフォルダに行きたいときは、\texttt{"\ "}の中に\texttt{../}と打てば可能です。その後にtabキーを押せば上の階層のフォルダが選べます。
+\end{itemize}
+
+\hypertarget{ux5217ux540dux304cux3072ux3069ux3044ux5834ux5408ux306eux8aadux307fux8fbcux307f}{%
+\section{列名がひどい場合の読み込み}\label{ux5217ux540dux304cux3072ux3069ux3044ux5834ux5408ux306eux8aadux307fux8fbcux307f}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{read_xlsx}\NormalTok{(}\StringTok{"data/ペンギン（ひどい列名）ver.xlsx"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 9
+##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`~ `②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）~
+##   <chr>         <chr>    <chr>                  <dbl>            <dbl>
+## 1 Adelie        アデリー Torgersen               39.1             18.7
+## 2 Adelie        アデリー Torgersen               39.5             17.4
+## 3 Adelie        アデリー Torgersen               40.3             18  
+## 4 Adelie        アデリー Torgersen               NA               NA  
+## 5 Adelie        アデリー Torgersen               36.7             19.3
+## # ... with 339 more rows, and 4 more variables: `翼：長さ(mm)` <dbl>,
+## #   `■体重　単位はｇ` <dbl>, `<U+329B><U+329A>` <chr>,
+## #   `２００７～２００９` <dbl>
+\end{verbatim}
+
+読めることは読めますが、今後のデータ処理を進めるうえで不安が残ります。
+
+\hypertarget{ux30b9ux30daux30fcux30b9ux3084ux8a18ux53f7ux306aux3069ux3092ux81eaux52d5ux7684ux306bux5909ux63dbux3057ux3066ux304fux308cux308bux95a2ux6570ux3067ux304dux308cux3044ux306b}{%
+\subsection{スペースや記号などを自動的に変換してくれる関数できれいに}\label{ux30b9ux30daux30fcux30b9ux3084ux8a18ux53f7ux306aux3069ux3092ux81eaux52d5ux7684ux306bux5909ux63dbux3057ux3066ux304fux308cux308bux95a2ux6570ux3067ux304dux308cux3044ux306b}}
+
+\texttt{janitor}パッケージの\texttt{clean\_names()}関数を使って、列名に入り込んでいるスペースや記号などを安全な記号に変換します。
+
+なお、日本語の列名では、引数に\texttt{case\ =\ "old\_janitor"}をつけないと読みにくい結果になります。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(janitor)}
+
+\KeywordTok{read_xlsx}\NormalTok{(}\StringTok{"data/ペンギン（ひどい列名）ver.xlsx"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{clean_names}\NormalTok{(}\DataTypeTok{case =} \StringTok{"old_janitor"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 9
+##   sｐｅｃｉｅｓ 種_類 x_島の名前 x_クチバシ_長さ_ｍｍ~ x_ｸﾁﾊﾞｼ_大きさ_ｍｍ~
+##   <chr>         <chr> <chr>                 <dbl>            <dbl>
+## 1 Adelie        アデリー~ Torgersen              39.1             18.7
+## 2 Adelie        アデリー~ Torgersen              39.5             17.4
+## 3 Adelie        アデリー~ Torgersen              40.3             18  
+## 4 Adelie        アデリー~ Torgersen              NA               NA  
+## 5 Adelie        アデリー~ Torgersen              36.7             19.3
+## # ... with 339 more rows, and 4 more variables: 翼_長さ_mm <dbl>,
+## #   x_体重_単位はｇ <dbl>, x_u_329b_u_329a <chr>,
+## #   ２００７_２００９ <dbl>
+\end{verbatim}
+
+さて、ここで使われている \texttt{\%\textgreater{}\%} は非常に大事なので解説しておきます。
+
+\hypertarget{ux3068ux306f}{%
+\subsubsection{\%\textgreater\% とは？}\label{ux3068ux306f}}
+
+「パイプ」と読みます。処理を重ねてコードに書いていきたい際に重宝し、現代の\texttt{tidyverse}を使ったRのコードに欠かせないものです。
+
+たとえば、dfのspecies列を選択する、という処理の
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{select}\NormalTok{(df, species)}
+\end{Highlighting}
+\end{Shaded}
+
+は
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(species)}
+\end{Highlighting}
+\end{Shaded}
+
+と書けます。 \texttt{\%\textgreater{}\%}の左側にあるものを右側の最初の部分（第1引数）に渡すという働きです。パイプの利点は、いくつもつないで書いていけることです。たとえば、種類別にクチバシの長さの平均値を出したいときには次のようにできます。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(species) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(平均値 =}\StringTok{ }\KeywordTok{mean}\NormalTok{(bill_length_mm, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 2
+##   species   平均値
+##   <chr>      <dbl>
+## 1 Adelie      38.8
+## 2 Chinstrap   48.8
+## 3 Gentoo      47.5
+\end{verbatim}
+
+以下では\texttt{\%\textgreater{}\%}を多用していきます。
+
+なお、ショートカット\texttt{ctrl\ +\ shit\ +\ M}で出せます。
+（Macだと \texttt{⇧⌘M}らしい）
+
+\hypertarget{ux5168ux89d2ux534aux89d2ux3092ux81eaux52d5ux3067}{%
+\subsection{全角←→半角を自動で}\label{ux5168ux89d2ux534aux89d2ux3092ux81eaux52d5ux3067}}
+
+\texttt{stringi}パッケージの\texttt{stri\_trans\_nfkc()}関数を使って、変数名で全角-半角のばらつきを統一させます。
+
+ここでは、変数名をリネームするのに\texttt{rename\_with()}関数を使いました。すべての変数に対し、全角文字を含んでいたら半角に直すというコードになります。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(stringi)}
+\KeywordTok{read_xlsx}\NormalTok{(}\StringTok{"data/ペンギン（ひどい列名）ver.xlsx"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{rename_with}\NormalTok{(}\OperatorTok{~}\KeywordTok{stri_trans_nfkc}\NormalTok{(.),}
+              \KeywordTok{everything}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 9
+##   Species `種 類` `※島の名前` `1クチバシ 長さ(mm)`~ `2クチバシ_大きさ(mm)`~
+##   <chr>   <chr>   <chr>                  <dbl>            <dbl>
+## 1 Adelie  アデリー~ Torgersen               39.1             18.7
+## 2 Adelie  アデリー~ Torgersen               39.5             17.4
+## 3 Adelie  アデリー~ Torgersen               40.3             18  
+## 4 Adelie  アデリー~ Torgersen               NA               NA  
+## 5 Adelie  アデリー~ Torgersen               36.7             19.3
+## # ... with 339 more rows, and 4 more variables: `翼:長さ(mm)` <dbl>,
+## #   `■体重 単位はg` <dbl>, 女男 <chr>, `2007~2009` <dbl>
+\end{verbatim}
+
+\hypertarget{ux4e0aux8a18ux306eux5408ux308fux305bux6280}{%
+\subsection{上記の合わせ技}\label{ux4e0aux8a18ux306eux5408ux308fux305bux6280}}
+
+\texttt{\%\textgreater{}\%} でつなぎ合わせて1つの実行で合わせてしまうこともできます。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{read_xlsx}\NormalTok{(}\StringTok{"data/ペンギン（ひどい列名）ver.xlsx"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{rename_with}\NormalTok{(}\OperatorTok{~}\KeywordTok{stri_trans_nfkc}\NormalTok{(.),}
+              \KeywordTok{everything}\NormalTok{()) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{clean_names}\NormalTok{(}\DataTypeTok{case =} \StringTok{"old_janitor"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 9
+##   species 種_類 x_島の名前 x1クチバシ_長さ_mm~ x2クチバシ_大きさ_mm~
+##   <chr>   <chr> <chr>                 <dbl>            <dbl>
+## 1 Adelie  アデリー~ Torgersen              39.1             18.7
+## 2 Adelie  アデリー~ Torgersen              39.5             17.4
+## 3 Adelie  アデリー~ Torgersen              40.3             18  
+## 4 Adelie  アデリー~ Torgersen              NA               NA  
+## 5 Adelie  アデリー~ Torgersen              36.7             19.3
+## # ... with 339 more rows, and 4 more variables: 翼_長さ_mm <dbl>,
+## #   x_体重_単位はg <dbl>, 女男 <chr>, x2007_2009 <dbl>
+\end{verbatim}
+
+\hypertarget{ux30b7ux30fcux30c8ux3092ux6307ux5b9aux3057ux3066ux8aadux307fux3053ux3080}{%
+\chapter{シートを指定して読みこむ}\label{ux30b7ux30fcux30c8ux3092ux6307ux5b9aux3057ux3066ux8aadux307fux3053ux3080}}
+
+\hypertarget{ux30b7ux30fcux30c8ux540dux306eux78baux8a8d}{%
+\section{シート名の確認}\label{ux30b7ux30fcux30c8ux540dux306eux78baux8a8d}}
+
+\texttt{readxl}の\texttt{excel\_sheets()}関数でシート名の一覧を取得できます。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{excel_sheets}\NormalTok{(}\StringTok{"data/ペンギン（シート別）.xlsx"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "アデリー"   "ジェンツー" "ヒゲ"
+\end{verbatim}
+
+\hypertarget{ux666eux901aux306eux8aadux307fux8fbcux307f}{%
+\section{普通の読み込み}\label{ux666eux901aux306eux8aadux307fux8fbcux307f}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{read_xlsx}\NormalTok{(}\StringTok{"data/ペンギン（シート別）.xlsx"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 152 x 9
+##   species 種類  island bill_length_mm bill_depth_mm flipper_length_~
+##   <chr>   <chr> <chr>           <dbl>         <dbl>            <dbl>
+## 1 Adelie  アデリー~ Torge~           39.1          18.7              181
+## 2 Adelie  アデリー~ Torge~           39.5          17.4              186
+## 3 Adelie  アデリー~ Torge~           40.3          18                195
+## 4 Adelie  アデリー~ Torge~           NA            NA                 NA
+## 5 Adelie  アデリー~ Torge~           36.7          19.3              193
+## # ... with 147 more rows, and 3 more variables: body_mass_g <dbl>,
+## #   sex <chr>, year <dbl>
+\end{verbatim}
+
+デフォルトでは一番最初のシートのデータが読みこまれます。ここでは、シート「アデリー」が読み込まれました。
+
+\hypertarget{ux30b7ux30fcux30c8ux3092ux6307ux5b9aux3057ux305fux8aadux307fux8fbcux307f}{%
+\section{シートを指定した読み込み}\label{ux30b7ux30fcux30c8ux3092ux6307ux5b9aux3057ux305fux8aadux307fux8fbcux307f}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{read_excel}\NormalTok{(}\StringTok{"data/ペンギン（シート別）.xlsx"}\NormalTok{, }\DataTypeTok{sheet =} \StringTok{"ジェンツー"}\NormalTok{ )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 124 x 9
+##   species 種類  island bill_length_mm bill_depth_mm flipper_length_~
+##   <chr>   <chr> <chr>           <dbl>         <dbl>            <dbl>
+## 1 Gentoo  ジェンツ~ Biscoe           46.1          13.2              211
+## 2 Gentoo  ジェンツ~ Biscoe           50            16.3              230
+## 3 Gentoo  ジェンツ~ Biscoe           48.7          14.1              210
+## 4 Gentoo  ジェンツ~ Biscoe           50            15.2              218
+## 5 Gentoo  ジェンツ~ Biscoe           47.6          14.5              215
+## # ... with 119 more rows, and 3 more variables: body_mass_g <dbl>,
+## #   sex <chr>, year <dbl>
+\end{verbatim}
+
+引数の\texttt{sheet\ =}にシート名を指定することで読み込めます。
+
+\hypertarget{dflist}{%
+\section{すべてのシートから読み込み}\label{dflist}}
+
+ここで一気にレベルが上がりますが、これこそがRを使ってexcelファイルを読みこむ便利な部分なので、その魅力をみていきましょう。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{path_name <-}\StringTok{ "data/ペンギン（シート別）.xlsx"} \CommentTok{# データのパスを格納}
+
+\CommentTok{# シート名を取得しそれぞれから読み込んでリストにまとめる}
+\NormalTok{df_list <-}
+\StringTok{  }\KeywordTok{excel_sheets}\NormalTok{(path_name) }\OperatorTok{%>%}\StringTok{                     }
+\StringTok{  }\KeywordTok{set_names}\NormalTok{() }\OperatorTok{%>%}\StringTok{                           }\CommentTok{# 名前付きベクトルにする、↓で作成されるリストの要素名に}
+\StringTok{  }\KeywordTok{map}\NormalTok{(read_excel, }\DataTypeTok{path =}\NormalTok{  path_name)}
+
+\CommentTok{# 読みこんだデータ全体のリスト構造を表示}
+\KeywordTok{str}\NormalTok{(df_list)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## List of 3
+##  $ アデリー  : tibble [152 x 9] (S3: tbl_df/tbl/data.frame)
+##   ..$ species          : chr [1:152] "Adelie" "Adelie" "Adelie" "Adelie" ...
+##   ..$ 種類             : chr [1:152] "アデリー" "アデリー" "アデリー" "アデリー" ...
+##   ..$ island           : chr [1:152] "Torgersen" "Torgersen" "Torgersen" "Torgersen" ...
+##   ..$ bill_length_mm   : num [1:152] 39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...
+##   ..$ bill_depth_mm    : num [1:152] 18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...
+##   ..$ flipper_length_mm: num [1:152] 181 186 195 NA 193 190 181 195 193 190 ...
+##   ..$ body_mass_g      : num [1:152] 3750 3800 3250 NA 3450 ...
+##   ..$ sex              : chr [1:152] "male" "female" "female" NA ...
+##   ..$ year             : num [1:152] 2007 2007 2007 2007 2007 ...
+##  $ ジェンツー: tibble [124 x 9] (S3: tbl_df/tbl/data.frame)
+##   ..$ species          : chr [1:124] "Gentoo" "Gentoo" "Gentoo" "Gentoo" ...
+##   ..$ 種類             : chr [1:124] "ジェンツー" "ジェンツー" "ジェンツー" "ジェンツー" ...
+##   ..$ island           : chr [1:124] "Biscoe" "Biscoe" "Biscoe" "Biscoe" ...
+##   ..$ bill_length_mm   : num [1:124] 46.1 50 48.7 50 47.6 46.5 45.4 46.7 43.3 46.8 ...
+##   ..$ bill_depth_mm    : num [1:124] 13.2 16.3 14.1 15.2 14.5 13.5 14.6 15.3 13.4 15.4 ...
+##   ..$ flipper_length_mm: num [1:124] 211 230 210 218 215 210 211 219 209 215 ...
+##   ..$ body_mass_g      : num [1:124] 4500 5700 4450 5700 5400 4550 4800 5200 4400 5150 ...
+##   ..$ sex              : chr [1:124] "female" "male" "female" "male" ...
+##   ..$ year             : num [1:124] 2007 2007 2007 2007 2007 ...
+##  $ ヒゲ      : tibble [68 x 9] (S3: tbl_df/tbl/data.frame)
+##   ..$ species          : chr [1:68] "Chinstrap" "Chinstrap" "Chinstrap" "Chinstrap" ...
+##   ..$ 種類             : chr [1:68] "ヒゲ" "ヒゲ" "ヒゲ" "ヒゲ" ...
+##   ..$ island           : chr [1:68] "Dream" "Dream" "Dream" "Dream" ...
+##   ..$ bill_length_mm   : num [1:68] 46.5 50 51.3 45.4 52.7 45.2 46.1 51.3 46 51.3 ...
+##   ..$ bill_depth_mm    : num [1:68] 17.9 19.5 19.2 18.7 19.8 17.8 18.2 18.2 18.9 19.9 ...
+##   ..$ flipper_length_mm: num [1:68] 192 196 193 188 197 198 178 197 195 198 ...
+##   ..$ body_mass_g      : num [1:68] 3500 3900 3650 3525 3725 ...
+##   ..$ sex              : chr [1:68] "female" "male" "male" "female" ...
+##   ..$ year             : num [1:68] 2007 2007 2007 2007 2007 ...
+\end{verbatim}
+
+それぞれのexcelシートから読みこまれた3つのデータ（アデリー、ジェンツー、ヒゲ）はデータフレームとして、\texttt{df\_all}にリストとしてまとめて格納されています。リストは最初は理解が難しいですが、慣れるとなんでもリストにしたくなるくらい便利なものです。リストの中身を個別に取り出してみてみましょう
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df_list}\OperatorTok{$}\NormalTok{ジェンツー}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 124 x 9
+##   species 種類  island bill_length_mm bill_depth_mm flipper_length_~
+##   <chr>   <chr> <chr>           <dbl>         <dbl>            <dbl>
+## 1 Gentoo  ジェンツ~ Biscoe           46.1          13.2              211
+## 2 Gentoo  ジェンツ~ Biscoe           50            16.3              230
+## 3 Gentoo  ジェンツ~ Biscoe           48.7          14.1              210
+## 4 Gentoo  ジェンツ~ Biscoe           50            15.2              218
+## 5 Gentoo  ジェンツ~ Biscoe           47.6          14.5              215
+## # ... with 119 more rows, and 3 more variables: body_mass_g <dbl>,
+## #   sex <chr>, year <dbl>
+\end{verbatim}
+
+これは、df\_allというリストの中の、ジェンツーという要素を取り出す、というコードです。\texttt{\$}が「の中の」という意味を表しています。自分でコードを打つと、\texttt{df\_all\$}と打った時点で、中の要素の一覧が表示されるはずなので、そこからクリックして選ぶこともできます。
+
+それでは、先ほど実行した読み込みコードの解説をします。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{path_name <-}\StringTok{ "data/ペンギン（シート別）.xlsx"}
+\end{Highlighting}
+\end{Shaded}
+
+これは、単にファイルの場所を\texttt{path\_name}に格納しただけです。自分のデータで試してみたいときは、基本的にここのパス名を変えるだけで実行できるはずです。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df_list <-}
+\StringTok{  }\KeywordTok{excel_sheets}\NormalTok{(path_name) }\OperatorTok{%>%}\StringTok{                    }
+\StringTok{  }\KeywordTok{set_names}\NormalTok{() }\OperatorTok{%>%}\StringTok{                           }
+\StringTok{  }\KeywordTok{map}\NormalTok{(read_excel, }\DataTypeTok{path =}\NormalTok{  path_name) }
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{excel\_sheets()}は上で実行したのと同じです。実行結果はベクトルとして保存されています。\texttt{set\_names()}は、ベクトルを名前付きベクトルにする働きをします。なので、ここでできるのは、
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{excel_sheets}\NormalTok{(path_name) }\OperatorTok{%>%}\StringTok{                    }
+\StringTok{  }\KeywordTok{set_names}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     アデリー   ジェンツー         ヒゲ 
+##   "アデリー" "ジェンツー"       "ヒゲ"
+\end{verbatim}
+
+です。それぞれについて\texttt{map()}を使って\texttt{read\_excel()}を1つ1つのシート（ここでは作成した名前付きベクトルの要素）に適用していき、1つのリストにまとめるという作業をします。
+
+\hypertarget{ux4e00ux3064ux306eux30c7ux30fcux30bfux30d5ux30ecux30fcux30e0ux306bux3059ux308b}{%
+\subsection{一つのデータフレームにする}\label{ux4e00ux3064ux306eux30c7ux30fcux30bfux30d5ux30ecux30fcux30e0ux306bux3059ux308b}}
+
+\texttt{bind\_rows()}は、データフレームを縦に連結します。データフレームがリストになったものが引数にくると、それらをすべて縦につなげてくれます。引数\texttt{.id\ =}で、リストの要素名を変数の値として入れることができるので、どのデータフレームから来たのか識別することが可能になります。ここでは\texttt{group}という名前にしています。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df_all <-}\StringTok{ }
+\KeywordTok{bind_rows}\NormalTok{(df_list, }\DataTypeTok{.id =} \StringTok{"group"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{slice()}関数を使って、最初の3行と最後の3行だけを表示してどんなものができたか確認します。\texttt{1:3}は1行目から3行目、\texttt{(n()-2):n()}は、列数（ただし現在のgroup内）を表す\texttt{n()}とそれから-2行した\texttt{(n()-2)}で表されています。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df_all }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{slice}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{, (}\KeywordTok{n}\NormalTok{()}\OperatorTok{-}\DecValTok{2}\NormalTok{)}\OperatorTok{:}\KeywordTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 10
+##   group species 種類  island bill_length_mm bill_depth_mm
+##   <chr> <chr>   <chr> <chr>           <dbl>         <dbl>
+## 1 アデリー~ Adelie  アデリー~ Torge~           39.1          18.7
+## 2 アデリー~ Adelie  アデリー~ Torge~           39.5          17.4
+## 3 アデリー~ Adelie  アデリー~ Torge~           40.3          18  
+## 4 ヒゲ  Chinst~ ヒゲ  Dream            49.6          18.2
+## 5 ヒゲ  Chinst~ ヒゲ  Dream            50.8          19  
+## 6 ヒゲ  Chinst~ ヒゲ  Dream            50.2          18.7
+## # ... with 4 more variables: flipper_length_mm <dbl>,
+## #   body_mass_g <dbl>, sex <chr>, year <dbl>
+\end{verbatim}
+
+それぞれ、別々に出したほうが分かりやすいかもしれません。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 最初の3行}
+\NormalTok{df_all }\OperatorTok{%>%}\StringTok{ }\KeywordTok{slice_head}\NormalTok{(}\DataTypeTok{n =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 10
+##   group species 種類  island bill_length_mm bill_depth_mm
+##   <chr> <chr>   <chr> <chr>           <dbl>         <dbl>
+## 1 アデリー~ Adelie  アデリー~ Torge~           39.1          18.7
+## 2 アデリー~ Adelie  アデリー~ Torge~           39.5          17.4
+## 3 アデリー~ Adelie  アデリー~ Torge~           40.3          18  
+## # ... with 4 more variables: flipper_length_mm <dbl>,
+## #   body_mass_g <dbl>, sex <chr>, year <dbl>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 最後の3行}
+\NormalTok{df_all }\OperatorTok{%>%}\StringTok{ }\KeywordTok{slice_tail}\NormalTok{(}\DataTypeTok{n =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 10
+##   group species 種類  island bill_length_mm bill_depth_mm
+##   <chr> <chr>   <chr> <chr>           <dbl>         <dbl>
+## 1 ヒゲ  Chinst~ ヒゲ  Dream            49.6          18.2
+## 2 ヒゲ  Chinst~ ヒゲ  Dream            50.8          19  
+## 3 ヒゲ  Chinst~ ヒゲ  Dream            50.2          18.7
+## # ... with 4 more variables: flipper_length_mm <dbl>,
+## #   body_mass_g <dbl>, sex <chr>, year <dbl>
+\end{verbatim}
+
+\hypertarget{ux8907ux6570ux306eexcelux30d5ux30a1ux30a4ux30ebux3092ux8aadux307fux8fbcux3080}{%
+\chapter{複数のexcelファイルを読み込む}\label{ux8907ux6570ux306eexcelux30d5ux30a1ux30a4ux30ebux3092ux8aadux307fux8fbcux3080}}
+
+\hypertarget{ux8aadux307fux8fbcux3080ux30d5ux30a1ux30a4ux30ebux540dux306eux4e00ux89a7ux306eux30aaux30d6ux30b8ux30a7ux30afux30c8ux4f5cux6210}{%
+\section{読み込むファイル名の一覧のオブジェクト作成}\label{ux8aadux307fux8fbcux3080ux30d5ux30a1ux30a4ux30ebux540dux306eux4e00ux89a7ux306eux30aaux30d6ux30b8ux30a7ux30afux30c8ux4f5cux6210}}
+
+まず、読みこみたいファイルが格納されているフォルダのファイル名、およびパス名の一覧を取得します。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{files <-}
+\StringTok{    }\KeywordTok{list.files}\NormalTok{(}\DataTypeTok{path =} \StringTok{"data/複数/"}\NormalTok{, }\DataTypeTok{full.names =} \OtherTok{TRUE}\NormalTok{)}
+
+\NormalTok{files}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "data/複数/アデリー.xlsx"   "data/複数/ジェンツー.xlsx"
+## [3] "data/複数/ヒゲ.xlsx"
+\end{verbatim}
+
+\texttt{list.files()}関数は、\texttt{path\ =}で指定したフォルダ内の情報を取得します。\texttt{full.names\ =\ TRUE}でパスも含めます。これをつけないと、ファイル名と拡張子だけの取得になります。
+
+\hypertarget{ux30d5ux30a1ux30a4ux30ebux3092ux4e00ux62ecux3067ux8aadux307fux8fbcux3080}{%
+\section{ファイルを一括で読み込む}\label{ux30d5ux30a1ux30a4ux30ebux3092ux4e00ux62ecux3067ux8aadux307fux8fbcux3080}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ldata <-}
+\StringTok{    }\KeywordTok{map}\NormalTok{(files, }\OperatorTok{~}\KeywordTok{read_xlsx}\NormalTok{(.))}
+\end{Highlighting}
+\end{Shaded}
+
+ここでできた\texttt{ldata}は、\ref{dflist}で作成した\texttt{df\_list}と同じ構造です。違いはそれぞれのデータフレームの要素名（アデリー、ジェンツー、ヒゲ）が入っていない点です。これは不便なので、以下で要素名を改めてつけます。
+
+\hypertarget{ux30d5ux30a1ux30a4ux30ebux540dux62bdux51fa}{%
+\subsection{ファイル名抽出}\label{ux30d5ux30a1ux30a4ux30ebux540dux62bdux51fa}}
+
+先ほど作成した\texttt{files}から、ファイル名部分だけに加工します。\texttt{str\_replace()}は、文字の置換をする関数です。ここでは、拡張子とパス名をそれぞれ\texttt{""}、つまり空白に置換しています。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{file_name <-}\StringTok{ }
+\StringTok{  }\KeywordTok{str_replace}\NormalTok{(files, }\StringTok{".xlsx"}\NormalTok{, }\StringTok{""}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_replace}\NormalTok{(}\StringTok{"data/複数/"}\NormalTok{, }\StringTok{""}\NormalTok{)}
+
+\NormalTok{file_name}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "アデリー"   "ジェンツー" "ヒゲ"
+\end{verbatim}
+
+\hypertarget{ux30eaux30b9ux30c8ux306eux8981ux7d20ux540dux306bux30d5ux30a1ux30a4ux30ebux540dux3092ux4ed8ux4e0e}{%
+\subsection{リストの要素名にファイル名を付与}\label{ux30eaux30b9ux30c8ux306eux8981ux7d20ux540dux306bux30d5ux30a1ux30a4ux30ebux540dux3092ux4ed8ux4e0e}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ldata <-}
+\StringTok{    }\KeywordTok{set_names}\NormalTok{(ldata, file_name)}
+
+\NormalTok{ldata}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $アデリー
+## # A tibble: 152 x 9
+##   species 種類  island bill_length_mm bill_depth_mm flipper_length_~
+##   <chr>   <chr> <chr>           <dbl>         <dbl>            <dbl>
+## 1 Adelie  アデリー~ Torge~           39.1          18.7              181
+## 2 Adelie  アデリー~ Torge~           39.5          17.4              186
+## 3 Adelie  アデリー~ Torge~           40.3          18                195
+## 4 Adelie  アデリー~ Torge~           NA            NA                 NA
+## 5 Adelie  アデリー~ Torge~           36.7          19.3              193
+## # ... with 147 more rows, and 3 more variables: body_mass_g <dbl>,
+## #   sex <chr>, year <dbl>
+## 
+## $ジェンツー
+## # A tibble: 124 x 9
+##   species 種類  island bill_length_mm bill_depth_mm flipper_length_~
+##   <chr>   <chr> <chr>           <dbl>         <dbl>            <dbl>
+## 1 Gentoo  ジェンツ~ Biscoe           46.1          13.2              211
+## 2 Gentoo  ジェンツ~ Biscoe           50            16.3              230
+## 3 Gentoo  ジェンツ~ Biscoe           48.7          14.1              210
+## 4 Gentoo  ジェンツ~ Biscoe           50            15.2              218
+## 5 Gentoo  ジェンツ~ Biscoe           47.6          14.5              215
+## # ... with 119 more rows, and 3 more variables: body_mass_g <dbl>,
+## #   sex <chr>, year <dbl>
+## 
+## $ヒゲ
+## # A tibble: 68 x 9
+##   species 種類  island bill_length_mm bill_depth_mm flipper_length_~
+##   <chr>   <chr> <chr>           <dbl>         <dbl>            <dbl>
+## 1 Chinst~ ヒゲ  Dream            46.5          17.9              192
+## 2 Chinst~ ヒゲ  Dream            50            19.5              196
+## 3 Chinst~ ヒゲ  Dream            51.3          19.2              193
+## 4 Chinst~ ヒゲ  Dream            45.4          18.7              188
+## 5 Chinst~ ヒゲ  Dream            52.7          19.8              197
+## # ... with 63 more rows, and 3 more variables: body_mass_g <dbl>,
+## #   sex <chr>, year <dbl>
+\end{verbatim}
+
+\hypertarget{ux30eaux30b9ux30c8ux306eux5404ux8981ux7d20ux30921ux3064ux306eux30c7ux30fcux30bfux30d5ux30ecux30fcux30e0ux306bux7d71ux5408}{%
+\section{リストの各要素を1つのデータフレームに統合}\label{ux30eaux30b9ux30c8ux306eux5404ux8981ux7d20ux30921ux3064ux306eux30c7ux30fcux30bfux30d5ux30ecux30fcux30e0ux306bux7d71ux5408}}
+
+\hypertarget{writingexcel}{%
+\part{excelファイルを保存する}\label{writingexcel}}
+
+\hypertarget{ux500bux5225ux3067excelux30d5ux30a1ux30a4ux30ebux306bux4fddux5b58ux3059ux308b}{%
+\chapter{個別でExcelファイルに保存する}\label{ux500bux5225ux3067excelux30d5ux30a1ux30a4ux30ebux306bux4fddux5b58ux3059ux308b}}
+
+\begin{itemize}
+\tightlist
+\item
+  リストの要素名をファイル名にする
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(writexl)}
+\KeywordTok{imap}\NormalTok{(df_list, }\OperatorTok{~}\KeywordTok{write_xlsx}\NormalTok{(.x, }\DataTypeTok{path =} \KeywordTok{str_c}\NormalTok{(}\StringTok{"data/複数/"}\NormalTok{,.y , }\StringTok{".xlsx"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\clearpage
+\vspace*{\stretch{1}}
+\begin{flushright}
+\begin{minipage}{0.5\hsize}
+\begin{description}
+  \item{著者：} 著者名
+  \item{発行：} 2019年11月18日
+  \item{サークル名：} サークル名
+  \item{連絡先：} メールアドレス
+  \item{印刷：} 印刷所名
+\end{description}
+\end{minipage}
+\end{flushright}
+\clearpage
+
+\end{document}
