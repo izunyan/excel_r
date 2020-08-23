@@ -1,8 +1,17 @@
+
+
+```{r eval=FALSE, include=FALSE}
+#メモ用チャンク
+
 # (PART) excelファイルを保存する {-#writingexcel}
+これはhtml用
+
+```
 
 # 一つのexcelファイルを保存する
 
 `writexl`パッケージの`write_xlsx()`関数で、直接excelファイルとして出力ができます。ここでは、最初の6行に制限したデータフレームをexcelファイルとして保存してみます。
+
 ```{r}
 library(writexl)
 ```
@@ -23,9 +32,9 @@ write_xlsx(df_head, "out/df_head.xlsx")
 
 ## カテゴリ別平均値の作成
 
-クチバシの長さと大きさを表す変数である、`bill_length_mm`、`bill_depth_mm`について、平均値と欠損を抜いたサンプルサイズを種類別に計算します。
+クチバシの長さと大きさを表す変数である、`bill_length_mm`、`bill_depth_mm`について、平均値と欠損を抜いたn（ペンギン数）を種類別に計算します。
 
-`group_by()`でカテゴリ別にしたい変数を指定し、`summarise()`で平均値とサンプルサイズを計算するコードが以下になります。
+`group_by()`でカテゴリ別にしたい変数を指定し、`summarise()`で平均値とnを計算するコードが以下になります。
 
 ```{r}
 df_group_mean <- 

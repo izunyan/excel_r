@@ -1,0 +1,77 @@
+
+```{r eval=FALSE, include=FALSE}
+#メモ用チャンク
+
+# (PART) excelファイルを読み込む {-#readingexcel}
+これはhtml用
+
+```
+
+# csvファイルの読み込み
+
+
+
+## 一つのcsvファイルを読み込む
+
+windows環境で過ごしている日本語を使うRユーザーにおいては、csvファイルを扱う際に文字コードの違いという深い闇に遭遇することが少なくありません。
+
+出会う可能性が高い文字コードの違いには、大きく`cp932（Shift-JIS）`と`UTF-8`という形式があり、一般的に業務で読みこもうとするファイルは前者であることが多いことを知っておくと役に立ちます。
+
+
+
+### UTF-8でエンコードされたcsvファイル
+
+* csvファイルを読みこむには、`readr`パッケージを使います。`tidyverse`を読み込んだら一緒に読み込まれます。
+* `data > csv`フォルダ（`data/csv/`で表現）に入っている「」を開きます。
+* `read_csv()`関数を使います。
+* ここでは、`""`の中で`tab`キーを押すと文字コードの関係でエラーが出るかもしれません。日本語ファイル名の場合は、直に張り付けた方が無難です。
+
+
+```{r}
+ read_csv("data/csv/ペンギン（ひどい列名）ver_utf8.csv")
+``` 
+
+
+### 【文字化けの例】Shift-JISでエンコードされたcsvファイル
+
+* 正確にはShift-JISの拡張版であるcp932
+* 変数名も文字化けして読めなくなるので、`clean_names()`で読める形式に変換している
+
+```{r}
+read_csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv") %>% 
+  clean_names(case = "old_janitor")
+```
+
+日本語の変数名と、2列目の日本語の値が文字化けします。
+
+### Shift-JISでエンコードされたcsvファイル
+
+* これを読むためには，引数でShift-JISのファイルであることを指定する必要がある
+  + 正確にはShift-JISの拡張版であるcp932
+
+
+```{r}
+read_csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv"
+         , locale = locale(encoding = "cp932"))
+```
+
+
+## read.csv
+
+* 従来のcsvを読む関数`read.csv()`を使えば，デフォルトでShift-JISのファイルは読める
+
+```{r}
+read.csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv") %>%
+  head() %>% 
+  as_tibble() # データフレームをtibble型にし見やすい出力に
+```
+
+
+* UTF-8を読む場合
+
+```{r}
+read.csv("data/csv/ペンギン（ひどい列名）ver_utf8.csv", 
+         encoding = "UTF-8") %>% 
+  head() %>% 
+  as_tibble()
+```

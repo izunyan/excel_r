@@ -69,6 +69,13 @@ library(stringi)
 
 stri_trans_nfkc("ﾍﾟﾝｷﾞﾝ")
 
-to do
-str()の表示列数縮減
+# to do --------------------
+
+1.2 プロジェクトとはに画像
+
 skipの説明
+
+本のタイトル
+
+rchunk outputのフォントサイズ
+
