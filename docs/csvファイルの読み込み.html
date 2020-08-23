@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1 前提：プロジェクトの設定 | index.split</title>
+  <title>7 csvファイルの読み込み | index.split</title>
   <meta name="description" content="" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1 前提：プロジェクトの設定 | index.split" />
+  <meta property="og:title" content="7 csvファイルの読み込み | index.split" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1 前提：プロジェクトの設定 | index.split" />
+  <meta name="twitter:title" content="7 csvファイルの読み込み | index.split" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="一つのexcelファイルを読み込む.html"/>
+<link rel="prev" href="複数のファイルを一度に保存する.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -194,19 +194,124 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="project" class="section level1">
-<h1><span class="header-section-number">1</span> 前提：プロジェクトの設定</h1>
-<p>Rの基本的な使い方は他の情報源にゆだねていますが、ここだけは避けて通れないので解説しておきます。</p>
-<div id="どのフォルダのファイルかの指定" class="section level2">
-<h2><span class="header-section-number">1.1</span> どのフォルダのファイルかの指定</h2>
-<p>excelファイルに限らず、ファイルをRに読み込む際は、どのフォルダから読むのか、位置を正確に指定する必要があります。</p>
-<p>そこで重要となる概念が、「作業フォルダ」というものです。</p>
-<p>コンソールに<code>getwd()</code>と打って出てくるフォルダが現在の作業フォルダになります。</p>
+<div id="csvファイルの読み込み" class="section level1">
+<h1><span class="header-section-number">7</span> csvファイルの読み込み</h1>
+<div id="一つのcsvファイルを読み込む" class="section level2">
+<h2><span class="header-section-number">7.1</span> 一つのcsvファイルを読み込む</h2>
+<p>windows環境で過ごしている日本語を使うRユーザーにおいては、csvファイルを扱う際に文字コードの違いという深い闇に遭遇することが少なくありません。</p>
+<p>出会う可能性が高い文字コードの違いには、大きく<code>cp932（SHIFT-JIS）</code>と<code>UTF-8</code>という形式があり、一般的に業務で読みこもうとするファイルは前者であることが多いことを知っておくと役に立ちます。</p>
+<div id="utf-8でエンコードされたcsvファイル" class="section level3">
+<h3><span class="header-section-number">7.1.1</span> utf-8でエンコードされたcsvファイル</h3>
+<ul>
+<li>csvファイルを読みこむには、<code>readr</code>パッケージを使います。<code>tidyverse</code>を読み込んだら一緒に読み込まれます。</li>
+<li>data &gt; csvフォルダ（<code>data/csv/</code>で表現）に入っている「」を開きます。</li>
+<li><code>read_csv()</code>関数を使います。</li>
+<li>ここでは、<code>""</code>の中で<code>tab</code>キーを押すと文字コードの関係でエラーが出るかもしれません。日本語ファイル名の場合は、直に張り付けた方が無難です。</li>
+</ul>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="csvファイルの読み込み.html#cb52-1"></a> <span class="kw">read_csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_utf8.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 344 x 9
+##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`~
+##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                  &lt;dbl&gt;
+## 1 Adelie        アデリー Torgersen               39.1
+## 2 Adelie        アデリー Torgersen               39.5
+## 3 Adelie        アデリー Torgersen               40.3
+## 4 Adelie        アデリー Torgersen               NA  
+## 5 Adelie        アデリー Torgersen               36.7
+## # ... with 339 more rows, and 5 more variables:
+## #   `②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）` &lt;dbl&gt;, `翼：長さ(mm)` &lt;dbl&gt;,
+## #   `■体重　単位はｇ` &lt;dbl&gt;, `&lt;U+329B&gt;&lt;U+329A&gt;` &lt;chr&gt;,
+## #   `２００７～２００９` &lt;dbl&gt;</code></pre>
 </div>
-<div id="プロジェクトとは" class="section level2">
-<h2><span class="header-section-number">1.2</span> プロジェクトとは</h2>
-<p>RStudioの「プロジェクト」とは、作業フォルダにまつわる面倒な設定を意識しないですむ非常に便利な機能です。</p>
-<p>ざっくり説明すると、データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコード、出力をまとめておき、そのフォルダをプロジェクトとして設定することで、ファイルの読み書きの際の場所指定をいちいち意識しないで作業できるようになります。</p>
+<div id="文字化けの例shit-jisでエンコードされたcsvファイル" class="section level3">
+<h3><span class="header-section-number">7.1.2</span> 【文字化けの例】SHIT-JISでエンコードされたcsvファイル</h3>
+<ul>
+<li>正確にはSHIT-JISの拡張版であるcp932</li>
+<li>変数名も文字化けして読めなくなるので、<code>clean_names()</code>で読める形式に変換している</li>
+</ul>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="csvファイルの読み込み.html#cb54-1"></a><span class="kw">read_csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_cp932.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb54-2"><a href="csvファイルの読み込み.html#cb54-2"></a><span class="st">  </span><span class="kw">clean_names</span>(<span class="dt">case =</span> <span class="st">&quot;old_janitor&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 344 x 9
+##   s_u_0082_u_0090~ x_u_008e_ed_u_0~ x_u_0081_u_00a6~
+##   &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;           
+## 1 Adelie           &quot;\x83A\x83f\x83~ Torgersen       
+## 2 Adelie           &quot;\x83A\x83f\x83~ Torgersen       
+## 3 Adelie           &quot;\x83A\x83f\x83~ Torgersen       
+## 4 Adelie           &quot;\x83A\x83f\x83~ Torgersen       
+## 5 Adelie           &quot;\x83A\x83f\x83~ Torgersen       
+## # ... with 339 more rows, and 6 more variables:
+## #   x_u_0087_u_0083_n_u_0083_u_0083_o_u_0083_v_u_0081_u_0092_u_00b7_u_0082_u_00b3_u_0081_i_u_0082_u_008d_u_0082_u_008d_u_0081_j &lt;dbl&gt;,
+## #   x_u_0087_a_u_00b8_c1_ca_u_07bc_u_0081_q_u_0091_u_50ab_u_0082_u_00b3_u_0081_i_u_0082_u_008d_u_0082_u_008d_u_0081_j &lt;dbl&gt;,
+## #   x_u_0097_u_0083_u_0081_f_u_0092_u_00b7_u_0082_u_00b3_mm &lt;dbl&gt;,
+## #   x_u_0081_u_00a1_u_0091_u_030f_d_u_0081_u_0092_p_u_0088_u_0282_u_0342_u_0087 &lt;dbl&gt;,
+## #   x &lt;chr&gt;,
+## #   x_u_0082_q_u_0082_o_u_0082_o_u_0082_v_u_0081_u_0082_q_u_0082_o_u_0082_o_u_0082_x &lt;dbl&gt;</code></pre>
+<p>日本語の変数名と、2列目の日本語の値が文字化けします。</p>
+</div>
+<div id="shit-jisでエンコードされたcsvファイル" class="section level3">
+<h3><span class="header-section-number">7.1.3</span> SHIT-JISでエンコードされたcsvファイル</h3>
+<ul>
+<li>これを読むためには，引数でSHIT-JISのファイルであることを指定する必要がある
+<ul>
+<li>正確にはSHIT-JISの拡張版であるcp932</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="csvファイルの読み込み.html#cb56-1"></a><span class="kw">read_csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_cp932.csv&quot;</span></span>
+<span id="cb56-2"><a href="csvファイルの読み込み.html#cb56-2"></a>         , <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">encoding =</span> <span class="st">&quot;cp932&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 344 x 9
+##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`~
+##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                  &lt;dbl&gt;
+## 1 Adelie        アデリー Torgersen               39.1
+## 2 Adelie        アデリー Torgersen               39.5
+## 3 Adelie        アデリー Torgersen               40.3
+## 4 Adelie        アデリー Torgersen               NA  
+## 5 Adelie        アデリー Torgersen               36.7
+## # ... with 339 more rows, and 5 more variables:
+## #   `②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）` &lt;dbl&gt;, `翼：長さ(mm)` &lt;dbl&gt;,
+## #   `■体重　単位はｇ` &lt;dbl&gt;, `??` &lt;chr&gt;,
+## #   `２００７～２００９` &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div id="read.csv" class="section level2">
+<h2><span class="header-section-number">7.2</span> read.csv</h2>
+<ul>
+<li>従来のcsvを読む関数<code>read.csv()</code>を使えば，デフォルトでSHIT-JISのファイルは読める</li>
+</ul>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="csvファイルの読み込み.html#cb58-1"></a><span class="kw">read.csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_cp932.csv&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb58-2"><a href="csvファイルの読み込み.html#cb58-2"></a><span class="st">  </span><span class="kw">head</span>()</span></code></pre></div>
+<pre><code>##   Sｐｅｃｉｅｓ    種.類 X.島の名前 X.クチバシ.長さ.ｍｍ. X.ｸﾁﾊﾞｼ.大きさ.ｍｍ.
+## 1        Adelie アデリー  Torgersen                  39.1                 18.7
+## 2        Adelie アデリー  Torgersen                  39.5                 17.4
+## 3        Adelie アデリー  Torgersen                  40.3                 18.0
+## 4        Adelie アデリー  Torgersen                    NA                   NA
+## 5        Adelie アデリー  Torgersen                  36.7                 19.3
+## 6        Adelie アデリー  Torgersen                  39.3                 20.6
+##   翼.長さ.mm. X.体重.単位はｇ    X.. ２００７.２００９
+## 1         181            3750   male              2007
+## 2         186            3800 female              2007
+## 3         195            3250 female              2007
+## 4          NA              NA                     2007
+## 5         193            3450 female              2007
+## 6         190            3650   male              2007</code></pre>
+<ul>
+<li>UTF-8を読む場合</li>
+</ul>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="csvファイルの読み込み.html#cb60-1"></a><span class="kw">read.csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_utf8.csv&quot;</span>, </span>
+<span id="cb60-2"><a href="csvファイルの読み込み.html#cb60-2"></a>         <span class="dt">encoding =</span> <span class="st">&quot;UTF-8&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb60-3"><a href="csvファイルの読み込み.html#cb60-3"></a><span class="st">  </span><span class="kw">head</span>()</span></code></pre></div>
+<pre><code>##   Sｐｅｃｉｅｓ    種.類 X.島の名前 X.クチバシ.長さ.ｍｍ. X.ｸﾁﾊﾞｼ.大きさ.ｍｍ.
+## 1        Adelie アデリー  Torgersen                  39.1                 18.7
+## 2        Adelie アデリー  Torgersen                  39.5                 17.4
+## 3        Adelie アデリー  Torgersen                  40.3                 18.0
+## 4        Adelie アデリー  Torgersen                    NA                   NA
+## 5        Adelie アデリー  Torgersen                  36.7                 19.3
+## 6        Adelie アデリー  Torgersen                  39.3                 20.6
+##   翼.長さ.mm. X.体重.単位はｇ X.U.329B..U.329A. ２００７.２００９
+## 1         181            3750              male              2007
+## 2         186            3800            female              2007
+## 3         195            3250            female              2007
+## 4          NA              NA                                2007
+## 5         193            3450            female              2007
+## 6         190            3650              male              2007</code></pre>
 
 </div>
 </div>
@@ -215,8 +320,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="一つのexcelファイルを読み込む.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="複数のファイルを一度に保存する.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
