@@ -8,29 +8,12 @@
 
 ```
 
-# 一つのexcelファイルを保存する
+# 一つのexcelファイルを保存する {#writeoneexcel}
 
-`writexl`パッケージの`write_xlsx()`関数で、直接excelファイルとして出力ができます。ここでは、最初の6行に制限したデータフレームをexcelファイルとして保存してみます。
-
-```{r}
-library(writexl)
-```
+`writexl`パッケージの`write_xlsx()`関数で、直接excelファイルとして出力ができます。ここでは、新しく作成したデータフレームをexcelファイルとして保存してみます。
 
 
-```{r eval = FALSE}
-# 最初の6行だけのデータに
-df_head <- head(df)
-
-write_xlsx(df_head, "out/df_head.xlsx")
-```
-
-`out/`の部分が出力先のフォルダを示しています。
-
-# 複数のファイルを一度に保存する
-
-これが活躍する場面としては、たとえばカテゴリ別（例：会社の部署別など）に集計した要約値をそのカテゴリ別にファイルにするといった状況が思いつきますので、それをやってみます。
-
-## カテゴリ別平均値の作成
+## カテゴリ別平均値の作成 {#groupbymean}
 
 クチバシの長さと大きさを表す変数である、`bill_length_mm`、`bill_depth_mm`について、平均値と欠損を抜いたn（ペンギン数）を種類別に計算します。
 
@@ -46,19 +29,50 @@ df_group_mean <-
                         n = ~sum(!is.na(.))))
            )
 
-df_group_mean
+df_group_mean <- 
+  df_group_mean %>%  
+  select(-bill_depth_mm_n) %>%  # nが同じなので列削除
+  rename(n = bill_length_mm_n)  # 列名をnにリネーム
+
+knitr::kable(df_group_mean) # きれいな出力にするコード
 ```
 
 
-## データフレームをカテゴリ別に分割する
+## excelファイルの保存
+```{r}
+library(writexl)
+```
 
-`split()`関数を使うことで、カテゴリ別にデータフレームを分割し、リストにまとめた結果を作成できます。
+```{r eval = FALSE}
+write_xlsx(df_group_mean, "out/df_group_mean.xlsx")
+```
+
+`out/`の部分が出力先のフォルダを示しています。
+
+### ファイル名に自動で本日の日付を入れる
+
+`lubridate`パッケージの`today()`関数で、今日の日付を表示できるので、それを保存名を入れる時に組み込む（文字列なので区切って`str_c()`でくっつける）と、日付入りファイル名が作成できます。
+
+```{r eval = FALSE}
+write_xlsx(df_group_mean, 
+         str_c("out/df_group_mean", "_", lubridate::today(), ".xlsx"))
+```
+
+
+
+# 複数のファイルを一度に保存する {#writeseveralexcel}
+
+これが活躍する場面としては、たとえばカテゴリ別（例：ペンギンの種類別、会社の部署別など）に集計した要約値をそのカテゴリ別に個々のexcelファイルにするといった状況が思いつきますので、それをやってみます。
+
+
+## データフレームをカテゴリ別に分割する {#splitdf}
+
+`split()`関数を使うことで、カテゴリ別にデータフレームを分割し、リストにまとめた結果を作成できます。データは\@ref(groupbymean)で作成した`df_group_mean`を使います。
 
 分割に使う変数は、`df_group_mean$species`のように、データフレーム名の後に`$`をつけてその後に指定します。この変数の中身が、そのままリストの要素名になるので、後の処理がとても楽になります。
 
 
 ```{r}
-
 df_gmean_list <- 
   split(df_group_mean, df_group_mean$種類)
 
@@ -81,5 +95,16 @@ imap(df_gmean_list, ~write_xlsx(.x, path = str_c("out/", .y , ".xlsx")))
 
 ```{r eval = FALSE}
 imap(df_list, ~write_xlsx(.x, path = str_c("data/複数/",.y , ".xlsx")))
+```
+
+
+## 一つのファイルの複数シートに保存する
+
+\@ref(splitdf)で作成した、ペンギンの種類別クチバシの長さと大きさ平均値のデータを、個別のファイルでなく、一ファイルの複数シートに保存したいときは、とてもシンプルなコードで可能になります。
+
+要素名のついたデータフレームのリストが作成されていれば、それを単純に`write_xlsx()`で出力するだけで完成します。
+
+```{r eval = FALSE}
+write_xlsx(df_gmean_list, "data/平均値（複数シート）.xlsx")
 ```
 

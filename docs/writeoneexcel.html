@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1 前提：プロジェクトの設定 | Rで読むExcelファイル（仮）</title>
-  <meta name="description" content="1 前提：プロジェクトの設定 | Rで読むExcelファイル（仮）" />
+  <title>5 一つのexcelファイルを保存する | Rで読むExcelファイル（仮）</title>
+  <meta name="description" content="5 一つのexcelファイルを保存する | Rで読むExcelファイル（仮）" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1 前提：プロジェクトの設定 | Rで読むExcelファイル（仮）" />
+  <meta property="og:title" content="5 一つのexcelファイルを保存する | Rで読むExcelファイル（仮）" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1 前提：プロジェクトの設定 | Rで読むExcelファイル（仮）" />
+  <meta name="twitter:title" content="5 一つのexcelファイルを保存する | Rで読むExcelファイル（仮）" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="readoneexcel.html"/>
+<link rel="prev" href="readseveralexcel.html"/>
+<link rel="next" href="writeseveralexcel.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -211,20 +211,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="project" class="section level1">
-<h1><span class="header-section-number">1</span> 前提：プロジェクトの設定</h1>
-<p>Rの基本的な使い方は他の情報源にゆだねていますが、ここだけは避けて通れないので解説しておきます。</p>
-<div id="どのフォルダのファイルかの指定" class="section level2">
-<h2><span class="header-section-number">1.1</span> どのフォルダのファイルかの指定</h2>
-<p>excelファイルに限らず、ファイルをRに読み込む際は、どのフォルダから読むのか、位置を正確に指定する必要があります。</p>
-<p>そこで重要となる概念が、「作業フォルダ」というものです。</p>
-<p>コンソールに<code>getwd()</code>と打って出てくるフォルダが現在の作業フォルダになります。</p>
+<div id="writeoneexcel" class="section level1">
+<h1><span class="header-section-number">5</span> 一つのexcelファイルを保存する</h1>
+<p><code>writexl</code>パッケージの<code>write_xlsx()</code>関数で、直接excelファイルとして出力ができます。ここでは、新しく作成したデータフレームをexcelファイルとして保存してみます。</p>
+<div id="groupbymean" class="section level2">
+<h2><span class="header-section-number">5.1</span> カテゴリ別平均値の作成</h2>
+<p>クチバシの長さと大きさを表す変数である、<code>bill_length_mm</code>、<code>bill_depth_mm</code>について、平均値と欠損を抜いたn（ペンギン数）を種類別に計算します。</p>
+<p><code>group_by()</code>でカテゴリ別にしたい変数を指定し、<code>summarise()</code>で平均値とnを計算するコードが以下になります。</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="writeoneexcel.html#cb50-1"></a>df_group_mean &lt;-<span class="st"> </span></span>
+<span id="cb50-2"><a href="writeoneexcel.html#cb50-2"></a><span class="st">  </span>df <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb50-3"><a href="writeoneexcel.html#cb50-3"></a><span class="st">  </span><span class="kw">group_by</span>(種類) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb50-4"><a href="writeoneexcel.html#cb50-4"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="kw">across</span>(</span>
+<span id="cb50-5"><a href="writeoneexcel.html#cb50-5"></a>                   <span class="kw">c</span>(bill_length_mm, bill_depth_mm), <span class="co"># ここに変数</span></span>
+<span id="cb50-6"><a href="writeoneexcel.html#cb50-6"></a>                   <span class="kw">list</span>(<span class="dt">m =</span> <span class="op">~</span><span class="kw">mean</span>(., <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb50-7"><a href="writeoneexcel.html#cb50-7"></a>                        <span class="dt">n =</span> <span class="op">~</span><span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(.))))</span>
+<span id="cb50-8"><a href="writeoneexcel.html#cb50-8"></a>           )</span>
+<span id="cb50-9"><a href="writeoneexcel.html#cb50-9"></a></span>
+<span id="cb50-10"><a href="writeoneexcel.html#cb50-10"></a>df_group_mean</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 5
+##   種類  bill_length_mm_m bill_length_mm_n bill_depth_mm_m
+##   &lt;chr&gt;            &lt;dbl&gt;            &lt;int&gt;           &lt;dbl&gt;
+## 1 アデリー~             38.8              151            18.3
+## 2 ジェンツ~             47.5              123            15.0
+## 3 ヒゲ              48.8               68            18.4
+## # ... with 1 more variable: bill_depth_mm_n &lt;int&gt;</code></pre>
 </div>
-<div id="プロジェクトとは" class="section level2">
-<h2><span class="header-section-number">1.2</span> プロジェクトとは</h2>
-<p>RStudioの「プロジェクト」とは、作業フォルダにまつわる面倒な設定を意識しないですむ非常に便利な機能です。</p>
-<p>ざっくり説明すると、データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコード、出力をまとめておき、そのフォルダをプロジェクトとして設定するのです。これにより、ファイルの読み書きの際の場所指定をいちいち意識しないで作業できるようになります。</p>
-
+<div id="excelファイルの保存" class="section level2">
+<h2><span class="header-section-number">5.2</span> excelファイルの保存</h2>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="writeoneexcel.html#cb52-1"></a><span class="kw">library</span>(writexl)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="writeoneexcel.html#cb53-1"></a><span class="kw">write_xlsx</span>(df_group_mean, <span class="st">&quot;out/df_group_mean.xlsx&quot;</span>)</span></code></pre></div>
+<p><code>out/</code>の部分が出力先のフォルダを示しています。</p>
+<div id="ファイル名に自動で本日の日付を入れる" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> ファイル名に自動で本日の日付を入れる</h3>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="writeoneexcel.html#cb54-1"></a><span class="kw">write_xlsx</span>(df_group_mean, </span>
+<span id="cb54-2"><a href="writeoneexcel.html#cb54-2"></a>           <span class="kw">str_c</span>(<span class="st">&quot;out/df_group_mean&quot;</span>, <span class="st">&quot;_&quot;</span>, lubridate<span class="op">::</span><span class="kw">today</span>(), <span class="st">&quot;.xlsx&quot;</span>))</span></code></pre></div>
+</div>
 </div>
 </div>
             </section>
@@ -232,8 +253,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="readoneexcel.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="readseveralexcel.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="writeseveralexcel.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

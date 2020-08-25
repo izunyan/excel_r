@@ -6,4 +6,6 @@ rmd_files: ["index.Rmd",
             
             "excelファイルの読み込み.Rmd",
             "excelファイルの保存.Rmd",
-            "csvファイルの読み込み.Rmd"] # rmdファイルの順番指定
+            "csvファイルの読み込み.Rmd",
+            "csvファイルの保存.Rmd",
+            "あとがき.Rmd"] # rmdファイルの順番指定

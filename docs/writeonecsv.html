@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1 前提：プロジェクトの設定 | Rで読むExcelファイル（仮）</title>
-  <meta name="description" content="1 前提：プロジェクトの設定 | Rで読むExcelファイル（仮）" />
+  <title>8 csvファイルの保存 | Rで読むExcelファイル（仮）</title>
+  <meta name="description" content="8 csvファイルの保存 | Rで読むExcelファイル（仮）" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1 前提：プロジェクトの設定 | Rで読むExcelファイル（仮）" />
+  <meta property="og:title" content="8 csvファイルの保存 | Rで読むExcelファイル（仮）" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1 前提：プロジェクトの設定 | Rで読むExcelファイル（仮）" />
+  <meta name="twitter:title" content="8 csvファイルの保存 | Rで読むExcelファイル（仮）" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="readoneexcel.html"/>
+<link rel="prev" href="readonecsv.html"/>
+<link rel="next" href="あとがき.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -211,19 +211,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="project" class="section level1">
-<h1><span class="header-section-number">1</span> 前提：プロジェクトの設定</h1>
-<p>Rの基本的な使い方は他の情報源にゆだねていますが、ここだけは避けて通れないので解説しておきます。</p>
-<div id="どのフォルダのファイルかの指定" class="section level2">
-<h2><span class="header-section-number">1.1</span> どのフォルダのファイルかの指定</h2>
-<p>excelファイルに限らず、ファイルをRに読み込む際は、どのフォルダから読むのか、位置を正確に指定する必要があります。</p>
-<p>そこで重要となる概念が、「作業フォルダ」というものです。</p>
-<p>コンソールに<code>getwd()</code>と打って出てくるフォルダが現在の作業フォルダになります。</p>
+<div id="writeonecsv" class="section level1">
+<h1><span class="header-section-number">8</span> csvファイルの保存</h1>
+<ul>
+<li>csvファイルを保存するには、<code>readr</code>パッケージの<code>write_csv()</code>関数を使います。
+<ul>
+<li>ただし、出力されたcsvファイルをExcelで開くとたぶん文字化けします。LibreOfficeのCalcであれば、最初にダイアログボックスが開いて読む文字コードを選べます。</li>
+</ul></li>
+</ul>
+<div id="write_csvを使う" class="section level2">
+<h2><span class="header-section-number">8.1</span> write_csv()を使う</h2>
+<p>先ほど読みこんだ<code>df_csv</code>と、保存先を<code>""</code>中に指定します。</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="writeonecsv.html#cb70-1"></a><span class="kw">write_csv</span>(df_csv, <span class="st">&quot;out/df_csv_utf8.csv&quot;</span>)</span></code></pre></div>
+<div id="excelで開いても読めるように" class="section level3">
+<h3><span class="header-section-number">8.1.1</span> Excelで開いても読めるように</h3>
+<p>Excelで開いても読める、BOM（byte order mark, バイトオーダーマーク）付きファイルとして出力する関数です。</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="writeonecsv.html#cb71-1"></a><span class="kw">write_excel_csv</span>(df_csv, <span class="st">&quot;out/df_csv_utf8_forxl.csv&quot;</span>)</span></code></pre></div>
 </div>
-<div id="プロジェクトとは" class="section level2">
-<h2><span class="header-section-number">1.2</span> プロジェクトとは</h2>
-<p>RStudioの「プロジェクト」とは、作業フォルダにまつわる面倒な設定を意識しないですむ非常に便利な機能です。</p>
-<p>ざっくり説明すると、データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコード、出力をまとめておき、そのフォルダをプロジェクトとして設定するのです。これにより、ファイルの読み書きの際の場所指定をいちいち意識しないで作業できるようになります。</p>
+</div>
+<div id="write.csvを使う" class="section level2">
+<h2><span class="header-section-number">8.2</span> write.csv()を使う</h2>
+<p>書き込みが遅いですが、文字化け回避の最終手段として、なぜかうまくいく時があるので、<code>write.csv()</code>も役に立ちます。Rでデフォルトの文字エンコードがcp932で、そちらを採用するからと思われます。</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="writeonecsv.html#cb72-1"></a><span class="kw">write.csv</span>(df_csv, <span class="st">&quot;out/df_csv_cp932.csv&quot;</span>)</span></code></pre></div>
 
 </div>
 </div>
@@ -232,8 +241,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="readoneexcel.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="readonecsv.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="あとがき.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

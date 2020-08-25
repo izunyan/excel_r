@@ -73,9 +73,17 @@ stri_trans_nfkc("ﾍﾟﾝｷﾞﾝ")
 
 1.2 プロジェクトとはに画像
 
-skipの説明
 
 本のタイトル
 
 rchunk outputのフォントサイズ
 
+palmerpenguins
+
+creative commons
+
+
+R version 4.0.2のエラー
+""の中でtabキーを打つと、
+path.expand(path) でエラー: unable to translate 'E:/excel_r/data/csv/郢晏｣ｹﾎｦ郢ｧ・ｮ郢晢ｽｳ<ef>・ｼ蛹ｻ<81>・ｲ邵ｺ・ｩ邵ｺ<84>陋ｻ諤憺倹<ef>・ｼ逶各r_cp932.csv' to UTF-8
+→versionを3.6.1に戻したら解決

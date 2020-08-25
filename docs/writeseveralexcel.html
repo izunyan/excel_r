@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1 前提：プロジェクトの設定 | Rで読むExcelファイル（仮）</title>
-  <meta name="description" content="1 前提：プロジェクトの設定 | Rで読むExcelファイル（仮）" />
+  <title>6 複数のファイルを一度に保存する | Rで読むExcelファイル（仮）</title>
+  <meta name="description" content="6 複数のファイルを一度に保存する | Rで読むExcelファイル（仮）" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1 前提：プロジェクトの設定 | Rで読むExcelファイル（仮）" />
+  <meta property="og:title" content="6 複数のファイルを一度に保存する | Rで読むExcelファイル（仮）" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1 前提：プロジェクトの設定 | Rで読むExcelファイル（仮）" />
+  <meta name="twitter:title" content="6 複数のファイルを一度に保存する | Rで読むExcelファイル（仮）" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="readoneexcel.html"/>
+<link rel="prev" href="writeoneexcel.html"/>
+<link rel="next" href="readonecsv.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -211,19 +211,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="project" class="section level1">
-<h1><span class="header-section-number">1</span> 前提：プロジェクトの設定</h1>
-<p>Rの基本的な使い方は他の情報源にゆだねていますが、ここだけは避けて通れないので解説しておきます。</p>
-<div id="どのフォルダのファイルかの指定" class="section level2">
-<h2><span class="header-section-number">1.1</span> どのフォルダのファイルかの指定</h2>
-<p>excelファイルに限らず、ファイルをRに読み込む際は、どのフォルダから読むのか、位置を正確に指定する必要があります。</p>
-<p>そこで重要となる概念が、「作業フォルダ」というものです。</p>
-<p>コンソールに<code>getwd()</code>と打って出てくるフォルダが現在の作業フォルダになります。</p>
+<div id="writeseveralexcel" class="section level1">
+<h1><span class="header-section-number">6</span> 複数のファイルを一度に保存する</h1>
+<p>これが活躍する場面としては、たとえばカテゴリ別（例：ペンギンの種類別、会社の部署別など）に集計した要約値をそのカテゴリ別に個々のexcelファイルにするといった状況が思いつきますので、それをやってみます。</p>
+<div id="splitdf" class="section level2">
+<h2><span class="header-section-number">6.1</span> データフレームをカテゴリ別に分割する</h2>
+<p><code>split()</code>関数を使うことで、カテゴリ別にデータフレームを分割し、リストにまとめた結果を作成できます。データは<a href="writeoneexcel.html#groupbymean">5.1</a>で作成した<code>df_group_mean</code>を使います。</p>
+<p>分割に使う変数は、<code>df_group_mean$species</code>のように、データフレーム名の後に<code>$</code>をつけてその後に指定します。この変数の中身が、そのままリストの要素名になるので、後の処理がとても楽になります。</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="writeseveralexcel.html#cb55-1"></a>df_gmean_list &lt;-<span class="st"> </span></span>
+<span id="cb55-2"><a href="writeseveralexcel.html#cb55-2"></a><span class="st">  </span><span class="kw">split</span>(df_group_mean, df_group_mean<span class="op">$</span>種類)</span>
+<span id="cb55-3"><a href="writeseveralexcel.html#cb55-3"></a></span>
+<span id="cb55-4"><a href="writeseveralexcel.html#cb55-4"></a>df_gmean_list</span></code></pre></div>
+<pre><code>## $アデリー
+## # A tibble: 1 x 5
+##   種類  bill_length_mm_m bill_length_mm_n bill_depth_mm_m
+##   &lt;chr&gt;            &lt;dbl&gt;            &lt;int&gt;           &lt;dbl&gt;
+## 1 アデリー~             38.8              151            18.3
+## # ... with 1 more variable: bill_depth_mm_n &lt;int&gt;
+## 
+## $ジェンツー
+## # A tibble: 1 x 5
+##   種類  bill_length_mm_m bill_length_mm_n bill_depth_mm_m
+##   &lt;chr&gt;            &lt;dbl&gt;            &lt;int&gt;           &lt;dbl&gt;
+## 1 ジェンツ~             47.5              123            15.0
+## # ... with 1 more variable: bill_depth_mm_n &lt;int&gt;
+## 
+## $ヒゲ
+## # A tibble: 1 x 5
+##   種類  bill_length_mm_m bill_length_mm_n bill_depth_mm_m
+##   &lt;chr&gt;            &lt;dbl&gt;            &lt;int&gt;           &lt;dbl&gt;
+## 1 ヒゲ              48.8               68            18.4
+## # ... with 1 more variable: bill_depth_mm_n &lt;int&gt;</code></pre>
 </div>
-<div id="プロジェクトとは" class="section level2">
-<h2><span class="header-section-number">1.2</span> プロジェクトとは</h2>
-<p>RStudioの「プロジェクト」とは、作業フォルダにまつわる面倒な設定を意識しないですむ非常に便利な機能です。</p>
-<p>ざっくり説明すると、データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコード、出力をまとめておき、そのフォルダをプロジェクトとして設定するのです。これにより、ファイルの読み書きの際の場所指定をいちいち意識しないで作業できるようになります。</p>
+<div id="個別でexcelファイルに保存する" class="section level2">
+<h2><span class="header-section-number">6.2</span> 個別でExcelファイルに保存する</h2>
+<p><code>purrr</code>パッケージの<code>imap()</code>関数を使って、リスト内の各データフレームに、それぞれの要素名をファイル名として、excelファイルに出力します。</p>
+<p>ここでは、リスト内の各要素を示すのが<code>.x</code>、要素名（位置）に当たるのは<code>.y</code>です。次々に代わるファイル名を作るのに、<code>str_c()</code>関数で文字列を結合しています。</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="writeseveralexcel.html#cb57-1"></a><span class="kw">imap</span>(df_gmean_list, <span class="op">~</span><span class="kw">write_xlsx</span>(.x, <span class="dt">path =</span> <span class="kw">str_c</span>(<span class="st">&quot;out/&quot;</span>, .y , <span class="st">&quot;.xlsx&quot;</span>)))</span></code></pre></div>
+<div id="サンプルデータセット作成コード" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> サンプルデータセット作成コード</h3>
+<p>ちなみに<code>data/複数/</code>フォルダにあるサンプルデータセットは以下のコードで作りました。</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="writeseveralexcel.html#cb58-1"></a><span class="kw">imap</span>(df_list, <span class="op">~</span><span class="kw">write_xlsx</span>(.x, <span class="dt">path =</span> <span class="kw">str_c</span>(<span class="st">&quot;data/複数/&quot;</span>,.y , <span class="st">&quot;.xlsx&quot;</span>)))</span></code></pre></div>
+</div>
+</div>
+<div id="一ファイルの複数シートに保存する" class="section level2">
+<h2><span class="header-section-number">6.3</span> 一ファイルの複数シートに保存する</h2>
+<p><a href="writeseveralexcel.html#splitdf">6.1</a>で作成した、ペンギンの種類別クチバシの長さと大きさ平均値のデータを、個別のファイルでなく、一ファイルの複数シートに保存したいときは、とてもシンプルなコードで可能になります。</p>
+<p>要素名のついたデータフレームのリストが作成されていれば、それを単純に<code>write_xlsx()</code>で出力するだけで完成します。</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="writeseveralexcel.html#cb59-1"></a><span class="kw">write_xlsx</span>(df_gmean_list, <span class="st">&quot;data/平均値（複数シート）.xlsx&quot;</span>)</span></code></pre></div>
 
 </div>
 </div>
@@ -232,8 +267,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="readoneexcel.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="writeoneexcel.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="readonecsv.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

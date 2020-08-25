@@ -1,0 +1,40 @@
+
+```{r eval=FALSE, include=FALSE}
+#メモ用チャンク
+
+# (PART) excelファイルを読み込む {-#readingexcel}
+これはhtml用
+
+```
+
+# csvファイルを保存する {#writeonecsv}
+
+* csvファイルを保存するには、`readr`パッケージの`write_csv()`関数を使います。
+  + ただし、出力されたcsvファイルをExcelで開くとたぶん文字化けします。LibreOfficeのCalcであれば、最初にダイアログボックスが開いて読む文字コードを選べます。
+
+## write_csv()を使う
+
+先ほど読みこんだ`df_csv`と、保存先を`""`中に指定します。
+
+```{r eval = FALSE}
+write_csv(df_csv, "out/df_csv_utf8.csv")
+```
+
+### Excelで開いても読めるように
+
+Excelで開いても読める、BOM（byte order mark, バイトオーダーマーク）付きファイルとして出力する関数です。
+
+```{r eval = FALSE}
+write_excel_csv(df_csv, "out/df_csv_utf8_forxl.csv")
+```
+
+
+## write.csv()を使う
+
+書き込みが遅いですが、文字化け回避の最終手段として、なぜかうまくいく時があるので、`write.csv()`も役に立ちます。Rでデフォルトの文字エンコードがcp932で、そちらを採用するからと思われます。
+
+```{r eval = FALSE}
+write.csv(df_csv, "out/df_csv_cp932.csv")
+``` 
+
+
