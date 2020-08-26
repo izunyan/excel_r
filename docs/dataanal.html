@@ -318,9 +318,10 @@ Figure 9.1: skim()の出力
 <span id="cb84-2"><a href="dataanal.html#cb84-2"></a><span class="st">  </span><span class="kw">filter</span>(skim_variable <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;bill_length_mm&quot;</span>, <span class="st">&quot;bill_depth_mm&quot;</span>,</span>
 <span id="cb84-3"><a href="dataanal.html#cb84-3"></a>                             <span class="st">&quot;flipper_length_mm&quot;</span>, <span class="st">&quot;body_mass_g&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb84-4"><a href="dataanal.html#cb84-4"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> 種類, <span class="dt">y =</span> numeric.mean, <span class="dt">fill =</span> 種類)) <span class="op">+</span></span>
-<span id="cb84-5"><a href="dataanal.html#cb84-5"></a><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></span>
-<span id="cb84-6"><a href="dataanal.html#cb84-6"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(skim_variable), <span class="dt">scale =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
-<p><img src="excel_r_files/figure-html/unnamed-chunk-60-1.png" width="384" /></p>
+<span id="cb84-5"><a href="dataanal.html#cb84-5"></a><span class="st">   </span><span class="kw">geom_col</span>() <span class="op">+</span></span>
+<span id="cb84-6"><a href="dataanal.html#cb84-6"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">5</span>)) <span class="op">+</span></span>
+<span id="cb84-7"><a href="dataanal.html#cb84-7"></a><span class="st">   </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(skim_variable), <span class="dt">scale =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
+<embed src="excel_r_files/figure-html/unnamed-chunk-57-1.pdf" width="480" type="application/pdf" />
 <p>ただし、ここの場合もっと潤沢な可視化グラフは元データから作成できます。例えば</p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="dataanal.html#cb85-1"></a>df <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb85-2"><a href="dataanal.html#cb85-2"></a><span class="st">  </span><span class="kw">select</span>(種類, bill_length_mm, bill_depth_mm, flipper_length_mm,</span>
@@ -329,10 +330,11 @@ Figure 9.1: skim()の出力
 <span id="cb85-5"><a href="dataanal.html#cb85-5"></a>               <span class="dt">names_to =</span> <span class="st">&quot;variables&quot;</span>,</span>
 <span id="cb85-6"><a href="dataanal.html#cb85-6"></a>               <span class="dt">values_to =</span> <span class="st">&quot;scores&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb85-7"><a href="dataanal.html#cb85-7"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> 種類, <span class="dt">y =</span> scores, <span class="dt">fill =</span> 種類)) <span class="op">+</span></span>
-<span id="cb85-8"><a href="dataanal.html#cb85-8"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>, <span class="dt">width =</span> <span class="fl">0.3</span>) <span class="op">+</span></span>
-<span id="cb85-9"><a href="dataanal.html#cb85-9"></a><span class="st">  </span><span class="kw">geom_violin</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span></span>
-<span id="cb85-10"><a href="dataanal.html#cb85-10"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(variables), <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
-<p><img src="excel_r_files/figure-html/unnamed-chunk-61-1.png" width="384" /></p>
+<span id="cb85-8"><a href="dataanal.html#cb85-8"></a><span class="st">   </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>, <span class="dt">width =</span> <span class="fl">0.3</span>) <span class="op">+</span></span>
+<span id="cb85-9"><a href="dataanal.html#cb85-9"></a><span class="st">   </span><span class="kw">geom_violin</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span></span>
+<span id="cb85-10"><a href="dataanal.html#cb85-10"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">5</span>)) <span class="op">+</span></span>
+<span id="cb85-11"><a href="dataanal.html#cb85-11"></a><span class="st">   </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(variables), <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
+<embed src="excel_r_files/figure-html/unnamed-chunk-58-1.pdf" width="384" type="application/pdf" />
 <p>詳しくは特別付録の<a href="https://izunyan.github.io/practice_ggplot2/">ggplot2の辞書</a>を参照ください。</p>
 </div>
 </div>
@@ -379,7 +381,7 @@ Figure 9.1: skim()の出力
 <p><code>corrr</code>パッケージの関数で相関行列の可視化も簡単にできます。</p>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="dataanal.html#cb92-1"></a><span class="kw">correlate</span>(cor_df) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb92-2"><a href="dataanal.html#cb92-2"></a><span class="st">  </span><span class="kw">rplot</span>()</span></code></pre></div>
-<p><img src="excel_r_files/figure-html/unnamed-chunk-66-1.png" width="384" /></p>
+<embed src="excel_r_files/figure-html/unnamed-chunk-63-1.pdf" width="480" type="application/pdf" />
 
 </div>
 </div>

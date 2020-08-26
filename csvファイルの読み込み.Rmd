@@ -24,7 +24,7 @@ windows環境で過ごしている日本語を使うRユーザーにおいては
 
 ### UTF-8でエンコードされたcsvファイル
 
-```{r}
+```{r readcsv}
 df_csv <- 
  read_csv("data/csv/ペンギン（ひどい列名）ver_utf8.csv")
 

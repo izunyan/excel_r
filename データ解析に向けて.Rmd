@@ -16,7 +16,7 @@
 まずどんなデータがどのように入っているか、欠損値（NA）はどれくらい発生しているか確認することは重要なプロセスです。
 
 
-```{r}
+```{r skimr}
 library(skimr)
 ```
 
@@ -83,13 +83,14 @@ write_xlsx(res_df_num_g, "out/種類別平均値.xlsx")
 ### 可視化
 さらに`ggplot2`を使って可視化することも可能になります。
 
-```{r fig.width = 4, fig.height = 3}
+```{r fig.width = 5, fig.height = 4}
 res_df_num_g %>% 
   filter(skim_variable %in% c("bill_length_mm", "bill_depth_mm",
                              "flipper_length_mm", "body_mass_g")) %>% 
   ggplot(aes(x = 種類, y = numeric.mean, fill = 種類)) +
-  geom_col() +
-  facet_wrap(vars(skim_variable), scale = "free")
+   geom_col() +
+    theme(axis.text.x = element_text(size = 5)) +
+   facet_wrap(vars(skim_variable), scale = "free")
 ```
 
 ただし、ここの場合もっと潤沢な可視化グラフは元データから作成できます。例えば
@@ -102,9 +103,10 @@ df %>%
                names_to = "variables",
                values_to = "scores") %>% 
   ggplot(aes(x = 種類, y = scores, fill = 種類)) +
-  geom_boxplot(alpha = 0.3, width = 0.3) +
-  geom_violin(alpha = 0.3) +
-  facet_wrap(vars(variables), scales = "free")
+   geom_boxplot(alpha = 0.3, width = 0.3) +
+   geom_violin(alpha = 0.3) +
+    theme(axis.text.x = element_text(size = 5)) +
+   facet_wrap(vars(variables), scales = "free")
 ```
 
 
@@ -157,7 +159,7 @@ write_xlsx(cormat, "out/相関行列.xlsx")
 
 `corrr`パッケージの関数で相関行列の可視化も簡単にできます。
 
-```{r fig.width = 4, fig.height = 3}
+```{r fig.width = 5, fig.height = 4}
 correlate(cor_df) %>% 
   rplot()
 ```
