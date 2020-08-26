@@ -9,6 +9,9 @@ library(writexl)
 #        )
 
 library(palmerpenguins)
+# https://github.com/allisonhorst/palmerpenguins
+
+有名なirisデータセットの代替として公開されたペンギンデータ。
 
 penguins
 
