@@ -76,7 +76,7 @@ res_df_num_g
 あとは、以下のように出力するだけです。
 
 ```{r eval = FALSE}
-write_xlsx(res_df_num_g, "out/種類別平均値.xlsx")
+write_xlsx(res_df_num_g, "out/種類別平均値（全数値型変数）.xlsx")
 ```
 
 

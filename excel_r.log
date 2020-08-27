@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.8.8)  26 AUG 2020 23:25
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.8.8)  28 AUG 2020 00:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1123,28 +1123,31 @@ LaTeX Font Info:    Font shape `TU/HaranoAjiGothic-Medium.otf(0)/m/n' will be
 ]
 第1章
 LaTeX Font Info:    Font shape `TU/HaranoAjiGothic-Medium.otf(0)/m/n' will be
-(Font)              scaled to size 19.17854pt on input line 226.
-[9] [10
-
-]
+(Font)              scaled to size 19.17854pt on input line 228.
+File: images/project.png Graphic file (type bmp)
+<images/project.png>
+LaTeX Font Info:    Font shape `TU/HaranoAjiMincho-Regular.otf(0)/m/n' will be
+(Font)              scaled to size 8.32242pt on input line 249.
+[9] [10]
 第2章
+LaTeX Font Info:    Font shape `TU/HaranoAjiMincho-Regular.otf(0)/m/n' will be
+(Font)              scaled to size 7.3977pt on input line 264.
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 260.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 272.
 
 LaTeX Font Warning: Font shape `TU/HaranoAjiMincho-Regular.otf(0)/m/it' undefin
 ed
 (Font)              using `TU/HaranoAjiMincho-Regular.otf(0)/m/n' instead on in
-put line 263.
+put line 275.
 
-[11]
-LaTeX Font Info:    Font shape `TU/HaranoAjiMincho-Regular.otf(0)/m/n' will be
-(Font)              scaled to size 7.3977pt on input line 294.
-[12]
+[11
+
+] [12]
 Missing character: There is no ① in font [lmmono10-regular]:!
 Missing character: There is no ② in font [lmmono10-regular]:!
 Missing character: There is no ■ in font [lmmono10-regular]:!
 [13] [14]
-Overfull \hbox (39.61475pt too wide) in paragraph at lines 424--424
+Overfull \hbox (39.61475pt too wide) in paragraph at lines 436--436
 []\TU/lmtt/m/n/10 ##   Species ` \TU/HaranoAjiMincho-Regular.otf(0)/m/n/10 種   
 類 \TU/lmtt/m/n/10 ` `※ \TU/HaranoAjiMincho-Regular.otf(0)/m/n/10 島 の 名 前 \TU/lm
 tt/m/n/10 ` `1 \TU/HaranoAjiMincho-Regular.otf(0)/m/n/10 ク チ バ シ   長 さ \TU/lmtt
@@ -1155,7 +1158,7 @@ n/10 _ \TU/HaranoAjiMincho-Regular.otf(0)/m/n/10 大 き さ \TU/lmtt/m/n/10 (mm
 
 Missing character: There is no ■ in font [lmmono10-regular]:!
 [15]
-Overfull \hbox (2.86475pt too wide) in paragraph at lines 450--450
+Overfull \hbox (2.86475pt too wide) in paragraph at lines 462--462
 []\TU/lmtt/m/n/10 ##   species  \TU/HaranoAjiMincho-Regular.otf(0)/m/n/10 種 \TU
 /lmtt/m/n/10 _ \TU/HaranoAjiMincho-Regular.otf(0)/m/n/10 類  \TU/lmtt/m/n/10 x_ 
 \TU/HaranoAjiMincho-Regular.otf(0)/m/n/10 島 の 名 前  \TU/lmtt/m/n/10 x1 \TU/Haran
@@ -1166,7 +1169,7 @@ tf(0)/m/n/10 ク チ バ シ \TU/lmtt/m/n/10 _ \TU/HaranoAjiMincho-Regular.otf(0
  []
 
 
-Overfull \hbox (34.36475pt too wide) in paragraph at lines 471--471
+Overfull \hbox (34.36475pt too wide) in paragraph at lines 483--483
 []\TU/lmtt/m/n/10 ##   ...1   \TU/HaranoAjiMincho-Regular.otf(0)/m/n/10 こ こ に 説
  明 と か 書 い て あ る フ ァ イ \TU/lmtt/m/n/10 ~ ...3  ...4  ...5  ...6  ...7  ...8[] 
  []
@@ -1179,33 +1182,33 @@ Overfull \hbox (34.36475pt too wide) in paragraph at lines 471--471
 第4章
 [25
 
-] [26] [27] [28
+] [26] [27] [28] [29] [30
 
 ]
 第5章
-[29] [30]
-第6章
-[31
+[31] [32] [33] [34
 
-] [32] [33] [34
+]
+第6章
+[35] [36] [37] [38
 
 ]
 第7章
 
-Underfull \hbox (badness 10000) in paragraph at lines 1062--1064
+Underfull \hbox (badness 10000) in paragraph at lines 1122--1124
 []\TU/lmtt/m/n/10 Tools > Global Options > Code > Saving > Default text
  []
 
-[35]
+[39]
 Missing character: There is no ① in font [lmmono10-regular]:!
 Missing character: There is no ② in font [lmmono10-regular]:!
 Missing character: There is no ■ in font [lmmono10-regular]:!
-[36]
+[40]
 Missing character: There is no ① in font [lmmono10-regular]:!
 Missing character: There is no ② in font [lmmono10-regular]:!
 Missing character: There is no ■ in font [lmmono10-regular]:!
-[37]
-Overfull \hbox (44.86475pt too wide) in paragraph at lines 1204--1204
+[41]
+Overfull \hbox (44.86475pt too wide) in paragraph at lines 1264--1264
 []\TU/lmtt/m/n/10 ##   S \TU/HaranoAjiMincho-Regular.otf(0)/m/n/10 ｐ ｅ ｃ ｉ ｅ ｓ 
 \TU/lmtt/m/n/10 . \TU/HaranoAjiMincho-Regular.otf(0)/m/n/10 種 \TU/lmtt/m/n/10 .
  \TU/HaranoAjiMincho-Regular.otf(0)/m/n/10 類 \TU/lmtt/m/n/10 .. \TU/HaranoAjiMi
@@ -1216,65 +1219,63 @@ t/m/n/10 ...~ X. \TU/HaranoAjiMincho-Regular.otf(0)/m/n/10 体 重 \TU/lmtt/m/n/
 . \TU/HaranoAjiMincho-Regular.otf(0)/m/n/10 単 位 は ｇ \TU/lmtt/m/n/10 ..U.32~[] 
  []
 
-[38]
+[42]
 Missing character: There is no ① in font [lmmono10-regular]:!
 Missing character: There is no ② in font [lmmono10-regular]:!
 Missing character: There is no ■ in font [lmmono10-regular]:!
-[39] [40
+[43] [44
 
 ]
 第8章
-[41] [42]
+[45] [46]
 第9章
 File: images/skim.png Graphic file (type bmp)
 <images/skim.png>
-LaTeX Font Info:    Font shape `TU/HaranoAjiMincho-Regular.otf(0)/m/n' will be
-(Font)              scaled to size 8.32242pt on input line 1313.
-[43
+[47
 
-] [44] [45]
+] [48] [49]
 File: excel_r_files/figure-latex/unnamed-chunk-57-1.pdf Graphic file (type pdf)
 
 <use excel_r_files/figure-latex/unnamed-chunk-57-1.pdf>
-[46]
+[50]
 File: excel_r_files/figure-latex/unnamed-chunk-58-1.pdf Graphic file (type pdf)
 
 <use excel_r_files/figure-latex/unnamed-chunk-58-1.pdf>
-[47] [48]
-Overfull \hbox (55.36475pt too wide) in paragraph at lines 1526--1526
+[51] [52]
+Overfull \hbox (55.36475pt too wide) in paragraph at lines 1588--1588
 []\TU/lmtt/m/n/10 ##             rowname bill_length_mm bill_depth_mm flipper_l
 ength_mm body_mass_g[] 
  []
 
-[49]
+[53]
 File: excel_r_files/figure-latex/unnamed-chunk-63-1.pdf Graphic file (type pdf)
 
 <use excel_r_files/figure-latex/unnamed-chunk-63-1.pdf>
-[50] [51
+[54] [55
 
-] [52
+] [56
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1571.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1571.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1633.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1633.
 (./excel_r.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1571.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1571.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1633.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1633.
 
 Package rerunfilecheck Info: File `excel_r.out' has not changed.
-(rerunfilecheck)             Checksum: B778FD54FF0F7BB741804C92708B54E8;5052.
+(rerunfilecheck)             Checksum: 242A2A17EC450E881C16969BA667C05B;5052.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1571.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1633.
  ) 
 Here is how much of TeX's memory you used:
- 20455 strings out of 481691
- 402448 string characters out of 5931918
+ 20473 strings out of 481691
+ 403337 string characters out of 5931918
  805478 words of memory out of 5000000
- 37251 multiletter control sequences out of 15000+600000
- 541715 words of font info for 104 fonts, out of 8000000 for 9000
+ 37266 multiletter control sequences out of 15000+600000
+ 541723 words of font info for 105 fonts, out of 8000000 for 9000
  19 hyphenation exceptions out of 8191
- 62i,11n,131p,901b,940s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,11n,131p,901b,938s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on excel_r.pdf (52 pages).
+Output written on excel_r.pdf (56 pages).

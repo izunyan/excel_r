@@ -228,7 +228,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">2</span> 一つのexcelファイルを読み込む</h1>
 <div id="ファイルの準備と読み込み" class="section level2">
 <h2><span class="header-section-number">2.1</span> ファイルの準備と読み込み</h2>
-<p>excelファイルをRに読み込むには、<code>readxl</code>パッケージを使います。ここからは、<a href="https://github.com/izunyan/excel_r" class="uri">https://github.com/izunyan/excel_r</a> をダウンロードしてプロジェクトを開いて進めると便利です。dataフォルダ（<code>data/</code>で表現）に入っている「ペンギン.xlsx」<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>を読み込んでみましょう。</p>
+<p>excelファイルをRに読み込むには、<code>readxl</code>パッケージを使います。ここからは、<a href="https://github.com/izunyan/excel_r" class="uri">https://github.com/izunyan/excel_r</a> をダウンロードしてプロジェクトを開いて進めると便利です。dataフォルダ（<code>data/</code>で表現）に入っている「ペンギン.xlsx」<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>を読み込んでみましょう。</p>
 <p>読み込みには<code>read_xlsx()</code>関数を使います。したがって、以下すべてexcelファイル形式は<code>.xlsx</code>を想定します。<code>read_xls()</code>や<code>read_excel()</code>という関数もあるので、ファイル形式によって使い分けられます。ファイル形式が混ざっている時は<code>read_excel()</code>が有用かもしれません。</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="readoneexcel.html#cb1-1"></a><span class="kw">library</span>(readxl)</span>
 <span id="cb1-2"><a href="readoneexcel.html#cb1-2"></a></span>
@@ -252,7 +252,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>なお、読みこんだファイルの保存については<a href="writeoneexcel.html#writeoneexcel">5</a>章で解説します。</p>
 <div id="最高な機能だよパスの自動補完" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> 最高な機能だよ！パスの自動補完</h3>
-<p><code>read_xlsx("")</code>と打った後に、<code>" "</code>の中にカーソルを置いて、tabキーを押すと、プロジェクトの中身が一覧で表示されるので、選んでいくだけで目的のファイルがキーボードを打つことなしに選べます！RStudioは<code>" "</code>と打てばどこでもこの補完が可能です。<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+<p><code>read_xlsx("")</code>と打った後に、<code>" "</code>の中にカーソルを置いて、tabキーを押すと、プロジェクトの中身が一覧で表示されるので、選んでいくだけで目的のファイルがキーボードを打つことなしに選べます！RStudioは<code>" "</code>と打てばどこでもこの補完が可能です。<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
 <p>上の階層のフォルダに行きたいときは、<code>" "</code>の中に<code>../</code>と打てば可能です。その後にtabキーを押せば上の階層のフォルダが選べます。</p>
 </div>
 </div>
@@ -383,17 +383,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3 Adelie  アデリー Torgersen           40.3
 ## 4 Adelie  アデリー Torgersen           NA</code></pre>
 <p>他にも、<code>cell_cols =</code>で読みたい列の指定、<code>cell_rows =</code>で読みたい行の指定も行えます。</p>
-<p>詳細は、<code>?readxl</code>と打ち込んでヘルプを見るか、readxlの<a href="https://readxl.tidyverse.org/">webサイト</a> <a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>を参照してください。</p>
+<p>詳細は、<code>?readxl</code>と打ち込んでヘルプを見るか、readxlの<a href="https://readxl.tidyverse.org/">webサイト</a> <a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>を参照してください。</p>
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="4">
-<li id="fn4"><p>Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago
+<ol start="5">
+<li id="fn5"><p>Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago
 (Antarctica) penguin data. R package version 0.1.0.
-<a href="https://allisonhorst.github.io/palmerpenguins/" class="uri">https://allisonhorst.github.io/palmerpenguins/</a><a href="readoneexcel.html#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>ただし、R version 4.0で文字コード関連の挙動が変わったみたいで、R 4.0.2ではエラーになりました…（未解決）<a href="readoneexcel.html#fnref5" class="footnote-back">↩︎</a></p></li>
-<li id="fn6"><p><a href="https://readxl.tidyverse.org/" class="uri">https://readxl.tidyverse.org/</a><a href="readoneexcel.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<a href="https://allisonhorst.github.io/palmerpenguins/" class="uri">https://allisonhorst.github.io/palmerpenguins/</a><a href="readoneexcel.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>ただし、R version 4.0で文字コード関連の挙動が変わったみたいで、R 4.0.2ではエラーになりました…（未解決）<a href="readoneexcel.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p><a href="https://readxl.tidyverse.org/" class="uri">https://readxl.tidyverse.org/</a><a href="readoneexcel.html#fnref7" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

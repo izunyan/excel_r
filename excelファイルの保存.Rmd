@@ -3,14 +3,14 @@
 ```{r eval=FALSE, include=FALSE}
 #メモ用チャンク
 
-# (PART) excelファイルを保存する {-#writingexcel}
+# (PART) Excelファイルを保存する {-#writingexcel}
 これはhtml用
 
 ```
 
-# 一つのexcelファイルを保存する {#writeoneexcel}
+# 一つのExcelファイルを保存する {#writeoneexcel}
 
-`writexl`パッケージの`write_xlsx()`関数で、直接excelファイルとして出力ができます。ここでは、新しく作成したデータフレームをexcelファイルとして保存してみます。
+`writexl`パッケージの`write_xlsx()`関数で、直接Excelファイルとして出力ができます。ここでは、新しく作成したデータフレームをExcelファイルとして保存してみます。
 
 
 ## カテゴリ別平均値の作成 {#groupbymean}
@@ -25,33 +25,37 @@ df_group_mean <-
   group_by(種類) %>% 
   summarise(across(
                    c(bill_length_mm, bill_depth_mm), # ここに変数
-                   list(m = ~mean(., na.rm = TRUE),
-                        n = ~sum(!is.na(.))))
+                   list(m = ~mean(., na.rm = TRUE),  # 平均値計算
+                        n = ~sum(!is.na(.))))        # 欠損のない人数計算
            )
 
+# ここは結果の整形部分
 df_group_mean <- 
   df_group_mean %>%  
   select(-bill_depth_mm_n) %>%  # nが同じなので列削除
   rename(n = bill_length_mm_n)  # 列名をnにリネーム
 
+
 knitr::kable(df_group_mean) # きれいな出力にするコード
 ```
 
+なお、ここで`knitr::kable()`という書き方が出てきますが、これは`knitr`パッケージの`kable()`関数という意味です。関数を1回しか使わないのに`library(knitr)`で呼び出すのは無駄が多かったりするので、時々こういった記述が出てきますので、覚えておいてください。この書き方は、パッケージ間で同じ名前の関数があったときにぶつかってしまう問題を回避する際にも使われたりします。
 
-## excelファイルの保存
+## Excelファイルの保存
 ```{r}
 library(writexl)
 ```
+前節で作成したカテゴリ別平均値のデータフレーム`df_group_mean`をExcelファイルとして保存します。保存は`write_xlsx()`関数の中に、データフレームのオブジェクトと出力先のパスと保存ファイル名を入れるだけです。
 
 ```{r eval = FALSE}
-write_xlsx(df_group_mean, "out/df_group_mean.xlsx")
+write_xlsx(df_group_mean, "out/種類別平均値.xlsx")
 ```
 
 `out/`の部分が出力先のフォルダを示しています。
 
-### ファイル名に自動で本日の日付を入れる
+### 【応用】ファイル名に自動で本日の日付を入れる
 
-`lubridate`パッケージの`today()`関数で、今日の日付を表示できるので、それを保存名を入れる時に組み込む（文字列なので区切って`str_c()`でくっつける）と、日付入りファイル名が作成できます。
+これはちょっと応用技ですが、便利なので紹介しておきます。`lubridate`パッケージの`today()`関数で、今日の日付を表示できるので、それを保存名を入れる時に組み込む（文字列なので区切って`str_c()`でくっつける）と、日付入りファイル名が作成できます。
 
 ```{r eval = FALSE}
 write_xlsx(df_group_mean, 
@@ -62,7 +66,7 @@ write_xlsx(df_group_mean,
 
 # 複数のファイルを一度に保存する {#writeseveralexcel}
 
-これが活躍する場面としては、たとえばカテゴリ別（例：ペンギンの種類別、会社の部署別など）に集計した要約値をそのカテゴリ別に個々のexcelファイルにするといった状況が思いつきますので、それをやってみます。
+これが活躍する場面としては、たとえばカテゴリ別（例：ペンギンの種類別、会社の部署別など）に集計した要約値をそのカテゴリ別に個々のExcelファイルにするといった状況が思いつきますので、それをやってみます。
 
 
 ## データフレームをカテゴリ別に分割する {#splitdf}
@@ -81,7 +85,7 @@ df_gmean_list
 
 ## 個別でExcelファイルに保存する
 
-`purrr`パッケージの`imap()`関数を使って、リスト内の各データフレームに、それぞれの要素名をファイル名として、excelファイルに出力します。
+`purrr`パッケージの`imap()`関数を使って、リスト内の各データフレームに、それぞれの要素名をファイル名として、Excelファイルに出力します。
 
 ここでは、リスト内の各要素を示すのが`.x`、要素名（位置）に当たるのは`.y`です。次々に代わるファイル名を作るのに、`str_c()`関数で文字列を結合しています。
 

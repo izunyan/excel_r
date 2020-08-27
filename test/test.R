@@ -60,7 +60,8 @@ df <-
 read_xlsx("data/ペンギン.xlsx")
 
 
-# シート別にデータがあるexcelファイル作成
+# 
+
 library(writexl)
 
 p_list <- 
@@ -72,18 +73,92 @@ library(stringi)
 
 stri_trans_nfkc("ﾍﾟﾝｷﾞﾝ")
 
-# to do --------------------
 
-1.2 プロジェクトとはに画像
+# 気温 ----------------------------------------------------------------------
+
+library(tidyverse)
+library(readxl)
+library(janitor)
+library(writexl)
+library(lubridate)
+
+read_xlsx("data/気温.xlsx", skip = 3)
+
+
+temp <- 
+read_xlsx("data/気温.xlsx", skip = 3) %>% 
+  clean_names(case = "old_janitor")
+
+glimpse(temp)
+
+temp %>% names()
+
+temp <- 
+  temp %>% 
+  select(年月日, 最高気温_2, 最高気温_4,  最低気温_7, 最低気温_9) %>% 
+  rename(date = 年月日,
+         最高気温  = 最高気温_2,
+         最高気温_時刻  = 最高気温_4,
+         最低気温  = 最低気温_7, 
+         最低気温_時刻  = 最低気温_9)
+
+temp <- 
+  temp %>% 
+  slice(-(1:2))
+
+temp <- 
+temp %>% 
+  mutate(date = ymd(date),
+         date_original = date,
+         最高気温_時刻 = ymd_hm(最高気温_時刻),
+         最高気温_時刻_original = 最高気温_時刻, # 時刻ずれ検証用
+         最低気温_時刻 = ymd_hm(最低気温_時刻))
+
+write_xlsx(temp, "data/temp.xlsx")
+
+# ここでexcel上で最高気温の時刻列を時刻の型に手動で変換(Libreofficeのcalc)
+
+
+read_xlsx("data/temp.xlsx")
+
+# 日付が数値になる問題は、col_types = "text"の際に発生！
+
+
+Sys.timezone()
+x <- "2018-01-01 12:00:00"
+as.POSIXct(x)
+xj <- as.POSIXct(x)
+
+as_datetime(x)
+as_datetime(xj)
+
+as_datetime(x) %>% 
+force_tz()
+
+
+read_csv("data/csv/気温.csv", 
+         locale = locale(encoding = "cp932"), skip = 3)
+
+
+# 引用 ----------------------------------------------------------------------
+
+出典：総務省 ICTスキル総合習得プログラム 4-3（https://www.soumu.go.jp/ict_skill/pdf/ict_skill_4_3.pdf）
+
+# to do ---------- ----------
+
+レ プロジェクトとはに画像
 
 
 本のタイトル
 
 rchunk outputのフォントサイズ
 
-palmerpenguins
+レpalmerpenguins
 
 creative commons
+
+# 引用 ----------------------------------------------------------------------
+
 
 
 R version 4.0.2のエラー
