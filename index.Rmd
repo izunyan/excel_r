@@ -1,6 +1,6 @@
 ---
-title:  "Rで読むExcelファイル（仮）"
-author: "やわらかクジラ @matsuchiy"
+# title:  "Rで読むExcelファイル（仮）"
+# author: "やわらかクジラ @matsuchiy"
 site: bookdown::bookdown_site
 documentclass: bxjsbook
 classoption: xelatex,ja=standard, b5paper

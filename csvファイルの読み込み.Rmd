@@ -15,12 +15,12 @@ windows環境で過ごしている日本語を使うRユーザーにおいては
 
 ## 一つのcsvファイルを読み込む
 
-* csvファイルを読みこむには、`readr`パッケージの`read_csv()`関数を使います。`tidyverse`を読み込んだら一緒に読み込まれます。
-  + `readr`では基本的に`utf8`の読み書きが想定されています。RStudioのメニューで以下の部分ををUTF-8に変えておかないと、色々つらい思いをします。
-    - `Tools > Global Options > Code > Saving > Default text encoding:`
-    - `Tools > Project Options > Code Editing > text encoding:`
-* `data > csv`フォルダ（ここでは`>`は階層関係を示し、コードでは`data/csv/`で表現）に入っている「ペンギン（ひどい列名）ver_utf8.csv」を開きます。
-  + `㊛㊚`列のみ、環境依存文字のため、csvにする時点で文字化けています…
+csvファイルを読みこむには、`readr`パッケージの`read_csv()`関数を使います。`tidyverse`を読み込んだら一緒に読み込まれます。`readr`では基本的に`utf8`の読み書きが想定されています。RStudioのメニューで以下の部分をUTF-8に変えておかないと、色々つらい思いをします。
+
+* `Tools > Global Options > Code > Saving > Default text encoding:`
+* `Tools > Project Options > Code Editing > text encoding:`
+
+`data > csv`フォルダ（ここでは`>`は階層関係を示し、コードでは`data/csv/`で表現）に入っている「ペンギン（ひどい列名）ver_utf8.csv」を開きます。`㊛㊚`列のみ、環境依存文字のため、csvにする時点で文字化けています…
 
 ### UTF-8でエンコードされたcsvファイル
 
@@ -60,18 +60,16 @@ read_csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv"
 
 ```{r}
 read.csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv") %>%
-    as_tibble() %>% # データフレームをtibble型にし見やすい出力に
-    head()
+    as_tibble()  # データフレームをtibble型にし見やすい出力に
 ```
 
 
-UTF-8を読む場合は引数`encoding = `で指定します。
+UTF-8を読む場合は引数`encoding = `で指定します。が、列名がひどすぎたせいかちゃんと読めないので出力はスキップします…
 
-```{r}
+```{r eval = FALSE}
 read.csv("data/csv/ペンギン（ひどい列名）ver_utf8.csv", 
          encoding = "UTF-8") %>% 
-    as_tibble() %>% 
-    head()
+    as_tibble()
 ```
 
 
