@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 複数のexcelファイルを読み込む | Rで読むExcelファイル（仮）</title>
-  <meta name="description" content="4 複数のexcelファイルを読み込む | Rで読むExcelファイル（仮）" />
+  <title>4 複数のExcelファイルを読み込む | index.split</title>
+  <meta name="description" content="" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 複数のexcelファイルを読み込む | Rで読むExcelファイル（仮）" />
+  <meta property="og:title" content="4 複数のExcelファイルを読み込む | index.split" />
   <meta property="og:type" content="book" />
   
   
@@ -16,12 +16,11 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 複数のexcelファイルを読み込む | Rで読むExcelファイル（仮）" />
+  <meta name="twitter:title" content="4 複数のExcelファイルを読み込む | index.split" />
   
   
   
 
-<meta name="author" content="やわらかクジラ @matsuchiy" />
 
 
 
@@ -139,9 +138,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1" data-path="project.html"><a href="project.html"><i class="fa fa-check"></i><b>1</b> 前提：プロジェクトの設定</a><ul>
 <li class="chapter" data-level="1.1" data-path="project.html"><a href="project.html#どのフォルダのファイルかの指定"><i class="fa fa-check"></i><b>1.1</b> どのフォルダのファイルかの指定</a></li>
-<li class="chapter" data-level="1.2" data-path="project.html"><a href="project.html#プロジェクトとは"><i class="fa fa-check"></i><b>1.2</b> プロジェクトとは</a></li>
+<li class="chapter" data-level="1.2" data-path="project.html"><a href="project.html#projecttoha"><i class="fa fa-check"></i><b>1.2</b> プロジェクトとは</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="readoneexcel.html"><a href="readoneexcel.html"><i class="fa fa-check"></i><b>2</b> 一つのexcelファイルを読み込む</a><ul>
+<li class="chapter" data-level="2" data-path="readoneexcel.html"><a href="readoneexcel.html"><i class="fa fa-check"></i><b>2</b> 一つのExcelファイルを読み込む</a><ul>
 <li class="chapter" data-level="2.1" data-path="readoneexcel.html"><a href="readoneexcel.html#ファイルの準備と読み込み"><i class="fa fa-check"></i><b>2.1</b> ファイルの準備と読み込み</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="readoneexcel.html"><a href="readoneexcel.html#最高な機能だよパスの自動補完"><i class="fa fa-check"></i><b>2.1.1</b> 最高な機能だよ！パスの自動補完</a></li>
 </ul></li>
@@ -161,17 +160,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.1" data-path="シートを指定して読み込む.html"><a href="シートを指定して読み込む.html#onedflist"><i class="fa fa-check"></i><b>3.4.1</b> 一つのデータフレームにする</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="readseveralexcel.html"><a href="readseveralexcel.html"><i class="fa fa-check"></i><b>4</b> 複数のexcelファイルを読み込む</a><ul>
+<li class="chapter" data-level="4" data-path="readseveralexcel.html"><a href="readseveralexcel.html"><i class="fa fa-check"></i><b>4</b> 複数のExcelファイルを読み込む</a><ul>
 <li class="chapter" data-level="4.1" data-path="readseveralexcel.html"><a href="readseveralexcel.html#読み込むファイル名の一覧のオブジェクト作成"><i class="fa fa-check"></i><b>4.1</b> 読み込むファイル名の一覧のオブジェクト作成</a></li>
 <li class="chapter" data-level="4.2" data-path="readseveralexcel.html"><a href="readseveralexcel.html#ファイルを一括で読み込む"><i class="fa fa-check"></i><b>4.2</b> ファイルを一括で読み込む</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="readseveralexcel.html"><a href="readseveralexcel.html#ファイル名抽出"><i class="fa fa-check"></i><b>4.2.1</b> ファイル名抽出</a></li>
 <li class="chapter" data-level="4.2.2" data-path="readseveralexcel.html"><a href="readseveralexcel.html#リストの要素名にファイル名を付与"><i class="fa fa-check"></i><b>4.2.2</b> リストの要素名にファイル名を付与</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="writeoneexcel.html"><a href="writeoneexcel.html"><i class="fa fa-check"></i><b>5</b> 一つのexcelファイルを保存する</a><ul>
+<li class="chapter" data-level="5" data-path="writeoneexcel.html"><a href="writeoneexcel.html"><i class="fa fa-check"></i><b>5</b> 一つのExcelファイルを保存する</a><ul>
 <li class="chapter" data-level="5.1" data-path="writeoneexcel.html"><a href="writeoneexcel.html#groupbymean"><i class="fa fa-check"></i><b>5.1</b> カテゴリ別平均値の作成</a></li>
-<li class="chapter" data-level="5.2" data-path="writeoneexcel.html"><a href="writeoneexcel.html#excelファイルの保存"><i class="fa fa-check"></i><b>5.2</b> excelファイルの保存</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="writeoneexcel.html"><a href="writeoneexcel.html#ファイル名に自動で本日の日付を入れる"><i class="fa fa-check"></i><b>5.2.1</b> ファイル名に自動で本日の日付を入れる</a></li>
+<li class="chapter" data-level="5.2" data-path="writeoneexcel.html"><a href="writeoneexcel.html#excelファイルの保存"><i class="fa fa-check"></i><b>5.2</b> Excelファイルの保存</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="writeoneexcel.html"><a href="writeoneexcel.html#応用ファイル名に自動で本日の日付を入れる"><i class="fa fa-check"></i><b>5.2.1</b> 【応用】ファイル名に自動で本日の日付を入れる</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="writeseveralexcel.html"><a href="writeseveralexcel.html"><i class="fa fa-check"></i><b>6</b> 複数のファイルを一度に保存する</a><ul>
@@ -216,7 +215,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Rで読むExcelファイル（仮）</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
           </h1>
         </div>
 
@@ -225,12 +224,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="readseveralexcel" class="section level1">
-<h1><span class="header-section-number">4</span> 複数のexcelファイルを読み込む</h1>
-<p>それでは、いよいよRの恩恵を深く実感できる部分に入ります。読みこみたいexcelファイルが大量にある場合です。これも実務上よく遭遇します。</p>
-<p>ただし、ここでは読み込むファイルの構造がすべて同様の場合に限ります。残念ながら、それがかなわない状況現実ではたくさん遭遇します。いつか本書の応用編を書くことがあったら、そちらで解説することとして、今回は構造が単純な場合に限って解説します。</p>
+<h1><span class="header-section-number">4</span> 複数のExcelファイルを読み込む</h1>
+<p>それでは、いよいよRの恩恵を深く実感できる部分に入ります。読みこみたいExcelファイルが大量にある場合です。これも実務上よく遭遇します。</p>
+<p>ただし、ここでは読み込むファイルの構造がすべて同様の場合に限ります。残念ながら、それがかなわない状況に、現実ではたくさん遭遇します。いつか本書の応用編を書くことがあったら、そちらで解説することとして、今回は構造が単純な場合に限って解説します。</p>
 <div id="読み込むファイル名の一覧のオブジェクト作成" class="section level2">
 <h2><span class="header-section-number">4.1</span> 読み込むファイル名の一覧のオブジェクト作成</h2>
-<p>まず、読みこみたいファイルが格納されているフォルダのファイル名、およびパス名の一覧を取得します。</p>
+<p>まず、読み込みたいファイルが格納されているフォルダのファイル名、およびパス名の一覧を取得します。</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="readseveralexcel.html#cb42-1"></a>files &lt;-</span>
 <span id="cb42-2"><a href="readseveralexcel.html#cb42-2"></a><span class="st">    </span><span class="kw">list.files</span>(<span class="dt">path =</span> <span class="st">&quot;data/複数/&quot;</span>, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb42-3"><a href="readseveralexcel.html#cb42-3"></a></span>
@@ -242,24 +241,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ファイルを一括で読み込む" class="section level2">
 <h2><span class="header-section-number">4.2</span> ファイルを一括で読み込む</h2>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="readseveralexcel.html#cb44-1"></a>ldata &lt;-</span>
-<span id="cb44-2"><a href="readseveralexcel.html#cb44-2"></a><span class="st">    </span><span class="kw">map</span>(files, <span class="op">~</span><span class="kw">read_xlsx</span>(.))</span></code></pre></div>
-<p>ここでできた<code>ldata</code>は、<a href="シートを指定して読み込む.html#dflist">3.4</a>で作成した<code>df_list</code>と同じ構造です。違いはそれぞれのデータフレームの要素名（アデリー、ジェンツー、ヒゲ）が入っていない点です。これは不便なので、以下で要素名を改めてつけます。</p>
+<span id="cb44-2"><a href="readseveralexcel.html#cb44-2"></a><span class="st">    </span><span class="kw">map</span>(files, <span class="op">~</span><span class="kw">read_xlsx</span>(.))</span>
+<span id="cb44-3"><a href="readseveralexcel.html#cb44-3"></a></span>
+<span id="cb44-4"><a href="readseveralexcel.html#cb44-4"></a>ldata</span></code></pre></div>
+<pre><code>## [[1]]
+## # A tibble: 152 x 9
+##   species 種類  island bill_length_mm bill_depth_mm
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Adelie  アデリー~ Torge~           39.1          18.7
+## 2 Adelie  アデリー~ Torge~           39.5          17.4
+## 3 Adelie  アデリー~ Torge~           40.3          18  
+## # ... with 149 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   year &lt;dbl&gt;
+## 
+## [[2]]
+## # A tibble: 124 x 9
+##   species 種類  island bill_length_mm bill_depth_mm
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Gentoo  ジェンツ~ Biscoe           46.1          13.2
+## 2 Gentoo  ジェンツ~ Biscoe           50            16.3
+## 3 Gentoo  ジェンツ~ Biscoe           48.7          14.1
+## # ... with 121 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   year &lt;dbl&gt;
+## 
+## [[3]]
+## # A tibble: 68 x 9
+##   species 種類  island bill_length_mm bill_depth_mm
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Chinst~ ヒゲ  Dream            46.5          17.9
+## 2 Chinst~ ヒゲ  Dream            50            19.5
+## 3 Chinst~ ヒゲ  Dream            51.3          19.2
+## # ... with 65 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   year &lt;dbl&gt;</code></pre>
+<p>ここでできた<code>ldata</code>は、<a href="シートを指定して読み込む.html#dflist">3.4</a>で作成した<code>df_list</code>と同じ構造です。違いはそれぞれのデータフレームの要素名（アデリー、ジェンツー、ヒゲ）が入っていない点です。各要素の上の部分にある名前が<code>[[1]], [[3]], [[3]]</code>と表示されています（つまり、1, 2, 3の数値が割り当てられている）。要素名が入っていないのは不便なので、以下で要素名を改めてつけます。</p>
 <div id="ファイル名抽出" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> ファイル名抽出</h3>
 <p>先ほど作成した<code>files</code>から、ファイル名部分だけに加工します。<code>str_replace()</code>は、<code>stringr</code>パッケージの、文字の置換をする関数です。ここでは、拡張子とパス名をそれぞれ<code>""</code>、つまり空白に置換しています。</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="readseveralexcel.html#cb45-1"></a>file_name &lt;-<span class="st"> </span></span>
-<span id="cb45-2"><a href="readseveralexcel.html#cb45-2"></a><span class="st">  </span><span class="kw">str_replace</span>(files, <span class="st">&quot;.xlsx&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb45-3"><a href="readseveralexcel.html#cb45-3"></a><span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;data/複数/&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
-<span id="cb45-4"><a href="readseveralexcel.html#cb45-4"></a></span>
-<span id="cb45-5"><a href="readseveralexcel.html#cb45-5"></a>file_name</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="readseveralexcel.html#cb46-1"></a>file_name &lt;-<span class="st"> </span></span>
+<span id="cb46-2"><a href="readseveralexcel.html#cb46-2"></a><span class="st">  </span><span class="kw">str_replace</span>(files, <span class="st">&quot;.xlsx&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb46-3"><a href="readseveralexcel.html#cb46-3"></a><span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;data/複数/&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb46-4"><a href="readseveralexcel.html#cb46-4"></a></span>
+<span id="cb46-5"><a href="readseveralexcel.html#cb46-5"></a>file_name</span></code></pre></div>
 <pre><code>## [1] &quot;アデリー&quot;   &quot;ジェンツー&quot; &quot;ヒゲ&quot;</code></pre>
 </div>
 <div id="リストの要素名にファイル名を付与" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> リストの要素名にファイル名を付与</h3>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="readseveralexcel.html#cb47-1"></a>ldata &lt;-</span>
-<span id="cb47-2"><a href="readseveralexcel.html#cb47-2"></a><span class="st">    </span><span class="kw">set_names</span>(ldata, file_name)</span>
-<span id="cb47-3"><a href="readseveralexcel.html#cb47-3"></a></span>
-<span id="cb47-4"><a href="readseveralexcel.html#cb47-4"></a>ldata</span></code></pre></div>
+<p><a href="シートを指定して読み込む.html#dflist">3.4</a>で使った<code>set_names()</code>関数は、リストの要素名を付ける時にも使えます。リスト<code>ldata</code>の3つの要素に、<code>file_name</code>の中身を割り当てます。</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="readseveralexcel.html#cb48-1"></a>ldata &lt;-</span>
+<span id="cb48-2"><a href="readseveralexcel.html#cb48-2"></a><span class="st">    </span><span class="kw">set_names</span>(ldata, file_name)</span>
+<span id="cb48-3"><a href="readseveralexcel.html#cb48-3"></a></span>
+<span id="cb48-4"><a href="readseveralexcel.html#cb48-4"></a>ldata</span></code></pre></div>
 <pre><code>## $アデリー
 ## # A tibble: 152 x 9
 ##   species 種類  island bill_length_mm bill_depth_mm
@@ -292,8 +326,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## # ... with 65 more rows, and 4 more variables:
 ## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
 ## #   year &lt;dbl&gt;</code></pre>
-<p>これらを1つのデータフレームにまとめるには、 <a href="シートを指定して読み込む.html#onedflist">3.4.1</a>と同じ手順でできます。</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="readseveralexcel.html#cb49-1"></a><span class="kw">bind_rows</span>(ldata, <span class="dt">.id =</span> <span class="st">&quot;group&quot;</span>)</span></code></pre></div>
+<p>このように、ちゃんと要素に名前が付きました。
+これらを1つのデータフレームにまとめるには、 <a href="シートを指定して読み込む.html#onedflist">3.4.1</a>と同じ手順でできます。</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="readseveralexcel.html#cb50-1"></a><span class="kw">bind_rows</span>(ldata, <span class="dt">.id =</span> <span class="st">&quot;group&quot;</span>)</span></code></pre></div>
 
 </div>
 </div>
