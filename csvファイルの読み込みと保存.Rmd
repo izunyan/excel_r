@@ -1,0 +1,120 @@
+
+```{r eval=FALSE, include=FALSE}
+#メモ用チャンク
+
+# (PART) excelファイルを読み込む {-#readingexcel}
+これはhtml用
+
+```
+
+# csvファイルの読み込みと保存 {#readsavecsv}
+
+windows環境で過ごしていて日本語を使うRユーザーにおいては、csvファイルを扱う際に文字コードの違いというつらみ（いわゆる文字化け）に遭遇することが少なくありません。
+
+出会う可能性が高い文字コードには、大きく`cp932（Shift-JIS）`と`UTF-8`という形式があり、一般的に業務で読みこもうとするファイルは前者であることが多いことを知っておくと役に立ちます。
+
+## 一つのcsvファイルを読み込む
+
+csvファイルを読みこむには、`readr`パッケージの`read_csv()`関数を使います。`tidyverse`を読み込んだら一緒に読み込まれます。`readr`では基本的に`utf8`の読み書きが想定されています。RStudioのメニューで以下の部分をUTF-8に変えておかないと、色々つらい思いをします。
+
+* `Tools > Global Options > Code > Saving > Default text encoding:`
+* `Tools > Project Options > Code Editing > text encoding:`
+
+`data > csv`フォルダ（ここでは`>`は階層関係を示し、コードでは`data/csv/`で表現）に入っている「ペンギン（ひどい列名）ver_utf8.csv」を開きます。`㊛㊚`列のみ、環境依存文字のため、csvにする時点で文字化けています…
+
+### UTF-8でエンコードされたcsvファイル
+
+```{r readcsv}
+df_csv <- 
+ read_csv("data/csv/ペンギン（ひどい列名）ver_utf8.csv")
+
+df_csv
+``` 
+
+
+### 【文字化けの例】Shift-JISでエンコードされたcsvファイル
+
+正確にはShift-JISの拡張版であるcp932でエンコードされたファイルです。変数名も文字化けして読みこみ自体できなくなるので、`clean_names()`で読める形式に変換しています。
+
+```{r}
+read_csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv") %>% 
+  clean_names(case = "old_janitor") %>% 
+  select(1:3) # 紙面の都合で最初の3つの変数に限定
+```
+
+日本語の変数名と、2列目の日本語の値が文字化けします。
+
+### Shift-JISでエンコードされたcsvファイル
+
+これを読むためには，引数`locale = locale(encoding = )`でShift-JISのファイルであることを指定する必要があります。
+
+```{r}
+read_csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv"
+         , locale = locale(encoding = "cp932"))
+```
+
+\newpage
+
+### read.csv()を使う場合
+
+従来のcsvを読む関数`read.csv()`を使えば，デフォルトでShift-JISのファイルは読めます。
+
+```{r}
+read.csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv") %>%
+    as_tibble()  # データフレームをtibble型にし見やすい出力に
+```
+
+
+UTF-8を読む場合は引数`encoding = `で指定します。が、列名がひどすぎたせいかちゃんと読めないので出力はスキップします…
+
+```{r eval = FALSE}
+read.csv("data/csv/ペンギン（ひどい列名）ver_utf8.csv", 
+         encoding = "UTF-8") %>% 
+    as_tibble()
+```
+
+
+### 大きいデータならfread()
+
+これまで紹介したcsvファイルを読みこむための関数は、小規模なデータならそんなに時間はかかりませんが、データが数万行×数百列と大きくなってくると、時間がかかるようになります。
+
+そこで大きく時間を短縮できるのが、`data.table`パッケージの`fread()`関数です。実は筆者が一番使ってるのはこの関数です。
+
+```{r}
+data.table::fread("data/csv/ペンギン（ひどい列名）ver_cp932.csv") %>% 
+  as_tibble()
+```
+
+なお、UTF-8でエンコーディングされたcsvファイルの場合は、引数に`encoding = "UTF-8"`を加えることで読み込めます。
+
+
+## csvファイルの保存 {#writeonecsv}
+
+csvファイルを保存するには、`readr`パッケージの`write_csv()`関数を使います。ただし、出力されたcsvファイルをExcelで開くとたぶん文字化けします。LibreOfficeのCalcであれば、最初にダイアログボックスが開いて読む文字コードを選べます。
+
+### write_csv()を使う
+
+先ほど読みこんだ`df_csv`と、保存先を`""`中に指定します。
+
+```{r eval = FALSE}
+write_csv(df_csv, "out/df_csv_utf8.csv")
+```
+
+#### Excelで開いても読めるように
+
+Excelで開いても読める、BOM（byte order mark, バイトオーダーマーク）付きファイルとして出力する関数です。
+
+```{r writecsv, eval = FALSE}
+write_excel_csv(df_csv, "out/df_csv_utf8_forxl.csv")
+```
+
+
+### write.csv()を使う
+
+書き込みが遅いですが、文字化け回避の最終手段として、なぜかうまくいく時があるので、`write.csv()`も役に立ちます。Rでデフォルトの文字エンコードがcp932で、そちらを採用するからと思われます。
+
+```{r eval = FALSE}
+write.csv(df_csv, "out/df_csv_cp932.csv")
+``` 
+
+

@@ -3,13 +3,13 @@
 ```{r eval=FALSE, include=FALSE}
 #メモ用チャンク
 
-# (PART) Excelファイルを保存する {-#writingexcel}
+# (PART) excelファイルを保存する {-#writingexcel}
 これはhtml用
 
 ```
 
 # データ解析に向けて {#dataanal}
-ここまでの解説で、Excelファイルとcsvファイルの読み込みについて一通り解説してきました。この段階では、まだデータがきれいでなくて、解析に入れないことも多いと思います。
+ここまでの解説で、excelファイルとcsvファイルの読み込みについて一通り解説してきました。この段階では、まだデータがきれいでなくて、解析に入れないことも多いと思います。
 
 
 ## 要約値や欠損データの確認
@@ -17,7 +17,7 @@
 
 
 ```{r skimr}
-library(skimr) # version 2.1.2
+library(skimr)
 ```
 
 ```{r eval = FALSE}
@@ -26,17 +26,17 @@ skim(df)
 
 (ref:skim) skim()の出力
 
-```{r skim, echo=FALSE, fig.align='center', fig.cap='(ref:skim)', out.width='80%'}
+```{r github, echo=FALSE, fig.align='center', fig.cap='(ref:skim)', out.width='80%'}
 knitr::include_graphics("images/skim.png")
 ```
 
-データの型が数値である変数（ここでは`Variable type:numeric`）については、`hist`列に簡単なヒストグラムが表示されます（図\@ref(fig:skim)）。しかしデータが大量な場合、動作が遅くなります。その場合は、ヒストグラムを描かない以下の関数が使えます。
+データの型が数値である変数（ここでは`Variable type:numeric`）については、`hist`列に簡単なヒストグラムが表示されます。しかしデータが大量な場合、動作が遅くなります。その場合は、ヒストグラムを描かない以下の関数が使えます。
 
 ```{r eval = FALSE}
 skim_without_charts(df)
 ```
 
-### 結果をExcelファイルに出力する
+### 結果をexcelファイルに出力する
 
 `as_tibble()`関数を使うことで、結果を一つのデータフレームにまとめることができます。
 
@@ -49,7 +49,7 @@ res_skim_df %>%
   head()        # 最初の6行を表示
 ```
 
-これで好きなように加工してExcelファイルとして出力することが可能になります。例えば、数値変数だけに絞る場合は
+これで好きなように加工してexcelファイルとして出力することが可能になります。例えば、数値変数だけに絞る場合は
 
 ```{r}
 res_skim_df %>% 
@@ -99,12 +99,12 @@ res_df_num_g %>%
 df %>% 
   select(種類, bill_length_mm, bill_depth_mm, flipper_length_mm,
          body_mass_g) %>% 
-  pivot_longer(-種類,                  # wideデータからlongデータに変換
+  pivot_longer(-種類,
                names_to = "variables",
                values_to = "scores") %>% 
   ggplot(aes(x = 種類, y = scores, fill = 種類)) +
-   geom_boxplot(alpha = 0.3, width = 0.3) + # 箱ひげ図
-   geom_violin(alpha = 0.3) +               # バイオリンプロット
+   geom_boxplot(alpha = 0.3, width = 0.3) +
+   geom_violin(alpha = 0.3) +
     theme(axis.text.x = element_text(size = 5)) +
    facet_wrap(vars(variables), scales = "free")
 ```

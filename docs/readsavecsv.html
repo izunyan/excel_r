@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1 前提：プロジェクトの設定 | excel_r.utf8</title>
+  <title>4 csvファイルの読み込みと保存 | excel_r.utf8</title>
   <meta name="description" content="" />
   <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1 前提：プロジェクトの設定 | excel_r.utf8" />
+  <meta property="og:title" content="4 csvファイルの読み込みと保存 | excel_r.utf8" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1 前提：プロジェクトの設定 | excel_r.utf8" />
+  <meta name="twitter:title" content="4 csvファイルの読み込みと保存 | excel_r.utf8" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="readexcel.html"/>
+<link rel="prev" href="writeexcel.html"/>
+<link rel="next" href="dataanal.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -211,43 +211,133 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="project" class="section level1">
-<h1><span class="header-section-number">1</span> 前提：プロジェクトの設定</h1>
-<p>Rの基本的な使い方は他の情報源にゆだねていますが、ここだけは避けて通れないので解説しておきます。</p>
-<div id="どのフォルダのファイルかの指定" class="section level2">
-<h2><span class="header-section-number">1.1</span> どのフォルダのファイルかの指定</h2>
-<p>excelファイルに限らず、ファイルをRに読み込む際は、どのフォルダから読むのか、位置を正確に指定する必要があります。</p>
-<p>そこで重要となる概念が、「作業フォルダ」というものです。</p>
-<p>コンソールに<code>getwd()</code>と打って出てくるフォルダが現在の作業フォルダになります。</p>
+<div id="readsavecsv" class="section level1">
+<h1><span class="header-section-number">4</span> csvファイルの読み込みと保存</h1>
+<p>windows環境で過ごしていて日本語を使うRユーザーにおいては、csvファイルを扱う際に文字コードの違いというつらみ（いわゆる文字化け）に遭遇することが少なくありません。</p>
+<p>出会う可能性が高い文字コードには、大きく<code>cp932（Shift-JIS）</code>と<code>UTF-8</code>という形式があり、一般的に業務で読みこもうとするファイルは前者であることが多いことを知っておくと役に立ちます。</p>
+<div id="一つのcsvファイルを読み込む" class="section level2">
+<h2><span class="header-section-number">4.1</span> 一つのcsvファイルを読み込む</h2>
+<p>csvファイルを読みこむには、<code>readr</code>パッケージの<code>read_csv()</code>関数を使います。<code>tidyverse</code>を読み込んだら一緒に読み込まれます。<code>readr</code>では基本的に<code>utf8</code>の読み書きが想定されています。RStudioのメニューで以下の部分をUTF-8に変えておかないと、色々つらい思いをします。</p>
+<ul>
+<li><code>Tools &gt; Global Options &gt; Code &gt; Saving &gt; Default text encoding:</code></li>
+<li><code>Tools &gt; Project Options &gt; Code Editing &gt; text encoding:</code></li>
+</ul>
+<p><code>data &gt; csv</code>フォルダ（ここでは<code>&gt;</code>は階層関係を示し、コードでは<code>data/csv/</code>で表現）に入っている「ペンギン（ひどい列名）ver_utf8.csv」を開きます。<code>㊛㊚</code>列のみ、環境依存文字のため、csvにする時点で文字化けています…</p>
+<div id="utf-8でエンコードされたcsvファイル" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> UTF-8でエンコードされたcsvファイル</h3>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="readsavecsv.html#cb65-1"></a>df_csv &lt;-<span class="st"> </span></span>
+<span id="cb65-2"><a href="readsavecsv.html#cb65-2"></a><span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_utf8.csv&quot;</span>)</span>
+<span id="cb65-3"><a href="readsavecsv.html#cb65-3"></a></span>
+<span id="cb65-4"><a href="readsavecsv.html#cb65-4"></a>df_csv</span></code></pre></div>
+<pre><code>## # A tibble: 344 x 9
+##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`~
+##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                  &lt;dbl&gt;
+## 1 Adelie        アデリー Torgersen               39.1
+## 2 Adelie        アデリー Torgersen               39.5
+## 3 Adelie        アデリー Torgersen               40.3
+## # ... with 341 more rows, and 5 more variables:
+## #   `②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）` &lt;dbl&gt;, `翼：長さ(mm)` &lt;dbl&gt;,
+## #   `■体重　単位はｇ` &lt;dbl&gt;, `&lt;U+329B&gt;&lt;U+329A&gt;` &lt;chr&gt;,
+## #   `２００７～２００９` &lt;dbl&gt;</code></pre>
 </div>
-<div id="projecttoha" class="section level2">
-<h2><span class="header-section-number">1.2</span> プロジェクトとは</h2>
-<p>RStudioの「プロジェクト」とは、作業フォルダにまつわる面倒な設定を意識しないですむ非常に便利な機能です。RStudioを開いて右上のところに設定アイコンがあります（Figure<a href="project.html#fig:projectfig">1.1</a>）。</p>
-<div class="figure" style="text-align: center"><span id="fig:projectfig"></span>
-<img src="images/project.png" alt="プロジェクトの場所" width="214" />
-<p class="caption">
-Figure 1.1: プロジェクトの場所
-</p>
+<div id="文字化けの例shift-jisでエンコードされたcsvファイル" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> 【文字化けの例】Shift-JISでエンコードされたcsvファイル</h3>
+<p>正確にはShift-JISの拡張版であるcp932でエンコードされたファイルです。変数名も文字化けして読みこみ自体できなくなるので、<code>clean_names()</code>で読める形式に変換しています。</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="readsavecsv.html#cb67-1"></a><span class="kw">read_csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_cp932.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb67-2"><a href="readsavecsv.html#cb67-2"></a><span class="st">  </span><span class="kw">clean_names</span>(<span class="dt">case =</span> <span class="st">&quot;old_janitor&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb67-3"><a href="readsavecsv.html#cb67-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="co"># 紙面の都合で最初の3つの変数に限定</span></span></code></pre></div>
+<pre><code>## # A tibble: 344 x 3
+##   s_u_0082_u_0090_u_008~ x_u_008e_ed_u_008~ x_u_0081_u_00a6_u_00~
+##   &lt;chr&gt;                  &lt;chr&gt;              &lt;chr&gt;                
+## 1 Adelie                 &quot;\x83A\x83f\x83\x~ Torgersen            
+## 2 Adelie                 &quot;\x83A\x83f\x83\x~ Torgersen            
+## 3 Adelie                 &quot;\x83A\x83f\x83\x~ Torgersen            
+## # ... with 341 more rows</code></pre>
+<p>日本語の変数名と、2列目の日本語の値が文字化けします。</p>
 </div>
-<p>ざっくり説明すると、データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコード、出力をまとめておき、そのフォルダをプロジェクトとして設定するのです。これにより、ファイルの読み書きの際の場所指定をいちいち意識しないで作業できるようになります。</p>
-<p>したがって、本書に出てくる内容をご自身のPC上で再現するには、Githubレポジトリhttps://github.com/izunyan/excel_r をダウンロードして、その中にある<code>excel_r.Rproj</code>ファイルを実行すればお手軽です。</p>
-<p>詳しくは、先述のR for Data Scienceでの<a href="https://r4ds.had.co.nz/workflow-projects.html">解説</a>が参考になります。<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+<div id="shift-jisでエンコードされたcsvファイル" class="section level3">
+<h3><span class="header-section-number">4.1.3</span> Shift-JISでエンコードされたcsvファイル</h3>
+<p>これを読むためには，引数<code>locale = locale(encoding = )</code>でShift-JISのファイルであることを指定する必要があります。</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="readsavecsv.html#cb69-1"></a><span class="kw">read_csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_cp932.csv&quot;</span></span>
+<span id="cb69-2"><a href="readsavecsv.html#cb69-2"></a>         , <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">encoding =</span> <span class="st">&quot;cp932&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 344 x 9
+##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`~
+##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                  &lt;dbl&gt;
+## 1 Adelie        アデリー Torgersen               39.1
+## 2 Adelie        アデリー Torgersen               39.5
+## 3 Adelie        アデリー Torgersen               40.3
+## # ... with 341 more rows, and 5 more variables:
+## #   `②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）` &lt;dbl&gt;, `翼：長さ(mm)` &lt;dbl&gt;,
+## #   `■体重　単位はｇ` &lt;dbl&gt;, `??` &lt;chr&gt;,
+## #   `２００７～２００９` &lt;dbl&gt;</code></pre>
+<div style="page-break-after: always;"></div>
+</div>
+<div id="read.csvを使う場合" class="section level3">
+<h3><span class="header-section-number">4.1.4</span> read.csv()を使う場合</h3>
+<p>従来のcsvを読む関数<code>read.csv()</code>を使えば，デフォルトでShift-JISのファイルは読めます。</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="readsavecsv.html#cb71-1"></a><span class="kw">read.csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_cp932.csv&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb71-2"><a href="readsavecsv.html#cb71-2"></a><span class="st">    </span><span class="kw">as_tibble</span>()  <span class="co"># データフレームをtibble型にし見やすい出力に</span></span></code></pre></div>
+<pre><code>## # A tibble: 344 x 9
+##   Sｐｅｃｉｅｓ 種.類 X.島の名前 X.クチバシ.長さ.ｍｍ.~
+##   &lt;fct&gt;         &lt;fct&gt; &lt;fct&gt;                 &lt;dbl&gt;
+## 1 Adelie        アデリー~ Torgersen              39.1
+## 2 Adelie        アデリー~ Torgersen              39.5
+## 3 Adelie        アデリー~ Torgersen              40.3
+## # ... with 341 more rows, and 5 more variables:
+## #   X.ｸﾁﾊﾞｼ.大きさ.ｍｍ. &lt;dbl&gt;, 翼.長さ.mm. &lt;int&gt;,
+## #   X.体重.単位はｇ &lt;int&gt;, X.. &lt;fct&gt;, ２００７.２００９ &lt;int&gt;</code></pre>
+<p>UTF-8を読む場合は引数<code>encoding =</code>で指定します。が、列名がひどすぎたせいかちゃんと読めないので出力はスキップします…</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="readsavecsv.html#cb73-1"></a><span class="kw">read.csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_utf8.csv&quot;</span>, </span>
+<span id="cb73-2"><a href="readsavecsv.html#cb73-2"></a>         <span class="dt">encoding =</span> <span class="st">&quot;UTF-8&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb73-3"><a href="readsavecsv.html#cb73-3"></a><span class="st">    </span><span class="kw">as_tibble</span>()</span></code></pre></div>
+</div>
+<div id="大きいデータならfread" class="section level3">
+<h3><span class="header-section-number">4.1.5</span> 大きいデータならfread()</h3>
+<p>これまで紹介したcsvファイルを読みこむための関数は、小規模なデータならそんなに時間はかかりませんが、データが数万行×数百列と大きくなってくると、時間がかかるようになります。</p>
+<p>そこで大きく時間を短縮できるのが、<code>data.table</code>パッケージの<code>fread()</code>関数です。実は筆者が一番使ってるのはこの関数です。</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="readsavecsv.html#cb74-1"></a>data.table<span class="op">::</span><span class="kw">fread</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_cp932.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb74-2"><a href="readsavecsv.html#cb74-2"></a><span class="st">  </span><span class="kw">as_tibble</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 344 x 9
+##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`~
+##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                  &lt;dbl&gt;
+## 1 Adelie        アデリー Torgersen               39.1
+## 2 Adelie        アデリー Torgersen               39.5
+## 3 Adelie        アデリー Torgersen               40.3
+## # ... with 341 more rows, and 5 more variables:
+## #   `②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）` &lt;dbl&gt;, `翼：長さ(mm)` &lt;int&gt;,
+## #   `■体重　単位はｇ` &lt;int&gt;, `??` &lt;chr&gt;,
+## #   `２００７～２００９` &lt;int&gt;</code></pre>
+<p>なお、UTF-8でエンコーディングされたcsvファイルの場合は、引数に<code>encoding = "UTF-8"</code>を加えることで読み込めます。</p>
+</div>
+</div>
+<div id="writeonecsv" class="section level2">
+<h2><span class="header-section-number">4.2</span> csvファイルの保存</h2>
+<p>csvファイルを保存するには、<code>readr</code>パッケージの<code>write_csv()</code>関数を使います。ただし、出力されたcsvファイルをExcelで開くとたぶん文字化けします。LibreOfficeのCalcであれば、最初にダイアログボックスが開いて読む文字コードを選べます。</p>
+<div id="write_csvを使う" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> write_csv()を使う</h3>
+<p>先ほど読みこんだ<code>df_csv</code>と、保存先を<code>""</code>中に指定します。</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="readsavecsv.html#cb76-1"></a><span class="kw">write_csv</span>(df_csv, <span class="st">&quot;out/df_csv_utf8.csv&quot;</span>)</span></code></pre></div>
+<div id="excelで開いても読めるように" class="section level4">
+<h4><span class="header-section-number">4.2.1.1</span> Excelで開いても読めるように</h4>
+<p>Excelで開いても読める、BOM（byte order mark, バイトオーダーマーク）付きファイルとして出力する関数です。</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="readsavecsv.html#cb77-1"></a><span class="kw">write_excel_csv</span>(df_csv, <span class="st">&quot;out/df_csv_utf8_forxl.csv&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="write.csvを使う" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> write.csv()を使う</h3>
+<p>書き込みが遅いですが、文字化け回避の最終手段として、なぜかうまくいく時があるので、<code>write.csv()</code>も役に立ちます。Rでデフォルトの文字エンコードがcp932で、そちらを採用するからと思われます。</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="readsavecsv.html#cb78-1"></a><span class="kw">write.csv</span>(df_csv, <span class="st">&quot;out/df_csv_cp932.csv&quot;</span>)</span></code></pre></div>
 
 </div>
 </div>
-<div class="footnotes">
-<hr />
-<ol start="5">
-<li id="fn5"><p><a href="https://r4ds.had.co.nz/workflow-projects.html" class="uri">https://r4ds.had.co.nz/workflow-projects.html</a><a href="project.html#fnref5" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="readexcel.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="writeexcel.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="dataanal.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

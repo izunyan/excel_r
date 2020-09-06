@@ -6,4 +6,4 @@ bookdown::pdf_book:
       includes: 
         in_header: preamble.tex
         after_body: after.tex
-bookdown::epub_book:
+bookdown::epub_book: default

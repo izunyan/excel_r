@@ -43,11 +43,16 @@ ggplot(penguins, aes(bill_length_mm,bill_depth_mm)) +
   geom_bin2d(bins = 20, binwidth = c(3,0.5))
 
 
+
+# ggplot(penguins, aes(bill_length_mm,bill_depth_mm)) +
+#   geom_bin2d( binwidth = c(3,0.5)) +
+#   scale_fill_gradient(low = "#217346", high = "#75aadb")
+
 ggplot(penguins, aes(bill_length_mm,bill_depth_mm)) +
   geom_bin2d( binwidth = c(3,0.5)) +
-  scale_fill_gradient(low = "#217346", high = "#75aadb")
+  scale_fill_gradient(low = "#75aadb", high = "#217346")
 
 
-ggplot(penguins, aes(bill_length_mm,bill_depth_mm, fill = body_mass_g)) +
-  geom_tile()
+# ggplot(penguins, aes(bill_length_mm,bill_depth_mm, fill = body_mass_g)) +
+#   geom_tile()
 
