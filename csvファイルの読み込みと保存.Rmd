@@ -100,6 +100,8 @@ csvファイルを保存するには、`readr`パッケージの`write_csv()`関
 write_csv(df_csv, "out/df_csv_utf8.csv")
 ```
 
+\newpage
+
 #### Excelで開いても読めるように
 
 Excelで開いても読める、BOM（byte order mark, バイトオーダーマーク）付きファイルとして出力する関数です。
