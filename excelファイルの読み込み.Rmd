@@ -11,8 +11,8 @@
 # Excelファイルの読み込み {#readexcel}
 ## 一つのExcelファイルを読み込む {#readoneexcel}
 
-### ファイルの準備と読み込み
-ExcelファイルをRに読み込むには、`readxl`パッケージが便利です。^[以下、まだインストールしていないパッケージがあれば、`install.packages("")`の`""`中にパッケージ名を入れて実行するか、RStudioの`Packages`タブの`Install`からインストールしてください]セクション\@ref(projecttoha)で述べた通り、ここからは、githubレポジトリのhttps://github.com/izunyan/excel_r をダウンロードしてプロジェクトを開いて進めると便利です。dataフォルダ（`data/`で表現）に入っている「ペンギン.xlsx」^[Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago
+### ファイルの準備と読み込み  {#junbiyomikomi}
+ExcelファイルをRに読み込むには、`readxl`パッケージが便利です。^[以下、まだインストールしていないパッケージがあれば、`install.packages("")`の`""`中にパッケージ名を入れて実行するか、RStudioの`Packages`タブの`Install`からインストールしてください]セクション\@ref(projecttoha)で述べた通り、ここからは、githubレポジトリのhttps://github.com/izunyan/excel_r をダウンロードしてプロジェクトを開いて進めてみてください。dataフォルダ（`data/`で表現）に入っている「ペンギン.xlsx」^[Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago
   (Antarctica) penguin data. R package version 0.1.0.
   https://allisonhorst.github.io/palmerpenguins/]を読み込んでみましょう。
 
@@ -33,9 +33,9 @@ df # データの表示
 df  344 obs. of 9 variables
 ```
 
-という表示が出ると思います。つまり、344行のデータと9列の変数が入っているデータを、`df`（オブジェクト）としてRに読みこんだ、ということを示しています。`df <-`の部分がその作業に該当します。`<-`の右側の内容を左側のオブジェクトに格納するという意味です。ここで読み込まれた形がデータフレーム（[はじめに>本書の構成](#structure)の注参照）です。
+という表示が出ると思います。つまり、344行のデータと9列の変数が入っているデータを、`df`という名前のもの（オブジェクト）としてRに読みこんだ、ということを示しています。`df <-`の部分がその作業に該当します。`<-`の右側の内容を左側のオブジェクトに格納するという意味です。ここで読み込まれた形がデータフレーム（[はじめに>本書の構成](#structure)の注参照）です。
 
-オブジェクト名である`df`と打つことで、デフォルトでは最初の10行分のデータが表示されます。ここでは紙面の都合で設定を変えているので3行だけにしています。表示された最初の行にも、`A tibble: 344 x 9`と、行数x列数の情報が出ています。表示しきれなかった行は、`with 341 more rows`と省略され、表示しきれなかった列は、`flipper_length_mm <dbl>, body_mass_g <dbl>, sex <chr>, year <dbl>`と、名前と<型名>が表示されます。なお、読みこんだファイルの保存については\@ref(writeoneexcel)章で解説します。
+オブジェクト名である`df`と打つことで、デフォルトでは最初の10行分のデータが表示されます。ここでは紙面の都合で設定を変えているので3行だけにしています。表示された最初の行にも、`A tibble: 344 x 9`と、行数x列数の情報が出ています。表示しきれなかった行は、`with 341 more rows`と省略され、表示しきれなかった列は、`flipper_length_mm <dbl>, body_mass_g <dbl>, sex <chr>, year <dbl>`と、`名前<データの型名>`が表示されます。なお、読みこんだファイルの保存については\@ref(writeoneexcel)章で解説します。
 
 #### 最高な機能だよ！パスの自動補完  {#hokan}
 `read_xlsx("")`と打った後に、`" "`の中にカーソルを置いて、tabキーを押すと、プロジェクトの中身が一覧で表示されるので、選んでいくだけで目的のファイルがキーボードを打つことなしに選べます！RStudioは`" "`と打てばどこでもこの補完が可能です。^[ただし、R version 4.0で文字コード関連の挙動が変わったみたいで、R 4.0.2ではエラーになりました…（未解決）]
@@ -103,7 +103,7 @@ df %>%
 `stringi`パッケージの`stri_trans_nfkc()`関数を使って、変数名で全角-半角のばらつきを統一させます。
 
 
-ここでは、変数名をリネームするのに`dplyr 1.0.0`で登場した`rename_with()`関数を使いました。すべての変数に対し、全角文字を含んでいたら半角に直すというコードになります。
+ここでは、変数名をリネームするのに`dplyr 1.0.0`で登場した`rename_with()`関数を使いました。`everything()`という引数を含めているので、すべての変数に対し、全角文字を含んでいたら半角に直すというコードになります。
 
 ```{r}
 library(stringi)
@@ -303,9 +303,9 @@ df_all %>%
 おそらく、単純に思いつく方法は、
 
 ```{r eval = FALSE}
-df_Adelie <-  read_xlsx("data/複数/アデリー.xlsx")
-df_Gentoo <- read_excel("data/複数/ジェンツー.xlsx")
-df_Chinstrap <- read_excel("data/複数/ヒゲ.xlsx")
+df_Adelie    <- read_xlsx("data/複数/アデリー.xlsx")
+df_Gentoo    <- read_xlsx("data/複数/ジェンツー.xlsx")
+df_Chinstrap <- read_xlsx("data/複数/ヒゲ.xlsx")
 ```
 
 と1つずつ読んでいく方法ですが、これも大量にあったら泣きたくなる作業です。1つ1つファイル名を入力やコピペする間にいくらでもミスが生じます。\@ref(hokan)で紹介した自動補完を使っても、楽しいのは最初だけでしょう。そこで、ファイルを指定するところから極力人の手を介さず進めていく方法を次に解説していきます。
@@ -330,6 +330,8 @@ files
 ```{r}
 files <- 
   files %>% str_subset("xlsx")
+
+files
 ```
 
 
