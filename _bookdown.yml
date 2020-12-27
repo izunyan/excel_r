@@ -1,5 +1,6 @@
 book_filename: "excel_r"
 # chapter_name: "ch: " # 自動で章の名前をつける
+repo: https://github.com/izunyan/excel_r
 output_dir: "docs"   # githubでweb公開するためにdocsフォルダに変更
 rmd_files: ["index.Rmd", 
             "プロジェクト.Rmd",

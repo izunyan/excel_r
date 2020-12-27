@@ -1,6 +1,7 @@
 ---
-cover-image: images/cover.png
 site: bookdown::bookdown_site
+github-repo: izunyan/excel_r
+cover-image: images/cover.png
 documentclass: bxjsbook
 classoption: xelatex,ja=standard, b5paper
 ---
