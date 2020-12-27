@@ -4,22 +4,22 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 Excelファイルの保存 | excel_r.utf8</title>
+  <title>3 Excelファイルの保存 | index.split</title>
   <meta name="description" content="" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 Excelファイルの保存 | excel_r.utf8" />
+  <meta property="og:title" content="3 Excelファイルの保存 | index.split" />
   <meta property="og:type" content="book" />
   
-  
+  <meta property="og:image" content="images/cover.png" />
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 Excelファイルの保存 | excel_r.utf8" />
+  <meta name="twitter:title" content="3 Excelファイルの保存 | index.split" />
   
   
-  
+  <meta name="twitter:image" content="images/cover.png" />
 
 
 
@@ -49,6 +49,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -135,6 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#執筆環境"><i class="fa fa-check"></i>執筆環境</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#注意事項など"><i class="fa fa-check"></i>注意事項など</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#huroku"><i class="fa fa-check"></i>特別付録について</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="project.html"><a href="project.html"><i class="fa fa-check"></i><b>1</b> 前提：プロジェクトの設定</a><ul>
 <li class="chapter" data-level="1.1" data-path="project.html"><a href="project.html#どのフォルダのファイルかの指定"><i class="fa fa-check"></i><b>1.1</b> どのフォルダのファイルかの指定</a></li>
@@ -142,7 +145,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="readexcel.html"><a href="readexcel.html"><i class="fa fa-check"></i><b>2</b> Excelファイルの読み込み</a><ul>
 <li class="chapter" data-level="2.1" data-path="readexcel.html"><a href="readexcel.html#readoneexcel"><i class="fa fa-check"></i><b>2.1</b> 一つのExcelファイルを読み込む</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="readexcel.html"><a href="readexcel.html#ファイルの準備と読み込み"><i class="fa fa-check"></i><b>2.1.1</b> ファイルの準備と読み込み</a></li>
+<li class="chapter" data-level="2.1.1" data-path="readexcel.html"><a href="readexcel.html#junbiyomikomi"><i class="fa fa-check"></i><b>2.1.1</b> ファイルの準備と読み込み</a></li>
 <li class="chapter" data-level="2.1.2" data-path="readexcel.html"><a href="readexcel.html#列名変数名がひどい場合の読み込み"><i class="fa fa-check"></i><b>2.1.2</b> 列名（変数名）がひどい場合の読み込み</a></li>
 <li class="chapter" data-level="2.1.3" data-path="readexcel.html"><a href="readexcel.html#開始行を指定して読み込む"><i class="fa fa-check"></i><b>2.1.3</b> 開始行を指定して読み込む</a></li>
 <li class="chapter" data-level="2.1.4" data-path="readexcel.html"><a href="readexcel.html#セルを指定して読み込む"><i class="fa fa-check"></i><b>2.1.4</b> セルを指定して読み込む</a></li>
@@ -151,7 +154,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.1" data-path="readexcel.html"><a href="readexcel.html#シート名の確認"><i class="fa fa-check"></i><b>2.2.1</b> シート名の確認</a></li>
 <li class="chapter" data-level="2.2.2" data-path="readexcel.html"><a href="readexcel.html#普通の読み込み"><i class="fa fa-check"></i><b>2.2.2</b> 普通の読み込み</a></li>
 <li class="chapter" data-level="2.2.3" data-path="readexcel.html"><a href="readexcel.html#シートを指定した読み込み"><i class="fa fa-check"></i><b>2.2.3</b> シートを指定した読み込み</a></li>
-<li class="chapter" data-level="2.2.4" data-path="readexcel.html"><a href="readexcel.html#dflist"><i class="fa fa-check"></i><b>2.2.4</b> すべてのシートから読み込み</a></li>
+<li class="chapter" data-level="2.2.4" data-path="readexcel.html"><a href="readexcel.html#dflist"><i class="fa fa-check"></i><b>2.2.4</b> すべてのシートから一気に読み込み</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="readexcel.html"><a href="readexcel.html#readseveralexcel"><i class="fa fa-check"></i><b>2.3</b> 複数のExcelファイルを読み込む</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="readexcel.html"><a href="readexcel.html#読み込むファイル名の一覧のオブジェクト作成"><i class="fa fa-check"></i><b>2.3.1</b> 読み込むファイル名の一覧のオブジェクト作成</a></li>
@@ -165,8 +168,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.2" data-path="writeexcel.html"><a href="writeexcel.html#excelファイルの保存"><i class="fa fa-check"></i><b>3.1.2</b> Excelファイルの保存</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="writeexcel.html"><a href="writeexcel.html#writeseveralexcel"><i class="fa fa-check"></i><b>3.2</b> 複数のファイルを一度に保存する</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="writeexcel.html"><a href="writeexcel.html#splitdf"><i class="fa fa-check"></i><b>3.2.1</b> データフレームをカテゴリ別に分割する</a></li>
-<li class="chapter" data-level="3.2.2" data-path="writeexcel.html"><a href="writeexcel.html#個別でexcelファイルに保存する"><i class="fa fa-check"></i><b>3.2.2</b> 個別でExcelファイルに保存する</a></li>
+<li class="chapter" data-level="3.2.1" data-path="writeexcel.html"><a href="writeexcel.html#splitdf"><i class="fa fa-check"></i><b>3.2.1</b> データフレームをカテゴリ別に分割してリストにする</a></li>
+<li class="chapter" data-level="3.2.2" data-path="writeexcel.html"><a href="writeexcel.html#リストの各要素を個別でexcelファイルに保存する"><i class="fa fa-check"></i><b>3.2.2</b> リストの各要素を個別でExcelファイルに保存する</a></li>
 <li class="chapter" data-level="3.2.3" data-path="writeexcel.html"><a href="writeexcel.html#一つのファイルの複数シートに保存する"><i class="fa fa-check"></i><b>3.2.3</b> 一つのファイルの複数シートに保存する</a></li>
 </ul></li>
 </ul></li>
@@ -185,7 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="dataanal.html"><a href="dataanal.html"><i class="fa fa-check"></i><b>5</b> データ解析に向けて</a><ul>
 <li class="chapter" data-level="5.1" data-path="dataanal.html"><a href="dataanal.html#要約値や欠損データの確認"><i class="fa fa-check"></i><b>5.1</b> 要約値や欠損データの確認</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="dataanal.html"><a href="dataanal.html#結果をexcelファイルに出力する"><i class="fa fa-check"></i><b>5.1.1</b> 結果をexcelファイルに出力する</a></li>
+<li class="chapter" data-level="5.1.1" data-path="dataanal.html"><a href="dataanal.html#結果をexcelファイルに出力する"><i class="fa fa-check"></i><b>5.1.1</b> 結果をExcelファイルに出力する</a></li>
 <li class="chapter" data-level="5.1.2" data-path="dataanal.html"><a href="dataanal.html#可視化"><i class="fa fa-check"></i><b>5.1.2</b> 可視化</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="dataanal.html"><a href="dataanal.html#相関の確認"><i class="fa fa-check"></i><b>5.2</b> 相関の確認</a><ul>
@@ -219,23 +222,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="groupbymean" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> カテゴリ別平均値の作成</h3>
 <p>クチバシの長さと大きさを表す変数である、<code>bill_length_mm</code>、<code>bill_depth_mm</code>について、平均値と欠損を抜いたn（ペンギン数）を種類別に計算します。<code>group_by()</code>でカテゴリ別にしたい変数を指定し、<code>summarise()</code>で平均値とnを計算するコードが以下になります。</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="writeexcel.html#cb56-1"></a>df_group_mean &lt;-<span class="st"> </span></span>
-<span id="cb56-2"><a href="writeexcel.html#cb56-2"></a><span class="st">  </span>df <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb56-3"><a href="writeexcel.html#cb56-3"></a><span class="st">  </span><span class="kw">group_by</span>(種類) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb56-4"><a href="writeexcel.html#cb56-4"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="kw">across</span>(</span>
-<span id="cb56-5"><a href="writeexcel.html#cb56-5"></a>                   <span class="kw">c</span>(bill_length_mm, bill_depth_mm), <span class="co"># ここに変数</span></span>
-<span id="cb56-6"><a href="writeexcel.html#cb56-6"></a>                   <span class="kw">list</span>(<span class="dt">m =</span> <span class="op">~</span><span class="kw">mean</span>(., <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),  <span class="co"># 平均値計算</span></span>
-<span id="cb56-7"><a href="writeexcel.html#cb56-7"></a>                        <span class="dt">n =</span> <span class="op">~</span><span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(.))))        <span class="co"># 欠損のない人数計算</span></span>
-<span id="cb56-8"><a href="writeexcel.html#cb56-8"></a>           )</span>
-<span id="cb56-9"><a href="writeexcel.html#cb56-9"></a></span>
-<span id="cb56-10"><a href="writeexcel.html#cb56-10"></a><span class="co"># ここは結果の整形部分</span></span>
-<span id="cb56-11"><a href="writeexcel.html#cb56-11"></a>df_group_mean &lt;-<span class="st"> </span></span>
-<span id="cb56-12"><a href="writeexcel.html#cb56-12"></a><span class="st">  </span>df_group_mean <span class="op">%&gt;%</span><span class="st">  </span></span>
-<span id="cb56-13"><a href="writeexcel.html#cb56-13"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>bill_depth_mm_n) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># nが同じなので列削除</span></span>
-<span id="cb56-14"><a href="writeexcel.html#cb56-14"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">n =</span> bill_length_mm_n)  <span class="co"># 列名をnにリネーム</span></span>
-<span id="cb56-15"><a href="writeexcel.html#cb56-15"></a></span>
-<span id="cb56-16"><a href="writeexcel.html#cb56-16"></a></span>
-<span id="cb56-17"><a href="writeexcel.html#cb56-17"></a>knitr<span class="op">::</span><span class="kw">kable</span>(df_group_mean) <span class="co"># きれいな出力にするコード</span></span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="writeexcel.html#cb59-1"></a>df_group_mean &lt;-<span class="st"> </span></span>
+<span id="cb59-2"><a href="writeexcel.html#cb59-2"></a><span class="st">  </span>df <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb59-3"><a href="writeexcel.html#cb59-3"></a><span class="st">  </span><span class="kw">group_by</span>(種類) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb59-4"><a href="writeexcel.html#cb59-4"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="kw">across</span>(</span>
+<span id="cb59-5"><a href="writeexcel.html#cb59-5"></a>                   <span class="kw">c</span>(bill_length_mm, bill_depth_mm), <span class="co"># ここに変数</span></span>
+<span id="cb59-6"><a href="writeexcel.html#cb59-6"></a>                   <span class="kw">list</span>(<span class="dt">m =</span> <span class="op">~</span><span class="kw">mean</span>(., <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),  <span class="co"># 平均値計算</span></span>
+<span id="cb59-7"><a href="writeexcel.html#cb59-7"></a>                        <span class="dt">n =</span> <span class="op">~</span><span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(.))))        <span class="co"># 欠損のない人数計算</span></span>
+<span id="cb59-8"><a href="writeexcel.html#cb59-8"></a>           )</span>
+<span id="cb59-9"><a href="writeexcel.html#cb59-9"></a></span>
+<span id="cb59-10"><a href="writeexcel.html#cb59-10"></a><span class="co"># ここは結果の整形部分</span></span>
+<span id="cb59-11"><a href="writeexcel.html#cb59-11"></a>df_group_mean &lt;-<span class="st"> </span></span>
+<span id="cb59-12"><a href="writeexcel.html#cb59-12"></a><span class="st">  </span>df_group_mean <span class="op">%&gt;%</span><span class="st">  </span></span>
+<span id="cb59-13"><a href="writeexcel.html#cb59-13"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>bill_depth_mm_n) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># nが同じなので列削除</span></span>
+<span id="cb59-14"><a href="writeexcel.html#cb59-14"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">n =</span> bill_length_mm_n)  <span class="co"># 列名をnにリネーム</span></span>
+<span id="cb59-15"><a href="writeexcel.html#cb59-15"></a></span>
+<span id="cb59-16"><a href="writeexcel.html#cb59-16"></a></span>
+<span id="cb59-17"><a href="writeexcel.html#cb59-17"></a>knitr<span class="op">::</span><span class="kw">kable</span>(df_group_mean) <span class="co"># きれいな出力にするコード</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -270,15 +273,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="excelファイルの保存" class="section level3">
 <h3><span class="header-section-number">3.1.2</span> Excelファイルの保存</h3>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="writeexcel.html#cb57-1"></a><span class="kw">library</span>(writexl)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="writeexcel.html#cb60-1"></a><span class="kw">library</span>(writexl)</span></code></pre></div>
 <p>前節で作成したカテゴリ別平均値のデータフレーム<code>df_group_mean</code>をExcelファイルとして保存します。保存は<code>write_xlsx()</code>関数の中に、データフレームのオブジェクトと出力先のパスと保存ファイル名を入れるだけです。</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="writeexcel.html#cb58-1"></a><span class="kw">write_xlsx</span>(df_group_mean, <span class="st">&quot;out/種類別平均値.xlsx&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="writeexcel.html#cb61-1"></a><span class="kw">write_xlsx</span>(df_group_mean, <span class="st">&quot;out/種類別平均値.xlsx&quot;</span>)</span></code></pre></div>
 <p><code>out/</code>の部分が出力先のフォルダを示しています。</p>
 <div id="応用ファイル名に自動で本日の日付を入れる" class="section level4">
 <h4><span class="header-section-number">3.1.2.1</span> 【応用】ファイル名に自動で本日の日付を入れる</h4>
 <p>これはちょっと応用技ですが、便利なので紹介しておきます。<code>lubridate</code>パッケージの<code>today()</code>関数で、今日の日付を表示できるので、それを保存名を入れる時に組み込む（文字列なので区切って<code>str_c()</code>でくっつける）と、日付入りファイル名が作成できます。</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="writeexcel.html#cb59-1"></a><span class="kw">write_xlsx</span>(df_group_mean, </span>
-<span id="cb59-2"><a href="writeexcel.html#cb59-2"></a>         <span class="kw">str_c</span>(<span class="st">&quot;out/df_group_mean&quot;</span>, <span class="st">&quot;_&quot;</span>, lubridate<span class="op">::</span><span class="kw">today</span>(), <span class="st">&quot;.xlsx&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="writeexcel.html#cb62-1"></a><span class="kw">write_xlsx</span>(df_group_mean, </span>
+<span id="cb62-2"><a href="writeexcel.html#cb62-2"></a>         <span class="kw">str_c</span>(<span class="st">&quot;out/df_group_mean&quot;</span>, <span class="st">&quot;_&quot;</span>, lubridate<span class="op">::</span><span class="kw">today</span>(), <span class="st">&quot;.xlsx&quot;</span>))</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -286,13 +289,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.2</span> 複数のファイルを一度に保存する</h2>
 <p>これが活躍する場面としては、たとえばカテゴリ別（例：ペンギンの種類別、会社の部署別など）に集計した要約値をそのカテゴリ別に個々のExcelファイルにするといった状況が思いつきますので、それをやってみます。</p>
 <div id="splitdf" class="section level3">
-<h3><span class="header-section-number">3.2.1</span> データフレームをカテゴリ別に分割する</h3>
+<h3><span class="header-section-number">3.2.1</span> データフレームをカテゴリ別に分割してリストにする</h3>
 <p><code>split()</code>関数を使うことで、カテゴリ別にデータフレームを分割し、リストにまとめた結果を作成できます。データは<a href="writeexcel.html#groupbymean">3.1.1</a>で作成した<code>df_group_mean</code>を使います。</p>
 <p>分割に使う変数は、<code>df_group_mean$species</code>のように、データフレーム名の後に<code>$</code>をつけてその後に指定します。この変数の中身が、そのままリストの要素名になるので、後の処理がとても楽になります。</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="writeexcel.html#cb60-1"></a>df_gmean_list &lt;-<span class="st"> </span></span>
-<span id="cb60-2"><a href="writeexcel.html#cb60-2"></a><span class="st">  </span><span class="kw">split</span>(df_group_mean, df_group_mean<span class="op">$</span>種類)</span>
-<span id="cb60-3"><a href="writeexcel.html#cb60-3"></a></span>
-<span id="cb60-4"><a href="writeexcel.html#cb60-4"></a>df_gmean_list</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="writeexcel.html#cb63-1"></a>df_gmean_list &lt;-<span class="st"> </span></span>
+<span id="cb63-2"><a href="writeexcel.html#cb63-2"></a><span class="st">  </span><span class="kw">split</span>(df_group_mean, df_group_mean<span class="op">$</span>種類)</span>
+<span id="cb63-3"><a href="writeexcel.html#cb63-3"></a></span>
+<span id="cb63-4"><a href="writeexcel.html#cb63-4"></a>df_gmean_list</span></code></pre></div>
 <pre><code>## $アデリー
 ## # A tibble: 1 x 4
 ##   種類     bill_length_mm_m     n bill_depth_mm_m
@@ -311,22 +314,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   &lt;chr&gt;            &lt;dbl&gt; &lt;int&gt;           &lt;dbl&gt;
 ## 1 ヒゲ              48.8    68            18.4</code></pre>
 </div>
-<div id="個別でexcelファイルに保存する" class="section level3">
-<h3><span class="header-section-number">3.2.2</span> 個別でExcelファイルに保存する</h3>
+<div id="リストの各要素を個別でexcelファイルに保存する" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> リストの各要素を個別でExcelファイルに保存する</h3>
 <p><code>purrr</code>パッケージの<code>imap()</code>関数を使って、リスト内の各データフレームに、それぞれの要素名をファイル名として、Excelファイルに出力します。</p>
 <p>ここでは、リスト内の各要素を示すのが<code>.x</code>、要素名（位置）に当たるのは<code>.y</code>です。次々に代わるファイル名を作るのに、<code>str_c()</code>関数で文字列を結合しています。</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="writeexcel.html#cb62-1"></a><span class="kw">imap</span>(df_gmean_list, <span class="op">~</span><span class="kw">write_xlsx</span>(.x, <span class="dt">path =</span> <span class="kw">str_c</span>(<span class="st">&quot;out/&quot;</span>, .y , <span class="st">&quot;.xlsx&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="writeexcel.html#cb65-1"></a><span class="kw">imap</span>(df_gmean_list, <span class="op">~</span><span class="kw">write_xlsx</span>(.x, <span class="dt">path =</span> <span class="kw">str_c</span>(<span class="st">&quot;out/&quot;</span>, .y , <span class="st">&quot;.xlsx&quot;</span>)))</span></code></pre></div>
 <div id="サンプルデータセット作成コード" class="section level4">
 <h4><span class="header-section-number">3.2.2.1</span> サンプルデータセット作成コード</h4>
 <p>ちなみに<code>data/複数/</code>フォルダにあるサンプルデータセットは以下のコードで作りました。</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="writeexcel.html#cb63-1"></a><span class="kw">imap</span>(df_list, <span class="op">~</span><span class="kw">write_xlsx</span>(.x, <span class="dt">path =</span> <span class="kw">str_c</span>(<span class="st">&quot;data/複数/&quot;</span>,.y , <span class="st">&quot;.xlsx&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="writeexcel.html#cb66-1"></a><span class="kw">imap</span>(df_list, <span class="op">~</span><span class="kw">write_xlsx</span>(.x, <span class="dt">path =</span> <span class="kw">str_c</span>(<span class="st">&quot;data/複数/&quot;</span>,.y , <span class="st">&quot;.xlsx&quot;</span>)))</span></code></pre></div>
 </div>
 </div>
 <div id="一つのファイルの複数シートに保存する" class="section level3">
 <h3><span class="header-section-number">3.2.3</span> 一つのファイルの複数シートに保存する</h3>
 <p><a href="writeexcel.html#splitdf">3.2.1</a>で作成した、ペンギンの種類別クチバシの長さと大きさ平均値のデータを、個別のファイルでなく、一ファイルの複数シートに保存したいときは、とてもシンプルなコードで可能になります。</p>
 <p>要素名のついたデータフレームのリストが作成されていれば、それを単純に<code>write_xlsx()</code>で出力するだけで完成します。</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="writeexcel.html#cb64-1"></a><span class="kw">write_xlsx</span>(df_gmean_list, <span class="st">&quot;data/平均値（複数シート）.xlsx&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="writeexcel.html#cb67-1"></a><span class="kw">write_xlsx</span>(df_gmean_list, <span class="st">&quot;data/平均値（複数シート）.xlsx&quot;</span>)</span></code></pre></div>
 
 </div>
 </div>

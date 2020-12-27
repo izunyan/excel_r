@@ -4,22 +4,22 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 csvファイルの読み込みと保存 | excel_r.utf8</title>
+  <title>4 csvファイルの読み込みと保存 | index.split</title>
   <meta name="description" content="" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 csvファイルの読み込みと保存 | excel_r.utf8" />
+  <meta property="og:title" content="4 csvファイルの読み込みと保存 | index.split" />
   <meta property="og:type" content="book" />
   
-  
+  <meta property="og:image" content="images/cover.png" />
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 csvファイルの読み込みと保存 | excel_r.utf8" />
+  <meta name="twitter:title" content="4 csvファイルの読み込みと保存 | index.split" />
   
   
-  
+  <meta name="twitter:image" content="images/cover.png" />
 
 
 
@@ -49,6 +49,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -135,6 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#執筆環境"><i class="fa fa-check"></i>執筆環境</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#注意事項など"><i class="fa fa-check"></i>注意事項など</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#huroku"><i class="fa fa-check"></i>特別付録について</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="project.html"><a href="project.html"><i class="fa fa-check"></i><b>1</b> 前提：プロジェクトの設定</a><ul>
 <li class="chapter" data-level="1.1" data-path="project.html"><a href="project.html#どのフォルダのファイルかの指定"><i class="fa fa-check"></i><b>1.1</b> どのフォルダのファイルかの指定</a></li>
@@ -142,7 +145,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="readexcel.html"><a href="readexcel.html"><i class="fa fa-check"></i><b>2</b> Excelファイルの読み込み</a><ul>
 <li class="chapter" data-level="2.1" data-path="readexcel.html"><a href="readexcel.html#readoneexcel"><i class="fa fa-check"></i><b>2.1</b> 一つのExcelファイルを読み込む</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="readexcel.html"><a href="readexcel.html#ファイルの準備と読み込み"><i class="fa fa-check"></i><b>2.1.1</b> ファイルの準備と読み込み</a></li>
+<li class="chapter" data-level="2.1.1" data-path="readexcel.html"><a href="readexcel.html#junbiyomikomi"><i class="fa fa-check"></i><b>2.1.1</b> ファイルの準備と読み込み</a></li>
 <li class="chapter" data-level="2.1.2" data-path="readexcel.html"><a href="readexcel.html#列名変数名がひどい場合の読み込み"><i class="fa fa-check"></i><b>2.1.2</b> 列名（変数名）がひどい場合の読み込み</a></li>
 <li class="chapter" data-level="2.1.3" data-path="readexcel.html"><a href="readexcel.html#開始行を指定して読み込む"><i class="fa fa-check"></i><b>2.1.3</b> 開始行を指定して読み込む</a></li>
 <li class="chapter" data-level="2.1.4" data-path="readexcel.html"><a href="readexcel.html#セルを指定して読み込む"><i class="fa fa-check"></i><b>2.1.4</b> セルを指定して読み込む</a></li>
@@ -151,7 +154,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.1" data-path="readexcel.html"><a href="readexcel.html#シート名の確認"><i class="fa fa-check"></i><b>2.2.1</b> シート名の確認</a></li>
 <li class="chapter" data-level="2.2.2" data-path="readexcel.html"><a href="readexcel.html#普通の読み込み"><i class="fa fa-check"></i><b>2.2.2</b> 普通の読み込み</a></li>
 <li class="chapter" data-level="2.2.3" data-path="readexcel.html"><a href="readexcel.html#シートを指定した読み込み"><i class="fa fa-check"></i><b>2.2.3</b> シートを指定した読み込み</a></li>
-<li class="chapter" data-level="2.2.4" data-path="readexcel.html"><a href="readexcel.html#dflist"><i class="fa fa-check"></i><b>2.2.4</b> すべてのシートから読み込み</a></li>
+<li class="chapter" data-level="2.2.4" data-path="readexcel.html"><a href="readexcel.html#dflist"><i class="fa fa-check"></i><b>2.2.4</b> すべてのシートから一気に読み込み</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="readexcel.html"><a href="readexcel.html#readseveralexcel"><i class="fa fa-check"></i><b>2.3</b> 複数のExcelファイルを読み込む</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="readexcel.html"><a href="readexcel.html#読み込むファイル名の一覧のオブジェクト作成"><i class="fa fa-check"></i><b>2.3.1</b> 読み込むファイル名の一覧のオブジェクト作成</a></li>
@@ -165,8 +168,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.2" data-path="writeexcel.html"><a href="writeexcel.html#excelファイルの保存"><i class="fa fa-check"></i><b>3.1.2</b> Excelファイルの保存</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="writeexcel.html"><a href="writeexcel.html#writeseveralexcel"><i class="fa fa-check"></i><b>3.2</b> 複数のファイルを一度に保存する</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="writeexcel.html"><a href="writeexcel.html#splitdf"><i class="fa fa-check"></i><b>3.2.1</b> データフレームをカテゴリ別に分割する</a></li>
-<li class="chapter" data-level="3.2.2" data-path="writeexcel.html"><a href="writeexcel.html#個別でexcelファイルに保存する"><i class="fa fa-check"></i><b>3.2.2</b> 個別でExcelファイルに保存する</a></li>
+<li class="chapter" data-level="3.2.1" data-path="writeexcel.html"><a href="writeexcel.html#splitdf"><i class="fa fa-check"></i><b>3.2.1</b> データフレームをカテゴリ別に分割してリストにする</a></li>
+<li class="chapter" data-level="3.2.2" data-path="writeexcel.html"><a href="writeexcel.html#リストの各要素を個別でexcelファイルに保存する"><i class="fa fa-check"></i><b>3.2.2</b> リストの各要素を個別でExcelファイルに保存する</a></li>
 <li class="chapter" data-level="3.2.3" data-path="writeexcel.html"><a href="writeexcel.html#一つのファイルの複数シートに保存する"><i class="fa fa-check"></i><b>3.2.3</b> 一つのファイルの複数シートに保存する</a></li>
 </ul></li>
 </ul></li>
@@ -185,7 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="dataanal.html"><a href="dataanal.html"><i class="fa fa-check"></i><b>5</b> データ解析に向けて</a><ul>
 <li class="chapter" data-level="5.1" data-path="dataanal.html"><a href="dataanal.html#要約値や欠損データの確認"><i class="fa fa-check"></i><b>5.1</b> 要約値や欠損データの確認</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="dataanal.html"><a href="dataanal.html#結果をexcelファイルに出力する"><i class="fa fa-check"></i><b>5.1.1</b> 結果をexcelファイルに出力する</a></li>
+<li class="chapter" data-level="5.1.1" data-path="dataanal.html"><a href="dataanal.html#結果をexcelファイルに出力する"><i class="fa fa-check"></i><b>5.1.1</b> 結果をExcelファイルに出力する</a></li>
 <li class="chapter" data-level="5.1.2" data-path="dataanal.html"><a href="dataanal.html#可視化"><i class="fa fa-check"></i><b>5.1.2</b> 可視化</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="dataanal.html"><a href="dataanal.html#相関の確認"><i class="fa fa-check"></i><b>5.2</b> 相関の確認</a><ul>
@@ -225,10 +228,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>data &gt; csv</code>フォルダ（ここでは<code>&gt;</code>は階層関係を示し、コードでは<code>data/csv/</code>で表現）に入っている「ペンギン（ひどい列名）ver_utf8.csv」を開きます。<code>㊛㊚</code>列のみ、環境依存文字のため、csvにする時点で文字化けています…</p>
 <div id="utf-8でエンコードされたcsvファイル" class="section level3">
 <h3><span class="header-section-number">4.1.1</span> UTF-8でエンコードされたcsvファイル</h3>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="readsavecsv.html#cb65-1"></a>df_csv &lt;-<span class="st"> </span></span>
-<span id="cb65-2"><a href="readsavecsv.html#cb65-2"></a><span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_utf8.csv&quot;</span>)</span>
-<span id="cb65-3"><a href="readsavecsv.html#cb65-3"></a></span>
-<span id="cb65-4"><a href="readsavecsv.html#cb65-4"></a>df_csv</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="readsavecsv.html#cb68-1"></a>df_csv &lt;-<span class="st"> </span></span>
+<span id="cb68-2"><a href="readsavecsv.html#cb68-2"></a><span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_utf8.csv&quot;</span>)</span>
+<span id="cb68-3"><a href="readsavecsv.html#cb68-3"></a></span>
+<span id="cb68-4"><a href="readsavecsv.html#cb68-4"></a>df_csv</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 9
 ##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`~
 ##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                  &lt;dbl&gt;
@@ -243,9 +246,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="文字化けの例shift-jisでエンコードされたcsvファイル" class="section level3">
 <h3><span class="header-section-number">4.1.2</span> 【文字化けの例】Shift-JISでエンコードされたcsvファイル</h3>
 <p>正確にはShift-JISの拡張版であるcp932でエンコードされたファイルです。変数名も文字化けして読みこみ自体できなくなるので、<code>clean_names()</code>で読める形式に変換しています。</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="readsavecsv.html#cb67-1"></a><span class="kw">read_csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_cp932.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb67-2"><a href="readsavecsv.html#cb67-2"></a><span class="st">  </span><span class="kw">clean_names</span>(<span class="dt">case =</span> <span class="st">&quot;old_janitor&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb67-3"><a href="readsavecsv.html#cb67-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="co"># 紙面の都合で最初の3つの変数に限定</span></span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="readsavecsv.html#cb70-1"></a><span class="kw">read_csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_cp932.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb70-2"><a href="readsavecsv.html#cb70-2"></a><span class="st">  </span><span class="kw">clean_names</span>(<span class="dt">case =</span> <span class="st">&quot;old_janitor&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb70-3"><a href="readsavecsv.html#cb70-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="co"># 紙面の都合で最初の3つの変数に限定</span></span></code></pre></div>
 <pre><code>## # A tibble: 344 x 3
 ##   s_u_0082_u_0090_u_008~ x_u_008e_ed_u_008~ x_u_0081_u_00a6_u_00~
 ##   &lt;chr&gt;                  &lt;chr&gt;              &lt;chr&gt;                
@@ -258,8 +261,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="shift-jisでエンコードされたcsvファイル" class="section level3">
 <h3><span class="header-section-number">4.1.3</span> Shift-JISでエンコードされたcsvファイル</h3>
 <p>これを読むためには，引数<code>locale = locale(encoding = )</code>でShift-JISのファイルであることを指定する必要があります。</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="readsavecsv.html#cb69-1"></a><span class="kw">read_csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_cp932.csv&quot;</span></span>
-<span id="cb69-2"><a href="readsavecsv.html#cb69-2"></a>         , <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">encoding =</span> <span class="st">&quot;cp932&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="readsavecsv.html#cb72-1"></a><span class="kw">read_csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_cp932.csv&quot;</span></span>
+<span id="cb72-2"><a href="readsavecsv.html#cb72-2"></a>         , <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">encoding =</span> <span class="st">&quot;cp932&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 9
 ##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`~
 ##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                  &lt;dbl&gt;
@@ -275,28 +278,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="read.csvを使う場合" class="section level3">
 <h3><span class="header-section-number">4.1.4</span> read.csv()を使う場合</h3>
 <p>従来のcsvを読む関数<code>read.csv()</code>を使えば，デフォルトでShift-JISのファイルは読めます。</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="readsavecsv.html#cb71-1"></a><span class="kw">read.csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_cp932.csv&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb71-2"><a href="readsavecsv.html#cb71-2"></a><span class="st">    </span><span class="kw">as_tibble</span>()  <span class="co"># データフレームをtibble型にし見やすい出力に</span></span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="readsavecsv.html#cb74-1"></a><span class="kw">read.csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_cp932.csv&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb74-2"><a href="readsavecsv.html#cb74-2"></a><span class="st">    </span><span class="kw">as_tibble</span>()  <span class="co"># データフレームをtibble型にし見やすい出力に</span></span></code></pre></div>
 <pre><code>## # A tibble: 344 x 9
 ##   Sｐｅｃｉｅｓ 種.類 X.島の名前 X.クチバシ.長さ.ｍｍ.~
-##   &lt;fct&gt;         &lt;fct&gt; &lt;fct&gt;                 &lt;dbl&gt;
+##   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt;                 &lt;dbl&gt;
 ## 1 Adelie        アデリー~ Torgersen              39.1
 ## 2 Adelie        アデリー~ Torgersen              39.5
 ## 3 Adelie        アデリー~ Torgersen              40.3
 ## # ... with 341 more rows, and 5 more variables:
 ## #   X.ｸﾁﾊﾞｼ.大きさ.ｍｍ. &lt;dbl&gt;, 翼.長さ.mm. &lt;int&gt;,
-## #   X.体重.単位はｇ &lt;int&gt;, X.. &lt;fct&gt;, ２００７.２００９ &lt;int&gt;</code></pre>
+## #   X.体重.単位はｇ &lt;int&gt;, X.. &lt;chr&gt;, ２００７.２００９ &lt;int&gt;</code></pre>
 <p>UTF-8を読む場合は引数<code>encoding =</code>で指定します。が、列名がひどすぎたせいかちゃんと読めないので出力はスキップします…</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="readsavecsv.html#cb73-1"></a><span class="kw">read.csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_utf8.csv&quot;</span>, </span>
-<span id="cb73-2"><a href="readsavecsv.html#cb73-2"></a>         <span class="dt">encoding =</span> <span class="st">&quot;UTF-8&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb73-3"><a href="readsavecsv.html#cb73-3"></a><span class="st">    </span><span class="kw">as_tibble</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="readsavecsv.html#cb76-1"></a><span class="kw">read.csv</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_utf8.csv&quot;</span>, </span>
+<span id="cb76-2"><a href="readsavecsv.html#cb76-2"></a>         <span class="dt">encoding =</span> <span class="st">&quot;UTF-8&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb76-3"><a href="readsavecsv.html#cb76-3"></a><span class="st">    </span><span class="kw">as_tibble</span>()</span></code></pre></div>
 </div>
 <div id="大きいデータならfread" class="section level3">
 <h3><span class="header-section-number">4.1.5</span> 大きいデータならfread()</h3>
 <p>これまで紹介したcsvファイルを読みこむための関数は、小規模なデータならそんなに時間はかかりませんが、データが数万行×数百列と大きくなってくると、時間がかかるようになります。</p>
 <p>そこで大きく時間を短縮できるのが、<code>data.table</code>パッケージの<code>fread()</code>関数です。実は筆者が一番使ってるのはこの関数です。</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="readsavecsv.html#cb74-1"></a>data.table<span class="op">::</span><span class="kw">fread</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_cp932.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb74-2"><a href="readsavecsv.html#cb74-2"></a><span class="st">  </span><span class="kw">as_tibble</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="readsavecsv.html#cb77-1"></a>data.table<span class="op">::</span><span class="kw">fread</span>(<span class="st">&quot;data/csv/ペンギン（ひどい列名）ver_cp932.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb77-2"><a href="readsavecsv.html#cb77-2"></a><span class="st">  </span><span class="kw">as_tibble</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 9
 ##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`~
 ##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                  &lt;dbl&gt;
@@ -316,17 +319,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="write_csvを使う" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> write_csv()を使う</h3>
 <p>先ほど読みこんだ<code>df_csv</code>と、保存先を<code>""</code>中に指定します。</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="readsavecsv.html#cb76-1"></a><span class="kw">write_csv</span>(df_csv, <span class="st">&quot;out/df_csv_utf8.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="readsavecsv.html#cb79-1"></a><span class="kw">write_csv</span>(df_csv, <span class="st">&quot;out/df_csv_utf8.csv&quot;</span>)</span></code></pre></div>
+<div style="page-break-after: always;"></div>
 <div id="excelで開いても読めるように" class="section level4">
 <h4><span class="header-section-number">4.2.1.1</span> Excelで開いても読めるように</h4>
 <p>Excelで開いても読める、BOM（byte order mark, バイトオーダーマーク）付きファイルとして出力する関数です。</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="readsavecsv.html#cb77-1"></a><span class="kw">write_excel_csv</span>(df_csv, <span class="st">&quot;out/df_csv_utf8_forxl.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="readsavecsv.html#cb80-1"></a><span class="kw">write_excel_csv</span>(df_csv, <span class="st">&quot;out/df_csv_utf8_forxl.csv&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="write.csvを使う" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> write.csv()を使う</h3>
 <p>書き込みが遅いですが、文字化け回避の最終手段として、なぜかうまくいく時があるので、<code>write.csv()</code>も役に立ちます。Rでデフォルトの文字エンコードがcp932で、そちらを採用するからと思われます。</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="readsavecsv.html#cb78-1"></a><span class="kw">write.csv</span>(df_csv, <span class="st">&quot;out/df_csv_cp932.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="readsavecsv.html#cb81-1"></a><span class="kw">write.csv</span>(df_csv, <span class="st">&quot;out/df_csv_cp932.csv&quot;</span>)</span></code></pre></div>
 
 </div>
 </div>

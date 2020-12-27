@@ -1,6 +1,5 @@
 ---
-# title:  "Rで読むExcelファイル"
-# author: "やわらかクジラ @matsuchiy"
+cover-image: images/cover.png
 site: bookdown::bookdown_site
 documentclass: bxjsbook
 classoption: xelatex,ja=standard, b5paper
@@ -21,7 +20,12 @@ options(tibble_opt)
 ```
 
 # はじめに {-#hajimeni}
-本書を書こうと思ったのは「RとRStudioを使いたい！と思う人がもっと増えればいいのに」という願いからです。使う人が多くなれば、新しい知識に出会いやすくなりますし、仕事でも使う機会が増える可能性があります。
+
+```{r cover, echo=FALSE, fig.align='center', out.width='60%'}
+knitr::include_graphics("images/cover.png")
+```
+
+本書『**Rで読むExcelファイル**』を書こうと思ったのは「RとRStudioを使いたい！と思う人がもっと増えればいいのに」という願いからです。使う人が多くなれば、新しい知識に出会いやすくなりますし、仕事でも使う機会が増える可能性があります。
 
 使う人を増やすためにはよい入門書やwebサイトが必要ですが、それは巷にあふれていて無料でアクセスできるものも多いです。
 
@@ -42,8 +46,10 @@ options(tibble_opt)
 
 Excelファイルをただ読みこむといってもいろんなバリエーションが考えられます。その単なる読みこみプロセスを通じて、Rを使う上で便利な関数や手続きを学ぶこともできるでしょう。**戦いの中で自然に強くなった的な効果**も見込めるかもしれません。
 
-本書の内容は、githubレポジトリの https://github.com/izunyan/excel_r ですべて公開しています。コードやサンプルデータはこちらのレポジトリをダウンロードしてお試しください。本書の発行後6か月をめどに、html版を読めるように準備予定です。自力でできる方は、`Build Book`ですぐにでも読むことができます。
+本書の内容は、githubレポジトリの https://github.com/izunyan/excel_r ですべて公開しています。コードやサンプルデータはこちらのレポジトリをダウンロードしてお試しください。pdf版が読みたい方は、以下のページで無料で入手可能です。自力でできる方は、`Build Book`でも作成できます。
 
+* [技術書典マーケットの販売ページ](https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584)
+  + https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584
 
 ### 想定読者 {-}
 色々なExcelファイルを読み込んで分析する機会があるのであれば、全くRのことを知らない方から、少しRの経験があるけど複数のファイルを一度に読みこんだことはないというレベルの方ぐらいまでが対象となるでしょう。
@@ -82,8 +88,8 @@ Excelファイルをただ読みこむといってもいろんなバリエーシ
 
 本書の執筆に先駆けて、順序が違う気がしますがまず付録の作成からはじめました。特別付録は以下でアクセス可能なオンライン付録となります。     
      
-[ggplot2の辞書](https://izunyan.github.io/practice_ggplot2/)    
-https://izunyan.github.io/practice_ggplot2/    
+* [ggplot2の辞書](https://izunyan.github.io/practice_ggplot2/)    
+  + https://izunyan.github.io/practice_ggplot2/    
      
 Twitterで応援してもらったら項目が増えていく仕様にしているので、もっと読みたい方は[こちらのツイート](https://twitter.com/matsuchiy/status/1277621662708453377)に何らかのレスポンスください！       
        

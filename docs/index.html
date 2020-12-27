@@ -4,22 +4,22 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>はじめに | excel_r.utf8</title>
+  <title>はじめに | index.split</title>
   <meta name="description" content="" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="はじめに | excel_r.utf8" />
+  <meta property="og:title" content="はじめに | index.split" />
   <meta property="og:type" content="book" />
   
-  
+  <meta property="og:image" content="images/cover.png" />
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="はじめに | excel_r.utf8" />
+  <meta name="twitter:title" content="はじめに | index.split" />
   
   
-  
+  <meta name="twitter:image" content="images/cover.png" />
 
 
 
@@ -49,6 +49,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -135,6 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#執筆環境"><i class="fa fa-check"></i>執筆環境</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#注意事項など"><i class="fa fa-check"></i>注意事項など</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#huroku"><i class="fa fa-check"></i>特別付録について</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="project.html"><a href="project.html"><i class="fa fa-check"></i><b>1</b> 前提：プロジェクトの設定</a><ul>
 <li class="chapter" data-level="1.1" data-path="project.html"><a href="project.html#どのフォルダのファイルかの指定"><i class="fa fa-check"></i><b>1.1</b> どのフォルダのファイルかの指定</a></li>
@@ -142,7 +145,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="readexcel.html"><a href="readexcel.html"><i class="fa fa-check"></i><b>2</b> Excelファイルの読み込み</a><ul>
 <li class="chapter" data-level="2.1" data-path="readexcel.html"><a href="readexcel.html#readoneexcel"><i class="fa fa-check"></i><b>2.1</b> 一つのExcelファイルを読み込む</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="readexcel.html"><a href="readexcel.html#ファイルの準備と読み込み"><i class="fa fa-check"></i><b>2.1.1</b> ファイルの準備と読み込み</a></li>
+<li class="chapter" data-level="2.1.1" data-path="readexcel.html"><a href="readexcel.html#junbiyomikomi"><i class="fa fa-check"></i><b>2.1.1</b> ファイルの準備と読み込み</a></li>
 <li class="chapter" data-level="2.1.2" data-path="readexcel.html"><a href="readexcel.html#列名変数名がひどい場合の読み込み"><i class="fa fa-check"></i><b>2.1.2</b> 列名（変数名）がひどい場合の読み込み</a></li>
 <li class="chapter" data-level="2.1.3" data-path="readexcel.html"><a href="readexcel.html#開始行を指定して読み込む"><i class="fa fa-check"></i><b>2.1.3</b> 開始行を指定して読み込む</a></li>
 <li class="chapter" data-level="2.1.4" data-path="readexcel.html"><a href="readexcel.html#セルを指定して読み込む"><i class="fa fa-check"></i><b>2.1.4</b> セルを指定して読み込む</a></li>
@@ -151,7 +154,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.1" data-path="readexcel.html"><a href="readexcel.html#シート名の確認"><i class="fa fa-check"></i><b>2.2.1</b> シート名の確認</a></li>
 <li class="chapter" data-level="2.2.2" data-path="readexcel.html"><a href="readexcel.html#普通の読み込み"><i class="fa fa-check"></i><b>2.2.2</b> 普通の読み込み</a></li>
 <li class="chapter" data-level="2.2.3" data-path="readexcel.html"><a href="readexcel.html#シートを指定した読み込み"><i class="fa fa-check"></i><b>2.2.3</b> シートを指定した読み込み</a></li>
-<li class="chapter" data-level="2.2.4" data-path="readexcel.html"><a href="readexcel.html#dflist"><i class="fa fa-check"></i><b>2.2.4</b> すべてのシートから読み込み</a></li>
+<li class="chapter" data-level="2.2.4" data-path="readexcel.html"><a href="readexcel.html#dflist"><i class="fa fa-check"></i><b>2.2.4</b> すべてのシートから一気に読み込み</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="readexcel.html"><a href="readexcel.html#readseveralexcel"><i class="fa fa-check"></i><b>2.3</b> 複数のExcelファイルを読み込む</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="readexcel.html"><a href="readexcel.html#読み込むファイル名の一覧のオブジェクト作成"><i class="fa fa-check"></i><b>2.3.1</b> 読み込むファイル名の一覧のオブジェクト作成</a></li>
@@ -165,8 +168,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.2" data-path="writeexcel.html"><a href="writeexcel.html#excelファイルの保存"><i class="fa fa-check"></i><b>3.1.2</b> Excelファイルの保存</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="writeexcel.html"><a href="writeexcel.html#writeseveralexcel"><i class="fa fa-check"></i><b>3.2</b> 複数のファイルを一度に保存する</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="writeexcel.html"><a href="writeexcel.html#splitdf"><i class="fa fa-check"></i><b>3.2.1</b> データフレームをカテゴリ別に分割する</a></li>
-<li class="chapter" data-level="3.2.2" data-path="writeexcel.html"><a href="writeexcel.html#個別でexcelファイルに保存する"><i class="fa fa-check"></i><b>3.2.2</b> 個別でExcelファイルに保存する</a></li>
+<li class="chapter" data-level="3.2.1" data-path="writeexcel.html"><a href="writeexcel.html#splitdf"><i class="fa fa-check"></i><b>3.2.1</b> データフレームをカテゴリ別に分割してリストにする</a></li>
+<li class="chapter" data-level="3.2.2" data-path="writeexcel.html"><a href="writeexcel.html#リストの各要素を個別でexcelファイルに保存する"><i class="fa fa-check"></i><b>3.2.2</b> リストの各要素を個別でExcelファイルに保存する</a></li>
 <li class="chapter" data-level="3.2.3" data-path="writeexcel.html"><a href="writeexcel.html#一つのファイルの複数シートに保存する"><i class="fa fa-check"></i><b>3.2.3</b> 一つのファイルの複数シートに保存する</a></li>
 </ul></li>
 </ul></li>
@@ -185,7 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="dataanal.html"><a href="dataanal.html"><i class="fa fa-check"></i><b>5</b> データ解析に向けて</a><ul>
 <li class="chapter" data-level="5.1" data-path="dataanal.html"><a href="dataanal.html#要約値や欠損データの確認"><i class="fa fa-check"></i><b>5.1</b> 要約値や欠損データの確認</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="dataanal.html"><a href="dataanal.html#結果をexcelファイルに出力する"><i class="fa fa-check"></i><b>5.1.1</b> 結果をexcelファイルに出力する</a></li>
+<li class="chapter" data-level="5.1.1" data-path="dataanal.html"><a href="dataanal.html#結果をexcelファイルに出力する"><i class="fa fa-check"></i><b>5.1.1</b> 結果をExcelファイルに出力する</a></li>
 <li class="chapter" data-level="5.1.2" data-path="dataanal.html"><a href="dataanal.html#可視化"><i class="fa fa-check"></i><b>5.1.2</b> 可視化</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="dataanal.html"><a href="dataanal.html#相関の確認"><i class="fa fa-check"></i><b>5.2</b> 相関の確認</a><ul>
@@ -215,7 +218,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!--bookdown:title:start-->
 <div id="hajimeni" class="section level1 unnumbered">
 <h1>はじめに</h1>
-<p>本書を書こうと思ったのは「RとRStudioを使いたい！と思う人がもっと増えればいいのに」という願いからです。使う人が多くなれば、新しい知識に出会いやすくなりますし、仕事でも使う機会が増える可能性があります。</p>
+<p><img src="images/cover.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>本書『<strong>Rで読むExcelファイル</strong>』を書こうと思ったのは「RとRStudioを使いたい！と思う人がもっと増えればいいのに」という願いからです。使う人が多くなれば、新しい知識に出会いやすくなりますし、仕事でも使う機会が増える可能性があります。</p>
 <p>使う人を増やすためにはよい入門書やwebサイトが必要ですが、それは巷にあふれていて無料でアクセスできるものも多いです。</p>
 <p>例えば</p>
 <ul>
@@ -229,12 +233,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>便利なことといってもいろいろあるので、その中でも、つまづくと嫌になってしまうことの多そうな、<strong>「手元のExcelファイルを読み込む」</strong>所に着目しました。このトピックだけをRのいわゆるモダンな方法を使って重点的に解説した資料は、筆者の知る範囲では見つけられてないので、本書の最も際立った特徴といえます。また、関連するファイル形式として、csvファイルの読み書きも少しだけ触れています。こちらはつまづくことの多いであろう文字コードについても解説しました。</p>
 <p>解析したいデータが、綺麗な一つにまとまったデータばかりとは限りません。たとえば、会社の部署ごとに分かれたデータなど、解析に持っていくまでに大量のファイルを読みこまなければいけない場合もあります。その読み込みの際にいかに楽をできるかという点を意識しています。データさえスムーズに読み込めれば、後はすぐれた解説がネット上でもたくさんあり、やりたいことが可能になる環境が整うからです。</p>
 <p>Excelファイルをただ読みこむといってもいろんなバリエーションが考えられます。その単なる読みこみプロセスを通じて、Rを使う上で便利な関数や手続きを学ぶこともできるでしょう。<strong>戦いの中で自然に強くなった的な効果</strong>も見込めるかもしれません。</p>
-<p>本書の内容は、githubレポジトリの <a href="https://github.com/izunyan/excel_r" class="uri">https://github.com/izunyan/excel_r</a> ですべて公開しています。コードやサンプルデータはこちらのレポジトリをダウンロードしてお試しください。本書の発行後6か月をめどに、html版を読めるように準備予定です。自力でできる方は、<code>Build Book</code>ですぐにでも読むことができます。</p>
+<p>本書の内容は、githubレポジトリの <a href="https://github.com/izunyan/excel_r" class="uri">https://github.com/izunyan/excel_r</a> ですべて公開しています。コードやサンプルデータはこちらのレポジトリをダウンロードしてお試しください。pdf版が読みたい方は、以下のページで無料で入手可能です。自力でできる方は、<code>Build Book</code>でも作成できます。</p>
+<ul>
+<li><a href="https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584">技術書典マーケットの販売ページ</a>
+<ul>
+<li><a href="https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584" class="uri">https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584</a></li>
+</ul></li>
+</ul>
 <div id="想定読者" class="section level3 unnumbered">
 <h3>想定読者</h3>
 <p>色々なExcelファイルを読み込んで分析する機会があるのであれば、全くRのことを知らない方から、少しRの経験があるけど複数のファイルを一度に読みこんだことはないというレベルの方ぐらいまでが対象となるでしょう。</p>
-<p>本書の到達目標は、RでのExcelファイルの読み書きレベルをある程度高める、という所に定めました。その先は是非好きなように可視化なり解析なり進めていただければと思います。とはいえ、そこでお好きなように！と言われても路頭に迷う方もいるかもしれないので、データの内容把握に関して、要約値や欠損値の一覧、簡単な可視化、相関の一覧についても少しだけ解説しました。その一助として、特別付録として本書と並行してまとめた、可視化のための<a href="https://izunyan.github.io/practice_ggplot2/">ggplot2の辞書</a>もあります。</p>
-<p>なお、データをきれいにする過程（例：データクリーニング、データクレンジング、データラングリングなど）については多くの説明を要するため、本書の範囲を超えます。これはまた別機会にまとめられたらなと思っています。</p>
+<p>本書の到達目標は、RでのExcelファイルの読み書きレベルをある程度高める、という所に定めました。その先は是非好きなように可視化なり解析なり進めていただければと思います。とはいえ、そこでお好きなように！と言われても路頭に迷う方もいるかもしれないので、データの内容把握に関して、要約値や欠損値の一覧、簡単な可視化、相関の一覧についても少しだけ解説しました。その一助として、特別付録として本書と並行してまとめた、可視化のための<a href="https://izunyan.github.io/practice_ggplot2/">ggplot2の辞書</a>（<a href="index.html#huroku">特別付録について</a>参照）もあります。</p>
+<p>なお、データをきれいにする過程（例：前処理、データクリーニング、データクレンジング、データラングリングなど）については多くの説明を要するため、本書の範囲を超えます。これはまた別機会にまとめられたらなと思っています。</p>
 </div>
 <div id="structure" class="section level3 unnumbered">
 <h3>本書の構成</h3>
@@ -264,6 +274,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>本書の内容はすべてwindows環境を想定しています。</p></li>
 <li><p>この本に書いてある内容は、筆者が学習したことをまとめているものにすぎないため、正常な動作の保証はできません。使用する際は、自己責任でお願いします。</p></li>
 </ul>
+</div>
+<div id="huroku" class="section level2 unnumbered">
+<h2>特別付録について</h2>
+<p>本書の執筆に先駆けて、順序が違う気がしますがまず付録の作成からはじめました。特別付録は以下でアクセス可能なオンライン付録となります。</p>
+<ul>
+<li><a href="https://izunyan.github.io/practice_ggplot2/">ggplot2の辞書</a>
+<ul>
+<li><a href="https://izunyan.github.io/practice_ggplot2/" class="uri">https://izunyan.github.io/practice_ggplot2/</a></li>
+</ul></li>
+</ul>
+<p>Twitterで応援してもらったら項目が増えていく仕様にしているので、もっと読みたい方は<a href="https://twitter.com/matsuchiy/status/1277621662708453377">こちらのツイート</a>に何らかのレスポンスください！</p>
+<hr />
+<p><img src="images/tweet.png" /></p>
 
 </div>
 </div>
@@ -272,7 +295,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol start="1">
 <li id="fn1"><p><a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a><a href="index.html#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p><a href="https://kazutan.github.io/JSSP2018_spring/index.html" class="uri">https://kazutan.github.io/JSSP2018_spring/index.html</a><a href="index.html#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>変数（列）とオブザベーション（行）が碁盤の目のようになった集まりの形のデータ。Excelであれば通常1行目に列名が入り、2行目以降が個別のデータを表す。データ解析に置いて便利で分かりやすいため、本書ではデータフレームの形で説明していく<a href="index.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>変数（列）とオブザベーション（行）が碁盤の目のようになった集まりの形のデータ。Excelであれば通常1行目に列名が入り、2行目以降が個別のデータを表す。データ解析において便利で分かりやすいため、本書ではデータフレームの形で説明していく<a href="index.html#fnref3" class="footnote-back">↩︎</a></p></li>
 <li id="fn4"><p><a href="https://bookdown.org/" class="uri">https://bookdown.org/</a><a href="index.html#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
