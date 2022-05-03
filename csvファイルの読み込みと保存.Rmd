@@ -32,17 +32,21 @@ df_csv
 ``` 
 
 
-### 【文字化けの例】Shift-JISでエンコードされたcsvファイル
+### 【エラー例】Shift-JISでエンコードされたcsvファイル
 
-正確にはShift-JISの拡張版であるcp932でエンコードされたファイルです。変数名も文字化けして読みこみ自体できなくなるので、`clean_names()`で読める形式に変換しています。
+正確にはShift-JISの拡張版であるcp932でエンコードされたファイルです。以下コードを実行するとエラーが出てきます
 
-```{r}
-read_csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv") %>% 
-  clean_names(case = "old_janitor") %>% 
-  select(1:3) # 紙面の都合で最初の3つの変数に限定
+```{r eval=FALSE}
+read_csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv")
 ```
 
-日本語の変数名と、2列目の日本語の値が文字化けします。
+Error in nchar(x, "width") : invalid multibyte string, element 1
+
+<!-- 過去コード -->
+<!-- read_csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv") %>%  -->
+<!--   clean_names(case = "old_janitor") %>%  -->
+<!--   select(1:3) # 紙面の都合で最初の3つの変数に限定 -->
+
 
 ### Shift-JISでエンコードされたcsvファイル
 
@@ -57,35 +61,68 @@ read_csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv"
 
 ### read.csv()を使う場合
 
-従来のcsvを読む関数`read.csv()`を使えば，デフォルトでShift-JISのファイルは読めます。
+従来のcsvを読む関数`read.csv()`を使う場合も同様です。R-4.2からはデフォルトでUTF-8を読むようになったため，Shift-JISのファイルを読むためには引数で指定する必要があります。
+
 
 ```{r}
-read.csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv") %>%
+read.csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv", 
+         fileEncoding = "cp932") %>%
     as_tibble()  # データフレームをtibble型にし見やすい出力に
 ```
+<!-- 確認中 -->
+<!-- `read.csv()`を使う場合は引数で`encoding = "cp932"`を指定します -->
+<!-- https://shohei-doi.github.io/quant_polisci/encoding-r.html -->
 
 
-UTF-8を読む場合は引数`encoding = `で指定します。が、列名がひどすぎたせいかちゃんと読めないので出力はスキップします…
 
-```{r eval = FALSE}
-read.csv("data/csv/ペンギン（ひどい列名）ver_utf8.csv", 
-         encoding = "UTF-8") %>% 
+UTF-8を読む場合はデフォルトで読めます。
+
+```{r}
+read.csv("data/csv/ペンギン（ひどい列名）ver_utf8.csv") %>% 
     as_tibble()
 ```
-
 
 ### 大きいデータならfread()
 
 これまで紹介したcsvファイルを読みこむための関数は、小規模なデータならそんなに時間はかかりませんが、データが数万行×数百列と大きくなってくると、時間がかかるようになります。
 
-そこで大きく時間を短縮できるのが、`data.table`パッケージの`fread()`関数です。実は筆者が一番使ってるのはこの関数です。
+そこで大きく時間を短縮できるのが、`data.table`パッケージの`fread()`関数です。
+
+UTF-8を読む場合はデフォルトで読めます。data.frame形式にするには引数に`data.table = FALSE`をつけます
 
 ```{r}
-data.table::fread("data/csv/ペンギン（ひどい列名）ver_cp932.csv") %>% 
+data.table::fread("data/csv/ペンギン（ひどい列名）ver_utf8.csv",
+                  data.table = FALSE) %>% 
   as_tibble()
 ```
 
-なお、UTF-8でエンコーディングされたcsvファイルの場合は、引数に`encoding = "UTF-8"`を加えることで読み込めます。
+R4.2からは，Shift-JISのファイルを読むと日本語が文字化けするようになってしまいました。現在の所，これは対処不可能みたいです。
+
+変数名も文字化けして読みこみ自体できなくなるので、`clean_names()`で読める形式に変換しています。
+
+```{r eval = FALSE}
+data.table::fread("data/csv/ペンギン（ひどい列名）ver_cp932.csv", data.table = FALSE) %>%
+  clean_names(case = "old_janitor") %>% 
+  as_tibble()
+  
+```
+
+### 大きいデータを読む場合のvroom
+
+readrを速くしたようなパッケージにvroomがあります。しばらくは別々に開発が進むみたいですが，将来的に統合が考えられてるらしいです。shift-jisの大規模csvファイルを読む際のfreadに代わる選択肢として有望です
+ + https://vroom.r-lib.org/
+
+```{r}
+vroom::vroom("data/csv/ペンギン（ひどい列名）ver_utf8.csv")
+```
+
+
+```{r}
+vroom::vroom("data/csv/ペンギン（ひどい列名）ver_cp932.csv",
+             locale = locale(encoding = "cp932"))
+```
+
+
 
 
 ## csvファイルの保存 {#writeonecsv}
@@ -111,12 +148,5 @@ write_excel_csv(df_csv, "out/df_csv_utf8_forxl.csv")
 ```
 
 
-### write.csv()を使う
-
-書き込みが遅いですが、文字化け回避の最終手段として、なぜかうまくいく時があるので、`write.csv()`も役に立ちます。Rでデフォルトの文字エンコードがcp932で、そちらを採用するからと思われます。
-
-```{r eval = FALSE}
-write.csv(df_csv, "out/df_csv_cp932.csv")
-``` 
 
 

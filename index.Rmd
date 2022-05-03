@@ -1,5 +1,7 @@
 ---
 site: bookdown::bookdown_site
+title:  "Rで読むExcelファイル"
+author: "やわらかクジラ"
 github-repo: izunyan/excel_r
 cover-image: images/cover.png
 documentclass: bxjsbook
@@ -25,6 +27,10 @@ options(tibble_opt)
 ```{r cover, echo=FALSE, fig.align='center', out.width='60%'}
 knitr::include_graphics("images/cover.png")
 ```
+
+* 本webサイトは，技術書典9にて頒布した[Rで読むExcelファイル](https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584)のオンラインバージョン
+* こちらは随時updateされていく予定
+* csvファイルの読み込み部分について，R4.2に対応させました（2022/05/03）
 
 本書『**Rで読むExcelファイル**』を書こうと思ったのは「RとRStudioを使いたい！と思う人がもっと増えればいいのに」という願いからです。使う人が多くなれば、新しい知識に出会いやすくなりますし、仕事でも使う機会が増える可能性があります。
 
@@ -73,11 +79,40 @@ Excelファイルをただ読みこむといってもいろんなバリエーシ
 ### 執筆環境 {-}
 * 本書は[bookdown](https://bookdown.org/)にて執筆しました ^[https://bookdown.org/]
 
-* RおよびRStudio、パッケージのバージョン
-  + R version 3.6.1
-  + RStudio version 1.3.1073
-  + readxl version 1.3.1
-  + tidyverse version 1.3.0  
+* RおよびRStudio、パッケージのバージョン（オンライン版）
+
+* RStudioだけなぜか表示されないので手動で…
+  + RStudio 2022.02.1+461 "Prairie Trillium"
+
+
+```{r echo = FALSE}
+library(tidyverse)
+library(writexl)
+library(janitor)
+
+res_si <- 
+   sessioninfo::session_info()
+
+res_si$platform %>%
+  stack() %>%
+  tibble::as_tibble() %>%
+  dplyr::relocate(ind) %>%
+  dplyr::mutate(ind = as.character(ind)) %>%
+  dplyr::filter(ind %in% c("version", "os", "system", "date", "rstudio")) %>%
+  print(n = 10)
+# %>% 
+#   # head(5) %>%
+#   knitr::kable() %>% 
+#   kableExtra::kable_styling(position = "center")
+
+res_si$packages %>% 
+  tibble::as_tibble() %>% 
+  dplyr::select(package, loadedversion) %>% 
+  dplyr::filter(package %in% c("bookdown", "tidyverse", "readxl","writexl"))
+# %>%
+#   knitr::kable() %>% 
+#   kableExtra::kable_styling(position = "center")
+```
 
 ## 注意事項など {-}
 * 本書の内容はすべてwindows環境を想定しています。
