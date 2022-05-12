@@ -40,8 +40,9 @@ splitdf
 readsavecsv
 一つのcsvファイルを読み込む
 utf-8でエンコードされたcsvファイル
-エラー例shift-jisでエンコードされたcsvファイル
 shift-jisでエンコードされたcsvファイル
+エラー例
+shift-jisのcsvファイルの読み込み方
 read.csvを使う場合
 大きいデータならfread
 大きいデータを読む場合のvroom

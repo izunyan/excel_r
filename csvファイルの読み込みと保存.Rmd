@@ -32,9 +32,13 @@ df_csv
 ``` 
 
 
-### 【エラー例】Shift-JISでエンコードされたcsvファイル
+### Shift-JISでエンコードされたcsvファイル
 
-正確にはShift-JISの拡張版であるcp932でエンコードされたファイルです。以下コードを実行するとエラーが出てきます
+正確にはShift-JISの拡張版であるcp932でエンコードされたファイルです。Windowsで作られた過去のcsvファイルはこの形式であることが多いです。
+
+#### 【エラー例】
+
+以下コードを実行するとエラーが出てきます。
 
 ```{r eval=FALSE}
 read_csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv")
@@ -48,7 +52,7 @@ Error in nchar(x, "width") : invalid multibyte string, element 1
 <!--   select(1:3) # 紙面の都合で最初の3つの変数に限定 -->
 
 
-### Shift-JISでエンコードされたcsvファイル
+#### Shift-JISのcsvファイルの読み込み方 
 
 これを読むためには，引数`locale = locale(encoding = )`でShift-JISのファイルであることを指定する必要があります。
 
@@ -98,24 +102,18 @@ data.table::fread("data/csv/ペンギン（ひどい列名）ver_utf8.csv",
 
 R4.2からは，Shift-JISのファイルを読むと日本語が文字化けするようになってしまいました。現在の所，これは対処不可能みたいです。
 
-変数名も文字化けして読みこみ自体できなくなるので、`clean_names()`で読める形式に変換しています。
 
-```{r eval = FALSE}
-data.table::fread("data/csv/ペンギン（ひどい列名）ver_cp932.csv", data.table = FALSE) %>%
-  clean_names(case = "old_janitor") %>% 
-  as_tibble()
-  
-```
 
 ### 大きいデータを読む場合のvroom
 
-readrを速くしたようなパッケージにvroomがあります。しばらくは別々に開発が進むみたいですが，将来的に統合が考えられてるらしいです。shift-jisの大規模csvファイルを読む際のfreadに代わる選択肢として有望です
- + https://vroom.r-lib.org/
+`readr`を速くしたようなパッケージに`vroom`[https://vroom.r-lib.org/]があります。しばらくは別々に開発が進むみたいですが，将来的に統合が考えられてるらしいです。shift-jisの大規模csvファイルを読む際の`fread`に代わる選択肢として有望です
+
 
 ```{r}
 vroom::vroom("data/csv/ペンギン（ひどい列名）ver_utf8.csv")
 ```
 
+Shift-JISのファイルは`readr`と同じように引数で指定します
 
 ```{r}
 vroom::vroom("data/csv/ペンギン（ひどい列名）ver_cp932.csv",
