@@ -56,12 +56,14 @@ read_xlsx("data/ペンギン（ひどい列名）ver.xlsx")
 
 なお、日本語の列名では、`clean_names()`関数に`case = "old_janitor"`をつけないと読みにくい結果になります。このように、関数の中に追加する情報のことを引数（ひきすう）と言います。引数によってさまざまな条件を変更することが可能になります。
 
-
-```{r}
+```{r eval = FALSE}
 library(tidyverse)
     # ↑は普通まず最初に読み込むパッケージですが、本書ではここで初めて使います
 library(janitor)
+```
 
+
+```{r}
 read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") %>% 
   clean_names(case = "old_janitor")
 ```

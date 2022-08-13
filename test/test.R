@@ -1,4 +1,5 @@
 library(tidyverse)
+library(readxl)
 library(writexl)
 
 
@@ -72,6 +73,78 @@ write_xlsx(p_list, "data/ペンギン（シート別）.xlsx")
 library(stringi)
 
 stri_trans_nfkc("ﾍﾟﾝｷﾞﾝ")
+
+# bootstrap
+# 参考 https://qiita.com/Ringa_hyj/items/30ed377738c7d25cbeea
+bs_penguins <- 
+rsample::bootstraps(penguins, times = 1000)
+
+df_bs_penguins <- 
+map_df(bs_penguins$splits, ~ as_tibble(.x))
+
+rm(bs_penguins)
+
+df_bs_penguins2 <- 
+  df_bs_penguins
+
+df_bs_penguins3 <- 
+  df_bs_penguins
+
+df_bs_penguins4 <- 
+  df_bs_penguins
+
+df_bs_penguins5 <- 
+  df_bs_penguins
+
+
+
+df_bs_penguins <- 
+bind_cols(df_bs_penguins,df_bs_penguins2, df_bs_penguins3, df_bs_penguins4, df_bs_penguins5) %>%
+  janitor::clean_names()
+
+rm(df_bs_penguins2, df_bs_penguins3, df_bs_penguins4, df_bs_penguins5)
+
+df_bs_penguins <- 
+  df_bs_penguins %>% 
+  mutate(across(where(is.factor), as.character))
+
+library(tictoc)
+
+tic("書き込み write_csv")
+  write_csv(df_bs_penguins, "df_bs_penguins.csv")
+toc(log = TRUE)
+
+tic("書き込み vroom_write")
+vroom::vroom_write(df_bs_penguins, "df_bs_penguins_v.csv")
+toc(log = TRUE)
+
+
+tic("読み込み fread")
+  data.table::fread("df_bs_penguins.csv", data.table = FALSE) %>% 
+  head()
+toc(log = TRUE)
+
+tic("読み込み read_csv")
+read_csv("df_bs_penguins.csv") %>% 
+  head()
+toc(log = TRUE)
+
+tic("読み込み vroom")
+  vroom::vroom("df_bs_penguins.csv") %>% 
+  head()
+toc(log = TRUE)
+
+
+
+
+# tic()
+# df_readcsv <- 
+#   read.csv("df_bs_penguins.csv") %>% 
+#   head()
+# toc()
+
+
+
 
 
 # 気温 ----------------------------------------------------------------------

@@ -90,3 +90,95 @@ iris_list <-
 write_xlsx(iris_list, "data/iris.xlsx")
 rm(iris_list) # いったん削除
 ```
+
+
+
+
+# 追加案
+
+
+あとは\@ref(ikkatsuread)と同じ手順で読み込めます。
+あとは\@ref(ikkatsuread)と同じ手順で読み込めます。
+
+## 複数ファイルの指定したシートを読み込む
+```{r}
+files <-
+    list.files(path = "data/month/", full.names = TRUE)
+files
+```
+
+```{r}
+ldata <-
+    map(files, ~read_xlsx(., sheet = "ジェンツー"))
+ldata
+```
+
+```{r}
+file_name <- 
+  str_replace(files, ".xlsx", "") %>% 
+  str_replace("data/month/", "")
+file_name
+```
+
+```{r}
+ldata <-
+    set_names(ldata, file_name)
+ldata
+```
+
+
+```{r}
+bind_rows(ldata, .id = "group")
+```
+
+
+## 複数ファイルの複数シートを読み込む
+```{r}
+files <-
+    list.files(path = "data/month/", full.names = TRUE)
+files
+```
+
+
+
+```{r}
+# 全てのファイルでシート名が共通であれば
+path_name <- "data/month/ペンギン（シート別）_1月.xlsx" # データのパスを格納
+sheet_named_list <- 
+excel_sheets(path_name) %>%                     
+  set_names()
+# map2(files, sheet_named_list, ~read_excel(path = .x, sheet = .y) )
+all_sheet <- function(target){
+map(sheet_named_list, read_excel, path = {{target}})
+}
+ldata <- 
+map(files, all_sheet) |> 
+  set_names(file_name)
+# 各ファイルから特定のシート名を取り出す
+map(ldata, "アデリー")
+```
+
+
+```{r}
+ldata <-
+    map(files, ~read_xlsx(., sheet = "ジェンツー"))
+ldata
+```
+
+```{r}
+file_name <- 
+  str_replace(files, ".xlsx", "") %>% 
+  str_replace("data/month/", "")
+file_name
+```
+
+```{r}
+ldata <-
+    set_names(ldata, file_name)
+ldata
+```
+
+
+```{r}
+bind_rows(ldata, .id = "group")
+```

@@ -4,23 +4,23 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 データ解析に向けて | index.split</title>
-  <meta name="description" content="" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <title>5 データ解析に向けて | Rで読むExcelファイル</title>
+  <meta name="description" content="5 データ解析に向けて | Rで読むExcelファイル" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 データ解析に向けて | index.split" />
+  <meta property="og:title" content="5 データ解析に向けて | Rで読むExcelファイル" />
   <meta property="og:type" content="book" />
-  
-  <meta property="og:image" content="images/cover.png" />
+  <meta property="og:image" content="/images/cover.png" />
   
   <meta name="github-repo" content="izunyan/excel_r" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 データ解析に向けて | index.split" />
+  <meta name="twitter:title" content="5 データ解析に向けて | Rで読むExcelファイル" />
   
   
-  <meta name="twitter:image" content="images/cover.png" />
+  <meta name="twitter:image" content="/images/cover.png" />
 
+<meta name="author" content="やわらかクジラ" />
 
 
 
@@ -31,7 +31,8 @@
   
 <link rel="prev" href="readsavecsv.html"/>
 <link rel="next" href="あとがき.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -47,25 +48,24 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -85,7 +85,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -118,6 +118,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 </head>
 
 <body>
@@ -130,8 +131,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#本書の特徴"><i class="fa fa-check"></i>本書の特徴</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#本書の特徴"><i class="fa fa-check"></i>本書の特徴</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#想定読者"><i class="fa fa-check"></i>想定読者</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure"><i class="fa fa-check"></i>本書の構成</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#執筆環境"><i class="fa fa-check"></i>執筆環境</a></li>
@@ -139,59 +142,72 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#注意事項など"><i class="fa fa-check"></i>注意事項など</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#huroku"><i class="fa fa-check"></i>特別付録について</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="project.html"><a href="project.html"><i class="fa fa-check"></i><b>1</b> 前提：プロジェクトの設定</a><ul>
+<li class="chapter" data-level="1" data-path="project.html"><a href="project.html"><i class="fa fa-check"></i><b>1</b> 前提：プロジェクトの設定</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="project.html"><a href="project.html#どのフォルダのファイルかの指定"><i class="fa fa-check"></i><b>1.1</b> どのフォルダのファイルかの指定</a></li>
 <li class="chapter" data-level="1.2" data-path="project.html"><a href="project.html#projecttoha"><i class="fa fa-check"></i><b>1.2</b> プロジェクトとは</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="readexcel.html"><a href="readexcel.html"><i class="fa fa-check"></i><b>2</b> Excelファイルの読み込み</a><ul>
-<li class="chapter" data-level="2.1" data-path="readexcel.html"><a href="readexcel.html#readoneexcel"><i class="fa fa-check"></i><b>2.1</b> 一つのExcelファイルを読み込む</a><ul>
+<li class="chapter" data-level="2" data-path="readexcel.html"><a href="readexcel.html"><i class="fa fa-check"></i><b>2</b> Excelファイルの読み込み</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="readexcel.html"><a href="readexcel.html#readoneexcel"><i class="fa fa-check"></i><b>2.1</b> 一つのExcelファイルを読み込む</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="readexcel.html"><a href="readexcel.html#junbiyomikomi"><i class="fa fa-check"></i><b>2.1.1</b> ファイルの準備と読み込み</a></li>
 <li class="chapter" data-level="2.1.2" data-path="readexcel.html"><a href="readexcel.html#列名変数名がひどい場合の読み込み"><i class="fa fa-check"></i><b>2.1.2</b> 列名（変数名）がひどい場合の読み込み</a></li>
 <li class="chapter" data-level="2.1.3" data-path="readexcel.html"><a href="readexcel.html#開始行を指定して読み込む"><i class="fa fa-check"></i><b>2.1.3</b> 開始行を指定して読み込む</a></li>
 <li class="chapter" data-level="2.1.4" data-path="readexcel.html"><a href="readexcel.html#セルを指定して読み込む"><i class="fa fa-check"></i><b>2.1.4</b> セルを指定して読み込む</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="readexcel.html"><a href="readexcel.html#シートを指定して読み込む"><i class="fa fa-check"></i><b>2.2</b> シートを指定して読み込む</a><ul>
+<li class="chapter" data-level="2.2" data-path="readexcel.html"><a href="readexcel.html#シートを指定して読み込む"><i class="fa fa-check"></i><b>2.2</b> シートを指定して読み込む</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="readexcel.html"><a href="readexcel.html#シート名の確認"><i class="fa fa-check"></i><b>2.2.1</b> シート名の確認</a></li>
 <li class="chapter" data-level="2.2.2" data-path="readexcel.html"><a href="readexcel.html#普通の読み込み"><i class="fa fa-check"></i><b>2.2.2</b> 普通の読み込み</a></li>
 <li class="chapter" data-level="2.2.3" data-path="readexcel.html"><a href="readexcel.html#シートを指定した読み込み"><i class="fa fa-check"></i><b>2.2.3</b> シートを指定した読み込み</a></li>
 <li class="chapter" data-level="2.2.4" data-path="readexcel.html"><a href="readexcel.html#dflist"><i class="fa fa-check"></i><b>2.2.4</b> すべてのシートから一気に読み込み</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="readexcel.html"><a href="readexcel.html#readseveralexcel"><i class="fa fa-check"></i><b>2.3</b> 複数のExcelファイルを読み込む</a><ul>
+<li class="chapter" data-level="2.3" data-path="readexcel.html"><a href="readexcel.html#readseveralexcel"><i class="fa fa-check"></i><b>2.3</b> 複数のExcelファイルを読み込む</a>
+<ul>
 <li class="chapter" data-level="2.3.1" data-path="readexcel.html"><a href="readexcel.html#読み込むファイル名の一覧のオブジェクト作成"><i class="fa fa-check"></i><b>2.3.1</b> 読み込むファイル名の一覧のオブジェクト作成</a></li>
 <li class="chapter" data-level="2.3.2" data-path="readexcel.html"><a href="readexcel.html#ikkatsuread"><i class="fa fa-check"></i><b>2.3.2</b> ファイルを一括で読み込む</a></li>
 <li class="chapter" data-level="2.3.3" data-path="readexcel.html"><a href="readexcel.html#読み込むファイルが複数フォルダにある場合"><i class="fa fa-check"></i><b>2.3.3</b> 読み込むファイルが複数フォルダにある場合</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="writeexcel.html"><a href="writeexcel.html"><i class="fa fa-check"></i><b>3</b> Excelファイルの保存</a><ul>
-<li class="chapter" data-level="3.1" data-path="writeexcel.html"><a href="writeexcel.html#writeoneexcel"><i class="fa fa-check"></i><b>3.1</b> 一つのExcelファイルを保存する</a><ul>
+<li class="chapter" data-level="3" data-path="writeexcel.html"><a href="writeexcel.html"><i class="fa fa-check"></i><b>3</b> Excelファイルの保存</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="writeexcel.html"><a href="writeexcel.html#writeoneexcel"><i class="fa fa-check"></i><b>3.1</b> 一つのExcelファイルを保存する</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="writeexcel.html"><a href="writeexcel.html#groupbymean"><i class="fa fa-check"></i><b>3.1.1</b> カテゴリ別平均値の作成</a></li>
 <li class="chapter" data-level="3.1.2" data-path="writeexcel.html"><a href="writeexcel.html#excelファイルの保存"><i class="fa fa-check"></i><b>3.1.2</b> Excelファイルの保存</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="writeexcel.html"><a href="writeexcel.html#writeseveralexcel"><i class="fa fa-check"></i><b>3.2</b> 複数のファイルを一度に保存する</a><ul>
+<li class="chapter" data-level="3.2" data-path="writeexcel.html"><a href="writeexcel.html#writeseveralexcel"><i class="fa fa-check"></i><b>3.2</b> 複数のファイルを一度に保存する</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="writeexcel.html"><a href="writeexcel.html#splitdf"><i class="fa fa-check"></i><b>3.2.1</b> データフレームをカテゴリ別に分割してリストにする</a></li>
 <li class="chapter" data-level="3.2.2" data-path="writeexcel.html"><a href="writeexcel.html#リストの各要素を個別でexcelファイルに保存する"><i class="fa fa-check"></i><b>3.2.2</b> リストの各要素を個別でExcelファイルに保存する</a></li>
 <li class="chapter" data-level="3.2.3" data-path="writeexcel.html"><a href="writeexcel.html#一つのファイルの複数シートに保存する"><i class="fa fa-check"></i><b>3.2.3</b> 一つのファイルの複数シートに保存する</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="readsavecsv.html"><a href="readsavecsv.html"><i class="fa fa-check"></i><b>4</b> csvファイルの読み込みと保存</a><ul>
-<li class="chapter" data-level="4.1" data-path="readsavecsv.html"><a href="readsavecsv.html#一つのcsvファイルを読み込む"><i class="fa fa-check"></i><b>4.1</b> 一つのcsvファイルを読み込む</a><ul>
+<li class="chapter" data-level="4" data-path="readsavecsv.html"><a href="readsavecsv.html"><i class="fa fa-check"></i><b>4</b> csvファイルの読み込みと保存</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="readsavecsv.html"><a href="readsavecsv.html#一つのcsvファイルを読み込む"><i class="fa fa-check"></i><b>4.1</b> 一つのcsvファイルを読み込む</a>
+<ul>
 <li class="chapter" data-level="4.1.1" data-path="readsavecsv.html"><a href="readsavecsv.html#utf-8でエンコードされたcsvファイル"><i class="fa fa-check"></i><b>4.1.1</b> UTF-8でエンコードされたcsvファイル</a></li>
-<li class="chapter" data-level="4.1.2" data-path="readsavecsv.html"><a href="readsavecsv.html#文字化けの例shift-jisでエンコードされたcsvファイル"><i class="fa fa-check"></i><b>4.1.2</b> 【文字化けの例】Shift-JISでエンコードされたcsvファイル</a></li>
-<li class="chapter" data-level="4.1.3" data-path="readsavecsv.html"><a href="readsavecsv.html#shift-jisでエンコードされたcsvファイル"><i class="fa fa-check"></i><b>4.1.3</b> Shift-JISでエンコードされたcsvファイル</a></li>
-<li class="chapter" data-level="4.1.4" data-path="readsavecsv.html"><a href="readsavecsv.html#read.csvを使う場合"><i class="fa fa-check"></i><b>4.1.4</b> read.csv()を使う場合</a></li>
-<li class="chapter" data-level="4.1.5" data-path="readsavecsv.html"><a href="readsavecsv.html#大きいデータならfread"><i class="fa fa-check"></i><b>4.1.5</b> 大きいデータならfread()</a></li>
+<li class="chapter" data-level="4.1.2" data-path="readsavecsv.html"><a href="readsavecsv.html#shift-jisでエンコードされたcsvファイル"><i class="fa fa-check"></i><b>4.1.2</b> Shift-JISでエンコードされたcsvファイル</a></li>
+<li class="chapter" data-level="4.1.3" data-path="readsavecsv.html"><a href="readsavecsv.html#read.csvを使う場合"><i class="fa fa-check"></i><b>4.1.3</b> read.csv()を使う場合</a></li>
+<li class="chapter" data-level="4.1.4" data-path="readsavecsv.html"><a href="readsavecsv.html#大きいデータならfread"><i class="fa fa-check"></i><b>4.1.4</b> 大きいデータならfread()</a></li>
+<li class="chapter" data-level="4.1.5" data-path="readsavecsv.html"><a href="readsavecsv.html#大きいデータを読む場合のvroom"><i class="fa fa-check"></i><b>4.1.5</b> 大きいデータを読む場合のvroom</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="readsavecsv.html"><a href="readsavecsv.html#writeonecsv"><i class="fa fa-check"></i><b>4.2</b> csvファイルの保存</a><ul>
+<li class="chapter" data-level="4.2" data-path="readsavecsv.html"><a href="readsavecsv.html#writeonecsv"><i class="fa fa-check"></i><b>4.2</b> csvファイルの保存</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="readsavecsv.html"><a href="readsavecsv.html#write_csvを使う"><i class="fa fa-check"></i><b>4.2.1</b> write_csv()を使う</a></li>
-<li class="chapter" data-level="4.2.2" data-path="readsavecsv.html"><a href="readsavecsv.html#write.csvを使う"><i class="fa fa-check"></i><b>4.2.2</b> write.csv()を使う</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="dataanal.html"><a href="dataanal.html"><i class="fa fa-check"></i><b>5</b> データ解析に向けて</a><ul>
-<li class="chapter" data-level="5.1" data-path="dataanal.html"><a href="dataanal.html#要約値や欠損データの確認"><i class="fa fa-check"></i><b>5.1</b> 要約値や欠損データの確認</a><ul>
+<li class="chapter" data-level="5" data-path="dataanal.html"><a href="dataanal.html"><i class="fa fa-check"></i><b>5</b> データ解析に向けて</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="dataanal.html"><a href="dataanal.html#要約値や欠損データの確認"><i class="fa fa-check"></i><b>5.1</b> 要約値や欠損データの確認</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="dataanal.html"><a href="dataanal.html#結果をexcelファイルに出力する"><i class="fa fa-check"></i><b>5.1.1</b> 結果をExcelファイルに出力する</a></li>
 <li class="chapter" data-level="5.1.2" data-path="dataanal.html"><a href="dataanal.html#可視化"><i class="fa fa-check"></i><b>5.1.2</b> 可視化</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="dataanal.html"><a href="dataanal.html#相関の確認"><i class="fa fa-check"></i><b>5.2</b> 相関の確認</a><ul>
+<li class="chapter" data-level="5.2" data-path="dataanal.html"><a href="dataanal.html#相関の確認"><i class="fa fa-check"></i><b>5.2</b> 相関の確認</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="dataanal.html"><a href="dataanal.html#相関行列を出す"><i class="fa fa-check"></i><b>5.2.1</b> 相関行列を出す</a></li>
 <li class="chapter" data-level="5.2.2" data-path="dataanal.html"><a href="dataanal.html#相関行列の可視化"><i class="fa fa-check"></i><b>5.2.2</b> 相関行列の可視化</a></li>
 </ul></li>
@@ -206,7 +222,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Rで読むExcelファイル</a>
           </h1>
         </div>
 
@@ -214,53 +230,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="dataanal" class="section level1">
-<h1><span class="header-section-number">5</span> データ解析に向けて</h1>
+<div id="dataanal" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> データ解析に向けて<a href="dataanal.html#dataanal" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>ここまでの解説で、Excelファイルとcsvファイルの読み込みについて一通り解説してきました。この段階では、まだデータがきれいでなくて、解析に入れないことも多いと思います。</p>
-<div id="要約値や欠損データの確認" class="section level2">
-<h2><span class="header-section-number">5.1</span> 要約値や欠損データの確認</h2>
+<div id="要約値や欠損データの確認" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> 要約値や欠損データの確認<a href="dataanal.html#要約値や欠損データの確認" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>まずどんなデータがどのように入っているか、欠損値（NA）はどれくらい発生しているか確認することは重要なプロセスです。変数の一覧を要約して確認することが簡単にできる<code>skim</code>パッケージの<code>skimr()</code>関数を使って確認してみましょう。データは<a href="readexcel.html#junbiyomikomi">2.1.1</a>で読み込んだ<code>df</code>を使います。</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="dataanal.html#cb82-1"></a><span class="kw">library</span>(skimr) <span class="co"># version 2.1.2</span></span></code></pre></div>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="dataanal.html#cb83-1"></a><span class="kw">skim</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="dataanal.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr) <span class="co"># version 2.1.2</span></span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="dataanal.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(df)</span></code></pre></div>
 
-<div class="figure" style="text-align: center"><span id="fig:skim"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:skim"></span>
 <img src="images/skim.png" alt="skim()の出力" width="80%" />
 <p class="caption">
 Figure 5.1: skim()の出力
 </p>
 </div>
 <p>データの型が数値である変数（ここでは<code>Variable type:numeric</code>）については、<code>hist</code>列に簡単なヒストグラムが表示されます（図<a href="dataanal.html#fig:skim">5.1</a>）。しかしデータが大量な場合、動作が遅くなります。その場合は、ヒストグラムを描かない以下の関数が使えます。</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="dataanal.html#cb84-1"></a><span class="kw">skim_without_charts</span>(df)</span></code></pre></div>
-<div id="結果をexcelファイルに出力する" class="section level3">
-<h3><span class="header-section-number">5.1.1</span> 結果をExcelファイルに出力する</h3>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="dataanal.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim_without_charts</span>(df)</span></code></pre></div>
+<div id="結果をexcelファイルに出力する" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> 結果をExcelファイルに出力する<a href="dataanal.html#結果をexcelファイルに出力する" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>as_tibble()</code>関数を使うことで、結果を一つのデータフレームにまとめることができます。</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="dataanal.html#cb85-1"></a>res_skim_df &lt;-<span class="st"> </span></span>
-<span id="cb85-2"><a href="dataanal.html#cb85-2"></a><span class="kw">skim</span>(df) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb85-3"><a href="dataanal.html#cb85-3"></a><span class="st">  </span><span class="kw">as_tibble</span>()</span>
-<span id="cb85-4"><a href="dataanal.html#cb85-4"></a></span>
-<span id="cb85-5"><a href="dataanal.html#cb85-5"></a>res_skim_df <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb85-6"><a href="dataanal.html#cb85-6"></a><span class="st">  </span><span class="kw">head</span>()        <span class="co"># 最初の6行を表示</span></span></code></pre></div>
-<pre><code>## # A tibble: 6 x 17
-##   skim_type skim_variable n_missing complete_rate character.min
-##   &lt;chr&gt;     &lt;chr&gt;             &lt;int&gt;         &lt;dbl&gt;         &lt;int&gt;
-## 1 character species               0         1                 6
-## 2 character 種類                  0         1                 2
-## 3 character island                0         1                 5
-## 4 character sex                  11         0.968             4
-## 5 numeric   bill_length_~         2         0.994            NA
-## 6 numeric   bill_depth_mm         2         0.994            NA
-## # ... with 12 more variables: character.max &lt;int&gt;,
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="dataanal.html#cb91-1" aria-hidden="true" tabindex="-1"></a>res_skim_df <span class="ot">&lt;-</span> </span>
+<span id="cb91-2"><a href="dataanal.html#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(df) <span class="sc">%&gt;%</span> </span>
+<span id="cb91-3"><a href="dataanal.html#cb91-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span>
+<span id="cb91-4"><a href="dataanal.html#cb91-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-5"><a href="dataanal.html#cb91-5" aria-hidden="true" tabindex="-1"></a>res_skim_df <span class="sc">%&gt;%</span> </span>
+<span id="cb91-6"><a href="dataanal.html#cb91-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()        <span class="co"># 最初の6行を表示</span></span></code></pre></div>
+<pre><code>## # A tibble: 6 × 17
+##   skim_type skim_variable  n_missing complete_rate character.min
+##   &lt;chr&gt;     &lt;chr&gt;              &lt;int&gt;         &lt;dbl&gt;         &lt;int&gt;
+## 1 character species                0         1                 6
+## 2 character 種類                   0         1                 2
+## 3 character island                 0         1                 5
+## 4 character sex                   11         0.968             4
+## 5 numeric   bill_length_mm         2         0.994            NA
+## 6 numeric   bill_depth_mm          2         0.994            NA
+## # … with 12 more variables: character.max &lt;int&gt;,
 ## #   character.empty &lt;int&gt;, character.n_unique &lt;int&gt;,
 ## #   character.whitespace &lt;int&gt;, numeric.mean &lt;dbl&gt;,
 ## #   numeric.sd &lt;dbl&gt;, numeric.p0 &lt;dbl&gt;, numeric.p25 &lt;dbl&gt;,
 ## #   numeric.p50 &lt;dbl&gt;, numeric.p75 &lt;dbl&gt;, numeric.p100 &lt;dbl&gt;,
 ## #   numeric.hist &lt;chr&gt;</code></pre>
 <p>これで好きなように加工してExcelファイルとして出力することが可能になります。例えば、数値変数だけに絞る場合は</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="dataanal.html#cb87-1"></a>res_skim_df <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb87-2"><a href="dataanal.html#cb87-2"></a><span class="st">  </span><span class="kw">filter</span>(skim_type  <span class="op">==</span><span class="st"> &quot;numeric&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb87-3"><a href="dataanal.html#cb87-3"></a><span class="st">  </span><span class="kw">select</span>(skim_type, skim_variable,</span>
-<span id="cb87-4"><a href="dataanal.html#cb87-4"></a>         n_missing, numeric.mean, numeric.sd)</span></code></pre></div>
-<pre><code>## # A tibble: 5 x 5
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="dataanal.html#cb93-1" aria-hidden="true" tabindex="-1"></a>res_skim_df <span class="sc">%&gt;%</span> </span>
+<span id="cb93-2"><a href="dataanal.html#cb93-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(skim_type  <span class="sc">==</span> <span class="st">&quot;numeric&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-3"><a href="dataanal.html#cb93-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(skim_type, skim_variable,</span>
+<span id="cb93-4"><a href="dataanal.html#cb93-4" aria-hidden="true" tabindex="-1"></a>         n_missing, numeric.mean, numeric.sd)</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 5
 ##   skim_type skim_variable     n_missing numeric.mean numeric.sd
 ##   &lt;chr&gt;     &lt;chr&gt;                 &lt;int&gt;        &lt;dbl&gt;      &lt;dbl&gt;
 ## 1 numeric   bill_length_mm            2         43.9      5.46 
@@ -269,109 +285,108 @@ Figure 5.1: skim()の出力
 ## 4 numeric   body_mass_g               2       4202.     802.   
 ## 5 numeric   year                      0       2008.       0.818</code></pre>
 <p>また、<code>group_by()</code>を使ってグループ別に上記結果を出すことも可能です。</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="dataanal.html#cb89-1"></a>res_df_num_g &lt;-<span class="st"> </span></span>
-<span id="cb89-2"><a href="dataanal.html#cb89-2"></a>df <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb89-3"><a href="dataanal.html#cb89-3"></a><span class="st">  </span><span class="kw">group_by</span>(種類) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb89-4"><a href="dataanal.html#cb89-4"></a><span class="st">  </span><span class="kw">skim</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb89-5"><a href="dataanal.html#cb89-5"></a><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb89-6"><a href="dataanal.html#cb89-6"></a><span class="st">  </span><span class="kw">filter</span>(skim_type  <span class="op">==</span><span class="st"> &quot;numeric&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb89-7"><a href="dataanal.html#cb89-7"></a><span class="st">  </span><span class="kw">select</span>(skim_type, skim_variable, 種類,</span>
-<span id="cb89-8"><a href="dataanal.html#cb89-8"></a>         n_missing, numeric.mean, numeric.sd)</span>
-<span id="cb89-9"><a href="dataanal.html#cb89-9"></a></span>
-<span id="cb89-10"><a href="dataanal.html#cb89-10"></a>res_df_num_g</span></code></pre></div>
-<pre><code>## # A tibble: 15 x 6
-##    skim_type skim_variable 種類  n_missing numeric.mean
-##    &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;     &lt;int&gt;        &lt;dbl&gt;
-##  1 numeric   bill_length_~ アデリー~         1         38.8
-##  2 numeric   bill_length_~ ジェンツ~         1         47.5
-##  3 numeric   bill_length_~ ヒゲ          0         48.8
-##  4 numeric   bill_depth_mm アデリー~         1         18.3
-##  5 numeric   bill_depth_mm ジェンツ~         1         15.0
-##  6 numeric   bill_depth_mm ヒゲ          0         18.4
-##  7 numeric   flipper_leng~ アデリー~         1        190. 
-##  8 numeric   flipper_leng~ ジェンツ~         1        217. 
-##  9 numeric   flipper_leng~ ヒゲ          0        196. 
-## 10 numeric   body_mass_g   アデリー~         1       3701. 
-## 11 numeric   body_mass_g   ジェンツ~         1       5076. 
-## 12 numeric   body_mass_g   ヒゲ          0       3733. 
-## 13 numeric   year          アデリー~         0       2008. 
-## 14 numeric   year          ジェンツ~         0       2008. 
-## 15 numeric   year          ヒゲ          0       2008. 
-## # ... with 1 more variable: numeric.sd &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="dataanal.html#cb95-1" aria-hidden="true" tabindex="-1"></a>res_df_num_g <span class="ot">&lt;-</span> </span>
+<span id="cb95-2"><a href="dataanal.html#cb95-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb95-3"><a href="dataanal.html#cb95-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(種類) <span class="sc">%&gt;%</span> </span>
+<span id="cb95-4"><a href="dataanal.html#cb95-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skim</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb95-5"><a href="dataanal.html#cb95-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb95-6"><a href="dataanal.html#cb95-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(skim_type  <span class="sc">==</span> <span class="st">&quot;numeric&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb95-7"><a href="dataanal.html#cb95-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(skim_type, skim_variable, 種類,</span>
+<span id="cb95-8"><a href="dataanal.html#cb95-8" aria-hidden="true" tabindex="-1"></a>         n_missing, numeric.mean, numeric.sd)</span>
+<span id="cb95-9"><a href="dataanal.html#cb95-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-10"><a href="dataanal.html#cb95-10" aria-hidden="true" tabindex="-1"></a>res_df_num_g</span></code></pre></div>
+<pre><code>## # A tibble: 15 × 6
+##    skim_type skim_variable     種類       n_missing numeric.mean
+##    &lt;chr&gt;     &lt;chr&gt;             &lt;chr&gt;          &lt;int&gt;        &lt;dbl&gt;
+##  1 numeric   bill_length_mm    アデリー           1         38.8
+##  2 numeric   bill_length_mm    ジェンツー         1         47.5
+##  3 numeric   bill_length_mm    ヒゲ               0         48.8
+##  4 numeric   bill_depth_mm     アデリー           1         18.3
+##  5 numeric   bill_depth_mm     ジェンツー         1         15.0
+##  6 numeric   bill_depth_mm     ヒゲ               0         18.4
+##  7 numeric   flipper_length_mm アデリー           1        190. 
+##  8 numeric   flipper_length_mm ジェンツー         1        217. 
+##  9 numeric   flipper_length_mm ヒゲ               0        196. 
+## 10 numeric   body_mass_g       アデリー           1       3701. 
+## 11 numeric   body_mass_g       ジェンツー         1       5076. 
+## 12 numeric   body_mass_g       ヒゲ               0       3733. 
+## 13 numeric   year              アデリー           0       2008. 
+## 14 numeric   year              ジェンツー         0       2008. 
+## 15 numeric   year              ヒゲ               0       2008. 
+## # … with 1 more variable: numeric.sd &lt;dbl&gt;</code></pre>
 <p>あとは、以下のように出力するだけです。</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="dataanal.html#cb91-1"></a><span class="kw">write_xlsx</span>(res_df_num_g, <span class="st">&quot;out/種類別平均値（全数値型変数）.xlsx&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="dataanal.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xlsx</span>(res_df_num_g, <span class="st">&quot;out/種類別平均値（全数値型変数）.xlsx&quot;</span>)</span></code></pre></div>
 </div>
-<div id="可視化" class="section level3">
-<h3><span class="header-section-number">5.1.2</span> 可視化</h3>
+<div id="可視化" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> 可視化<a href="dataanal.html#可視化" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>さらに<code>ggplot2</code>を使って可視化することも可能になります。</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="dataanal.html#cb92-1"></a>res_df_num_g <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb92-2"><a href="dataanal.html#cb92-2"></a><span class="st">  </span><span class="kw">filter</span>(skim_variable <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;bill_length_mm&quot;</span>, <span class="st">&quot;bill_depth_mm&quot;</span>,</span>
-<span id="cb92-3"><a href="dataanal.html#cb92-3"></a>                             <span class="st">&quot;flipper_length_mm&quot;</span>, <span class="st">&quot;body_mass_g&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb92-4"><a href="dataanal.html#cb92-4"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> 種類, <span class="dt">y =</span> numeric.mean, <span class="dt">fill =</span> 種類)) <span class="op">+</span></span>
-<span id="cb92-5"><a href="dataanal.html#cb92-5"></a><span class="st">   </span><span class="kw">geom_col</span>() <span class="op">+</span></span>
-<span id="cb92-6"><a href="dataanal.html#cb92-6"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">5</span>)) <span class="op">+</span></span>
-<span id="cb92-7"><a href="dataanal.html#cb92-7"></a><span class="st">   </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(skim_variable), <span class="dt">scale =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
-<embed src="excel_r_files/figure-html/unnamed-chunk-61-1.pdf" width="480" type="application/pdf" />
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="dataanal.html#cb98-1" aria-hidden="true" tabindex="-1"></a>res_df_num_g <span class="sc">%&gt;%</span> </span>
+<span id="cb98-2"><a href="dataanal.html#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(skim_variable <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;bill_length_mm&quot;</span>, <span class="st">&quot;bill_depth_mm&quot;</span>,</span>
+<span id="cb98-3"><a href="dataanal.html#cb98-3" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;flipper_length_mm&quot;</span>, <span class="st">&quot;body_mass_g&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb98-4"><a href="dataanal.html#cb98-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> 種類, <span class="at">y =</span> numeric.mean, <span class="at">fill =</span> 種類)) <span class="sc">+</span></span>
+<span id="cb98-5"><a href="dataanal.html#cb98-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb98-6"><a href="dataanal.html#cb98-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb98-7"><a href="dataanal.html#cb98-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(skim_variable), <span class="at">scale =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
+<embed src="excel_r_files/figure-html/unnamed-chunk-64-1.pdf" width="480" type="application/pdf" />
 <p>ただし、ここの場合もっと潤沢な可視化グラフは元データから作成できます。例えば</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="dataanal.html#cb93-1"></a>df <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb93-2"><a href="dataanal.html#cb93-2"></a><span class="st">  </span><span class="kw">select</span>(種類, bill_length_mm, bill_depth_mm, flipper_length_mm,</span>
-<span id="cb93-3"><a href="dataanal.html#cb93-3"></a>         body_mass_g) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb93-4"><a href="dataanal.html#cb93-4"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="op">-</span>種類,                  <span class="co"># wideデータからlongデータに変換</span></span>
-<span id="cb93-5"><a href="dataanal.html#cb93-5"></a>               <span class="dt">names_to =</span> <span class="st">&quot;variables&quot;</span>,</span>
-<span id="cb93-6"><a href="dataanal.html#cb93-6"></a>               <span class="dt">values_to =</span> <span class="st">&quot;scores&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb93-7"><a href="dataanal.html#cb93-7"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> 種類, <span class="dt">y =</span> scores, <span class="dt">fill =</span> 種類)) <span class="op">+</span></span>
-<span id="cb93-8"><a href="dataanal.html#cb93-8"></a><span class="st">   </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>, <span class="dt">width =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span><span class="co"># 箱ひげ図</span></span>
-<span id="cb93-9"><a href="dataanal.html#cb93-9"></a><span class="st">   </span><span class="kw">geom_violin</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st">               </span><span class="co"># バイオリンプロット</span></span>
-<span id="cb93-10"><a href="dataanal.html#cb93-10"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">5</span>)) <span class="op">+</span></span>
-<span id="cb93-11"><a href="dataanal.html#cb93-11"></a><span class="st">   </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(variables), <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
-<embed src="excel_r_files/figure-html/unnamed-chunk-62-1.pdf" width="384" type="application/pdf" />
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="dataanal.html#cb99-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb99-2"><a href="dataanal.html#cb99-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(種類, bill_length_mm, bill_depth_mm, flipper_length_mm,</span>
+<span id="cb99-3"><a href="dataanal.html#cb99-3" aria-hidden="true" tabindex="-1"></a>         body_mass_g) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-4"><a href="dataanal.html#cb99-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>種類,                  <span class="co"># wideデータからlongデータに変換</span></span>
+<span id="cb99-5"><a href="dataanal.html#cb99-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;variables&quot;</span>,</span>
+<span id="cb99-6"><a href="dataanal.html#cb99-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;scores&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-7"><a href="dataanal.html#cb99-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> 種類, <span class="at">y =</span> scores, <span class="at">fill =</span> 種類)) <span class="sc">+</span></span>
+<span id="cb99-8"><a href="dataanal.html#cb99-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">width =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="co"># 箱ひげ図</span></span>
+<span id="cb99-9"><a href="dataanal.html#cb99-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_violin</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span>               <span class="co"># バイオリンプロット</span></span>
+<span id="cb99-10"><a href="dataanal.html#cb99-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb99-11"><a href="dataanal.html#cb99-11" aria-hidden="true" tabindex="-1"></a>   <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(variables), <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
+<embed src="excel_r_files/figure-html/unnamed-chunk-65-1.pdf" width="384" type="application/pdf" />
 <p>詳しくは特別付録の<a href="https://izunyan.github.io/practice_ggplot2/">ggplot2の辞書</a>を参照ください。</p>
 </div>
 </div>
-<div id="相関の確認" class="section level2">
-<h2><span class="header-section-number">5.2</span> 相関の確認</h2>
+<div id="相関の確認" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> 相関の確認<a href="dataanal.html#相関の確認" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>変数同士の相関関係を見たいという要望はビジネス、アカデミックを問わず多く発生すると思います。簡単な相関行列の出し方やその可視化について解説します。ここで便利なパッケージが<code>corrr</code>です。</p>
-<div id="相関行列を出す" class="section level3">
-<h3><span class="header-section-number">5.2.1</span> 相関行列を出す</h3>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="dataanal.html#cb94-1"></a><span class="kw">library</span>(corrr)</span></code></pre></div>
+<div id="相関行列を出す" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> 相関行列を出す<a href="dataanal.html#相関行列を出す" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="dataanal.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrr)</span></code></pre></div>
 <p>まずペンギンデータの中の数値変数だけにしぼります。そして、yearはここでは不要なので落とします。そうして作ったデータフレーム<code>cor_df</code>を、<code>correlate()</code>関数に入れるだけです。</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="dataanal.html#cb95-1"></a>cor_df &lt;-<span class="st"> </span></span>
-<span id="cb95-2"><a href="dataanal.html#cb95-2"></a>df <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb95-3"><a href="dataanal.html#cb95-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">where</span>(is.numeric)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># 数値変数だけにしぼる</span></span>
-<span id="cb95-4"><a href="dataanal.html#cb95-4"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>year)                 <span class="co"># 不要なので落とす  </span></span>
-<span id="cb95-5"><a href="dataanal.html#cb95-5"></a></span>
-<span id="cb95-6"><a href="dataanal.html#cb95-6"></a></span>
-<span id="cb95-7"><a href="dataanal.html#cb95-7"></a><span class="kw">correlate</span>(cor_df)</span></code></pre></div>
-<pre><code>## # A tibble: 4 x 5
-##   rowname bill_length_mm bill_depth_mm flipper_length_~
-##   &lt;chr&gt;            &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
-## 1 bill_l~         NA            -0.235            0.656
-## 2 bill_d~         -0.235        NA               -0.584
-## 3 flippe~          0.656        -0.584           NA    
-## 4 body_m~          0.595        -0.472            0.871
-## # ... with 1 more variable: body_mass_g &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="dataanal.html#cb101-1" aria-hidden="true" tabindex="-1"></a>cor_df <span class="ot">&lt;-</span> </span>
+<span id="cb101-2"><a href="dataanal.html#cb101-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb101-3"><a href="dataanal.html#cb101-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span> <span class="co"># 数値変数だけにしぼる</span></span>
+<span id="cb101-4"><a href="dataanal.html#cb101-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>year)                 <span class="co"># 不要なので落とす  </span></span>
+<span id="cb101-5"><a href="dataanal.html#cb101-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-6"><a href="dataanal.html#cb101-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-7"><a href="dataanal.html#cb101-7" aria-hidden="true" tabindex="-1"></a><span class="fu">correlate</span>(cor_df)</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 5
+##   term  bill_length_mm bill_depth_mm flipper_length_… body_mass_g
+##   &lt;chr&gt;          &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;
+## 1 bill…         NA            -0.235            0.656       0.595
+## 2 bill…         -0.235        NA               -0.584      -0.472
+## 3 flip…          0.656        -0.584           NA           0.871
+## 4 body…          0.595        -0.472            0.871      NA</code></pre>
 <p>上側と下型で相関係数が重複しているので、片側だけを残したい場合があります。その際は<code>shave()</code>関数で簡単に重複部分をなくせます。引数に<code>upper = FALSE</code>と入れれば、上側だけにすることもできます。</p>
 <p>相関係数の表示したい桁の指定は、<code>fashion()</code>関数で、引数に<code>decimals =</code>で桁数を指定することで可能になります。</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="dataanal.html#cb97-1"></a>cormat &lt;-<span class="st"> </span></span>
-<span id="cb97-2"><a href="dataanal.html#cb97-2"></a><span class="kw">correlate</span>(cor_df) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb97-3"><a href="dataanal.html#cb97-3"></a><span class="st">  </span><span class="kw">shave</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb97-4"><a href="dataanal.html#cb97-4"></a><span class="st">  </span><span class="kw">fashion</span>(<span class="dt">decimals =</span> <span class="dv">1</span>)</span>
-<span id="cb97-5"><a href="dataanal.html#cb97-5"></a></span>
-<span id="cb97-6"><a href="dataanal.html#cb97-6"></a>cormat</span></code></pre></div>
-<pre><code>##             rowname bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="dataanal.html#cb103-1" aria-hidden="true" tabindex="-1"></a>cormat <span class="ot">&lt;-</span> </span>
+<span id="cb103-2"><a href="dataanal.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">correlate</span>(cor_df) <span class="sc">%&gt;%</span> </span>
+<span id="cb103-3"><a href="dataanal.html#cb103-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shave</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb103-4"><a href="dataanal.html#cb103-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fashion</span>(<span class="at">decimals =</span> <span class="dv">1</span>)</span>
+<span id="cb103-5"><a href="dataanal.html#cb103-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-6"><a href="dataanal.html#cb103-6" aria-hidden="true" tabindex="-1"></a>cormat</span></code></pre></div>
+<pre><code>##                term bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ## 1    bill_length_mm                                                           
 ## 2     bill_depth_mm            -.2                                            
 ## 3 flipper_length_mm             .7           -.6                              
 ## 4       body_mass_g             .6           -.5                .9</code></pre>
 <p>あとは、以下のように出力するだけです。</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="dataanal.html#cb99-1"></a><span class="kw">write_xlsx</span>(cormat, <span class="st">&quot;out/相関行列.xlsx&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="dataanal.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xlsx</span>(cormat, <span class="st">&quot;out/相関行列.xlsx&quot;</span>)</span></code></pre></div>
 </div>
-<div id="相関行列の可視化" class="section level3">
-<h3><span class="header-section-number">5.2.2</span> 相関行列の可視化</h3>
+<div id="相関行列の可視化" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> 相関行列の可視化<a href="dataanal.html#相関行列の可視化" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>corrr</code>パッケージの関数で相関行列の可視化も簡単にできます。</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="dataanal.html#cb100-1"></a><span class="kw">correlate</span>(cor_df) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb100-2"><a href="dataanal.html#cb100-2"></a><span class="st">  </span><span class="kw">rplot</span>()</span></code></pre></div>
-<embed src="excel_r_files/figure-html/unnamed-chunk-67-1.pdf" width="480" type="application/pdf" />
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="dataanal.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">correlate</span>(cor_df) <span class="sc">%&gt;%</span> </span>
+<span id="cb106-2"><a href="dataanal.html#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rplot</span>()</span></code></pre></div>
+<embed src="excel_r_files/figure-html/unnamed-chunk-70-1.pdf" width="480" type="application/pdf" />
 
 </div>
 </div>
@@ -386,7 +401,6 @@ Figure 5.1: skim()の出力
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -405,6 +419,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -424,7 +439,11 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["excel_r.pdf", "excel_r.epub"],
+"download": ["excel_r.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }
