@@ -47,8 +47,8 @@ read_csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv")
 Error in nchar(x, "width") : invalid multibyte string, element 1
 
 <!-- 過去コード -->
-<!-- read_csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv") %>%  -->
-<!--   clean_names(case = "old_janitor") %>%  -->
+<!-- read_csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv") |>  -->
+<!--   clean_names(case = "old_janitor") |>  -->
 <!--   select(1:3) # 紙面の都合で最初の3つの変数に限定 -->
 
 
@@ -70,7 +70,7 @@ read_csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv"
 
 ```{r}
 read.csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv", 
-         fileEncoding = "cp932") %>%
+         fileEncoding = "cp932") |>
     as_tibble()  # データフレームをtibble型にし見やすい出力に
 ```
 <!-- 確認中 -->
@@ -82,7 +82,7 @@ read.csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv",
 UTF-8を読む場合はデフォルトで読めます。
 
 ```{r}
-read.csv("data/csv/ペンギン（ひどい列名）ver_utf8.csv") %>% 
+read.csv("data/csv/ペンギン（ひどい列名）ver_utf8.csv") |> 
     as_tibble()
 ```
 
@@ -96,7 +96,7 @@ UTF-8を読む場合はデフォルトで読めます。data.frame形式にす�
 
 ```{r}
 data.table::fread("data/csv/ペンギン（ひどい列名）ver_utf8.csv",
-                  data.table = FALSE) %>% 
+                  data.table = FALSE) |> 
   as_tibble()
 ```
 

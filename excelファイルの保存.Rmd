@@ -20,8 +20,8 @@
 
 ```{r}
 df_group_mean <- 
-  df %>% 
-  group_by(種類) %>% 
+  df |> 
+  group_by(種類) |> 
   summarise(across(
                    c(bill_length_mm, bill_depth_mm), # ここに変数
                    list(m = ~mean(., na.rm = TRUE),  # 平均値計算
@@ -30,8 +30,8 @@ df_group_mean <-
 
 # ここは結果の整形部分
 df_group_mean <- 
-  df_group_mean %>%  
-  select(-bill_depth_mm_n) %>%  # nが同じなので列削除
+  df_group_mean |>  
+  select(-bill_depth_mm_n) |>  # nが同じなので列削除
   rename(n = bill_length_mm_n)  # 列名をnにリネーム
 
 
@@ -41,7 +41,7 @@ knitr::kable(df_group_mean) # きれいな出力にするコード
 なお、ここで`knitr::kable()`という書き方が出てきますが、これは`knitr`パッケージの`kable()`関数という意味です。関数を1回しか使わない場合などに`library()`で呼び出すのは無駄が多かったりするので、時々こういった記述が出てきます。
 
 ### Excelファイルの保存
-```{r eval = FALSE}
+```{r}
 library(writexl)
 ```
 前節で作成したカテゴリ別平均値のデータフレーム`df_group_mean`をExcelファイルとして保存します。保存は`write_xlsx()`関数の中に、データフレームのオブジェクトと出力先のパスと保存ファイル名を入れるだけです。

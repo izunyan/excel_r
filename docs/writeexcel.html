@@ -1,269 +1,103 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 Excelファイルの保存 | Rで読むExcelファイル</title>
-  <meta name="description" content="3 Excelファイルの保存 | Rで読むExcelファイル" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="3 Excelファイルの保存 | Rで読むExcelファイル" />
-  <meta property="og:type" content="book" />
-  <meta property="og:image" content="/images/cover.png" />
-  
-  <meta name="github-repo" content="izunyan/excel_r" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 Excelファイルの保存 | Rで読むExcelファイル" />
-  
-  
-  <meta name="twitter:image" content="/images/cover.png" />
-
-<meta name="author" content="やわらかクジラ" />
-
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="readexcel.html"/>
-<link rel="next" href="readsavecsv.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>3 Excelファイルの保存 | Rで読むExcelファイル</title>
+<meta name="author" content="やわらかクジラ">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
+<meta property="og:title" content="3 Excelファイルの保存 | Rで読むExcelファイル">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/images/cover.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="3 Excelファイルの保存 | Rで読むExcelファイル">
+<meta name="twitter:image" content="/images/cover.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+<meta name="description" content="3.1 一つのExcelファイルを保存する writexlパッケージのwrite_xlsx()関数で、直接Excelファイルとして出力ができます。ここでは、新しく作成したデータフレームをExcelファイルとして保存してみます。  3.1.1 カテゴリ別平均値の作成...">
+<meta property="og:description" content="3.1 一つのExcelファイルを保存する writexlパッケージのwrite_xlsx()関数で、直接Excelファイルとして出力ができます。ここでは、新しく作成したデータフレームをExcelファイルとして保存してみます。  3.1.1 カテゴリ別平均値の作成...">
+<meta name="twitter:description" content="3.1 一つのExcelファイルを保存する writexlパッケージのwrite_xlsx()関数で、直接Excelファイルとして出力ができます。ここでは、新しく作成したデータフレームをExcelファイルとして保存してみます。  3.1.1 カテゴリ別平均値の作成...">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a>
-<ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#本書の特徴"><i class="fa fa-check"></i>本書の特徴</a>
-<ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#想定読者"><i class="fa fa-check"></i>想定読者</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure"><i class="fa fa-check"></i>本書の構成</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#執筆環境"><i class="fa fa-check"></i>執筆環境</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#注意事項など"><i class="fa fa-check"></i>注意事項など</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#huroku"><i class="fa fa-check"></i>特別付録について</a></li>
-</ul></li>
-<li class="chapter" data-level="1" data-path="project.html"><a href="project.html"><i class="fa fa-check"></i><b>1</b> 前提：プロジェクトの設定</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="project.html"><a href="project.html#どのフォルダのファイルかの指定"><i class="fa fa-check"></i><b>1.1</b> どのフォルダのファイルかの指定</a></li>
-<li class="chapter" data-level="1.2" data-path="project.html"><a href="project.html#projecttoha"><i class="fa fa-check"></i><b>1.2</b> プロジェクトとは</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="readexcel.html"><a href="readexcel.html"><i class="fa fa-check"></i><b>2</b> Excelファイルの読み込み</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="readexcel.html"><a href="readexcel.html#readoneexcel"><i class="fa fa-check"></i><b>2.1</b> 一つのExcelファイルを読み込む</a>
-<ul>
-<li class="chapter" data-level="2.1.1" data-path="readexcel.html"><a href="readexcel.html#junbiyomikomi"><i class="fa fa-check"></i><b>2.1.1</b> ファイルの準備と読み込み</a></li>
-<li class="chapter" data-level="2.1.2" data-path="readexcel.html"><a href="readexcel.html#列名変数名がひどい場合の読み込み"><i class="fa fa-check"></i><b>2.1.2</b> 列名（変数名）がひどい場合の読み込み</a></li>
-<li class="chapter" data-level="2.1.3" data-path="readexcel.html"><a href="readexcel.html#開始行を指定して読み込む"><i class="fa fa-check"></i><b>2.1.3</b> 開始行を指定して読み込む</a></li>
-<li class="chapter" data-level="2.1.4" data-path="readexcel.html"><a href="readexcel.html#セルを指定して読み込む"><i class="fa fa-check"></i><b>2.1.4</b> セルを指定して読み込む</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="readexcel.html"><a href="readexcel.html#シートを指定して読み込む"><i class="fa fa-check"></i><b>2.2</b> シートを指定して読み込む</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="readexcel.html"><a href="readexcel.html#シート名の確認"><i class="fa fa-check"></i><b>2.2.1</b> シート名の確認</a></li>
-<li class="chapter" data-level="2.2.2" data-path="readexcel.html"><a href="readexcel.html#普通の読み込み"><i class="fa fa-check"></i><b>2.2.2</b> 普通の読み込み</a></li>
-<li class="chapter" data-level="2.2.3" data-path="readexcel.html"><a href="readexcel.html#シートを指定した読み込み"><i class="fa fa-check"></i><b>2.2.3</b> シートを指定した読み込み</a></li>
-<li class="chapter" data-level="2.2.4" data-path="readexcel.html"><a href="readexcel.html#dflist"><i class="fa fa-check"></i><b>2.2.4</b> すべてのシートから一気に読み込み</a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="readexcel.html"><a href="readexcel.html#readseveralexcel"><i class="fa fa-check"></i><b>2.3</b> 複数のExcelファイルを読み込む</a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="readexcel.html"><a href="readexcel.html#読み込むファイル名の一覧のオブジェクト作成"><i class="fa fa-check"></i><b>2.3.1</b> 読み込むファイル名の一覧のオブジェクト作成</a></li>
-<li class="chapter" data-level="2.3.2" data-path="readexcel.html"><a href="readexcel.html#ikkatsuread"><i class="fa fa-check"></i><b>2.3.2</b> ファイルを一括で読み込む</a></li>
-<li class="chapter" data-level="2.3.3" data-path="readexcel.html"><a href="readexcel.html#読み込むファイルが複数フォルダにある場合"><i class="fa fa-check"></i><b>2.3.3</b> 読み込むファイルが複数フォルダにある場合</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="writeexcel.html"><a href="writeexcel.html"><i class="fa fa-check"></i><b>3</b> Excelファイルの保存</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="writeexcel.html"><a href="writeexcel.html#writeoneexcel"><i class="fa fa-check"></i><b>3.1</b> 一つのExcelファイルを保存する</a>
-<ul>
-<li class="chapter" data-level="3.1.1" data-path="writeexcel.html"><a href="writeexcel.html#groupbymean"><i class="fa fa-check"></i><b>3.1.1</b> カテゴリ別平均値の作成</a></li>
-<li class="chapter" data-level="3.1.2" data-path="writeexcel.html"><a href="writeexcel.html#excelファイルの保存"><i class="fa fa-check"></i><b>3.1.2</b> Excelファイルの保存</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="writeexcel.html"><a href="writeexcel.html#writeseveralexcel"><i class="fa fa-check"></i><b>3.2</b> 複数のファイルを一度に保存する</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="writeexcel.html"><a href="writeexcel.html#splitdf"><i class="fa fa-check"></i><b>3.2.1</b> データフレームをカテゴリ別に分割してリストにする</a></li>
-<li class="chapter" data-level="3.2.2" data-path="writeexcel.html"><a href="writeexcel.html#リストの各要素を個別でexcelファイルに保存する"><i class="fa fa-check"></i><b>3.2.2</b> リストの各要素を個別でExcelファイルに保存する</a></li>
-<li class="chapter" data-level="3.2.3" data-path="writeexcel.html"><a href="writeexcel.html#一つのファイルの複数シートに保存する"><i class="fa fa-check"></i><b>3.2.3</b> 一つのファイルの複数シートに保存する</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="readsavecsv.html"><a href="readsavecsv.html"><i class="fa fa-check"></i><b>4</b> csvファイルの読み込みと保存</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="readsavecsv.html"><a href="readsavecsv.html#一つのcsvファイルを読み込む"><i class="fa fa-check"></i><b>4.1</b> 一つのcsvファイルを読み込む</a>
-<ul>
-<li class="chapter" data-level="4.1.1" data-path="readsavecsv.html"><a href="readsavecsv.html#utf-8でエンコードされたcsvファイル"><i class="fa fa-check"></i><b>4.1.1</b> UTF-8でエンコードされたcsvファイル</a></li>
-<li class="chapter" data-level="4.1.2" data-path="readsavecsv.html"><a href="readsavecsv.html#shift-jisでエンコードされたcsvファイル"><i class="fa fa-check"></i><b>4.1.2</b> Shift-JISでエンコードされたcsvファイル</a></li>
-<li class="chapter" data-level="4.1.3" data-path="readsavecsv.html"><a href="readsavecsv.html#read.csvを使う場合"><i class="fa fa-check"></i><b>4.1.3</b> read.csv()を使う場合</a></li>
-<li class="chapter" data-level="4.1.4" data-path="readsavecsv.html"><a href="readsavecsv.html#大きいデータならfread"><i class="fa fa-check"></i><b>4.1.4</b> 大きいデータならfread()</a></li>
-<li class="chapter" data-level="4.1.5" data-path="readsavecsv.html"><a href="readsavecsv.html#大きいデータを読む場合のvroom"><i class="fa fa-check"></i><b>4.1.5</b> 大きいデータを読む場合のvroom</a></li>
-</ul></li>
-<li class="chapter" data-level="4.2" data-path="readsavecsv.html"><a href="readsavecsv.html#writeonecsv"><i class="fa fa-check"></i><b>4.2</b> csvファイルの保存</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="readsavecsv.html"><a href="readsavecsv.html#write_csvを使う"><i class="fa fa-check"></i><b>4.2.1</b> write_csv()を使う</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="dataanal.html"><a href="dataanal.html"><i class="fa fa-check"></i><b>5</b> データ解析に向けて</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="dataanal.html"><a href="dataanal.html#要約値や欠損データの確認"><i class="fa fa-check"></i><b>5.1</b> 要約値や欠損データの確認</a>
-<ul>
-<li class="chapter" data-level="5.1.1" data-path="dataanal.html"><a href="dataanal.html#結果をexcelファイルに出力する"><i class="fa fa-check"></i><b>5.1.1</b> 結果をExcelファイルに出力する</a></li>
-<li class="chapter" data-level="5.1.2" data-path="dataanal.html"><a href="dataanal.html#可視化"><i class="fa fa-check"></i><b>5.1.2</b> 可視化</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="dataanal.html"><a href="dataanal.html#相関の確認"><i class="fa fa-check"></i><b>5.2</b> 相関の確認</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="dataanal.html"><a href="dataanal.html#相関行列を出す"><i class="fa fa-check"></i><b>5.2.1</b> 相関行列を出す</a></li>
-<li class="chapter" data-level="5.2.2" data-path="dataanal.html"><a href="dataanal.html#相関行列の可視化"><i class="fa fa-check"></i><b>5.2.2</b> 相関行列の可視化</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="あとがき.html"><a href="あとがき.html"><i class="fa fa-check"></i>あとがき</a></li>
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Rで読むExcelファイル</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Rで読むExcelファイル</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">はじめに</a></li>
+<li><a class="" href="project.html"><span class="header-section-number">1</span> 前提：プロジェクトの設定</a></li>
+<li><a class="" href="readexcel.html"><span class="header-section-number">2</span> Excelファイルの読み込み</a></li>
+<li><a class="active" href="writeexcel.html"><span class="header-section-number">3</span> Excelファイルの保存</a></li>
+<li><a class="" href="readsavecsv.html"><span class="header-section-number">4</span> csvファイルの読み込みと保存</a></li>
+<li><a class="" href="dataanal.html"><span class="header-section-number">5</span> データ解析に向けて</a></li>
+<li><a class="" href="%E3%81%82%E3%81%A8%E3%81%8C%E3%81%8D.html">あとがき</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/izunyan/excel_r.git">View book source <i class="fab fa-github"></i></a></p>
         </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="writeexcel" class="section level1" number="3">
+<h1>
+<span class="header-section-number">3</span> Excelファイルの保存<a class="anchor" aria-label="anchor" href="#writeexcel"><i class="fas fa-link"></i></a>
+</h1>
+<div id="writeoneexcel" class="section level2" number="3.1">
+<h2>
+<span class="header-section-number">3.1</span> 一つのExcelファイルを保存する<a class="anchor" aria-label="anchor" href="#writeoneexcel"><i class="fas fa-link"></i></a>
+</h2>
+<p><code>writexl</code>パッケージの<code><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">write_xlsx()</a></code>関数で、直接Excelファイルとして出力ができます。ここでは、新しく作成したデータフレームをExcelファイルとして保存してみます。</p>
+<div id="groupbymean" class="section level3" number="3.1.1">
+<h3>
+<span class="header-section-number">3.1.1</span> カテゴリ別平均値の作成<a class="anchor" aria-label="anchor" href="#groupbymean"><i class="fas fa-link"></i></a>
+</h3>
+<p>クチバシの長さと大きさを表す変数である、<code>bill_length_mm</code>、<code>bill_depth_mm</code>について、平均値と欠損を抜いたn（ペンギン数）を種類別に計算します。<code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>でカテゴリ別にしたい変数を指定し、<code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code>で平均値とnを計算するコードが以下になります。</p>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_group_mean</span> <span class="op">&lt;-</span> 
+  <span class="va">df</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">種類</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span>
+                   <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, <span class="va">bill_depth_mm</span><span class="op">)</span>, <span class="co"># ここに変数</span>
+                   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>m <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,  <span class="co"># 平均値計算</span>
+                        n <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>        <span class="co"># 欠損のない人数計算</span>
+           <span class="op">)</span>
 
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
+<span class="co"># ここは結果の整形部分</span>
+<span class="va">df_group_mean</span> <span class="op">&lt;-</span> 
+  <span class="va">df_group_mean</span> |&gt;  
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">bill_depth_mm_n</span><span class="op">)</span> |&gt;  <span class="co"># nが同じなので列削除</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">bill_length_mm_n</span><span class="op">)</span>  <span class="co"># 列名をnにリネーム</span>
 
-            <section class="normal" id="section-">
-<div id="writeexcel" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">3</span> Excelファイルの保存<a href="writeexcel.html#writeexcel" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="writeoneexcel" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> 一つのExcelファイルを保存する<a href="writeexcel.html#writeoneexcel" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><code>writexl</code>パッケージの<code>write_xlsx()</code>関数で、直接Excelファイルとして出力ができます。ここでは、新しく作成したデータフレームをExcelファイルとして保存してみます。</p>
-<div id="groupbymean" class="section level3 hasAnchor" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> カテゴリ別平均値の作成<a href="writeexcel.html#groupbymean" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>クチバシの長さと大きさを表す変数である、<code>bill_length_mm</code>、<code>bill_depth_mm</code>について、平均値と欠損を抜いたn（ペンギン数）を種類別に計算します。<code>group_by()</code>でカテゴリ別にしたい変数を指定し、<code>summarise()</code>で平均値とnを計算するコードが以下になります。</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="writeexcel.html#cb62-1" aria-hidden="true" tabindex="-1"></a>df_group_mean <span class="ot">&lt;-</span> </span>
-<span id="cb62-2"><a href="writeexcel.html#cb62-2" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> </span>
-<span id="cb62-3"><a href="writeexcel.html#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(種類) <span class="sc">%&gt;%</span> </span>
-<span id="cb62-4"><a href="writeexcel.html#cb62-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(</span>
-<span id="cb62-5"><a href="writeexcel.html#cb62-5" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">c</span>(bill_length_mm, bill_depth_mm), <span class="co"># ここに変数</span></span>
-<span id="cb62-6"><a href="writeexcel.html#cb62-6" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">m =</span> <span class="sc">~</span><span class="fu">mean</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>),  <span class="co"># 平均値計算</span></span>
-<span id="cb62-7"><a href="writeexcel.html#cb62-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">n =</span> <span class="sc">~</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(.))))        <span class="co"># 欠損のない人数計算</span></span>
-<span id="cb62-8"><a href="writeexcel.html#cb62-8" aria-hidden="true" tabindex="-1"></a>           )</span>
-<span id="cb62-9"><a href="writeexcel.html#cb62-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-10"><a href="writeexcel.html#cb62-10" aria-hidden="true" tabindex="-1"></a><span class="co"># ここは結果の整形部分</span></span>
-<span id="cb62-11"><a href="writeexcel.html#cb62-11" aria-hidden="true" tabindex="-1"></a>df_group_mean <span class="ot">&lt;-</span> </span>
-<span id="cb62-12"><a href="writeexcel.html#cb62-12" aria-hidden="true" tabindex="-1"></a>  df_group_mean <span class="sc">%&gt;%</span>  </span>
-<span id="cb62-13"><a href="writeexcel.html#cb62-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>bill_depth_mm_n) <span class="sc">%&gt;%</span>  <span class="co"># nが同じなので列削除</span></span>
-<span id="cb62-14"><a href="writeexcel.html#cb62-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">n =</span> bill_length_mm_n)  <span class="co"># 列名をnにリネーム</span></span>
-<span id="cb62-15"><a href="writeexcel.html#cb62-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-16"><a href="writeexcel.html#cb62-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-17"><a href="writeexcel.html#cb62-17" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(df_group_mean) <span class="co"># きれいな出力にするコード</span></span></code></pre></div>
-<table>
-<thead>
-<tr class="header">
+
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">df_group_mean</span><span class="op">)</span> <span class="co"># きれいな出力にするコード</span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
 <th align="left">種類</th>
 <th align="right">bill_length_mm_m</th>
 <th align="right">n</th>
 <th align="right">bill_depth_mm_m</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td align="left">アデリー</td>
@@ -284,34 +118,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">18.42059</td>
 </tr>
 </tbody>
-</table>
-<p>なお、ここで<code>knitr::kable()</code>という書き方が出てきますが、これは<code>knitr</code>パッケージの<code>kable()</code>関数という意味です。関数を1回しか使わない場合などに<code>library()</code>で呼び出すのは無駄が多かったりするので、時々こういった記述が出てきます。</p>
+</table></div>
+<p>なお、ここで<code><a href="https://rdrr.io/pkg/knitr/man/kable.html">knitr::kable()</a></code>という書き方が出てきますが、これは<code>knitr</code>パッケージの<code>kable()</code>関数という意味です。関数を1回しか使わない場合などに<code><a href="https://rdrr.io/r/base/library.html">library()</a></code>で呼び出すのは無駄が多かったりするので、時々こういった記述が出てきます。</p>
 </div>
-<div id="excelファイルの保存" class="section level3 hasAnchor" number="3.1.2">
-<h3><span class="header-section-number">3.1.2</span> Excelファイルの保存<a href="writeexcel.html#excelファイルの保存" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="writeexcel.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(writexl)</span></code></pre></div>
-<p>前節で作成したカテゴリ別平均値のデータフレーム<code>df_group_mean</code>をExcelファイルとして保存します。保存は<code>write_xlsx()</code>関数の中に、データフレームのオブジェクトと出力先のパスと保存ファイル名を入れるだけです。</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="writeexcel.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xlsx</span>(df_group_mean, <span class="st">&quot;out/種類別平均値.xlsx&quot;</span>)</span></code></pre></div>
+<div id="excelファイルの保存" class="section level3" number="3.1.2">
+<h3>
+<span class="header-section-number">3.1.2</span> Excelファイルの保存<a class="anchor" aria-label="anchor" href="#excel%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E4%BF%9D%E5%AD%98"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/writexl/">writexl</a></span><span class="op">)</span></code></pre></div>
+<p>前節で作成したカテゴリ別平均値のデータフレーム<code>df_group_mean</code>をExcelファイルとして保存します。保存は<code><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">write_xlsx()</a></code>関数の中に、データフレームのオブジェクトと出力先のパスと保存ファイル名を入れるだけです。</p>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">write_xlsx</a></span><span class="op">(</span><span class="va">df_group_mean</span>, <span class="st">"out/種類別平均値.xlsx"</span><span class="op">)</span></code></pre></div>
 <p><code>out/</code>の部分が出力先のフォルダを示しています。</p>
-<div id="応用ファイル名に自動で本日の日付を入れる" class="section level4 hasAnchor" number="3.1.2.1">
-<h4><span class="header-section-number">3.1.2.1</span> 【応用】ファイル名に自動で本日の日付を入れる<a href="writeexcel.html#応用ファイル名に自動で本日の日付を入れる" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>これはちょっと応用技ですが、便利なので紹介しておきます。<code>lubridate</code>パッケージの<code>today()</code>関数で、今日の日付を表示できるので、それを保存名を入れる時に組み込む（文字列なので区切って<code>str_c()</code>でくっつける）と、日付入りファイル名が作成できます。</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="writeexcel.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xlsx</span>(df_group_mean, </span>
-<span id="cb65-2"><a href="writeexcel.html#cb65-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">str_c</span>(<span class="st">&quot;out/df_group_mean&quot;</span>, <span class="st">&quot;_&quot;</span>, lubridate<span class="sc">::</span><span class="fu">today</span>(), <span class="st">&quot;.xlsx&quot;</span>))</span></code></pre></div>
+<div id="応用ファイル名に自動で本日の日付を入れる" class="section level4" number="3.1.2.1">
+<h4>
+<span class="header-section-number">3.1.2.1</span> 【応用】ファイル名に自動で本日の日付を入れる<a class="anchor" aria-label="anchor" href="#%E5%BF%9C%E7%94%A8%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%90%8D%E3%81%AB%E8%87%AA%E5%8B%95%E3%81%A7%E6%9C%AC%E6%97%A5%E3%81%AE%E6%97%A5%E4%BB%98%E3%82%92%E5%85%A5%E3%82%8C%E3%82%8B"><i class="fas fa-link"></i></a>
+</h4>
+<p>これはちょっと応用技ですが、便利なので紹介しておきます。<code>lubridate</code>パッケージの<code>today()</code>関数で、今日の日付を表示できるので、それを保存名を入れる時に組み込む（文字列なので区切って<code><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c()</a></code>でくっつける）と、日付入りファイル名が作成できます。</p>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">write_xlsx</a></span><span class="op">(</span><span class="va">df_group_mean</span>, 
+         <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="st">"out/df_group_mean"</span>, <span class="st">"_"</span>, <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">".xlsx"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 </div>
-<div id="writeseveralexcel" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> 複数のファイルを一度に保存する<a href="writeexcel.html#writeseveralexcel" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="writeseveralexcel" class="section level2" number="3.2">
+<h2>
+<span class="header-section-number">3.2</span> 複数のファイルを一度に保存する<a class="anchor" aria-label="anchor" href="#writeseveralexcel"><i class="fas fa-link"></i></a>
+</h2>
 <p>これが活躍する場面としては、たとえばカテゴリ別（例：ペンギンの種類別、会社の部署別など）に集計した要約値をそのカテゴリ別に個々のExcelファイルにするといった状況が思いつきますので、それをやってみます。</p>
-<div id="splitdf" class="section level3 hasAnchor" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> データフレームをカテゴリ別に分割してリストにする<a href="writeexcel.html#splitdf" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><code>split()</code>関数を使うことで、カテゴリ別にデータフレームを分割し、リストにまとめた結果を作成できます。データは<a href="writeexcel.html#groupbymean">3.1.1</a>で作成した<code>df_group_mean</code>を使います。</p>
+<div id="splitdf" class="section level3" number="3.2.1">
+<h3>
+<span class="header-section-number">3.2.1</span> データフレームをカテゴリ別に分割してリストにする<a class="anchor" aria-label="anchor" href="#splitdf"><i class="fas fa-link"></i></a>
+</h3>
+<p><code><a href="https://rdrr.io/r/base/split.html">split()</a></code>関数を使うことで、カテゴリ別にデータフレームを分割し、リストにまとめた結果を作成できます。データは<a href="writeexcel.html#groupbymean">3.1.1</a>で作成した<code>df_group_mean</code>を使います。</p>
 <p>分割に使う変数は、<code>df_group_mean$species</code>のように、データフレーム名の後に<code>$</code>をつけてその後に指定します。この変数の中身が、そのままリストの要素名になるので、後の処理がとても楽になります。</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="writeexcel.html#cb66-1" aria-hidden="true" tabindex="-1"></a>df_gmean_list <span class="ot">&lt;-</span> </span>
-<span id="cb66-2"><a href="writeexcel.html#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">split</span>(df_group_mean, df_group_mean<span class="sc">$</span>種類)</span>
-<span id="cb66-3"><a href="writeexcel.html#cb66-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-4"><a href="writeexcel.html#cb66-4" aria-hidden="true" tabindex="-1"></a>df_gmean_list</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_gmean_list</span> <span class="op">&lt;-</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span><span class="va">df_group_mean</span>, <span class="va">df_group_mean</span><span class="op">$</span><span class="va">種類</span><span class="op">)</span>
+
+<span class="va">df_gmean_list</span></code></pre></div>
 <pre><code>## $アデリー
 ## # A tibble: 1 × 4
 ##   種類     bill_length_mm_m     n bill_depth_mm_m
@@ -330,86 +176,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   &lt;chr&gt;            &lt;dbl&gt; &lt;int&gt;           &lt;dbl&gt;
 ## 1 ヒゲ              48.8    68            18.4</code></pre>
 </div>
-<div id="リストの各要素を個別でexcelファイルに保存する" class="section level3 hasAnchor" number="3.2.2">
-<h3><span class="header-section-number">3.2.2</span> リストの各要素を個別でExcelファイルに保存する<a href="writeexcel.html#リストの各要素を個別でexcelファイルに保存する" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><code>purrr</code>パッケージの<code>imap()</code>関数を使って、リスト内の各データフレームに、それぞれの要素名をファイル名として、Excelファイルに出力します。</p>
-<p>ここでは、リスト内の各要素を示すのが<code>.x</code>、要素名（位置）に当たるのは<code>.y</code>です。次々に代わるファイル名を作るのに、<code>str_c()</code>関数で文字列を結合しています。</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="writeexcel.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">imap</span>(df_gmean_list, <span class="sc">~</span><span class="fu">write_xlsx</span>(.x, <span class="at">path =</span> <span class="fu">str_c</span>(<span class="st">&quot;out/&quot;</span>, .y , <span class="st">&quot;.xlsx&quot;</span>)))</span></code></pre></div>
-<div id="サンプルデータセット作成コード" class="section level4 hasAnchor" number="3.2.2.1">
-<h4><span class="header-section-number">3.2.2.1</span> サンプルデータセット作成コード<a href="writeexcel.html#サンプルデータセット作成コード" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="リストの各要素を個別でexcelファイルに保存する" class="section level3" number="3.2.2">
+<h3>
+<span class="header-section-number">3.2.2</span> リストの各要素を個別でExcelファイルに保存する<a class="anchor" aria-label="anchor" href="#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E5%90%84%E8%A6%81%E7%B4%A0%E3%82%92%E5%80%8B%E5%88%A5%E3%81%A7excel%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AB%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B"><i class="fas fa-link"></i></a>
+</h3>
+<p><code>purrr</code>パッケージの<code><a href="https://purrr.tidyverse.org/reference/imap.html">imap()</a></code>関数を使って、リスト内の各データフレームに、それぞれの要素名をファイル名として、Excelファイルに出力します。</p>
+<p>ここでは、リスト内の各要素を示すのが<code>.x</code>、要素名（位置）に当たるのは<code>.y</code>です。次々に代わるファイル名を作るのに、<code><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c()</a></code>関数で文字列を結合しています。</p>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://purrr.tidyverse.org/reference/imap.html">imap</a></span><span class="op">(</span><span class="va">df_gmean_list</span>, <span class="op">~</span><span class="fu"><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">write_xlsx</a></span><span class="op">(</span><span class="va">.x</span>, path <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="st">"out/"</span>, <span class="va">.y</span> , <span class="st">".xlsx"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div id="サンプルデータセット作成コード" class="section level4" number="3.2.2.1">
+<h4>
+<span class="header-section-number">3.2.2.1</span> サンプルデータセット作成コード<a class="anchor" aria-label="anchor" href="#%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%83%87%E3%83%BC%E3%82%BF%E3%82%BB%E3%83%83%E3%83%88%E4%BD%9C%E6%88%90%E3%82%B3%E3%83%BC%E3%83%89"><i class="fas fa-link"></i></a>
+</h4>
 <p>ちなみに<code>data/複数/</code>フォルダにあるサンプルデータセットは以下のコードで作りました。</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="writeexcel.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">imap</span>(df_list, <span class="sc">~</span><span class="fu">write_xlsx</span>(.x, <span class="at">path =</span> <span class="fu">str_c</span>(<span class="st">&quot;data/複数/&quot;</span>,.y , <span class="st">&quot;.xlsx&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://purrr.tidyverse.org/reference/imap.html">imap</a></span><span class="op">(</span><span class="va">df_list</span>, <span class="op">~</span><span class="fu"><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">write_xlsx</a></span><span class="op">(</span><span class="va">.x</span>, path <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="st">"data/複数/"</span>,<span class="va">.y</span> , <span class="st">".xlsx"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="一つのファイルの複数シートに保存する" class="section level3 hasAnchor" number="3.2.3">
-<h3><span class="header-section-number">3.2.3</span> 一つのファイルの複数シートに保存する<a href="writeexcel.html#一つのファイルの複数シートに保存する" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="一つのファイルの複数シートに保存する" class="section level3" number="3.2.3">
+<h3>
+<span class="header-section-number">3.2.3</span> 一つのファイルの複数シートに保存する<a class="anchor" aria-label="anchor" href="#%E4%B8%80%E3%81%A4%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E8%A4%87%E6%95%B0%E3%82%B7%E3%83%BC%E3%83%88%E3%81%AB%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B"><i class="fas fa-link"></i></a>
+</h3>
 <p><a href="writeexcel.html#splitdf">3.2.1</a>で作成した、ペンギンの種類別クチバシの長さと大きさ平均値のデータを、個別のファイルでなく、一ファイルの複数シートに保存したいときは、とてもシンプルなコードで可能になります。</p>
-<p>要素名のついたデータフレームのリストが作成されていれば、それを単純に<code>write_xlsx()</code>で出力するだけで完成します。</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="writeexcel.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xlsx</span>(df_gmean_list, <span class="st">&quot;data/平均値（複数シート）.xlsx&quot;</span>)</span></code></pre></div>
+<p>要素名のついたデータフレームのリストが作成されていれば、それを単純に<code><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">write_xlsx()</a></code>で出力するだけで完成します。</p>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">write_xlsx</a></span><span class="op">(</span><span class="va">df_gmean_list</span>, <span class="st">"data/平均値（複数シート）.xlsx"</span><span class="op">)</span></code></pre></div>
 
 </div>
 </div>
 </div>
-            </section>
+  <div class="chapter-nav">
+<div class="prev"><a href="readexcel.html"><span class="header-section-number">2</span> Excelファイルの読み込み</a></div>
+<div class="next"><a href="readsavecsv.html"><span class="header-section-number">4</span> csvファイルの読み込みと保存</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#writeexcel"><span class="header-section-number">3</span> Excelファイルの保存</a></li>
+<li>
+<a class="nav-link" href="#writeoneexcel"><span class="header-section-number">3.1</span> 一つのExcelファイルを保存する</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#groupbymean"><span class="header-section-number">3.1.1</span> カテゴリ別平均値の作成</a></li>
+<li><a class="nav-link" href="#excel%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E4%BF%9D%E5%AD%98"><span class="header-section-number">3.1.2</span> Excelファイルの保存</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#writeseveralexcel"><span class="header-section-number">3.2</span> 複数のファイルを一度に保存する</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#splitdf"><span class="header-section-number">3.2.1</span> データフレームをカテゴリ別に分割してリストにする</a></li>
+<li><a class="nav-link" href="#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E5%90%84%E8%A6%81%E7%B4%A0%E3%82%92%E5%80%8B%E5%88%A5%E3%81%A7excel%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AB%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B"><span class="header-section-number">3.2.2</span> リストの各要素を個別でExcelファイルに保存する</a></li>
+<li><a class="nav-link" href="#%E4%B8%80%E3%81%A4%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E8%A4%87%E6%95%B0%E3%82%B7%E3%83%BC%E3%83%88%E3%81%AB%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B"><span class="header-section-number">3.2.3</span> 一つのファイルの複数シートに保存する</a></li>
+</ul>
+</li>
+</ul>
 
-          </div>
-        </div>
-      </div>
-<a href="readexcel.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="readsavecsv.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/izunyan/excel_r.git/blob/master/excel%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E4%BF%9D%E5%AD%98.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/izunyan/excel_r.git/edit/master/excel%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E4%BF%9D%E5%AD%98.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Rで読むExcelファイル</strong>" was written by やわらかクジラ. </p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": true,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["excel_r.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
-});
-});
-</script>
 
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
 </body>
-
 </html>
