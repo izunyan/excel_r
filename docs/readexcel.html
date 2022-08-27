@@ -21,9 +21,9 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="bs4_style.css">
-<meta name="description" content="2.1 一つのExcelファイルを読み込む  2.1.1 ファイルの準備と読み込み ExcelファイルをRに読み込むには、readxlパッケージが便利です。6セクション1.2で述べた通り、ここからは、githubレポジトリのhttps://github.com/izunyan/excel_r...">
-<meta property="og:description" content="2.1 一つのExcelファイルを読み込む  2.1.1 ファイルの準備と読み込み ExcelファイルをRに読み込むには、readxlパッケージが便利です。6セクション1.2で述べた通り、ここからは、githubレポジトリのhttps://github.com/izunyan/excel_r...">
-<meta name="twitter:description" content="2.1 一つのExcelファイルを読み込む  2.1.1 ファイルの準備と読み込み ExcelファイルをRに読み込むには、readxlパッケージが便利です。6セクション1.2で述べた通り、ここからは、githubレポジトリのhttps://github.com/izunyan/excel_r...">
+<meta name="description" content="2.1 一つのExcelファイルを読み込む  2.1.1 ファイルの準備と読み込み ExcelファイルをRに読み込むには、readxlパッケージが便利です。7セクション1.2で述べた通り、ここからは、githubレポジトリのhttps://github.com/izunyan/excel_r...">
+<meta property="og:description" content="2.1 一つのExcelファイルを読み込む  2.1.1 ファイルの準備と読み込み ExcelファイルをRに読み込むには、readxlパッケージが便利です。7セクション1.2で述べた通り、ここからは、githubレポジトリのhttps://github.com/izunyan/excel_r...">
+<meta name="twitter:description" content="2.1 一つのExcelファイルを読み込む  2.1.1 ファイルの準備と読み込み ExcelファイルをRに読み込むには、readxlパッケージが便利です。7セクション1.2で述べた通り、ここからは、githubレポジトリのhttps://github.com/izunyan/excel_r...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -71,9 +71,9 @@
 <h3>
 <span class="header-section-number">2.1.1</span> ファイルの準備と読み込み<a class="anchor" aria-label="anchor" href="#junbiyomikomi"><i class="fas fa-link"></i></a>
 </h3>
-<p>ExcelファイルをRに読み込むには、<code>readxl</code>パッケージが便利です。<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;以下、まだインストールしていないパッケージがあれば、&lt;code&gt;install.packages("")&lt;/code&gt;の&lt;code&gt;""&lt;/code&gt;中にパッケージ名を入れて実行するか、RStudioの&lt;code&gt;Packages&lt;/code&gt;タブの&lt;code&gt;Install&lt;/code&gt;からインストールしてください&lt;/p&gt;'><sup>6</sup></a>セクション<a href="project.html#projecttoha">1.2</a>で述べた通り、ここからは、githubレポジトリのhttps://github.com/izunyan/excel_r をダウンロードしてプロジェクトを開いて進めてみてください。dataフォルダ（<code>data/</code>で表現）に入っている「ペンギン.xlsx」<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago
+<p>ExcelファイルをRに読み込むには、<code>readxl</code>パッケージが便利です。<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;以下、まだインストールしていないパッケージがあれば、&lt;code&gt;install.packages("")&lt;/code&gt;の&lt;code&gt;""&lt;/code&gt;中にパッケージ名を入れて実行するか、RStudioの&lt;code&gt;Packages&lt;/code&gt;タブの&lt;code&gt;Install&lt;/code&gt;からインストールしてください&lt;/p&gt;'><sup>7</sup></a>セクション<a href="project.html#projecttoha">1.2</a>で述べた通り、ここからは、githubレポジトリのhttps://github.com/izunyan/excel_r をダウンロードしてプロジェクトを開いて進めてみてください。dataフォルダ（<code>data/</code>で表現）に入っている「ペンギン.xlsx」<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago
 (Antarctica) penguin data. R package version 0.1.0.
-&lt;a href="https://allisonhorst.github.io/palmerpenguins/" class="uri"&gt;https://allisonhorst.github.io/palmerpenguins/&lt;/a&gt;&lt;/p&gt;'><sup>7</sup></a>を読み込んでみましょう。</p>
+&lt;a href="https://allisonhorst.github.io/palmerpenguins/" class="uri"&gt;https://allisonhorst.github.io/palmerpenguins/&lt;/a&gt;&lt;/p&gt;'><sup>8</sup></a>を読み込んでみましょう。</p>
 <p>読み込みには<code><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_xlsx()</a></code>関数を使います。したがって、以下すべてExcelファイル形式は<code>.xlsx</code>を想定します。<code><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_xls()</a></code>や<code><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel()</a></code>という関数もあるので、ファイル形式によって使い分けられます。ファイル形式が混ざっている時は<code><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel()</a></code>が有用かもしれません。</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span>
@@ -99,7 +99,7 @@
 <h4>
 <span class="header-section-number">2.1.1.1</span> 最高な機能だよ！パスの自動補完<a class="anchor" aria-label="anchor" href="#hokan"><i class="fas fa-link"></i></a>
 </h4>
-<p><code>read_xlsx("")</code>と打った後に、<code>" "</code>の中にカーソルを置いて、tabキーを押すと、プロジェクトの中身が一覧で表示されるので、選んでいくだけで目的のファイルがキーボードを打つことなしに選べます！RStudioは<code>" "</code>と打てばどこでもこの補完が可能です。<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;ただし、R version 4.0で文字コード関連の挙動が変わったみたいで、R 4.0.2ではエラーになりました…（未解決）&lt;/p&gt;"><sup>8</sup></a></p>
+<p><code>read_xlsx("")</code>と打った後に、<code>" "</code>の中にカーソルを置いて、tabキーを押すと、プロジェクトの中身が一覧で表示されるので、選んでいくだけで目的のファイルがキーボードを打つことなしに選べます！RStudioは<code>" "</code>と打てばどこでもこの補完が可能です。<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;ただし、R version 4.0で文字コード関連の挙動が変わったみたいで、R 4.0.2ではエラーになりました…（未解決）&lt;/p&gt;"><sup>9</sup></a></p>
 <p>上の階層のフォルダに行きたいときは、<code>" "</code>の中に<code>../</code>と打てば可能です。その後にtabキーを押せば上の階層のフォルダが選べます。</p>
 </div>
 </div>
@@ -148,7 +148,7 @@
 <h4>
 <span class="header-section-number">2.1.2.2</span> |&gt; とは？<a class="anchor" aria-label="anchor" href="#pipe"><i class="fas fa-link"></i></a>
 </h4>
-<p>「パイプ」と読みます。処理を重ねてコードに書いていきたい際に重宝し、現代の<code>tidyverse</code>を使ったRのコードに欠かせないものです。たとえば、データフレームdfのspecies列を選択する、という処理の</p>
+<p>「パイプ」と読みます<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;2022年4月以前は&lt;code&gt;%&amp;gt;%&lt;/code&gt;が使われることが多かったのですが，最近では&lt;code&gt;|&amp;gt;&lt;/code&gt;が用いられるケースが増えています。&lt;/p&gt;"><sup>10</sup></a>。処理を重ねてコードに書いていきたい際に重宝し、現代の<code>tidyverse</code>を使ったRのコードに欠かせないものです。たとえば、データフレームdfのspecies列を選択する、という処理の</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">species</span><span class="op">)</span></code></pre></div>
 <p>は</p>
@@ -166,7 +166,7 @@
 ## 2 Chinstrap   48.8
 ## 3 Gentoo      47.5</code></pre>
 <p>以下では<code>|&gt;</code>を多用していきます。</p>
-<p>なお、ショートカット<code>ctrl + shit + M</code>（Macだと<code>Cmd + Shift + M</code>）で出せます。</p>
+<p>なお、ショートカット<code>ctrl + shit + M</code>（Macだと<code>Cmd + Shift + M</code>）で出せます<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;現時点ではRStudioのデフォルトのショートカットで出るのは&lt;code&gt;%&amp;gt;%&lt;/code&gt;だが，&lt;code&gt;|&amp;gt;&lt;/code&gt;に切り替えたい場合は，RStudioの&lt;code&gt;Tools &amp;gt; Global Options &amp;gt; Code &amp;gt; Editing &amp;gt; use native pipe operator&lt;/code&gt;にチェックを入れます&lt;/p&gt;"><sup>11</sup></a>。</p>
 </div>
 <div id="全角半角を自動で" class="section level4" number="2.1.2.3">
 <h4>
@@ -253,7 +253,7 @@
 ## 3 Adelie  アデリー Torgersen           40.3
 ## 4 Adelie  アデリー Torgersen           NA</code></pre>
 <p>他にも、<code>cell_cols =</code>で読みたい列の指定、<code>cell_rows =</code>で読みたい行の指定も行えます。</p>
-<p>詳細は、<code><a href="https://readxl.tidyverse.org/reference/readxl-package.html">?readxl</a></code>と打ち込んでヘルプを見るか、readxlの<a href="https://readxl.tidyverse.org/">webサイト</a> <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="https://readxl.tidyverse.org/" class="uri"&gt;https://readxl.tidyverse.org/&lt;/a&gt;&lt;/p&gt;'><sup>9</sup></a>を参照してください。</p>
+<p>詳細は、<code><a href="https://readxl.tidyverse.org/reference/readxl-package.html">?readxl</a></code>と打ち込んでヘルプを見るか、readxlの<a href="https://readxl.tidyverse.org/">webサイト</a> <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="https://readxl.tidyverse.org/" class="uri"&gt;https://readxl.tidyverse.org/&lt;/a&gt;&lt;/p&gt;'><sup>12</sup></a>を参照してください。</p>
 </div>
 </div>
 <div id="シートを指定して読み込む" class="section level2" number="2.2">
