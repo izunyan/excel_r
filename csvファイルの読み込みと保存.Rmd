@@ -120,12 +120,35 @@ vroom::vroom("data/csv/ペンギン（ひどい列名）ver_cp932.csv",
              locale = locale(encoding = "cp932"))
 ```
 
+## 複数のcsvファイルを読み込む
 
+\@ref(re-multiple-excel)で紹介した方法で，読み込みの関数を`read_csv()`に変えるだけで同じことができますが，もっと簡単な方法もあります。
 
+まず，csvファイルのパス一覧を取得します。
+
+```{r}
+files <-
+    list.files(path = "data/複数/", full.names = TRUE)
+
+files <- 
+  files |> 
+  str_subset("csv")
+
+files
+```
+
+この3つのcsvファイルを一気に読み込んで縦につなげたいとします。
+
+そして，`read_csv()`の第一引数にパス一覧オブジェクトを入れ，`id =`引数にファイル名の情報を示す列の名前（ここでは`file_name`）を決めるだけです。
+
+`
+```{r}
+read_csv(files, id = "file_name")
+```
 
 ## csvファイルの保存 {#writeonecsv}
 
-csvファイルを保存するには、`readr`パッケージの`write_csv()`関数を使います。ただし、出力されたcsvファイルをExcelで開くとたぶん文字化けします。LibreOfficeのCalcであれば、最初にダイアログボックスが開いて読む文字コードを選べます。
+csvファイルを保存するには、`readr`パッケージの`write_csv()`関数を使います。ただし、出力されたcsvファイルをExcelでそのまま開くとたぶん文字化けするので，インポートなどの操作が必要かもしれません。LibreOfficeのCalcであれば、最初にダイアログボックスが開いて読む文字コードを選べます。
 
 ### write_csv()を使う
 

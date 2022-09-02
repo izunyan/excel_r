@@ -121,9 +121,9 @@
 </table></div>
 <p>なお、ここで<code><a href="https://rdrr.io/pkg/knitr/man/kable.html">knitr::kable()</a></code>という書き方が出てきますが、これは<code>knitr</code>パッケージの<code>kable()</code>関数という意味です。関数を1回しか使わない場合などに<code><a href="https://rdrr.io/r/base/library.html">library()</a></code>で呼び出すのは無駄が多かったりするので、時々こういった記述が出てきます。</p>
 </div>
-<div id="excelファイルの保存" class="section level3" number="3.1.2">
+<div id="we-save" class="section level3" number="3.1.2">
 <h3>
-<span class="header-section-number">3.1.2</span> Excelファイルの保存<a class="anchor" aria-label="anchor" href="#excel%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E4%BF%9D%E5%AD%98"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.1.2</span> Excelファイルの保存<a class="anchor" aria-label="anchor" href="#we-save"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/writexl/">writexl</a></span><span class="op">)</span></code></pre></div>
@@ -131,9 +131,9 @@
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">write_xlsx</a></span><span class="op">(</span><span class="va">df_group_mean</span>, <span class="st">"out/種類別平均値.xlsx"</span><span class="op">)</span></code></pre></div>
 <p><code>out/</code>の部分が出力先のフォルダを示しています。</p>
-<div id="応用ファイル名に自動で本日の日付を入れる" class="section level4" number="3.1.2.1">
+<div id="we-date" class="section level4" number="3.1.2.1">
 <h4>
-<span class="header-section-number">3.1.2.1</span> 【応用】ファイル名に自動で本日の日付を入れる<a class="anchor" aria-label="anchor" href="#%E5%BF%9C%E7%94%A8%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%90%8D%E3%81%AB%E8%87%AA%E5%8B%95%E3%81%A7%E6%9C%AC%E6%97%A5%E3%81%AE%E6%97%A5%E4%BB%98%E3%82%92%E5%85%A5%E3%82%8C%E3%82%8B"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.1.2.1</span> 【応用】ファイル名に自動で本日の日付を入れる<a class="anchor" aria-label="anchor" href="#we-date"><i class="fas fa-link"></i></a>
 </h4>
 <p>これはちょっと応用技ですが、便利なので紹介しておきます。<code>lubridate</code>パッケージの<code>today()</code>関数で、今日の日付を表示できるので、それを保存名を入れる時に組み込む（文字列なので区切って<code><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c()</a></code>でくっつける）と、日付入りファイル名が作成できます。</p>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
@@ -176,26 +176,26 @@
 ##   &lt;chr&gt;            &lt;dbl&gt; &lt;int&gt;           &lt;dbl&gt;
 ## 1 ヒゲ              48.8    68            18.4</code></pre>
 </div>
-<div id="リストの各要素を個別でexcelファイルに保存する" class="section level3" number="3.2.2">
+<div id="we-list-save" class="section level3" number="3.2.2">
 <h3>
-<span class="header-section-number">3.2.2</span> リストの各要素を個別でExcelファイルに保存する<a class="anchor" aria-label="anchor" href="#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E5%90%84%E8%A6%81%E7%B4%A0%E3%82%92%E5%80%8B%E5%88%A5%E3%81%A7excel%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AB%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.2.2</span> リストの各要素を個別でExcelファイルに保存する<a class="anchor" aria-label="anchor" href="#we-list-save"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>purrr</code>パッケージの<code><a href="https://purrr.tidyverse.org/reference/imap.html">imap()</a></code>関数を使って、リスト内の各データフレームに、それぞれの要素名をファイル名として、Excelファイルに出力します。</p>
 <p>ここでは、リスト内の各要素を示すのが<code>.x</code>、要素名（位置）に当たるのは<code>.y</code>です。次々に代わるファイル名を作るのに、<code><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c()</a></code>関数で文字列を結合しています。</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://purrr.tidyverse.org/reference/imap.html">imap</a></span><span class="op">(</span><span class="va">df_gmean_list</span>, <span class="op">~</span><span class="fu"><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">write_xlsx</a></span><span class="op">(</span><span class="va">.x</span>, path <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="st">"out/"</span>, <span class="va">.y</span> , <span class="st">".xlsx"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div id="サンプルデータセット作成コード" class="section level4" number="3.2.2.1">
+<div id="we-sampledata" class="section level4" number="3.2.2.1">
 <h4>
-<span class="header-section-number">3.2.2.1</span> サンプルデータセット作成コード<a class="anchor" aria-label="anchor" href="#%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%83%87%E3%83%BC%E3%82%BF%E3%82%BB%E3%83%83%E3%83%88%E4%BD%9C%E6%88%90%E3%82%B3%E3%83%BC%E3%83%89"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.2.2.1</span> サンプルデータセット作成コード<a class="anchor" aria-label="anchor" href="#we-sampledata"><i class="fas fa-link"></i></a>
 </h4>
 <p>ちなみに<code>data/複数/</code>フォルダにあるサンプルデータセットは以下のコードで作りました。</p>
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://purrr.tidyverse.org/reference/imap.html">imap</a></span><span class="op">(</span><span class="va">df_list</span>, <span class="op">~</span><span class="fu"><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">write_xlsx</a></span><span class="op">(</span><span class="va">.x</span>, path <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="st">"data/複数/"</span>,<span class="va">.y</span> , <span class="st">".xlsx"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="一つのファイルの複数シートに保存する" class="section level3" number="3.2.3">
+<div id="we-multiple-sheet" class="section level3" number="3.2.3">
 <h3>
-<span class="header-section-number">3.2.3</span> 一つのファイルの複数シートに保存する<a class="anchor" aria-label="anchor" href="#%E4%B8%80%E3%81%A4%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E8%A4%87%E6%95%B0%E3%82%B7%E3%83%BC%E3%83%88%E3%81%AB%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.2.3</span> 一つのファイルの複数シートに保存する<a class="anchor" aria-label="anchor" href="#we-multiple-sheet"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="writeexcel.html#splitdf">3.2.1</a>で作成した、ペンギンの種類別クチバシの長さと大きさ平均値のデータを、個別のファイルでなく、一ファイルの複数シートに保存したいときは、とてもシンプルなコードで可能になります。</p>
 <p>要素名のついたデータフレームのリストが作成されていれば、それを単純に<code><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">write_xlsx()</a></code>で出力するだけで完成します。</p>
@@ -215,14 +215,14 @@
 <li>
 <a class="nav-link" href="#writeoneexcel"><span class="header-section-number">3.1</span> 一つのExcelファイルを保存する</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#groupbymean"><span class="header-section-number">3.1.1</span> カテゴリ別平均値の作成</a></li>
-<li><a class="nav-link" href="#excel%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E4%BF%9D%E5%AD%98"><span class="header-section-number">3.1.2</span> Excelファイルの保存</a></li>
+<li><a class="nav-link" href="#we-save"><span class="header-section-number">3.1.2</span> Excelファイルの保存</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#writeseveralexcel"><span class="header-section-number">3.2</span> 複数のファイルを一度に保存する</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#splitdf"><span class="header-section-number">3.2.1</span> データフレームをカテゴリ別に分割してリストにする</a></li>
-<li><a class="nav-link" href="#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E5%90%84%E8%A6%81%E7%B4%A0%E3%82%92%E5%80%8B%E5%88%A5%E3%81%A7excel%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AB%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B"><span class="header-section-number">3.2.2</span> リストの各要素を個別でExcelファイルに保存する</a></li>
-<li><a class="nav-link" href="#%E4%B8%80%E3%81%A4%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E8%A4%87%E6%95%B0%E3%82%B7%E3%83%BC%E3%83%88%E3%81%AB%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B"><span class="header-section-number">3.2.3</span> 一つのファイルの複数シートに保存する</a></li>
+<li><a class="nav-link" href="#we-list-save"><span class="header-section-number">3.2.2</span> リストの各要素を個別でExcelファイルに保存する</a></li>
+<li><a class="nav-link" href="#we-multiple-sheet"><span class="header-section-number">3.2.3</span> 一つのファイルの複数シートに保存する</a></li>
 </ul>
 </li>
 </ul>

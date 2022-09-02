@@ -225,25 +225,57 @@
 ## #   `２００７～２００９` &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<div id="writeonecsv" class="section level2" number="4.2">
+<div id="複数のcsvファイルを読み込む" class="section level2" number="4.2">
 <h2>
-<span class="header-section-number">4.2</span> csvファイルの保存<a class="anchor" aria-label="anchor" href="#writeonecsv"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> 複数のcsvファイルを読み込む<a class="anchor" aria-label="anchor" href="#%E8%A4%87%E6%95%B0%E3%81%AEcsv%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80"><i class="fas fa-link"></i></a>
 </h2>
-<p>csvファイルを保存するには、<code>readr</code>パッケージの<code><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv()</a></code>関数を使います。ただし、出力されたcsvファイルをExcelで開くとたぶん文字化けします。LibreOfficeのCalcであれば、最初にダイアログボックスが開いて読む文字コードを選べます。</p>
-<div id="write_csvを使う" class="section level3" number="4.2.1">
+<p><a href="readexcel.html#re-multiple-excel">2.3</a>で紹介した方法で，読み込みの関数を<code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code>に変えるだけで同じことができますが，もっと簡単な方法もあります。</p>
+<p>まず，csvファイルのパス一覧を取得します。</p>
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">files</span> <span class="op">&lt;-</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"data/複数/"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="va">files</span> <span class="op">&lt;-</span> 
+  <span class="va">files</span> |&gt; 
+  <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_subset.html">str_subset</a></span><span class="op">(</span><span class="st">"csv"</span><span class="op">)</span>
+
+<span class="va">files</span></code></pre></div>
+<pre><code>## [1] "data/複数/Adelie.csv"    "data/複数/Chinstrap.csv"
+## [3] "data/複数/Gentoo.csv"</code></pre>
+<p>この3つのcsvファイルを一気に読み込んで縦につなげたいとします。</p>
+<p>そして，<code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code>の第一引数にパス一覧オブジェクトを入れ，<code>id =</code>引数にファイル名の情報を示す列の名前（ここでは<code>file_name</code>）を決めるだけです。</p>
+<p>`</p>
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">files</span>, id <span class="op">=</span> <span class="st">"file_name"</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 344 × 9
+##   file_name           species island bill_length_mm bill_depth_mm
+##   &lt;chr&gt;               &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 data/複数/Adelie.c… Adelie  Torge…           39.1          18.7
+## 2 data/複数/Adelie.c… Adelie  Torge…           39.5          17.4
+## 3 data/複数/Adelie.c… Adelie  Torge…           40.3          18  
+## # … with 341 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   year &lt;dbl&gt;</code></pre>
+</div>
+<div id="writeonecsv" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> csvファイルの保存<a class="anchor" aria-label="anchor" href="#writeonecsv"><i class="fas fa-link"></i></a>
+</h2>
+<p>csvファイルを保存するには、<code>readr</code>パッケージの<code><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv()</a></code>関数を使います。ただし、出力されたcsvファイルをExcelでそのまま開くとたぶん文字化けするので，インポートなどの操作が必要かもしれません。LibreOfficeのCalcであれば、最初にダイアログボックスが開いて読む文字コードを選べます。</p>
+<div id="write_csvを使う" class="section level3" number="4.3.1">
 <h3>
-<span class="header-section-number">4.2.1</span> write_csv()を使う<a class="anchor" aria-label="anchor" href="#write_csv%E3%82%92%E4%BD%BF%E3%81%86"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3.1</span> write_csv()を使う<a class="anchor" aria-label="anchor" href="#write_csv%E3%82%92%E4%BD%BF%E3%81%86"><i class="fas fa-link"></i></a>
 </h3>
 <p>先ほど読みこんだ<code>df_csv</code>と、保存先を<code>""</code>中に指定します。</p>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">df_csv</span>, <span class="st">"out/df_csv_utf8.csv"</span><span class="op">)</span></code></pre></div>
 <div style="page-break-after: always;"></div>
-<div id="excelで開いても読めるように" class="section level4" number="4.2.1.1">
+<div id="excelで開いても読めるように" class="section level4" number="4.3.1.1">
 <h4>
-<span class="header-section-number">4.2.1.1</span> Excelで開いても読めるように<a class="anchor" aria-label="anchor" href="#excel%E3%81%A7%E9%96%8B%E3%81%84%E3%81%A6%E3%82%82%E8%AA%AD%E3%82%81%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3.1.1</span> Excelで開いても読めるように<a class="anchor" aria-label="anchor" href="#excel%E3%81%A7%E9%96%8B%E3%81%84%E3%81%A6%E3%82%82%E8%AA%AD%E3%82%81%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB"><i class="fas fa-link"></i></a>
 </h4>
 <p>Excelで開いても読める、BOM（byte order mark, バイトオーダーマーク）付きファイルとして出力する関数です。</p>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_excel_csv</a></span><span class="op">(</span><span class="va">df_csv</span>, <span class="st">"out/df_csv_utf8_forxl.csv"</span><span class="op">)</span></code></pre></div>
 
 </div>
@@ -266,8 +298,9 @@
 <li><a class="nav-link" href="#%E5%A4%A7%E3%81%8D%E3%81%84%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E8%AA%AD%E3%82%80%E5%A0%B4%E5%90%88%E3%81%AEvroom"><span class="header-section-number">4.1.5</span> 大きいデータを読む場合のvroom</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#%E8%A4%87%E6%95%B0%E3%81%AEcsv%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80"><span class="header-section-number">4.2</span> 複数のcsvファイルを読み込む</a></li>
 <li>
-<a class="nav-link" href="#writeonecsv"><span class="header-section-number">4.2</span> csvファイルの保存</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#write_csv%E3%82%92%E4%BD%BF%E3%81%86"><span class="header-section-number">4.2.1</span> write_csv()を使う</a></li></ul>
+<a class="nav-link" href="#writeonecsv"><span class="header-section-number">4.3</span> csvファイルの保存</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#write_csv%E3%82%92%E4%BD%BF%E3%81%86"><span class="header-section-number">4.3.1</span> write_csv()を使う</a></li></ul>
 </li>
 </ul>
 
