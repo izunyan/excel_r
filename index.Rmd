@@ -55,7 +55,7 @@ knitr::include_graphics("images/cover.png")
 
 Excelファイルをただ読みこむといってもいろんなバリエーションが考えられます。その単なる読みこみプロセスを通じて、Rを使う上で便利な関数や手続きを学ぶこともできるでしょう。**戦いの中で自然に強くなった的な効果**も見込めるかもしれません。
 
-本書の内容は、githubレポジトリの https://github.com/izunyan/excel_r ですべて公開しています。コードやサンプルデータはこちらのレポジトリをダウンロードしてお試しください。pdf版が読みたい方は、以下のページで無料で入手可能です。自力でできる方は、`Build Book`でも作成できます。
+本書の内容は、githubレポジトリの [https://github.com/izunyan/excel_r](https://github.com/izunyan/excel_r) ですべて公開しています。コードやサンプルデータはこちらのレポジトリをダウンロードしてお試しください。pdf版が読みたい方は、以下のページで無料で入手可能です。自力でできる方は、`Build Book`でも作成できます。
 
 * [技術書典マーケットの販売ページ](https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584)
   + https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584
