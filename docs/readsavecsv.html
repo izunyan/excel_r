@@ -120,7 +120,7 @@
 <p>これを読むためには，引数<code>locale = locale(encoding = )</code>でShift-JISのファイルであることを指定する必要があります。</p>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/csv/ペンギン（ひどい列名）ver_cp932.csv"</span>
-         , locale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stringi/man/about_locale.html">locale</a></span><span class="op">(</span>encoding <span class="op">=</span> <span class="st">"cp932"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+         , locale <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/locale.html">locale</a></span><span class="op">(</span>encoding <span class="op">=</span> <span class="st">"cp932"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
 ##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`
 ##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                           &lt;dbl&gt;
@@ -212,7 +212,7 @@
 <p>Shift-JISのファイルは<code>readr</code>と同じように引数で指定します</p>
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">vroom</span><span class="fu">::</span><span class="fu"><a href="https://vroom.r-lib.org/reference/vroom.html">vroom</a></span><span class="op">(</span><span class="st">"data/csv/ペンギン（ひどい列名）ver_cp932.csv"</span>,
-             locale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stringi/man/about_locale.html">locale</a></span><span class="op">(</span>encoding <span class="op">=</span> <span class="st">"cp932"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+             locale <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/locale.html">locale</a></span><span class="op">(</span>encoding <span class="op">=</span> <span class="st">"cp932"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
 ##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`
 ##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                           &lt;dbl&gt;

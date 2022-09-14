@@ -148,14 +148,17 @@
 <h4>
 <span class="header-section-number">2.1.2.2</span> |&gt; とは？<a class="anchor" aria-label="anchor" href="#pipe"><i class="fas fa-link"></i></a>
 </h4>
-<p>「パイプ」と読みます<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;2022年4月以前は&lt;code&gt;%&amp;gt;%&lt;/code&gt;が使われることが多かったのですが，最近では&lt;code&gt;|&amp;gt;&lt;/code&gt;が用いられるケースが増えています。&lt;/p&gt;"><sup>10</sup></a>。処理を重ねてコードに書いていきたい際に重宝し、現代の<code>tidyverse</code>を使ったRのコードに欠かせないものです。たとえば、データフレームdfのspecies列を選択する、という処理の</p>
+<p>「パイプ」と読みます<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;2022年4月以前は&lt;code&gt;%&amp;gt;%&lt;/code&gt;が使われることが多かったのですが，最近では&lt;code&gt;|&amp;gt;&lt;/code&gt;が用いられるケースが増えています。&lt;/p&gt;"><sup>10</sup></a>。処理を重ねてコードに書いていきたい際に重宝し、現代の<code>tidyverse</code>を使ったRのコードに欠かせないものです。まず<code>tidyverse</code>パッケージを読み込みます</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
+<p>たとえば、データフレームdfのspecies列を選択する、という処理の</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">species</span><span class="op">)</span></code></pre></div>
 <p>は</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span></code></pre></div>
 <p>と書けます。 <code>|&gt;</code>の左側にあるものを右側の最初の部分（第1引数）に渡すという働きです。パイプの利点は、いくつもつないで書いていけることです。たとえば、ペンギンの種類別にクチバシの長さの平均値を出したいときには次のようにできます。</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>平均値 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -172,12 +175,10 @@
 <h4>
 <span class="header-section-number">2.1.2.3</span> 全角←→半角を自動で<a class="anchor" aria-label="anchor" href="#re-hidoi-zh"><i class="fas fa-link"></i></a>
 </h4>
-<p><code>stringi</code>パッケージの<code><a href="https://rdrr.io/pkg/stringi/man/stri_trans_nf.html">stri_trans_nfkc()</a></code>関数を使って、変数名で全角-半角のばらつきを統一させます。</p>
-<p>ここでは、変数名をリネームするのに<code>dplyr 1.0.0</code>で登場した<code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with()</a></code>関数を使いました。<code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code>という引数を含めているので、すべての変数に対し、全角文字を含んでいたら半角に直すというコードになります。</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://stringi.gagolewski.com/">stringi</a></span><span class="op">)</span>
-<span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_xlsx</a></span><span class="op">(</span><span class="st">"data/ペンギン（ひどい列名）ver.xlsx"</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_trans_nf.html">stri_trans_nfkc</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>,
+<p><code>stringi</code>パッケージの<code>stri_trans_nfkc()</code>関数を使って、変数名で全角-半角のばらつきを統一させます。<code>stringi</code>パッケージは本書ではここでしか使わないので，一時的にパッケージから関数を呼び出す処理として<strong><code>パッケージ名::関数名()</code></strong>を使います。</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_xlsx</a></span><span class="op">(</span><span class="st">"data/ペンギン（ひどい列名）ver.xlsx"</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span><span class="op">~</span><span class="fu">stringi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_trans_nf.html">stri_trans_nfkc</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>,
               <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
 ##   Species `種 類`  `※島の名前` `1クチバシ 長さ…` `2クチバシ_大…`
@@ -188,9 +189,7 @@
 ## # … with 341 more rows, and 4 more variables:
 ## #   `翼:長さ(mm)` &lt;dbl&gt;, `■体重 単位はg` &lt;dbl&gt;, 女男 &lt;chr&gt;,
 ## #   `2007~2009` &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># ここ1回のみでしかstri_trans_nfkc()を使わないのであれば，パッケージ名を指定して読みだす::を使用して，library(stringi)は書かず，stringi::stri_trans_nfkc()と書いてもよいです。</span></code></pre></div>
-<div style="page-break-after: always;"></div>
+<p>ここでは、変数名をリネームするのに<code>dplyr 1.0.0</code>で登場した<code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with()</a></code>関数を使いました。<code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code>という引数を含めているので、すべての変数に対し、全角文字を含んでいたら半角に直すというコードになります。</p>
 </div>
 <div id="re-hidoi-zhcomb" class="section level4" number="2.1.2.4">
 <h4>
@@ -199,7 +198,7 @@
 <p><code>|&gt;</code> でつなぎ合わせて1つの実行で合わせてしまうこともできます。</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_xlsx</a></span><span class="op">(</span><span class="st">"data/ペンギン（ひどい列名）ver.xlsx"</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_trans_nf.html">stri_trans_nfkc</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>,
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span><span class="op">~</span><span class="fu">stringi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_trans_nf.html">stri_trans_nfkc</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>,
               <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> |&gt; 
     <span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names</a></span><span class="op">(</span>case <span class="op">=</span> <span class="st">"old_janitor"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9

@@ -73,7 +73,13 @@ read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") |>
 
 #### |> とは？ {#pipe}  
   
-「パイプ」と読みます^[2022年4月以前は`%>%`が使われることが多かったのですが，最近では`|>`が用いられるケースが増えています。]。処理を重ねてコードに書いていきたい際に重宝し、現代の`tidyverse`を使ったRのコードに欠かせないものです。たとえば、データフレームdfのspecies列を選択する、という処理の
+「パイプ」と読みます^[2022年4月以前は`%>%`が使われることが多かったのですが，最近では`|>`が用いられるケースが増えています。]。処理を重ねてコードに書いていきたい際に重宝し、現代の`tidyverse`を使ったRのコードに欠かせないものです。まず`tidyverse`パッケージを読み込みます
+
+```{r eval = FALSE}
+library(tidyverse)
+```
+
+たとえば、データフレームdfのspecies列を選択する、という処理の
 
 ```{r eval = FALSE}
 select(df, species)
@@ -102,23 +108,17 @@ df |>
 
 #### 全角←→半角を自動で {#re-hidoi-zh}
 
-`stringi`パッケージの`stri_trans_nfkc()`関数を使って、変数名で全角-半角のばらつきを統一させます。
+`stringi`パッケージの`stri_trans_nfkc()`関数を使って、変数名で全角-半角のばらつきを統一させます。`stringi`パッケージは本書ではここでしか使わないので，一時的にパッケージから関数を呼び出す処理として**`パッケージ名::関数名()`**を使います。
 
+```{r}
+
+read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") |> 
+  rename_with(~stringi::stri_trans_nfkc(.),
+              everything())
+```
 
 ここでは、変数名をリネームするのに`dplyr 1.0.0`で登場した`rename_with()`関数を使いました。`everything()`という引数を含めているので、すべての変数に対し、全角文字を含んでいたら半角に直すというコードになります。
 
-```{r}
-library(stringi)
-read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") |> 
-  rename_with(~stri_trans_nfkc(.),
-              everything())
-
-
-# ここ1回のみでしかstri_trans_nfkc()を使わないのであれば，パッケージ名を指定して読みだす::を使用して，library(stringi)は書かず，stringi::stri_trans_nfkc()と書いてもよいです。
-
-```
-
-\newpage
 
 #### 上記の合わせ技 {#re-hidoi-zhcomb}
 
@@ -126,7 +126,7 @@ read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") |>
 
 ```{r}
 read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") |> 
-  rename_with(~stri_trans_nfkc(.),
+  rename_with(~stringi::stri_trans_nfkc(.),
               everything()) |> 
     clean_names(case = "old_janitor")
 

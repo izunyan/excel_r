@@ -172,7 +172,7 @@ Figure 5.1: skim()の出力
    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">skim_variable</span><span class="op">)</span>, scale <span class="op">=</span> <span class="st">"free"</span><span class="op">)</span></code></pre></div>
-<embed src="excel_r_files/figure-html/unnamed-chunk-67-1.pdf" width="480" type="application/pdf"></embed><p>ただし、ここの場合もっと潤沢な可視化グラフは元データから作成できます。例えば</p>
+<embed src="excel_r_files/figure-html/unnamed-chunk-68-1.pdf" width="480" type="application/pdf"></embed><p>ただし、ここの場合もっと潤沢な可視化グラフは元データから作成できます。例えば</p>
 <div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">種類</span>, <span class="va">bill_length_mm</span>, <span class="va">bill_depth_mm</span>, <span class="va">flipper_length_mm</span>,
@@ -185,7 +185,7 @@ Figure 5.1: skim()の出力
    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span>               <span class="co"># バイオリンプロット</span>
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">variables</span><span class="op">)</span>, scales <span class="op">=</span> <span class="st">"free"</span><span class="op">)</span></code></pre></div>
-<embed src="excel_r_files/figure-html/unnamed-chunk-68-1.pdf" width="384" type="application/pdf"></embed><p>詳しくは特別付録の<a href="https://izunyan.github.io/practice_ggplot2/">ggplot2の辞書</a>を参照ください。</p>
+<embed src="excel_r_files/figure-html/unnamed-chunk-69-1.pdf" width="384" type="application/pdf"></embed><p>詳しくは特別付録の<a href="https://izunyan.github.io/practice_ggplot2/">ggplot2の辞書</a>を参照ください。</p>
 </div>
 </div>
 <div id="dataanal-cor" class="section level2" number="5.2">
@@ -204,7 +204,7 @@ Figure 5.1: skim()の出力
 <code class="sourceCode R"><span class="va">cor_df</span> <span class="op">&lt;-</span> 
 <span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> |&gt; <span class="co"># 数値変数だけにしぼる</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">year</span><span class="op">)</span>                 <span class="co"># 不要なので落とす  </span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">!</span><span class="va">year</span><span class="op">)</span>                 <span class="co"># 不要なので落とす  </span>
 
 
 <span class="fu"><a href="https://corrr.tidymodels.org/reference/correlate.html">correlate</a></span><span class="op">(</span><span class="va">cor_df</span><span class="op">)</span></code></pre></div>
@@ -241,7 +241,7 @@ Figure 5.1: skim()の出力
 <div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://corrr.tidymodels.org/reference/correlate.html">correlate</a></span><span class="op">(</span><span class="va">cor_df</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://corrr.tidymodels.org/reference/rplot.html">rplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<embed src="excel_r_files/figure-html/unnamed-chunk-73-1.pdf" width="480" type="application/pdf"></embed>
+<embed src="excel_r_files/figure-html/unnamed-chunk-74-1.pdf" width="480" type="application/pdf"></embed>
 </div>
 </div>
 </div>
