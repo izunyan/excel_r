@@ -129,7 +129,7 @@ library(corrr)
 cor_df <- 
 df |> 
   select(where(is.numeric)) |> # 数値変数だけにしぼる
-  select(-year)                 # 不要なので落とす  
+  select(!year)                 # 不要なので落とす  
 
 
 correlate(cor_df)

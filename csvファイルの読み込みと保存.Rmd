@@ -106,7 +106,7 @@ R4.2からは，Shift-JISのファイルを読むと日本語が文字化けす�
 
 ### 大きいデータを読む場合のvroom{#rscsv-readone-vroom}
 
-`readr`を速くしたようなパッケージに`vroom`[https://vroom.r-lib.org/]があります。しばらくは別々に開発が進むみたいですが，将来的に統合が考えられてるらしいです。shift-jisの大規模csvファイルを読む際の`fread`に代わる選択肢として有望です
+`readr`を速くしたようなパッケージに`vroom` [https://vroom.r-lib.org/](https://vroom.r-lib.org/)があります。しばらくは別々に開発が進むみたいですが，将来的に統合が考えられてるらしいです。shift-jisの大規模csvファイルを読む際の`fread`に代わる選択肢として有望です
 
 
 ```{r}
@@ -157,8 +157,6 @@ csvファイルを保存するには、`readr`パッケージの`write_csv()`関
 ```{r eval = FALSE}
 write_csv(df_csv, "out/df_csv_utf8.csv")
 ```
-
-\newpage
 
 #### Excelで開いても読めるように {#writeonecsv-excelcsv}
 

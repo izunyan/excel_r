@@ -1,7 +1,7 @@
 ---
 site: bookdown::bookdown_site
-title:  "Rで読むExcelファイル"
-author: "やわらかクジラ"
+# title:  "Rで読むExcelファイル"
+# author: "やわらかクジラ"
 github-repo: izunyan/excel_r
 cover-image: images/cover.png
 documentclass: bxjsbook
@@ -24,13 +24,15 @@ options(tibble_opt)
 
 # はじめに {-#hajimeni}
 
-```{r cover, echo=FALSE, fig.align='center', out.width='60%'}
+```{r cover, eval=FALSE, fig.align='center', include=FALSE, out.width='60%'}
 knitr::include_graphics("images/cover.png")
 ```
 
-* 本webサイトは，技術書典9にて頒布した[Rで読むExcelファイル](https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584)のオンラインバージョン
-* こちらは随時updateされていく予定
-* csvファイルの読み込み部分について，R4.2に対応させました（2022/05/03）
+<!-- * 本webサイトは，技術書典9にて頒布した[Rで読むExcelファイル](https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584)のオンラインバージョン -->
+<!-- * こちらは随時updateされていく予定 -->
+<!-- * csvファイルの読み込み部分について，R4.2に対応させました（2022/05/03） -->
+
+
 
 本書『**Rで読むExcelファイル**』を書こうと思ったのは「RとRStudioを使いたい！と思う人がもっと増えればいいのに」という願いからです。使う人が多くなれば、新しい知識に出会いやすくなりますし、仕事でも使う機会が増える可能性があります。
 
@@ -44,6 +46,13 @@ knitr::include_graphics("images/cover.png")
 
 そこで本書では目的を絞って、R（実際はすべてRStudioから使います）を使いたいと思わせる部分を解説することを目指します。Rでどんな便利なことができるか、入門書などでもあまり深く解説されてない部分にフォーカスして紹介します。
 
+## 技術書典9頒布版からの変更点 {-}
+ * R4.2対応
+   + 特に文字コードの読み込みがデフォルトでUTF-8になる点
+ * パイプ演算子を`%>%`から`|>`に置き換え
+ * 表紙と裏表紙のサイズを適正なものに：B5（JIS）
+ * 軽微な追記
+ * 誤字・脱字・細かい表現を修正
 
 
 ## 本書の特徴 {-}
@@ -53,7 +62,7 @@ knitr::include_graphics("images/cover.png")
 
 Excelファイルをただ読みこむといってもいろんなバリエーションが考えられます。その単なる読みこみプロセスを通じて、Rを使う上で便利な関数や手続きを学ぶこともできるでしょう。**戦いの中で自然に強くなった的な効果**も見込めるかもしれません。
 
-本書の内容は、githubレポジトリの https://github.com/izunyan/excel_r ですべて公開しています。コードやサンプルデータはこちらのレポジトリをダウンロードしてお試しください。pdf版が読みたい方は、以下のページで無料で入手可能です。自力でできる方は、`Build Book`でも作成できます。
+本書の内容は、githubレポジトリの [https://github.com/izunyan/excel_r](https://github.com/izunyan/excel_r) ですべて公開しています。コードやサンプルデータはこちらのレポジトリをダウンロードしてお試しください。pdf版が読みたい方は、以下のページで無料で入手可能です。自力でできる方は、`Build Book`でも作成できます。
 
 * [技術書典マーケットの販売ページ](https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584)
   + https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584
@@ -86,7 +95,7 @@ Excelファイルをただ読みこむといってもいろんなバリエーシ
 
 
 ```{r echo = FALSE}
-# library(tidyverse)
+library(tidyverse)
 # library(writexl)
 # library(janitor)
 
