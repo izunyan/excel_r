@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>4 csvファイルの読み込みと保存 | Rで読むExcelファイル</title>
 <meta name="author" content="やわらかクジラ">
-<meta name="generator" content="bookdown 0.28 with bs4_book()">
+<meta name="generator" content="bookdown 0.29 with bs4_book()">
 <meta property="og:title" content="4 csvファイルの読み込みと保存 | Rで読むExcelファイル">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/cover.png">
@@ -65,9 +65,9 @@
 </h1>
 <p>windows環境で過ごしていて日本語を使うRユーザーにおいては、csvファイルを扱う際に文字コードの違いというつらみ（いわゆる文字化け）に遭遇することが少なくありません。</p>
 <p>出会う可能性が高い文字コードには、大きく<code>cp932（Shift-JIS）</code>と<code>UTF-8</code>という形式があり、一般的に業務で読みこもうとするファイルは前者であることが多いことを知っておくと役に立ちます。</p>
-<div id="一つのcsvファイルを読み込む" class="section level2" number="4.1">
+<div id="rscsv-readone" class="section level2" number="4.1">
 <h2>
-<span class="header-section-number">4.1</span> 一つのcsvファイルを読み込む<a class="anchor" aria-label="anchor" href="#%E4%B8%80%E3%81%A4%E3%81%AEcsv%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1</span> 一つのcsvファイルを読み込む<a class="anchor" aria-label="anchor" href="#rscsv-readone"><i class="fas fa-link"></i></a>
 </h2>
 <p>csvファイルを読みこむには、<code>readr</code>パッケージの<code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code>関数を使います。<code>tidyverse</code>を読み込んだら一緒に読み込まれます。<code>readr</code>では基本的に<code>utf8</code>の読み書きが想定されています。RStudioのメニューで以下の部分をUTF-8に変えておかないと、色々つらい思いをします。</p>
 <ul>
@@ -75,11 +75,11 @@
 <li><code>Tools &gt; Project Options &gt; Code Editing &gt; text encoding:</code></li>
 </ul>
 <p><code>data &gt; csv</code>フォルダ（ここでは<code>&gt;</code>は階層関係を示し、コードでは<code>data/csv/</code>で表現）に入っている「ペンギン（ひどい列名）ver_utf8.csv」を開きます。<code>㊛㊚</code>列のみ、環境依存文字のため、csvにする時点で文字化けています…</p>
-<div id="utf-8でエンコードされたcsvファイル" class="section level3" number="4.1.1">
+<div id="rscsv-readone-utf" class="section level3" number="4.1.1">
 <h3>
-<span class="header-section-number">4.1.1</span> UTF-8でエンコードされたcsvファイル<a class="anchor" aria-label="anchor" href="#utf-8%E3%81%A7%E3%82%A8%E3%83%B3%E3%82%B3%E3%83%BC%E3%83%89%E3%81%95%E3%82%8C%E3%81%9Fcsv%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1.1</span> UTF-8でエンコードされたcsvファイル<a class="anchor" aria-label="anchor" href="#rscsv-readone-utf"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_csv</span> <span class="op">&lt;-</span> 
  <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/csv/ペンギン（ひどい列名）ver_utf8.csv"</span><span class="op">)</span>
 
@@ -95,17 +95,17 @@
 ## #   `■体重　単位はｇ` &lt;dbl&gt;, `㊛㊚` &lt;chr&gt;,
 ## #   `２００７～２００９` &lt;dbl&gt;</code></pre>
 </div>
-<div id="shift-jisでエンコードされたcsvファイル" class="section level3" number="4.1.2">
+<div id="rscsv-readone-sjis" class="section level3" number="4.1.2">
 <h3>
-<span class="header-section-number">4.1.2</span> Shift-JISでエンコードされたcsvファイル<a class="anchor" aria-label="anchor" href="#shift-jis%E3%81%A7%E3%82%A8%E3%83%B3%E3%82%B3%E3%83%BC%E3%83%89%E3%81%95%E3%82%8C%E3%81%9Fcsv%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1.2</span> Shift-JISでエンコードされたcsvファイル<a class="anchor" aria-label="anchor" href="#rscsv-readone-sjis"><i class="fas fa-link"></i></a>
 </h3>
 <p>正確にはShift-JISの拡張版であるcp932でエンコードされたファイルです。Windowsで作られた過去のcsvファイルはこの形式であることが多いです。</p>
-<div id="エラー例" class="section level4" number="4.1.2.1">
+<div id="rscsv-readone-sjiserror" class="section level4" number="4.1.2.1">
 <h4>
-<span class="header-section-number">4.1.2.1</span> 【エラー例】<a class="anchor" aria-label="anchor" href="#%E3%82%A8%E3%83%A9%E3%83%BC%E4%BE%8B"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1.2.1</span> 【エラー例】<a class="anchor" aria-label="anchor" href="#rscsv-readone-sjiserror"><i class="fas fa-link"></i></a>
 </h4>
 <p>以下コードを実行するとエラーが出てきます。</p>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/csv/ペンギン（ひどい列名）ver_cp932.csv"</span><span class="op">)</span></code></pre></div>
 <p>Error in nchar(x, “width”) : invalid multibyte string, element 1</p>
 <!-- 過去コード -->
@@ -113,12 +113,12 @@
 <!--   clean_names(case = "old_janitor") |>  -->
 <!--   select(1:3) # 紙面の都合で最初の3つの変数に限定 -->
 </div>
-<div id="shift-jisのcsvファイルの読み込み方" class="section level4" number="4.1.2.2">
+<div id="rscsv-readone-sjisread" class="section level4" number="4.1.2.2">
 <h4>
-<span class="header-section-number">4.1.2.2</span> Shift-JISのcsvファイルの読み込み方<a class="anchor" aria-label="anchor" href="#shift-jis%E3%81%AEcsv%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF%E6%96%B9"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1.2.2</span> Shift-JISのcsvファイルの読み込み方<a class="anchor" aria-label="anchor" href="#rscsv-readone-sjisread"><i class="fas fa-link"></i></a>
 </h4>
 <p>これを読むためには，引数<code>locale = locale(encoding = )</code>でShift-JISのファイルであることを指定する必要があります。</p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/csv/ペンギン（ひどい列名）ver_cp932.csv"</span>
          , locale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stringi/man/about_locale.html">locale</a></span><span class="op">(</span>encoding <span class="op">=</span> <span class="st">"cp932"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
@@ -134,12 +134,12 @@
 <div style="page-break-after: always;"></div>
 </div>
 </div>
-<div id="read.csvを使う場合" class="section level3" number="4.1.3">
+<div id="rscsv-readone-baseread" class="section level3" number="4.1.3">
 <h3>
-<span class="header-section-number">4.1.3</span> read.csv()を使う場合<a class="anchor" aria-label="anchor" href="#read.csv%E3%82%92%E4%BD%BF%E3%81%86%E5%A0%B4%E5%90%88"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1.3</span> read.csv()を使う場合<a class="anchor" aria-label="anchor" href="#rscsv-readone-baseread"><i class="fas fa-link"></i></a>
 </h3>
 <p>従来のcsvを読む関数<code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code>を使う場合も同様です。R-4.2からはデフォルトでUTF-8を読むようになったため，Shift-JISのファイルを読むためには引数で指定する必要があります。</p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/csv/ペンギン（ひどい列名）ver_cp932.csv"</span>, 
          fileEncoding <span class="op">=</span> <span class="st">"cp932"</span><span class="op">)</span> |&gt;
     <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># データフレームをtibble型にし見やすい出力に</span></code></pre></div>
@@ -156,7 +156,7 @@
 <!-- `read.csv()`を使う場合は引数で`encoding = "cp932"`を指定します -->
 <!-- https://shohei-doi.github.io/quant_polisci/encoding-r.html -->
 <p>UTF-8を読む場合はデフォルトで読めます。</p>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/csv/ペンギン（ひどい列名）ver_utf8.csv"</span><span class="op">)</span> |&gt; 
     <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
@@ -169,14 +169,14 @@
 ## #   X.ｸﾁﾊﾞｼ.大きさ.ｍｍ. &lt;dbl&gt;, 翼.長さ.mm. &lt;int&gt;,
 ## #   X.体重.単位はｇ &lt;int&gt;, X.. &lt;chr&gt;, ２００７.２００９ &lt;int&gt;</code></pre>
 </div>
-<div id="大きいデータならfread" class="section level3" number="4.1.4">
+<div id="rscsv-readone-fread" class="section level3" number="4.1.4">
 <h3>
-<span class="header-section-number">4.1.4</span> 大きいデータならfread()<a class="anchor" aria-label="anchor" href="#%E5%A4%A7%E3%81%8D%E3%81%84%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AA%E3%82%89fread"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1.4</span> 大きいデータならfread()<a class="anchor" aria-label="anchor" href="#rscsv-readone-fread"><i class="fas fa-link"></i></a>
 </h3>
 <p>これまで紹介したcsvファイルを読みこむための関数は、小規模なデータならそんなに時間はかかりませんが、データが数万行×数百列と大きくなってくると、時間がかかるようになります。</p>
 <p>そこで大きく時間を短縮できるのが、<code>data.table</code>パッケージの<code>fread()</code>関数です。</p>
 <p>UTF-8を読む場合はデフォルトで読めます。data.frame形式にするには引数に<code>data.table = FALSE</code>をつけます</p>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="st">"data/csv/ペンギン（ひどい列名）ver_utf8.csv"</span>,
                   data.table <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -192,12 +192,12 @@
 ## #   `２００７～２００９` &lt;int&gt;</code></pre>
 <p>R4.2からは，Shift-JISのファイルを読むと日本語が文字化けするようになってしまいました。現在の所，これは対処不可能みたいです。</p>
 </div>
-<div id="大きいデータを読む場合のvroom" class="section level3" number="4.1.5">
+<div id="rscsv-readone-vroom" class="section level3" number="4.1.5">
 <h3>
-<span class="header-section-number">4.1.5</span> 大きいデータを読む場合のvroom<a class="anchor" aria-label="anchor" href="#%E5%A4%A7%E3%81%8D%E3%81%84%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E8%AA%AD%E3%82%80%E5%A0%B4%E5%90%88%E3%81%AEvroom"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1.5</span> 大きいデータを読む場合のvroom<a class="anchor" aria-label="anchor" href="#rscsv-readone-vroom"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>readr</code>を速くしたようなパッケージに<code>vroom</code>[<a href="https://vroom.r-lib.org/" class="uri">https://vroom.r-lib.org/</a>]があります。しばらくは別々に開発が進むみたいですが，将来的に統合が考えられてるらしいです。shift-jisの大規模csvファイルを読む際の<code>fread</code>に代わる選択肢として有望です</p>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">vroom</span><span class="fu">::</span><span class="fu"><a href="https://vroom.r-lib.org/reference/vroom.html">vroom</a></span><span class="op">(</span><span class="st">"data/csv/ペンギン（ひどい列名）ver_utf8.csv"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
 ##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`
@@ -210,7 +210,7 @@
 ## #   `■体重　単位はｇ` &lt;dbl&gt;, `㊛㊚` &lt;chr&gt;,
 ## #   `２００７～２００９` &lt;dbl&gt;</code></pre>
 <p>Shift-JISのファイルは<code>readr</code>と同じように引数で指定します</p>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">vroom</span><span class="fu">::</span><span class="fu"><a href="https://vroom.r-lib.org/reference/vroom.html">vroom</a></span><span class="op">(</span><span class="st">"data/csv/ペンギン（ひどい列名）ver_cp932.csv"</span>,
              locale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stringi/man/about_locale.html">locale</a></span><span class="op">(</span>encoding <span class="op">=</span> <span class="st">"cp932"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
@@ -225,13 +225,13 @@
 ## #   `２００７～２００９` &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<div id="複数のcsvファイルを読み込む" class="section level2" number="4.2">
+<div id="rscsv-readmulti" class="section level2" number="4.2">
 <h2>
-<span class="header-section-number">4.2</span> 複数のcsvファイルを読み込む<a class="anchor" aria-label="anchor" href="#%E8%A4%87%E6%95%B0%E3%81%AEcsv%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> 複数のcsvファイルを読み込む<a class="anchor" aria-label="anchor" href="#rscsv-readmulti"><i class="fas fa-link"></i></a>
 </h2>
 <p><a href="readexcel.html#re-multiple-excel">2.3</a>で紹介した方法で，読み込みの関数を<code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code>に変えるだけで同じことができますが，もっと簡単な方法もあります。</p>
 <p>まず，csvファイルのパス一覧を取得します。</p>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">files</span> <span class="op">&lt;-</span>
     <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"data/複数/"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
@@ -243,9 +243,9 @@
 <pre><code>## [1] "data/複数/Adelie.csv"    "data/複数/Chinstrap.csv"
 ## [3] "data/複数/Gentoo.csv"</code></pre>
 <p>この3つのcsvファイルを一気に読み込んで縦につなげたいとします。</p>
-<p>そして，<code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code>の第一引数にパス一覧オブジェクトを入れ，<code>id =</code>引数にファイル名の情報を示す列の名前（ここでは<code>file_name</code>）を決めるだけです。</p>
+<p>これは，<code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code>の第一引数にパス一覧オブジェクトを入れ，<code>id =</code>引数にファイル名の情報を示す列の名前（ここでは<code>file_name</code>）を決めるだけです。</p>
 <p>`</p>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">files</span>, id <span class="op">=</span> <span class="st">"file_name"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
 ##   file_name           species island bill_length_mm bill_depth_mm
@@ -262,20 +262,20 @@
 <span class="header-section-number">4.3</span> csvファイルの保存<a class="anchor" aria-label="anchor" href="#writeonecsv"><i class="fas fa-link"></i></a>
 </h2>
 <p>csvファイルを保存するには、<code>readr</code>パッケージの<code><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv()</a></code>関数を使います。ただし、出力されたcsvファイルをExcelでそのまま開くとたぶん文字化けするので，インポートなどの操作が必要かもしれません。LibreOfficeのCalcであれば、最初にダイアログボックスが開いて読む文字コードを選べます。</p>
-<div id="write_csvを使う" class="section level3" number="4.3.1">
+<div id="writeonecsv-writecsv" class="section level3" number="4.3.1">
 <h3>
-<span class="header-section-number">4.3.1</span> write_csv()を使う<a class="anchor" aria-label="anchor" href="#write_csv%E3%82%92%E4%BD%BF%E3%81%86"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3.1</span> write_csv()を使う<a class="anchor" aria-label="anchor" href="#writeonecsv-writecsv"><i class="fas fa-link"></i></a>
 </h3>
 <p>先ほど読みこんだ<code>df_csv</code>と、保存先を<code>""</code>中に指定します。</p>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">df_csv</span>, <span class="st">"out/df_csv_utf8.csv"</span><span class="op">)</span></code></pre></div>
 <div style="page-break-after: always;"></div>
-<div id="excelで開いても読めるように" class="section level4" number="4.3.1.1">
+<div id="writeonecsv-excelcsv" class="section level4" number="4.3.1.1">
 <h4>
-<span class="header-section-number">4.3.1.1</span> Excelで開いても読めるように<a class="anchor" aria-label="anchor" href="#excel%E3%81%A7%E9%96%8B%E3%81%84%E3%81%A6%E3%82%82%E8%AA%AD%E3%82%81%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3.1.1</span> Excelで開いても読めるように<a class="anchor" aria-label="anchor" href="#writeonecsv-excelcsv"><i class="fas fa-link"></i></a>
 </h4>
 <p>Excelで開いても読める、BOM（byte order mark, バイトオーダーマーク）付きファイルとして出力する関数です。</p>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_excel_csv</a></span><span class="op">(</span><span class="va">df_csv</span>, <span class="st">"out/df_csv_utf8_forxl.csv"</span><span class="op">)</span></code></pre></div>
 
 </div>
@@ -290,17 +290,17 @@
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#readsavecsv"><span class="header-section-number">4</span> csvファイルの読み込みと保存</a></li>
 <li>
-<a class="nav-link" href="#%E4%B8%80%E3%81%A4%E3%81%AEcsv%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80"><span class="header-section-number">4.1</span> 一つのcsvファイルを読み込む</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#utf-8%E3%81%A7%E3%82%A8%E3%83%B3%E3%82%B3%E3%83%BC%E3%83%89%E3%81%95%E3%82%8C%E3%81%9Fcsv%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB"><span class="header-section-number">4.1.1</span> UTF-8でエンコードされたcsvファイル</a></li>
-<li><a class="nav-link" href="#shift-jis%E3%81%A7%E3%82%A8%E3%83%B3%E3%82%B3%E3%83%BC%E3%83%89%E3%81%95%E3%82%8C%E3%81%9Fcsv%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB"><span class="header-section-number">4.1.2</span> Shift-JISでエンコードされたcsvファイル</a></li>
-<li><a class="nav-link" href="#read.csv%E3%82%92%E4%BD%BF%E3%81%86%E5%A0%B4%E5%90%88"><span class="header-section-number">4.1.3</span> read.csv()を使う場合</a></li>
-<li><a class="nav-link" href="#%E5%A4%A7%E3%81%8D%E3%81%84%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AA%E3%82%89fread"><span class="header-section-number">4.1.4</span> 大きいデータならfread()</a></li>
-<li><a class="nav-link" href="#%E5%A4%A7%E3%81%8D%E3%81%84%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E8%AA%AD%E3%82%80%E5%A0%B4%E5%90%88%E3%81%AEvroom"><span class="header-section-number">4.1.5</span> 大きいデータを読む場合のvroom</a></li>
+<a class="nav-link" href="#rscsv-readone"><span class="header-section-number">4.1</span> 一つのcsvファイルを読み込む</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#rscsv-readone-utf"><span class="header-section-number">4.1.1</span> UTF-8でエンコードされたcsvファイル</a></li>
+<li><a class="nav-link" href="#rscsv-readone-sjis"><span class="header-section-number">4.1.2</span> Shift-JISでエンコードされたcsvファイル</a></li>
+<li><a class="nav-link" href="#rscsv-readone-baseread"><span class="header-section-number">4.1.3</span> read.csv()を使う場合</a></li>
+<li><a class="nav-link" href="#rscsv-readone-fread"><span class="header-section-number">4.1.4</span> 大きいデータならfread()</a></li>
+<li><a class="nav-link" href="#rscsv-readone-vroom"><span class="header-section-number">4.1.5</span> 大きいデータを読む場合のvroom</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#%E8%A4%87%E6%95%B0%E3%81%AEcsv%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80"><span class="header-section-number">4.2</span> 複数のcsvファイルを読み込む</a></li>
+<li><a class="nav-link" href="#rscsv-readmulti"><span class="header-section-number">4.2</span> 複数のcsvファイルを読み込む</a></li>
 <li>
-<a class="nav-link" href="#writeonecsv"><span class="header-section-number">4.3</span> csvファイルの保存</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#write_csv%E3%82%92%E4%BD%BF%E3%81%86"><span class="header-section-number">4.3.1</span> write_csv()を使う</a></li></ul>
+<a class="nav-link" href="#writeonecsv"><span class="header-section-number">4.3</span> csvファイルの保存</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#writeonecsv-writecsv"><span class="header-section-number">4.3.1</span> write_csv()を使う</a></li></ul>
 </li>
 </ul>
 

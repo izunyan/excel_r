@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>5 データ解析に向けて | Rで読むExcelファイル</title>
 <meta name="author" content="やわらかクジラ">
-<meta name="generator" content="bookdown 0.28 with bs4_book()">
+<meta name="generator" content="bookdown 0.29 with bs4_book()">
 <meta property="og:title" content="5 データ解析に向けて | Rで読むExcelファイル">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/cover.png">
@@ -64,14 +64,14 @@
 <span class="header-section-number">5</span> データ解析に向けて<a class="anchor" aria-label="anchor" href="#dataanal"><i class="fas fa-link"></i></a>
 </h1>
 <p>ここまでの解説で、Excelファイルとcsvファイルの読み込みについて一通り解説してきました。この段階では、まだデータがきれいでなくて、解析に入れないことも多いと思います。</p>
-<div id="要約値や欠損データの確認" class="section level2" number="5.1">
+<div id="dataanal-summarizemissing" class="section level2" number="5.1">
 <h2>
-<span class="header-section-number">5.1</span> 要約値や欠損データの確認<a class="anchor" aria-label="anchor" href="#%E8%A6%81%E7%B4%84%E5%80%A4%E3%82%84%E6%AC%A0%E6%90%8D%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E7%A2%BA%E8%AA%8D"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1</span> 要約値や欠損データの確認<a class="anchor" aria-label="anchor" href="#dataanal-summarizemissing"><i class="fas fa-link"></i></a>
 </h2>
 <p>まずどんなデータがどのように入っているか、欠損値（NA）はどれくらい発生しているか確認することは重要なプロセスです。変数の一覧を要約して確認することが簡単にできる<code>skim</code>パッケージの<code><a href="https://docs.ropensci.org/skimr/reference/skimr-package.html">skimr()</a></code>関数を使って確認してみましょう。データは<a href="readexcel.html#junbiyomikomi">2.1.1</a>で読み込んだ<code>df</code>を使います。</p>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/skimr/">skimr</a></span><span class="op">)</span> <span class="co"># version 2.1.2</span></code></pre></div>
 <div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/skimr/">skimr</a></span><span class="op">)</span> <span class="co"># version 2.1.2</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></code></pre></div>
 
 <div class="figure" style="text-align: center">
@@ -81,14 +81,14 @@ Figure 5.1: skim()の出力
 </p>
 </div>
 <p>データの型が数値である変数（ここでは<code>Variable type:numeric</code>）については、<code>hist</code>列に簡単なヒストグラムが表示されます（図<a href="dataanal.html#fig:skim">5.1</a>）。しかしデータが大量な場合、動作が遅くなります。その場合は、ヒストグラムを描かない以下の関数が使えます。</p>
-<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim_without_charts</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></code></pre></div>
-<div id="結果をexcelファイルに出力する" class="section level3" number="5.1.1">
+<div id="dataanal-outexcel" class="section level3" number="5.1.1">
 <h3>
-<span class="header-section-number">5.1.1</span> 結果をExcelファイルに出力する<a class="anchor" aria-label="anchor" href="#%E7%B5%90%E6%9E%9C%E3%82%92excel%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AB%E5%87%BA%E5%8A%9B%E3%81%99%E3%82%8B"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1.1</span> 結果をExcelファイルに出力する<a class="anchor" aria-label="anchor" href="#dataanal-outexcel"><i class="fas fa-link"></i></a>
 </h3>
 <p><code><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble()</a></code>関数を使うことで、結果を一つのデータフレームにまとめることができます。</p>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res_skim_df</span> <span class="op">&lt;-</span> 
 <span class="fu"><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span>
@@ -111,7 +111,7 @@ Figure 5.1: skim()の出力
 ## #   numeric.p50 &lt;dbl&gt;, numeric.p75 &lt;dbl&gt;, numeric.p100 &lt;dbl&gt;,
 ## #   numeric.hist &lt;chr&gt;</code></pre>
 <p>これで好きなように加工してExcelファイルとして出力することが可能になります。例えば、数値変数だけに絞る場合は</p>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res_skim_df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">skim_type</span>  <span class="op">==</span> <span class="st">"numeric"</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">skim_type</span>, <span class="va">skim_variable</span>,
@@ -125,7 +125,7 @@ Figure 5.1: skim()の出力
 ## 4 numeric   body_mass_g               2       4202.     802.   
 ## 5 numeric   year                      0       2008.       0.818</code></pre>
 <p>また、<code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>を使ってグループ別に上記結果を出すことも可能です。</p>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res_df_num_g</span> <span class="op">&lt;-</span> 
 <span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">種類</span><span class="op">)</span> |&gt; 
@@ -156,15 +156,15 @@ Figure 5.1: skim()の出力
 ## 15 numeric   year              ヒゲ               0       2008. 
 ## # … with 1 more variable: numeric.sd &lt;dbl&gt;</code></pre>
 <p>あとは、以下のように出力するだけです。</p>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">write_xlsx</a></span><span class="op">(</span><span class="va">res_df_num_g</span>, <span class="st">"out/種類別平均値（全数値型変数）.xlsx"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="可視化" class="section level3" number="5.1.2">
+<div id="dataanal-visualize" class="section level3" number="5.1.2">
 <h3>
-<span class="header-section-number">5.1.2</span> 可視化<a class="anchor" aria-label="anchor" href="#%E5%8F%AF%E8%A6%96%E5%8C%96"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1.2</span> 可視化<a class="anchor" aria-label="anchor" href="#dataanal-visualize"><i class="fas fa-link"></i></a>
 </h3>
 <p>さらに<code>ggplot2</code>を使って可視化することも可能になります。</p>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res_df_num_g</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">skim_variable</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bill_length_mm"</span>, <span class="st">"bill_depth_mm"</span>,
                              <span class="st">"flipper_length_mm"</span>, <span class="st">"body_mass_g"</span><span class="op">)</span><span class="op">)</span> |&gt; 
@@ -173,7 +173,7 @@ Figure 5.1: skim()の出力
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">skim_variable</span><span class="op">)</span>, scale <span class="op">=</span> <span class="st">"free"</span><span class="op">)</span></code></pre></div>
 <embed src="excel_r_files/figure-html/unnamed-chunk-67-1.pdf" width="480" type="application/pdf"></embed><p>ただし、ここの場合もっと潤沢な可視化グラフは元データから作成できます。例えば</p>
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">種類</span>, <span class="va">bill_length_mm</span>, <span class="va">bill_depth_mm</span>, <span class="va">flipper_length_mm</span>,
          <span class="va">body_mass_g</span><span class="op">)</span> |&gt; 
@@ -188,19 +188,19 @@ Figure 5.1: skim()の出力
 <embed src="excel_r_files/figure-html/unnamed-chunk-68-1.pdf" width="384" type="application/pdf"></embed><p>詳しくは特別付録の<a href="https://izunyan.github.io/practice_ggplot2/">ggplot2の辞書</a>を参照ください。</p>
 </div>
 </div>
-<div id="相関の確認" class="section level2" number="5.2">
+<div id="dataanal-cor" class="section level2" number="5.2">
 <h2>
-<span class="header-section-number">5.2</span> 相関の確認<a class="anchor" aria-label="anchor" href="#%E7%9B%B8%E9%96%A2%E3%81%AE%E7%A2%BA%E8%AA%8D"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2</span> 相関の確認<a class="anchor" aria-label="anchor" href="#dataanal-cor"><i class="fas fa-link"></i></a>
 </h2>
 <p>変数同士の相関関係を見たいという要望はビジネス、アカデミックを問わず多く発生すると思います。簡単な相関行列の出し方やその可視化について解説します。ここで便利なパッケージが<code>corrr</code>です。</p>
-<div id="相関行列を出す" class="section level3" number="5.2.1">
+<div id="dataanal-cormatr" class="section level3" number="5.2.1">
 <h3>
-<span class="header-section-number">5.2.1</span> 相関行列を出す<a class="anchor" aria-label="anchor" href="#%E7%9B%B8%E9%96%A2%E8%A1%8C%E5%88%97%E3%82%92%E5%87%BA%E3%81%99"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2.1</span> 相関行列を出す<a class="anchor" aria-label="anchor" href="#dataanal-cormatr"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymodels/corrr">corrr</a></span><span class="op">)</span></code></pre></div>
 <p>まずペンギンデータの中の数値変数だけにしぼります。そして、yearはここでは不要なので落とします。そうして作ったデータフレーム<code>cor_df</code>を、<code><a href="https://corrr.tidymodels.org/reference/correlate.html">correlate()</a></code>関数に入れるだけです。</p>
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cor_df</span> <span class="op">&lt;-</span> 
 <span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> |&gt; <span class="co"># 数値変数だけにしぼる</span>
@@ -217,7 +217,7 @@ Figure 5.1: skim()の出力
 ## 4 body…          0.595        -0.472            0.871      NA</code></pre>
 <p>上側と下型で相関係数が重複しているので、片側だけを残したい場合があります。その際は<code><a href="https://corrr.tidymodels.org/reference/shave.html">shave()</a></code>関数で簡単に重複部分をなくせます。引数に<code>upper = FALSE</code>と入れれば、上側だけにすることもできます。</p>
 <p>相関係数の表示したい桁の指定は、<code><a href="https://corrr.tidymodels.org/reference/fashion.html">fashion()</a></code>関数で、引数に<code>decimals =</code>で桁数を指定することで可能になります。</p>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cormat</span> <span class="op">&lt;-</span> 
 <span class="fu"><a href="https://corrr.tidymodels.org/reference/correlate.html">correlate</a></span><span class="op">(</span><span class="va">cor_df</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://corrr.tidymodels.org/reference/shave.html">shave</a></span><span class="op">(</span><span class="op">)</span> |&gt; 
@@ -230,15 +230,15 @@ Figure 5.1: skim()の出力
 ## 3 flipper_length_mm             .7           -.6                              
 ## 4       body_mass_g             .6           -.5                .9</code></pre>
 <p>あとは、以下のように出力するだけです。</p>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">write_xlsx</a></span><span class="op">(</span><span class="va">cormat</span>, <span class="st">"out/相関行列.xlsx"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="相関行列の可視化" class="section level3" number="5.2.2">
+<div id="dataanal-cormatrvis" class="section level3" number="5.2.2">
 <h3>
-<span class="header-section-number">5.2.2</span> 相関行列の可視化<a class="anchor" aria-label="anchor" href="#%E7%9B%B8%E9%96%A2%E8%A1%8C%E5%88%97%E3%81%AE%E5%8F%AF%E8%A6%96%E5%8C%96"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2.2</span> 相関行列の可視化<a class="anchor" aria-label="anchor" href="#dataanal-cormatrvis"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>corrr</code>パッケージの関数で相関行列の可視化も簡単にできます。</p>
-<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://corrr.tidymodels.org/reference/correlate.html">correlate</a></span><span class="op">(</span><span class="va">cor_df</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://corrr.tidymodels.org/reference/rplot.html">rplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <embed src="excel_r_files/figure-html/unnamed-chunk-73-1.pdf" width="480" type="application/pdf"></embed>
@@ -253,15 +253,15 @@ Figure 5.1: skim()の出力
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#dataanal"><span class="header-section-number">5</span> データ解析に向けて</a></li>
 <li>
-<a class="nav-link" href="#%E8%A6%81%E7%B4%84%E5%80%A4%E3%82%84%E6%AC%A0%E6%90%8D%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E7%A2%BA%E8%AA%8D"><span class="header-section-number">5.1</span> 要約値や欠損データの確認</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%E7%B5%90%E6%9E%9C%E3%82%92excel%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AB%E5%87%BA%E5%8A%9B%E3%81%99%E3%82%8B"><span class="header-section-number">5.1.1</span> 結果をExcelファイルに出力する</a></li>
-<li><a class="nav-link" href="#%E5%8F%AF%E8%A6%96%E5%8C%96"><span class="header-section-number">5.1.2</span> 可視化</a></li>
+<a class="nav-link" href="#dataanal-summarizemissing"><span class="header-section-number">5.1</span> 要約値や欠損データの確認</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#dataanal-outexcel"><span class="header-section-number">5.1.1</span> 結果をExcelファイルに出力する</a></li>
+<li><a class="nav-link" href="#dataanal-visualize"><span class="header-section-number">5.1.2</span> 可視化</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#%E7%9B%B8%E9%96%A2%E3%81%AE%E7%A2%BA%E8%AA%8D"><span class="header-section-number">5.2</span> 相関の確認</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%E7%9B%B8%E9%96%A2%E8%A1%8C%E5%88%97%E3%82%92%E5%87%BA%E3%81%99"><span class="header-section-number">5.2.1</span> 相関行列を出す</a></li>
-<li><a class="nav-link" href="#%E7%9B%B8%E9%96%A2%E8%A1%8C%E5%88%97%E3%81%AE%E5%8F%AF%E8%A6%96%E5%8C%96"><span class="header-section-number">5.2.2</span> 相関行列の可視化</a></li>
+<a class="nav-link" href="#dataanal-cor"><span class="header-section-number">5.2</span> 相関の確認</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#dataanal-cormatr"><span class="header-section-number">5.2.1</span> 相関行列を出す</a></li>
+<li><a class="nav-link" href="#dataanal-cormatrvis"><span class="header-section-number">5.2.2</span> 相関行列の可視化</a></li>
 </ul>
 </li>
 </ul>

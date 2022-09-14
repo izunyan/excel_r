@@ -12,7 +12,7 @@
 ここまでの解説で、Excelファイルとcsvファイルの読み込みについて一通り解説してきました。この段階では、まだデータがきれいでなくて、解析に入れないことも多いと思います。
 
 
-## 要約値や欠損データの確認
+## 要約値や欠損データの確認 {#dataanal-summarizemissing}
 まずどんなデータがどのように入っているか、欠損値（NA）はどれくらい発生しているか確認することは重要なプロセスです。変数の一覧を要約して確認することが簡単にできる`skim`パッケージの`skimr()`関数を使って確認してみましょう。データは\@ref(junbiyomikomi)で読み込んだ`df`を使います。
 
 
@@ -36,7 +36,7 @@ knitr::include_graphics("images/skim.png")
 skim_without_charts(df)
 ```
 
-### 結果をExcelファイルに出力する
+### 結果をExcelファイルに出力する {#dataanal-outexcel}
 
 `as_tibble()`関数を使うことで、結果を一つのデータフレームにまとめることができます。
 
@@ -80,7 +80,7 @@ write_xlsx(res_df_num_g, "out/種類別平均値（全数値型変数）.xlsx")
 ```
 
 
-### 可視化
+### 可視化 {#dataanal-visualize}
 さらに`ggplot2`を使って可視化することも可能になります。
 
 ```{r fig.width = 5, fig.height = 4}
@@ -115,10 +115,10 @@ df |>
 
 
 
-## 相関の確認
+## 相関の確認 {#dataanal-cor}
 変数同士の相関関係を見たいという要望はビジネス、アカデミックを問わず多く発生すると思います。簡単な相関行列の出し方やその可視化について解説します。ここで便利なパッケージが`corrr`です。
 
-### 相関行列を出す
+### 相関行列を出す {#dataanal-cormatr}
 ```{r}
 library(corrr)
 ```
@@ -155,7 +155,7 @@ cormat
 write_xlsx(cormat, "out/相関行列.xlsx")
 ```
 
-### 相関行列の可視化
+### 相関行列の可視化 {#dataanal-cormatrvis}
 
 `corrr`パッケージの関数で相関行列の可視化も簡単にできます。
 

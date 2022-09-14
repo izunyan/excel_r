@@ -20,6 +20,6 @@ knitr::include_graphics("images/project.png")
 
 ざっくり説明すると、データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコード、出力をまとめておき、そのフォルダをプロジェクトとして設定するのです。これにより、ファイルの読み書きの際の場所指定をいちいち意識しないで作業できるようになります。
 
-したがって、本書に出てくる内容をご自身のPC上で再現するには、Githubレポジトリhttps://github.com/izunyan/excel_r をダウンロードして、その中にある`excel_r.Rproj`ファイルを実行すればお手軽です。
+したがって、本書に出てくる内容をご自身のPC上で再現するには、Githubレポジトリ[https://github.com/izunyan/excel_r](https://github.com/izunyan/excel_r) をダウンロードして、その中にある`excel_r.Rproj`ファイルを実行すればお手軽です。
 
 詳しくは、先述のR for Data Scienceでの[解説](https://r4ds.had.co.nz/workflow-projects.html)が参考になります。^[https://r4ds.had.co.nz/workflow-projects.html]

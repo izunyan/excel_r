@@ -13,7 +13,7 @@ windows環境で過ごしていて日本語を使うRユーザーにおいては
 
 出会う可能性が高い文字コードには、大きく`cp932（Shift-JIS）`と`UTF-8`という形式があり、一般的に業務で読みこもうとするファイルは前者であることが多いことを知っておくと役に立ちます。
 
-## 一つのcsvファイルを読み込む
+## 一つのcsvファイルを読み込む {#rscsv-readone}
 
 csvファイルを読みこむには、`readr`パッケージの`read_csv()`関数を使います。`tidyverse`を読み込んだら一緒に読み込まれます。`readr`では基本的に`utf8`の読み書きが想定されています。RStudioのメニューで以下の部分をUTF-8に変えておかないと、色々つらい思いをします。
 
@@ -22,7 +22,7 @@ csvファイルを読みこむには、`readr`パッケージの`read_csv()`関�
 
 `data > csv`フォルダ（ここでは`>`は階層関係を示し、コードでは`data/csv/`で表現）に入っている「ペンギン（ひどい列名）ver_utf8.csv」を開きます。`㊛㊚`列のみ、環境依存文字のため、csvにする時点で文字化けています…
 
-### UTF-8でエンコードされたcsvファイル
+### UTF-8でエンコードされたcsvファイル{#rscsv-readone-utf}
 
 ```{r readcsv}
 df_csv <- 
@@ -32,11 +32,11 @@ df_csv
 ``` 
 
 
-### Shift-JISでエンコードされたcsvファイル
+### Shift-JISでエンコードされたcsvファイル{#rscsv-readone-sjis}
 
 正確にはShift-JISの拡張版であるcp932でエンコードされたファイルです。Windowsで作られた過去のcsvファイルはこの形式であることが多いです。
 
-#### 【エラー例】
+#### 【エラー例】{#rscsv-readone-sjiserror}
 
 以下コードを実行するとエラーが出てきます。
 
@@ -52,7 +52,7 @@ Error in nchar(x, "width") : invalid multibyte string, element 1
 <!--   select(1:3) # 紙面の都合で最初の3つの変数に限定 -->
 
 
-#### Shift-JISのcsvファイルの読み込み方 
+#### Shift-JISのcsvファイルの読み込み方 {#rscsv-readone-sjisread}
 
 これを読むためには，引数`locale = locale(encoding = )`でShift-JISのファイルであることを指定する必要があります。
 
@@ -63,7 +63,7 @@ read_csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv"
 
 \newpage
 
-### read.csv()を使う場合
+### read.csv()を使う場合{#rscsv-readone-baseread}
 
 従来のcsvを読む関数`read.csv()`を使う場合も同様です。R-4.2からはデフォルトでUTF-8を読むようになったため，Shift-JISのファイルを読むためには引数で指定する必要があります。
 
@@ -86,7 +86,7 @@ read.csv("data/csv/ペンギン（ひどい列名）ver_utf8.csv") |>
     as_tibble()
 ```
 
-### 大きいデータならfread()
+### 大きいデータならfread(){#rscsv-readone-fread}
 
 これまで紹介したcsvファイルを読みこむための関数は、小規模なデータならそんなに時間はかかりませんが、データが数万行×数百列と大きくなってくると、時間がかかるようになります。
 
@@ -104,7 +104,7 @@ R4.2からは，Shift-JISのファイルを読むと日本語が文字化けす�
 
 
 
-### 大きいデータを読む場合のvroom
+### 大きいデータを読む場合のvroom{#rscsv-readone-vroom}
 
 `readr`を速くしたようなパッケージに`vroom`[https://vroom.r-lib.org/]があります。しばらくは別々に開発が進むみたいですが，将来的に統合が考えられてるらしいです。shift-jisの大規模csvファイルを読む際の`fread`に代わる選択肢として有望です
 
@@ -120,7 +120,7 @@ vroom::vroom("data/csv/ペンギン（ひどい列名）ver_cp932.csv",
              locale = locale(encoding = "cp932"))
 ```
 
-## 複数のcsvファイルを読み込む
+## 複数のcsvファイルを読み込む{#rscsv-readmulti}
 
 \@ref(re-multiple-excel)で紹介した方法で，読み込みの関数を`read_csv()`に変えるだけで同じことができますが，もっと簡単な方法もあります。
 
@@ -139,7 +139,7 @@ files
 
 この3つのcsvファイルを一気に読み込んで縦につなげたいとします。
 
-そして，`read_csv()`の第一引数にパス一覧オブジェクトを入れ，`id =`引数にファイル名の情報を示す列の名前（ここでは`file_name`）を決めるだけです。
+これは，`read_csv()`の第一引数にパス一覧オブジェクトを入れ，`id =`引数にファイル名の情報を示す列の名前（ここでは`file_name`）を決めるだけです。
 
 `
 ```{r}
@@ -150,7 +150,7 @@ read_csv(files, id = "file_name")
 
 csvファイルを保存するには、`readr`パッケージの`write_csv()`関数を使います。ただし、出力されたcsvファイルをExcelでそのまま開くとたぶん文字化けするので，インポートなどの操作が必要かもしれません。LibreOfficeのCalcであれば、最初にダイアログボックスが開いて読む文字コードを選べます。
 
-### write_csv()を使う
+### write_csv()を使う {#writeonecsv-writecsv}
 
 先ほど読みこんだ`df_csv`と、保存先を`""`中に指定します。
 
@@ -160,7 +160,7 @@ write_csv(df_csv, "out/df_csv_utf8.csv")
 
 \newpage
 
-#### Excelで開いても読めるように
+#### Excelで開いても読めるように {#writeonecsv-excelcsv}
 
 Excelで開いても読める、BOM（byte order mark, バイトオーダーマーク）付きファイルとして出力する関数です。
 

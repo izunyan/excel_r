@@ -112,6 +112,10 @@ library(stringi)
 read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") |> 
   rename_with(~stri_trans_nfkc(.),
               everything())
+
+
+# ここ1回のみでしかstri_trans_nfkc()を使わないのであれば，パッケージ名を指定して読みだす::を使用して，library(stringi)は書かず，stringi::stri_trans_nfkc()と書いてもよいです。
+
 ```
 
 \newpage
@@ -272,7 +276,7 @@ df_all <-
 
 ```
 
-#### 作成したデータフレームの確認
+#### 作成したデータフレームの確認 {#dfcheck}
 
 最初の3行と最後の3行だけを表示してどんなものができたか確認します。`dplyr`パッケージの`slice_head()`, `slice_tail()`関数を使って、引数`n =`に表示したい行数を指定することで、最初および最後の数行を取得できます。
 
