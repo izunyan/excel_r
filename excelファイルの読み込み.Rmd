@@ -43,20 +43,20 @@ df  344 obs. of 9 variables
 上の階層のフォルダに行きたいときは、`" "`の中に`../`と打てば可能です。その後にtabキーを押せば上の階層のフォルダが選べます。
 
 
-### 列名（変数名）がひどい場合の読み込み
+### 列名（変数名）がひどい場合の読み込み {#re-hidoi}
 ```{r}
 read_xlsx("data/ペンギン（ひどい列名）ver.xlsx")
 ```
 
 読めることは読めますが、今後のデータ処理を進めるうえで不安が残ります。
 
-#### スペースや記号などを自動的に変換してくれる関数できれいに
+#### スペースや記号などを自動的に変換してくれる関数できれいに {#re-hidoi-ss}
 
 `janitor`パッケージの`clean_names()`関数を使って、列名に入り込んでいるスペースや記号などを安全な記号に変換します。
 
 なお、日本語の列名では、`clean_names()`関数に`case = "old_janitor"`をつけないと読みにくい結果になります。このように、関数の中に追加する情報のことを引数（ひきすう）と言います。引数によってさまざまな条件を変更することが可能になります。
 
-```{r eval = FALSE}
+```{r}
 library(tidyverse)
     # ↑は普通まず最初に読み込むパッケージですが、本書ではここで初めて使います
 library(janitor)
@@ -64,16 +64,16 @@ library(janitor)
 
 
 ```{r}
-read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") %>% 
+read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") |> 
   clean_names(case = "old_janitor")
 ```
 
 
-さて、ここで使われている `%>%` は非常に大事なので解説しておきます。
+さて、ここで使われている `|>` は非常に大事なので解説しておきます。
 
-#### %>% とは？ {#pipe}  
+#### |> とは？ {#pipe}  
   
-「パイプ」と読みます。処理を重ねてコードに書いていきたい際に重宝し、現代の`tidyverse`を使ったRのコードに欠かせないものです。たとえば、データフレームdfのspecies列を選択する、という処理の
+「パイプ」と読みます^[2022年4月以前は`%>%`が使われることが多かったのですが，最近では`|>`が用いられるケースが増えています。]。処理を重ねてコードに書いていきたい際に重宝し、現代の`tidyverse`を使ったRのコードに欠かせないものです。たとえば、データフレームdfのspecies列を選択する、という処理の
 
 ```{r eval = FALSE}
 select(df, species)
@@ -82,25 +82,25 @@ select(df, species)
 は
 
 ```{r eval = FALSE}
-df %>% select(species)
+df |> select(species)
 ```
 
 
-と書けます。 `%>%`の左側にあるものを右側の最初の部分（第1引数）に渡すという働きです。パイプの利点は、いくつもつないで書いていけることです。たとえば、ペンギンの種類別にクチバシの長さの平均値を出したいときには次のようにできます。
+と書けます。 `|>`の左側にあるものを右側の最初の部分（第1引数）に渡すという働きです。パイプの利点は、いくつもつないで書いていけることです。たとえば、ペンギンの種類別にクチバシの長さの平均値を出したいときには次のようにできます。
 
 ```{r}
-df %>% 
-  group_by(species) %>% 
+df |> 
+  group_by(species) |> 
   summarise(平均値 = mean(bill_length_mm, na.rm = TRUE))
                               
 ```
 
-以下では`%>%`を多用していきます。
+以下では`|>`を多用していきます。
 
-なお、ショートカット`ctrl + shit + M`（Macだと`	Cmd + Shift + M`）で出せます。
+なお、ショートカット`ctrl + shit + M`（Macだと`	Cmd + Shift + M`）で出せます^[現時点ではRStudioのデフォルトのショートカットで出るのは`%>%`だが，`|>`に切り替えたい場合は，RStudioの`Tools > Global Options > Code > Editing > use native pipe operator`にチェックを入れます]。
 
 
-#### 全角←→半角を自動で
+#### 全角←→半角を自動で {#re-hidoi-zh}
 
 `stringi`パッケージの`stri_trans_nfkc()`関数を使って、変数名で全角-半角のばらつきを統一させます。
 
@@ -109,31 +109,35 @@ df %>%
 
 ```{r}
 library(stringi)
-read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") %>% 
+read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") |> 
   rename_with(~stri_trans_nfkc(.),
               everything())
+
+
+# ここ1回のみでしかstri_trans_nfkc()を使わないのであれば，パッケージ名を指定して読みだす::を使用して，library(stringi)は書かず，stringi::stri_trans_nfkc()と書いてもよいです。
+
 ```
 
 \newpage
 
-#### 上記の合わせ技
+#### 上記の合わせ技 {#re-hidoi-zhcomb}
 
-`%>%` でつなぎ合わせて1つの実行で合わせてしまうこともできます。
+`|>` でつなぎ合わせて1つの実行で合わせてしまうこともできます。
 
 ```{r}
-read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") %>% 
+read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") |> 
   rename_with(~stri_trans_nfkc(.),
-              everything()) %>% 
+              everything()) |> 
     clean_names(case = "old_janitor")
 
 ```
 
-### 開始行を指定して読み込む
+### 開始行を指定して読み込む {#re-startline}
 
 理想的なデータは1行目に列名が入力されている形ですが、最初の数行が空だったり、文字の説明が入っていたりすることも多いです。そうした場合は、以下のような読み込み結果になります。
 
 ```{r}
-read_xlsx("data/ペンギン（3行空き）.xlsx") %>% 
+read_xlsx("data/ペンギン（3行空き）.xlsx") |> 
   select(1:3) # 紙面の都合のため最初の3列に制限
 ```
 
@@ -146,7 +150,7 @@ read_xlsx("data/ペンギン（3行空き）.xlsx", skip = 3)
 このように、ちゃんと読む込むことができました。
 
 
-### セルを指定して読み込む
+### セルを指定して読み込む {#re-cell}
 
 引数`range =`にセル範囲を指定すれば、そのセル範囲だけを読み込むこともできます。
 
@@ -159,15 +163,15 @@ read_xlsx("data/ペンギン.xlsx", range = "A1:D5")
 詳細は、`?readxl`と打ち込んでヘルプを見るか、readxlの[webサイト](https://readxl.tidyverse.org/) ^[https://readxl.tidyverse.org/]を参照してください。
 
 
-## シートを指定して読み込む
-### シート名の確認
+## シートを指定して読み込む {#re-sheet}
+### シート名の確認 {#re-sheetname}
 複雑なExcelファイルとなると、たくさんのシートが含まれていて、その全容を知るのも一苦労です。Rでは、`readxl`パッケージの`excel_sheets()`関数でシート名の一覧を簡単に取得できます。
 
 ```{r}
 excel_sheets("data/ペンギン（シート別）.xlsx")
 ```
 
-### 普通の読み込み
+### 普通の読み込み {#re-standard}
 
 シートが分かれているExcelファイルをそのまま読みこんでみます。
 
@@ -178,7 +182,7 @@ read_xlsx("data/ペンギン（シート別）.xlsx")
 デフォルトでは一番最初のシートのデータが読みこまれます。ここでは、シート「アデリー」が読み込まれました。
 
 
-### シートを指定した読み込み
+### シートを指定した読み込み {#re-sheet-shitei}
 
 引数の`sheet =`にシート名を指定することで読み込めます。 
 
@@ -210,8 +214,8 @@ path_name <- "data/ペンギン（シート別）.xlsx" # データのパスを�
 
 # シート名を取得しそれぞれから読み込んでリストにまとめる
 df_list <-
-  excel_sheets(path_name) %>%                     
-  set_names() %>%           # 名前付きベクトルにする
+  excel_sheets(path_name) |>                     
+  set_names() |>           # 名前付きベクトルにする
   map(read_excel, path =  path_name)
 
 df_list # 作成したリストの表示
@@ -235,15 +239,15 @@ path_name <- "data/ペンギン（シート別）.xlsx"
 
 ```{r eval = FALSE}
 df_list <-
-  excel_sheets(path_name) %>%                    
-  set_names() %>%                           
+  excel_sheets(path_name) |>                    
+  set_names() |>                           
   map(read_excel, path =  path_name) 
 ```
 
 `excel_sheets()`は上で実行したのと同じです。実行結果はベクトルとして保存されています。`set_names()`は、ベクトルを名前付きベクトルにする働きをします。なので、ここでできるのは、
 
 ```{r}
-excel_sheets(path_name) %>%                    
+excel_sheets(path_name) |>                    
   set_names()
 ```
 
@@ -255,9 +259,9 @@ excel_sheets(path_name) %>%
 ```{r eval=FALSE, include=FALSE}
 # clean_names()も組み合わせる
 df_list <-
-  excel_sheets(path_name) %>%                    
-  set_names() %>%                           
-  map(read_excel, path =  path_name) %>%
+  excel_sheets(path_name) |>                    
+  set_names() |>                           
+  map(read_excel, path =  path_name) |>
   map(clean_names, case = "old_janitor")    # 列名をきれいに
 ```
 
@@ -272,31 +276,31 @@ df_all <-
 
 ```
 
-#### 作成したデータフレームの確認
+#### 作成したデータフレームの確認 {#dfcheck}
 
 最初の3行と最後の3行だけを表示してどんなものができたか確認します。`dplyr`パッケージの`slice_head()`, `slice_tail()`関数を使って、引数`n =`に表示したい行数を指定することで、最初および最後の数行を取得できます。
 
 ```{r}
 # 最初の3行
-df_all %>% slice_head(n = 3)
+df_all |> slice_head(n = 3)
 ```
 
 ```{r}
 # 最後の3行
-df_all %>% slice_tail(n = 3)
+df_all |> slice_tail(n = 3)
 ```
 
 
 一気にやるには`slice()`関数が便利です。`1:3`は1行目から3行目、`(n()-2):n()`は、列数（ただし現在のgroup内）を表す`n()`とそれから-2行した`(n()-2)`で表されています。
 
 ```{r}
-df_all %>% 
+df_all |> 
   slice(1:3, (n()-2):n())
 ```
 
 \newpage
 
-## 複数のExcelファイルを読み込む {#readseveralexcel}
+## 複数のExcelファイルを読み込む {#re-multiple-excel}
 
 それでは、さらにRの恩恵を深く実感できる部分に入ります。読みこみたいExcelファイルが大量にある場合です。これも実務上よく遭遇します。やり方としては、\@ref(dflist)で使った方法とほぼ同じです。
 
@@ -313,7 +317,7 @@ df_Chinstrap <- read_xlsx("data/複数/ヒゲ.xlsx")
 と1つずつ読んでいく方法ですが、これも大量にあったら泣きたくなる作業です。1つ1つファイル名を入力やコピペする間にいくらでもミスが生じます。\@ref(hokan)で紹介した自動補完を使っても、楽しいのは最初だけでしょう。そこで、ファイルを指定するところから極力人の手を介さず進めていく方法を次に解説していきます。
 
 
-### 読み込むファイル名の一覧のオブジェクト作成
+### 読み込むファイル名の一覧のオブジェクト作成 {#re-filename}
 
 まず、読み込みたいファイルが格納されているフォルダのファイル名、およびパス名の一覧を取得します。
 
@@ -331,7 +335,7 @@ files
 
 ```{r}
 files <- 
-  files %>% str_subset("xlsx")
+  files |> str_subset("xlsx")
 
 files
 ```
@@ -348,19 +352,19 @@ ldata
 ここでできた`ldata`は、\@ref(dflist)で作成した`df_list`と同じ構造です。違いはそれぞれのデータフレームの要素名（アデリー、ジェンツー、ヒゲ）が入っていない点です。各要素の上の部分にある名前が`[[1]], [[3]], [[3]]`と表示されています（つまり、1, 2, 3の数値が割り当てられている）。要素名が入っていないのは不便なので、以下で要素名を改めてつけます。
 
 
-#### ファイル名抽出
+#### ファイル名抽出 {#re-extract-filename}
 
 先ほど作成した`files`から、ファイル名部分だけに加工します。`str_replace()`は、`stringr`パッケージの、文字の置換をする関数です。ここでは、拡張子とパス名をそれぞれ`""`、つまり空白に置換しています。
 
 ```{r}
 file_name <- 
-  str_replace(files, ".xlsx", "") %>% 
+  str_replace(files, ".xlsx", "") |> 
   str_replace("data/複数/", "")
 
 file_name
 ```
 
-#### リストの要素名にファイル名を付与
+#### リストの要素名にファイル名を付与 {#re-add-filename}
 
 \@ref(dflist)で使った`set_names()`関数は、リストの要素名を付ける時にも使えます。リスト`ldata`の3つの要素に、`file_name`の中身を割り当てます。
 
@@ -386,7 +390,7 @@ str(ldata,
 bind_rows(ldata, .id = "group")
 ```
 
-### 読み込むファイルが複数フォルダにある場合
+### 読み込むファイルが複数フォルダにある場合 {#re-multiple-dir}
 
 `data/複数`フォルダの中に、さらにフォルダ1～フォルダ3がありました。この中にもそれぞれxlsxファイルが入っていて、それぞれ読み込みたいとします。その場合は、先ほど使った`list.files()`関数の引数、`recursive = TRUE`を追加します。これによって、フォルダの深い階層までもすべて読み込むことが可能になります。
 
@@ -401,7 +405,7 @@ files
 
 ```{r}
 files <- 
-  files %>% str_subset("フォルダ")
+  files |> str_subset("フォルダ")
 ```
 
 あとは\@ref(ikkatsuread)と同じ手順で読み込めます。

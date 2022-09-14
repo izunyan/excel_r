@@ -63,7 +63,7 @@ Excelファイルをただ読みこむといってもいろんなバリエーシ
 
 本書の到達目標は、RでのExcelファイルの読み書きレベルをある程度高める、という所に定めました。その先は是非好きなように可視化なり解析なり進めていただければと思います。とはいえ、そこでお好きなように！と言われても路頭に迷う方もいるかもしれないので、データの内容把握に関して、要約値や欠損値の一覧、簡単な可視化、相関の一覧についても少しだけ解説しました。その一助として、特別付録として本書と並行してまとめた、可視化のための[ggplot2の辞書](https://izunyan.github.io/practice_ggplot2/)（[特別付録について](#huroku)参照）もあります。
 
-なお、データをきれいにする過程（例：前処理、データクリーニング、データクレンジング、データラングリングなど）については多くの説明を要するため、本書の範囲を超えます。これはまた別機会にまとめられたらなと思っています。
+なお、データをきれいにする過程（例：前処理、データクリーニング、データクレンジング、データラングリングなど）については多くの説明を要するため、本書の範囲を超えます。これはまた別機会にまとめられたらなと思っています^[基本の一部ですが，まとめました『がんばらないデータ加工　Rによるくり返し作業入門　前編』 (https://izunyan.github.io/gisho12/)]。
 
 ### 本書の構成 {-#structure} 
 まず\@ref(project)章では、RStudioでファイルを読み書きする際に、最低限知っておいた方がよい知識について解説しておきます。とっつきにくいかもしれませんが、知っておいてよかったと後になって実感する類のものなので、使って慣れていきましょう。  
@@ -79,40 +79,52 @@ Excelファイルをただ読みこむといってもいろんなバリエーシ
 ### 執筆環境 {-}
 * 本書は[bookdown](https://bookdown.org/)にて執筆しました ^[https://bookdown.org/]
 
-* RおよびRStudio、パッケージのバージョン（オンライン版）
+* 表紙のフォントの一部に「あずきフォントB」v1.20を使用しました
 
-* RStudioだけなぜか表示されないので手動で…
-  + RStudio 2022.02.1+461 "Prairie Trillium"
+* Rおよびパッケージのバージョン（オンライン版）
+
 
 
 ```{r echo = FALSE}
-library(tidyverse)
-library(writexl)
-library(janitor)
+# library(tidyverse)
+# library(writexl)
+# library(janitor)
 
 res_si <- 
    sessioninfo::session_info()
 
-res_si$platform %>%
-  stack() %>%
-  tibble::as_tibble() %>%
-  dplyr::relocate(ind) %>%
-  dplyr::mutate(ind = as.character(ind)) %>%
-  dplyr::filter(ind %in% c("version", "os", "system", "date", "rstudio")) %>%
+res_si$platform |>
+  stack() |>
+  tibble::as_tibble() |>
+  dplyr::relocate(ind) |>
+  dplyr::mutate(ind = as.character(ind)) |>
+  dplyr::filter(ind %in% c("version", "os", "system", "date", "rstudio")) |>
   print(n = 10)
-# %>% 
-#   # head(5) %>%
-#   knitr::kable() %>% 
+# |> 
+#   # head(5) |>
+#   knitr::kable() |> 
 #   kableExtra::kable_styling(position = "center")
 
-res_si$packages %>% 
-  tibble::as_tibble() %>% 
-  dplyr::select(package, loadedversion) %>% 
+res_si$packages |> 
+  tibble::as_tibble() |> 
+  dplyr::select(package, loadedversion) |> 
   dplyr::filter(package %in% c("bookdown", "tidyverse", "readxl","writexl"))
-# %>%
-#   knitr::kable() %>% 
+# |>
+#   knitr::kable() |> 
 #   kableExtra::kable_styling(position = "center")
 ```
+
+* RStudioのバージョン
+  + ‘2022.2.1.461’（手動で記入）
+
+
+```{r eval=FALSE, include=FALSE}
+rsinfo <- 
+rstudioapi::versionInfo()
+
+rsinfo$version
+```
+
 
 ## 注意事項など {-}
 * 本書の内容はすべてwindows環境を想定しています。
