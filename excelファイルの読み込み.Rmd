@@ -57,8 +57,6 @@ read_xlsx("data/ペンギン（ひどい列名）ver.xlsx")
 なお、日本語の列名では、`clean_names()`関数に`case = "old_janitor"`をつけないと読みにくい結果になります。このように、関数の中に追加する情報のことを引数（ひきすう）と言います。引数によってさまざまな条件を変更することが可能になります。
 
 ```{r}
-library(tidyverse)
-    # ↑は普通まず最初に読み込むパッケージですが、本書ではここで初めて使います
 library(janitor)
 ```
 
@@ -75,7 +73,7 @@ read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") |>
   
 「パイプ」と読みます^[2022年4月以前は`%>%`が使われることが多かったのですが，最近では`|>`が用いられるケースが増えています。]。処理を重ねてコードに書いていきたい際に重宝し、現代の`tidyverse`を使ったRのコードに欠かせないものです。まず`tidyverse`パッケージを読み込みます
 
-```{r eval = FALSE}
+```{r}
 library(tidyverse)
 ```
 
@@ -113,11 +111,10 @@ df |>
 ```{r}
 
 read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") |> 
-  rename_with(~stringi::stri_trans_nfkc(.),
-              everything())
+  rename_with(~stringi::stri_trans_nfkc(.))
 ```
 
-ここでは、変数名をリネームするのに`dplyr 1.0.0`で登場した`rename_with()`関数を使いました。`everything()`という引数を含めているので、すべての変数に対し、全角文字を含んでいたら半角に直すというコードになります。
+ここでは、変数名をリネームするのに`dplyr 1.0.0`で登場した`rename_with()`関数を使いました。デフォルトで全列対象の`.cols = everything()`という引数が含められているので、すべての変数に対し、全角文字を含んでいたら半角に直すというコードになります。
 
 
 #### 上記の合わせ技 {#re-hidoi-zhcomb}
@@ -126,8 +123,7 @@ read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") |>
 
 ```{r}
 read_xlsx("data/ペンギン（ひどい列名）ver.xlsx") |> 
-  rename_with(~stringi::stri_trans_nfkc(.),
-              everything()) |> 
+  rename_with(~stringi::stri_trans_nfkc(.)) |> 
     clean_names(case = "old_janitor")
 
 ```
