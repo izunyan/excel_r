@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>4 csvファイルの読み込みと保存 | Rで読むExcelファイル</title>
 <meta name="author" content="やわらかクジラ">
-<meta name="generator" content="bookdown 0.29 with bs4_book()">
+<meta name="generator" content="bookdown 0.32 with bs4_book()">
 <meta property="og:title" content="4 csvファイルの読み込みと保存 | Rで読むExcelファイル">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/cover.png">
@@ -85,15 +85,16 @@
 
 <span class="va">df_csv</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
-##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`
-##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                           &lt;dbl&gt;
-## 1 Adelie        アデリー Torgersen                        39.1
-## 2 Adelie        アデリー Torgersen                        39.5
-## 3 Adelie        アデリー Torgersen                        40.3
-## # … with 341 more rows, and 5 more variables:
-## #   `②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）` &lt;dbl&gt;, `翼：長さ(mm)` &lt;dbl&gt;,
-## #   `■体重　単位はｇ` &lt;dbl&gt;, `㊛㊚` &lt;chr&gt;,
-## #   `２００７～２００９` &lt;dbl&gt;</code></pre>
+##   Sｐｅ…¹ `種　類` ※島…²   ①クチ…³ ②ｸﾁﾊﾞ…⁴ 翼：…⁵ ■体重…⁶ `㊛㊚`
+##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; 
+## 1 Adelie  アデリー Torger…    39.1    18.7    181    3750 male  
+## 2 Adelie  アデリー Torger…    39.5    17.4    186    3800 female
+## 3 Adelie  アデリー Torger…    40.3    18      195    3250 female
+## # … with 341 more rows, 1 more variable:
+## #   `２００７～２００９` &lt;dbl&gt;, and abbreviated variable names
+## #   ¹​Sｐｅｃｉｅｓ, ²​`※島の名前`, ³​`①クチバシ　長さ（ｍｍ）`,
+## #   ⁴​`②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）`, ⁵​`翼：長さ(mm)`,
+## #   ⁶​`■体重　単位はｇ`</code></pre>
 </div>
 <div id="rscsv-readone-sjis" class="section level3" number="4.1.2">
 <h3>
@@ -122,15 +123,16 @@
 <code class="sourceCode R"><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/csv/ペンギン（ひどい列名）ver_cp932.csv"</span>
          , locale <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/locale.html">locale</a></span><span class="op">(</span>encoding <span class="op">=</span> <span class="st">"cp932"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
-##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`
-##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                           &lt;dbl&gt;
-## 1 Adelie        アデリー Torgersen                        39.1
-## 2 Adelie        アデリー Torgersen                        39.5
-## 3 Adelie        アデリー Torgersen                        40.3
-## # … with 341 more rows, and 5 more variables:
-## #   `②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）` &lt;dbl&gt;, `翼：長さ(mm)` &lt;dbl&gt;,
-## #   `■体重　単位はｇ` &lt;dbl&gt;, `??` &lt;chr&gt;,
-## #   `２００７～２００９` &lt;dbl&gt;</code></pre>
+##   Sｐｅｃ…¹ 種　…²  ※島…³   ①クチ…⁴ ②ｸﾁﾊﾞ…⁵ 翼：…⁶ ■体重…⁷ `??`  
+##   &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; 
+## 1 Adelie    アデリ… Torger…    39.1    18.7    181    3750 male  
+## 2 Adelie    アデリ… Torger…    39.5    17.4    186    3800 female
+## 3 Adelie    アデリ… Torger…    40.3    18      195    3250 female
+## # … with 341 more rows, 1 more variable:
+## #   `２００７～２００９` &lt;dbl&gt;, and abbreviated variable names
+## #   ¹​Sｐｅｃｉｅｓ, ²​`種　類`, ³​`※島の名前`,
+## #   ⁴​`①クチバシ　長さ（ｍｍ）`, ⁵​`②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）`,
+## #   ⁶​`翼：長さ(mm)`, ⁷​`■体重　単位はｇ`</code></pre>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -144,14 +146,15 @@
          fileEncoding <span class="op">=</span> <span class="st">"cp932"</span><span class="op">)</span> |&gt;
     <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># データフレームをtibble型にし見やすい出力に</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
-##   Sｐｅｃｉｅｓ 種.類    X.島の名前 X.クチバシ.長さ.ｍｍ.
-##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                      &lt;dbl&gt;
-## 1 Adelie        アデリー Torgersen                   39.1
-## 2 Adelie        アデリー Torgersen                   39.5
-## 3 Adelie        アデリー Torgersen                   40.3
-## # … with 341 more rows, and 5 more variables:
-## #   X.ｸﾁﾊﾞｼ.大きさ.ｍｍ. &lt;dbl&gt;, 翼.長さ.mm. &lt;int&gt;,
-## #   X.体重.単位はｇ &lt;int&gt;, X.. &lt;chr&gt;, ２００７.２００９ &lt;int&gt;</code></pre>
+##   Sｐｅｃｉ…¹ 種.類 X.島…²  X.ク…³ X.ｸﾁﾊﾞ…⁴ 翼.長…⁵ X.体…⁶ X..   
+##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;int&gt;  &lt;int&gt; &lt;chr&gt; 
+## 1 Adelie      アデ… Torger…   39.1     18.7     181   3750 male  
+## 2 Adelie      アデ… Torger…   39.5     17.4     186   3800 female
+## 3 Adelie      アデ… Torger…   40.3     18       195   3250 female
+## # … with 341 more rows, 1 more variable:
+## #   ２００７.２００９ &lt;int&gt;, and abbreviated variable names
+## #   ¹​Sｐｅｃｉｅｓ, ²​X.島の名前, ³​X.クチバシ.長さ.ｍｍ.,
+## #   ⁴​X.ｸﾁﾊﾞｼ.大きさ.ｍｍ., ⁵​翼.長さ.mm., ⁶​X.体重.単位はｇ</code></pre>
 <!-- 確認中 -->
 <!-- `read.csv()`を使う場合は引数で`encoding = "cp932"`を指定します -->
 <!-- https://shohei-doi.github.io/quant_polisci/encoding-r.html -->
@@ -160,14 +163,15 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/csv/ペンギン（ひどい列名）ver_utf8.csv"</span><span class="op">)</span> |&gt; 
     <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
-##   Sｐｅｃｉｅｓ 種.類    X.島の名前 X.クチバシ.長さ.ｍｍ.
-##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                      &lt;dbl&gt;
-## 1 Adelie        アデリー Torgersen                   39.1
-## 2 Adelie        アデリー Torgersen                   39.5
-## 3 Adelie        アデリー Torgersen                   40.3
-## # … with 341 more rows, and 5 more variables:
-## #   X.ｸﾁﾊﾞｼ.大きさ.ｍｍ. &lt;dbl&gt;, 翼.長さ.mm. &lt;int&gt;,
-## #   X.体重.単位はｇ &lt;int&gt;, X.. &lt;chr&gt;, ２００７.２００９ &lt;int&gt;</code></pre>
+##   Sｐｅｃｉ…¹ 種.類 X.島…²  X.ク…³ X.ｸﾁﾊﾞ…⁴ 翼.長…⁵ X.体…⁶ X..   
+##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;int&gt;  &lt;int&gt; &lt;chr&gt; 
+## 1 Adelie      アデ… Torger…   39.1     18.7     181   3750 male  
+## 2 Adelie      アデ… Torger…   39.5     17.4     186   3800 female
+## 3 Adelie      アデ… Torger…   40.3     18       195   3250 female
+## # … with 341 more rows, 1 more variable:
+## #   ２００７.２００９ &lt;int&gt;, and abbreviated variable names
+## #   ¹​Sｐｅｃｉｅｓ, ²​X.島の名前, ³​X.クチバシ.長さ.ｍｍ.,
+## #   ⁴​X.ｸﾁﾊﾞｼ.大きさ.ｍｍ., ⁵​翼.長さ.mm., ⁶​X.体重.単位はｇ</code></pre>
 </div>
 <div id="rscsv-readone-fread" class="section level3" number="4.1.4">
 <h3>
@@ -181,15 +185,16 @@
                   data.table <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
-##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`
-##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                           &lt;dbl&gt;
-## 1 Adelie        アデリー Torgersen                        39.1
-## 2 Adelie        アデリー Torgersen                        39.5
-## 3 Adelie        アデリー Torgersen                        40.3
-## # … with 341 more rows, and 5 more variables:
-## #   `②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）` &lt;dbl&gt;, `翼：長さ(mm)` &lt;int&gt;,
-## #   `■体重　単位はｇ` &lt;int&gt;, `㊛㊚` &lt;chr&gt;,
-## #   `２００７～２００９` &lt;int&gt;</code></pre>
+##   Sｐｅ…¹ `種　類` ※島…²   ①クチ…³ ②ｸﾁﾊﾞ…⁴ 翼：…⁵ ■体重…⁶ `㊛㊚`
+##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;int&gt;   &lt;int&gt; &lt;chr&gt; 
+## 1 Adelie  アデリー Torger…    39.1    18.7    181    3750 male  
+## 2 Adelie  アデリー Torger…    39.5    17.4    186    3800 female
+## 3 Adelie  アデリー Torger…    40.3    18      195    3250 female
+## # … with 341 more rows, 1 more variable:
+## #   `２００７～２００９` &lt;int&gt;, and abbreviated variable names
+## #   ¹​Sｐｅｃｉｅｓ, ²​`※島の名前`, ³​`①クチバシ　長さ（ｍｍ）`,
+## #   ⁴​`②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）`, ⁵​`翼：長さ(mm)`,
+## #   ⁶​`■体重　単位はｇ`</code></pre>
 <p>R4.2からは，Shift-JISのファイルを読むと日本語が文字化けするようになってしまいました。現在の所，これは対処不可能みたいです。</p>
 </div>
 <div id="rscsv-readone-vroom" class="section level3" number="4.1.5">
@@ -200,29 +205,31 @@
 <div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">vroom</span><span class="fu">::</span><span class="fu"><a href="https://vroom.r-lib.org/reference/vroom.html">vroom</a></span><span class="op">(</span><span class="st">"data/csv/ペンギン（ひどい列名）ver_utf8.csv"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
-##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`
-##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                           &lt;dbl&gt;
-## 1 Adelie        アデリー Torgersen                        39.1
-## 2 Adelie        アデリー Torgersen                        39.5
-## 3 Adelie        アデリー Torgersen                        40.3
-## # … with 341 more rows, and 5 more variables:
-## #   `②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）` &lt;dbl&gt;, `翼：長さ(mm)` &lt;dbl&gt;,
-## #   `■体重　単位はｇ` &lt;dbl&gt;, `㊛㊚` &lt;chr&gt;,
-## #   `２００７～２００９` &lt;dbl&gt;</code></pre>
+##   Sｐｅ…¹ `種　類` ※島…²   ①クチ…³ ②ｸﾁﾊﾞ…⁴ 翼：…⁵ ■体重…⁶ `㊛㊚`
+##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; 
+## 1 Adelie  アデリー Torger…    39.1    18.7    181    3750 male  
+## 2 Adelie  アデリー Torger…    39.5    17.4    186    3800 female
+## 3 Adelie  アデリー Torger…    40.3    18      195    3250 female
+## # … with 341 more rows, 1 more variable:
+## #   `２００７～２００９` &lt;dbl&gt;, and abbreviated variable names
+## #   ¹​Sｐｅｃｉｅｓ, ²​`※島の名前`, ³​`①クチバシ　長さ（ｍｍ）`,
+## #   ⁴​`②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）`, ⁵​`翼：長さ(mm)`,
+## #   ⁶​`■体重　単位はｇ`</code></pre>
 <p>Shift-JISのファイルは<code>readr</code>と同じように引数で指定します</p>
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">vroom</span><span class="fu">::</span><span class="fu"><a href="https://vroom.r-lib.org/reference/vroom.html">vroom</a></span><span class="op">(</span><span class="st">"data/csv/ペンギン（ひどい列名）ver_cp932.csv"</span>,
              locale <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/locale.html">locale</a></span><span class="op">(</span>encoding <span class="op">=</span> <span class="st">"cp932"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
-##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`
-##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                           &lt;dbl&gt;
-## 1 Adelie        アデリー Torgersen                        39.1
-## 2 Adelie        アデリー Torgersen                        39.5
-## 3 Adelie        アデリー Torgersen                        40.3
-## # … with 341 more rows, and 5 more variables:
-## #   `②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）` &lt;dbl&gt;, `翼：長さ(mm)` &lt;dbl&gt;,
-## #   `■体重　単位はｇ` &lt;dbl&gt;, `??` &lt;chr&gt;,
-## #   `２００７～２００９` &lt;dbl&gt;</code></pre>
+##   Sｐｅｃ…¹ 種　…²  ※島…³   ①クチ…⁴ ②ｸﾁﾊﾞ…⁵ 翼：…⁶ ■体重…⁷ `??`  
+##   &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; 
+## 1 Adelie    アデリ… Torger…    39.1    18.7    181    3750 male  
+## 2 Adelie    アデリ… Torger…    39.5    17.4    186    3800 female
+## 3 Adelie    アデリ… Torger…    40.3    18      195    3250 female
+## # … with 341 more rows, 1 more variable:
+## #   `２００７～２００９` &lt;dbl&gt;, and abbreviated variable names
+## #   ¹​Sｐｅｃｉｅｓ, ²​`種　類`, ³​`※島の名前`,
+## #   ⁴​`①クチバシ　長さ（ｍｍ）`, ⁵​`②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）`,
+## #   ⁶​`翼：長さ(mm)`, ⁷​`■体重　単位はｇ`</code></pre>
 </div>
 </div>
 <div id="rscsv-readmulti" class="section level2" number="4.2">
@@ -248,14 +255,14 @@
 <div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">files</span>, id <span class="op">=</span> <span class="st">"file_name"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
-##   file_name           species island bill_length_mm bill_depth_mm
-##   &lt;chr&gt;               &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
-## 1 data/複数/Adelie.c… Adelie  Torge…           39.1          18.7
-## 2 data/複数/Adelie.c… Adelie  Torge…           39.5          17.4
-## 3 data/複数/Adelie.c… Adelie  Torge…           40.3          18  
-## # … with 341 more rows, and 4 more variables:
-## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
-## #   year &lt;dbl&gt;</code></pre>
+##   file_name  species island bill_…¹ bill_…² flipp…³ body_…⁴ sex  
+##   &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+## 1 data/複数… Adelie  Torge…    39.1    18.7     181    3750 male 
+## 2 data/複数… Adelie  Torge…    39.5    17.4     186    3800 fema…
+## 3 data/複数… Adelie  Torge…    40.3    18       195    3250 fema…
+## # … with 341 more rows, 1 more variable: year &lt;dbl&gt;, and
+## #   abbreviated variable names ¹​bill_length_mm, ²​bill_depth_mm,
+## #   ³​flipper_length_mm, ⁴​body_mass_g</code></pre>
 </div>
 <div id="writeonecsv" class="section level2" number="4.3">
 <h2>

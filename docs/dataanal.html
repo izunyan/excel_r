@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>5 データ解析に向けて | Rで読むExcelファイル</title>
 <meta name="author" content="やわらかクジラ">
-<meta name="generator" content="bookdown 0.29 with bs4_book()">
+<meta name="generator" content="bookdown 0.32 with bs4_book()">
 <meta property="og:title" content="5 データ解析に向けて | Rで読むExcelファイル">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/cover.png">
@@ -96,20 +96,21 @@ Figure 5.1: skim()の出力
 <span class="va">res_skim_df</span> |&gt; 
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>        <span class="co"># 最初の6行を表示</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 17
-##   skim_type skim_variable  n_missing complete_rate character.min
-##   &lt;chr&gt;     &lt;chr&gt;              &lt;int&gt;         &lt;dbl&gt;         &lt;int&gt;
-## 1 character species                0         1                 6
-## 2 character 種類                   0         1                 2
-## 3 character island                 0         1                 5
-## 4 character sex                   11         0.968             4
-## 5 numeric   bill_length_mm         2         0.994            NA
-## 6 numeric   bill_depth_mm          2         0.994            NA
-## # … with 12 more variables: character.max &lt;int&gt;,
-## #   character.empty &lt;int&gt;, character.n_unique &lt;int&gt;,
-## #   character.whitespace &lt;int&gt;, numeric.mean &lt;dbl&gt;,
-## #   numeric.sd &lt;dbl&gt;, numeric.p0 &lt;dbl&gt;, numeric.p25 &lt;dbl&gt;,
-## #   numeric.p50 &lt;dbl&gt;, numeric.p75 &lt;dbl&gt;, numeric.p100 &lt;dbl&gt;,
-## #   numeric.hist &lt;chr&gt;</code></pre>
+##   skim_…¹ skim_…² n_mis…³ compl…⁴ chara…⁵ chara…⁶ chara…⁷ chara…⁸
+##   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;
+## 1 charac… species       0   1           6       9       0       3
+## 2 charac… 種類          0   1           2       5       0       3
+## 3 charac… island        0   1           5       9       0       3
+## 4 charac… sex          11   0.968       4       6       0       2
+## 5 numeric bill_l…       2   0.994      NA      NA      NA      NA
+## 6 numeric bill_d…       2   0.994      NA      NA      NA      NA
+## # … with 9 more variables: character.whitespace &lt;int&gt;,
+## #   numeric.mean &lt;dbl&gt;, numeric.sd &lt;dbl&gt;, numeric.p0 &lt;dbl&gt;,
+## #   numeric.p25 &lt;dbl&gt;, numeric.p50 &lt;dbl&gt;, numeric.p75 &lt;dbl&gt;,
+## #   numeric.p100 &lt;dbl&gt;, numeric.hist &lt;chr&gt;, and abbreviated
+## #   variable names ¹​skim_type, ²​skim_variable, ³​n_missing,
+## #   ⁴​complete_rate, ⁵​character.min, ⁶​character.max,
+## #   ⁷​character.empty, ⁸​character.n_unique</code></pre>
 <p>これで好きなように加工してExcelファイルとして出力することが可能になります。例えば、数値変数だけに絞る場合は</p>
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res_skim_df</span> |&gt; 
@@ -137,24 +138,25 @@ Figure 5.1: skim()の出力
 
 <span class="va">res_df_num_g</span></code></pre></div>
 <pre><code>## # A tibble: 15 × 6
-##    skim_type skim_variable     種類       n_missing numeric.mean
-##    &lt;chr&gt;     &lt;chr&gt;             &lt;chr&gt;          &lt;int&gt;        &lt;dbl&gt;
-##  1 numeric   bill_length_mm    アデリー           1         38.8
-##  2 numeric   bill_length_mm    ジェンツー         1         47.5
-##  3 numeric   bill_length_mm    ヒゲ               0         48.8
-##  4 numeric   bill_depth_mm     アデリー           1         18.3
-##  5 numeric   bill_depth_mm     ジェンツー         1         15.0
-##  6 numeric   bill_depth_mm     ヒゲ               0         18.4
-##  7 numeric   flipper_length_mm アデリー           1        190. 
-##  8 numeric   flipper_length_mm ジェンツー         1        217. 
-##  9 numeric   flipper_length_mm ヒゲ               0        196. 
-## 10 numeric   body_mass_g       アデリー           1       3701. 
-## 11 numeric   body_mass_g       ジェンツー         1       5076. 
-## 12 numeric   body_mass_g       ヒゲ               0       3733. 
-## 13 numeric   year              アデリー           0       2008. 
-## 14 numeric   year              ジェンツー         0       2008. 
-## 15 numeric   year              ヒゲ               0       2008. 
-## # … with 1 more variable: numeric.sd &lt;dbl&gt;</code></pre>
+##    skim_type skim_variable     種類       n_mis…¹ numer…² numer…³
+##    &lt;chr&gt;     &lt;chr&gt;             &lt;chr&gt;        &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+##  1 numeric   bill_length_mm    アデリー         1    38.8   2.66 
+##  2 numeric   bill_length_mm    ジェンツー       1    47.5   3.08 
+##  3 numeric   bill_length_mm    ヒゲ             0    48.8   3.34 
+##  4 numeric   bill_depth_mm     アデリー         1    18.3   1.22 
+##  5 numeric   bill_depth_mm     ジェンツー       1    15.0   0.981
+##  6 numeric   bill_depth_mm     ヒゲ             0    18.4   1.14 
+##  7 numeric   flipper_length_mm アデリー         1   190.    6.54 
+##  8 numeric   flipper_length_mm ジェンツー       1   217.    6.48 
+##  9 numeric   flipper_length_mm ヒゲ             0   196.    7.13 
+## 10 numeric   body_mass_g       アデリー         1  3701.  459.   
+## 11 numeric   body_mass_g       ジェンツー       1  5076.  504.   
+## 12 numeric   body_mass_g       ヒゲ             0  3733.  384.   
+## 13 numeric   year              アデリー         0  2008.    0.822
+## 14 numeric   year              ジェンツー       0  2008.    0.792
+## 15 numeric   year              ヒゲ             0  2008.    0.863
+## # … with abbreviated variable names ¹​n_missing, ²​numeric.mean,
+## #   ³​numeric.sd</code></pre>
 <p>あとは、以下のように出力するだけです。</p>
 <div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">write_xlsx</a></span><span class="op">(</span><span class="va">res_df_num_g</span>, <span class="st">"out/種類別平均値（全数値型変数）.xlsx"</span><span class="op">)</span></code></pre></div>
@@ -203,18 +205,20 @@ Figure 5.1: skim()の出力
 <div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cor_df</span> <span class="op">&lt;-</span> 
 <span class="va">df</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> |&gt; <span class="co"># 数値変数だけにしぼる</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> |&gt; <span class="co"># 数値変数だけにしぼる</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">!</span><span class="va">year</span><span class="op">)</span>                 <span class="co"># 不要なので落とす  </span>
 
 
 <span class="fu"><a href="https://corrr.tidymodels.org/reference/correlate.html">correlate</a></span><span class="op">(</span><span class="va">cor_df</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 5
-##   term  bill_length_mm bill_depth_mm flipper_length_… body_mass_g
-##   &lt;chr&gt;          &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;
-## 1 bill…         NA            -0.235            0.656       0.595
-## 2 bill…         -0.235        NA               -0.584      -0.472
-## 3 flip…          0.656        -0.584           NA           0.871
-## 4 body…          0.595        -0.472            0.871      NA</code></pre>
+##   term              bill_length_mm bill_depth_mm flippe…¹ body_…²
+##   &lt;chr&gt;                      &lt;dbl&gt;         &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+## 1 bill_length_mm            NA            -0.235    0.656   0.595
+## 2 bill_depth_mm             -0.235        NA       -0.584  -0.472
+## 3 flipper_length_mm          0.656        -0.584   NA       0.871
+## 4 body_mass_g                0.595        -0.472    0.871  NA    
+## # … with abbreviated variable names ¹​flipper_length_mm,
+## #   ²​body_mass_g</code></pre>
 <p>上側と下型で相関係数が重複しているので、片側だけを残したい場合があります。その際は<code><a href="https://corrr.tidymodels.org/reference/shave.html">shave()</a></code>関数で簡単に重複部分をなくせます。引数に<code>upper = FALSE</code>と入れれば、上側だけにすることもできます。</p>
 <p>相関係数の表示したい桁の指定は、<code><a href="https://corrr.tidymodels.org/reference/fashion.html">fashion()</a></code>関数で、引数に<code>decimals =</code>で桁数を指定することで可能になります。</p>
 <div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
@@ -241,7 +245,7 @@ Figure 5.1: skim()の出力
 <div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://corrr.tidymodels.org/reference/correlate.html">correlate</a></span><span class="op">(</span><span class="va">cor_df</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://corrr.tidymodels.org/reference/rplot.html">rplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<embed src="excel_r_files/figure-html/unnamed-chunk-74-1.pdf" width="480" type="application/pdf"></embed>
+<embed src="excel_r_files/figure-html/unnamed-chunk-74-1.pdf" width="672" type="application/pdf"></embed>
 </div>
 </div>
 </div>

@@ -159,7 +159,7 @@ write_xlsx(cormat, "out/相関行列.xlsx")
 
 `corrr`パッケージの関数で相関行列の可視化も簡単にできます。
 
-```{r fig.width = 5, fig.height = 4}
+```{r}
 correlate(cor_df) |> 
   rplot()
 ```

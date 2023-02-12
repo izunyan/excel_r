@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>2 Excelファイルの読み込み | Rで読むExcelファイル</title>
 <meta name="author" content="やわらかクジラ">
-<meta name="generator" content="bookdown 0.29 with bs4_book()">
+<meta name="generator" content="bookdown 0.32 with bs4_book()">
 <meta property="og:title" content="2 Excelファイルの読み込み | Rで読むExcelファイル">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/cover.png">
@@ -83,14 +83,14 @@
 
 <span class="va">df</span> <span class="co"># データの表示 </span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
-##   species 種類     island    bill_length_mm bill_depth_mm
-##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;
-## 1 Adelie  アデリー Torgersen           39.1          18.7
-## 2 Adelie  アデリー Torgersen           39.5          17.4
-## 3 Adelie  アデリー Torgersen           40.3          18  
-## # … with 341 more rows, and 4 more variables:
-## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
-## #   year &lt;dbl&gt;</code></pre>
+##   species 種類     island   bill_…¹ bill_…² flipp…³ body_…⁴ sex  
+##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+## 1 Adelie  アデリー Torgers…    39.1    18.7     181    3750 male 
+## 2 Adelie  アデリー Torgers…    39.5    17.4     186    3800 fema…
+## 3 Adelie  アデリー Torgers…    40.3    18       195    3250 fema…
+## # … with 341 more rows, 1 more variable: year &lt;dbl&gt;, and
+## #   abbreviated variable names ¹​bill_length_mm, ²​bill_depth_mm,
+## #   ³​flipper_length_mm, ⁴​body_mass_g</code></pre>
 <p>上記コードを実行すると、RStudioの右上（デフォルトの配置であれば）のEnvironmentタブに、</p>
 <pre><code>df  344 obs. of 9 variables</code></pre>
 <p>という表示が出ると思います。つまり、344行のデータと9列の変数が入っているデータを、<code>df</code>という名前のもの（オブジェクト）としてRに読みこんだ、ということを示しています。<code>df &lt;-</code>の部分がその作業に該当します。<code>&lt;-</code>の右側の内容を左側のオブジェクトに格納するという意味です。ここで読み込まれた形がデータフレーム（<a href="index.html#structure">はじめに&gt;本書の構成</a>の注参照）です。</p>
@@ -110,36 +110,38 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_xlsx</a></span><span class="op">(</span><span class="st">"data/ペンギン（ひどい列名）ver.xlsx"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
-##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`
-##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                           &lt;dbl&gt;
-## 1 Adelie        アデリー Torgersen                        39.1
-## 2 Adelie        アデリー Torgersen                        39.5
-## 3 Adelie        アデリー Torgersen                        40.3
-## # … with 341 more rows, and 5 more variables:
-## #   `②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）` &lt;dbl&gt;, `翼：長さ(mm)` &lt;dbl&gt;,
-## #   `■体重　単位はｇ` &lt;dbl&gt;, `㊛㊚` &lt;chr&gt;,
-## #   `２００７～２００９` &lt;dbl&gt;</code></pre>
+##   Sｐｅ…¹ `種　類` ※島…²   ①クチ…³ ②ｸﾁﾊﾞ…⁴ 翼：…⁵ ■体重…⁶ `㊛㊚`
+##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; 
+## 1 Adelie  アデリー Torger…    39.1    18.7    181    3750 male  
+## 2 Adelie  アデリー Torger…    39.5    17.4    186    3800 female
+## 3 Adelie  アデリー Torger…    40.3    18      195    3250 female
+## # … with 341 more rows, 1 more variable:
+## #   `２００７～２００９` &lt;dbl&gt;, and abbreviated variable names
+## #   ¹​Sｐｅｃｉｅｓ, ²​`※島の名前`, ³​`①クチバシ　長さ（ｍｍ）`,
+## #   ⁴​`②ｸﾁﾊﾞｼ＿大きさ（ｍｍ）`, ⁵​`翼：長さ(mm)`,
+## #   ⁶​`■体重　単位はｇ`</code></pre>
 <p>読めることは読めますが、今後のデータ処理を進めるうえで不安が残ります。</p>
 <div id="re-hidoi-ss" class="section level4" number="2.1.2.1">
 <h4>
 <span class="header-section-number">2.1.2.1</span> スペースや記号などを自動的に変換してくれる関数できれいに<a class="anchor" aria-label="anchor" href="#re-hidoi-ss"><i class="fas fa-link"></i></a>
 </h4>
-<p><code>janitor</code>パッケージの<code><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names()</a></code>関数を使って、列名に入り込んでいるスペースや記号などを安全な記号に変換します。</p>
-<p>なお、日本語の列名では、<code><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names()</a></code>関数に<code>case = "old_janitor"</code>をつけないと読みにくい結果になります。このように、関数の中に追加する情報のことを引数（ひきすう）と言います。引数によってさまざまな条件を変更することが可能になります。</p>
+<p><code>janitor</code>パッケージの<code><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names()</a></code>関数を使って、列名に入り込んでいるスペースや記号などを安全な記号に変換します。</p>
+<p>なお、日本語の列名では、<code><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names()</a></code>関数に<code>case = "old_janitor"</code>をつけないと読みにくい結果になります。このように、関数の中に追加する情報のことを引数（ひきすう）と言います。引数によってさまざまな条件を変更することが可能になります。</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sfirke/janitor">janitor</a></span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_xlsx</a></span><span class="op">(</span><span class="st">"data/ペンギン（ひどい列名）ver.xlsx"</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names</a></span><span class="op">(</span>case <span class="op">=</span> <span class="st">"old_janitor"</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span>case <span class="op">=</span> <span class="st">"old_janitor"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
-##   sｐｅｃｉｅｓ 種_類    x_島の名前 x_クチバシ_長さ_ｍｍ
-##   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;                     &lt;dbl&gt;
-## 1 Adelie        アデリー Torgersen                  39.1
-## 2 Adelie        アデリー Torgersen                  39.5
-## 3 Adelie        アデリー Torgersen                  40.3
-## # … with 341 more rows, and 5 more variables:
-## #   x_ｸﾁﾊﾞｼ_大きさ_ｍｍ &lt;dbl&gt;, 翼_長さ_mm &lt;dbl&gt;,
-## #   x_体重_単位はｇ &lt;dbl&gt;, x &lt;chr&gt;, ２００７_２００９ &lt;dbl&gt;</code></pre>
+##   sｐｅｃｉ…¹ 種_類 x_島…²  x_ク…³ x_ｸﾁﾊﾞ…⁴ 翼_長…⁵ x_体…⁶ x     
+##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; 
+## 1 Adelie      アデ… Torger…   39.1     18.7     181   3750 male  
+## 2 Adelie      アデ… Torger…   39.5     17.4     186   3800 female
+## 3 Adelie      アデ… Torger…   40.3     18       195   3250 female
+## # … with 341 more rows, 1 more variable:
+## #   ２００７_２００９ &lt;dbl&gt;, and abbreviated variable names
+## #   ¹​sｐｅｃｉｅｓ, ²​x_島の名前, ³​x_クチバシ_長さ_ｍｍ,
+## #   ⁴​x_ｸﾁﾊﾞｼ_大きさ_ｍｍ, ⁵​翼_長さ_mm, ⁶​x_体重_単位はｇ</code></pre>
 <p>さて、ここで使われている <code>|&gt;</code> は非常に大事なので解説しておきます。</p>
 </div>
 <div id="pipe" class="section level4" number="2.1.2.2">
@@ -178,14 +180,15 @@
 <code class="sourceCode R"><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_xlsx</a></span><span class="op">(</span><span class="st">"data/ペンギン（ひどい列名）ver.xlsx"</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span><span class="op">~</span><span class="fu">stringi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_trans_nf.html">stri_trans_nfkc</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
-##   Species `種 類`  `※島の名前` `1クチバシ 長さ…` `2クチバシ_大…`
-##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;                   &lt;dbl&gt;           &lt;dbl&gt;
-## 1 Adelie  アデリー Torgersen                39.1            18.7
-## 2 Adelie  アデリー Torgersen                39.5            17.4
-## 3 Adelie  アデリー Torgersen                40.3            18  
-## # … with 341 more rows, and 4 more variables:
-## #   `翼:長さ(mm)` &lt;dbl&gt;, `■体重 単位はg` &lt;dbl&gt;, 女男 &lt;chr&gt;,
-## #   `2007~2009` &lt;dbl&gt;</code></pre>
+##   Species `種 類`  ※島の…¹  1クチ…² 2クチ…³ 翼:長…⁴ ■体…⁵ 女男  
+##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
+## 1 Adelie  アデリー Torgers…    39.1    18.7     181  3750 male  
+## 2 Adelie  アデリー Torgers…    39.5    17.4     186  3800 female
+## 3 Adelie  アデリー Torgers…    40.3    18       195  3250 female
+## # … with 341 more rows, 1 more variable: `2007~2009` &lt;dbl&gt;, and
+## #   abbreviated variable names ¹​`※島の名前`,
+## #   ²​`1クチバシ 長さ(mm)`, ³​`2クチバシ_大きさ(mm)`,
+## #   ⁴​`翼:長さ(mm)`, ⁵​`■体重 単位はg`</code></pre>
 <p>ここでは、変数名をリネームするのに<code>dplyr 1.0.0</code>で登場した<code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with()</a></code>関数を使いました。デフォルトで全列対象の<code>.cols = everything()</code>という引数が含められているので、すべての変数に対し、全角文字を含んでいたら半角に直すというコードになります。</p>
 </div>
 <div id="re-hidoi-zhcomb" class="section level4" number="2.1.2.4">
@@ -196,15 +199,16 @@
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_xlsx</a></span><span class="op">(</span><span class="st">"data/ペンギン（ひどい列名）ver.xlsx"</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span><span class="op">~</span><span class="fu">stringi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_trans_nf.html">stri_trans_nfkc</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> |&gt; 
-    <span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names</a></span><span class="op">(</span>case <span class="op">=</span> <span class="st">"old_janitor"</span><span class="op">)</span></code></pre></div>
+    <span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span>case <span class="op">=</span> <span class="st">"old_janitor"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
-##   species 種_類    x_島の名前 x1クチバシ_長さ_mm x2クチバシ_大き…
-##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;                   &lt;dbl&gt;            &lt;dbl&gt;
-## 1 Adelie  アデリー Torgersen                39.1             18.7
-## 2 Adelie  アデリー Torgersen                39.5             17.4
-## 3 Adelie  アデリー Torgersen                40.3             18  
-## # … with 341 more rows, and 4 more variables: 翼_長さ_mm &lt;dbl&gt;,
-## #   x_体重_単位はg &lt;dbl&gt;, 女男 &lt;chr&gt;, x2007_2009 &lt;dbl&gt;</code></pre>
+##   species 種_類    x_島の…¹ x1ク…² x2クチ…³ 翼_長…⁴ x_体…⁵ 女男  
+##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; 
+## 1 Adelie  アデリー Torgers…   39.1     18.7     181   3750 male  
+## 2 Adelie  アデリー Torgers…   39.5     17.4     186   3800 female
+## 3 Adelie  アデリー Torgers…   40.3     18       195   3250 female
+## # … with 341 more rows, 1 more variable: x2007_2009 &lt;dbl&gt;, and
+## #   abbreviated variable names ¹​x_島の名前, ²​x1クチバシ_長さ_mm,
+## #   ³​x2クチバシ_大きさ_mm, ⁴​翼_長さ_mm, ⁵​x_体重_単位はg</code></pre>
 </div>
 </div>
 <div id="re-startline" class="section level3" number="2.1.3">
@@ -216,23 +220,25 @@
 <code class="sourceCode R"><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_xlsx</a></span><span class="op">(</span><span class="st">"data/ペンギン（3行空き）.xlsx"</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="co"># 紙面の都合のため最初の3列に制限</span></code></pre></div>
 <pre><code>## # A tibble: 346 × 3
-##   ...1    ここに説明とか書いてあるファイル読むのつらいので… ...3 
-##   &lt;chr&gt;   &lt;chr&gt;                                             &lt;chr&gt;
-## 1 &lt;NA&gt;    &lt;NA&gt;                                              &lt;NA&gt; 
-## 2 species island                                            bill…
-## 3 Adelie  Torgersen                                         39.1 
-## # … with 343 more rows</code></pre>
+##   ...1    ここに説明とか書いてあるファイル読むのつらいの…¹ ...3  
+##   &lt;chr&gt;   &lt;chr&gt;                                            &lt;chr&gt; 
+## 1 &lt;NA&gt;    &lt;NA&gt;                                             &lt;NA&gt;  
+## 2 species island                                           bill_…
+## 3 Adelie  Torgersen                                        39.1  
+## # … with 343 more rows, and abbreviated variable name
+## #   ¹​ここに説明とか書いてあるファイル読むのつらいのです</code></pre>
 <p>列名が、セルに内容が入っている行から始まり、他の列名が<code>...1</code>, <code>...3</code>といったものになりました。そしてデータがうまく読み込めていません。これを、指定した行から読み込むには、引数<code>skip =</code>にとばしたい行の数を指定します。</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_xlsx</a></span><span class="op">(</span><span class="st">"data/ペンギン（3行空き）.xlsx"</span>, skip <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 9
-##   species island    bill_length_mm bill_depth_mm flipper_length_…
-##   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
-## 1 Adelie  Torgersen           39.1          18.7              181
-## 2 Adelie  Torgersen           39.5          17.4              186
-## 3 Adelie  Torgersen           40.3          18                195
-## # … with 341 more rows, and 4 more variables: body_mass_g &lt;dbl&gt;,
-## #   sex &lt;chr&gt;, year &lt;dbl&gt;, 種類 &lt;chr&gt;</code></pre>
+##   species island    bill_le…¹ bill_…² flipp…³ body_…⁴ sex    year
+##   &lt;chr&gt;   &lt;chr&gt;         &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;
+## 1 Adelie  Torgersen      39.1    18.7     181    3750 male   2007
+## 2 Adelie  Torgersen      39.5    17.4     186    3800 fema…  2007
+## 3 Adelie  Torgersen      40.3    18       195    3250 fema…  2007
+## # … with 341 more rows, 1 more variable: 種類 &lt;chr&gt;, and
+## #   abbreviated variable names ¹​bill_length_mm, ²​bill_depth_mm,
+## #   ³​flipper_length_mm, ⁴​body_mass_g</code></pre>
 <p>このように、ちゃんと読む込むことができました。</p>
 </div>
 <div id="re-cell" class="section level3" number="2.1.4">
@@ -274,14 +280,14 @@
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_xlsx</a></span><span class="op">(</span><span class="st">"data/ペンギン（シート別）.xlsx"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 152 × 9
-##   species 種類     island    bill_length_mm bill_depth_mm
-##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;
-## 1 Adelie  アデリー Torgersen           39.1          18.7
-## 2 Adelie  アデリー Torgersen           39.5          17.4
-## 3 Adelie  アデリー Torgersen           40.3          18  
-## # … with 149 more rows, and 4 more variables:
-## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
-## #   year &lt;dbl&gt;</code></pre>
+##   species 種類     island   bill_…¹ bill_…² flipp…³ body_…⁴ sex  
+##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+## 1 Adelie  アデリー Torgers…    39.1    18.7     181    3750 male 
+## 2 Adelie  アデリー Torgers…    39.5    17.4     186    3800 fema…
+## 3 Adelie  アデリー Torgers…    40.3    18       195    3250 fema…
+## # … with 149 more rows, 1 more variable: year &lt;dbl&gt;, and
+## #   abbreviated variable names ¹​bill_length_mm, ²​bill_depth_mm,
+## #   ³​flipper_length_mm, ⁴​body_mass_g</code></pre>
 <p>デフォルトでは一番最初のシートのデータが読みこまれます。ここでは、シート「アデリー」が読み込まれました。</p>
 </div>
 <div id="re-sheet-shitei" class="section level3" number="2.2.3">
@@ -292,14 +298,14 @@
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/ペンギン（シート別）.xlsx"</span>, sheet <span class="op">=</span> <span class="st">"ジェンツー"</span> <span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 124 × 9
-##   species 種類       island bill_length_mm bill_depth_mm
-##   &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
-## 1 Gentoo  ジェンツー Biscoe           46.1          13.2
-## 2 Gentoo  ジェンツー Biscoe           50            16.3
-## 3 Gentoo  ジェンツー Biscoe           48.7          14.1
-## # … with 121 more rows, and 4 more variables:
-## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
-## #   year &lt;dbl&gt;</code></pre>
+##   species 種類       island bill_…¹ bill_…² flipp…³ body_…⁴ sex  
+##   &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+## 1 Gentoo  ジェンツー Biscoe    46.1    13.2     211    4500 fema…
+## 2 Gentoo  ジェンツー Biscoe    50      16.3     230    5700 male 
+## 3 Gentoo  ジェンツー Biscoe    48.7    14.1     210    4450 fema…
+## # … with 121 more rows, 1 more variable: year &lt;dbl&gt;, and
+## #   abbreviated variable names ¹​bill_length_mm, ²​bill_depth_mm,
+## #   ³​flipper_length_mm, ⁴​body_mass_g</code></pre>
 </div>
 <div id="dflist" class="section level3" number="2.2.4">
 <h3>
@@ -321,54 +327,54 @@
 <span class="co"># シート名を取得しそれぞれから読み込んでリストにまとめる</span>
 <span class="va">df_list</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="https://readxl.tidyverse.org/reference/excel_sheets.html">excel_sheets</a></span><span class="op">(</span><span class="va">path_name</span><span class="op">)</span> |&gt;                     
-  <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="op">)</span> |&gt;           <span class="co"># 名前付きベクトルにする</span>
+  <span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="op">)</span> |&gt;           <span class="co"># 名前付きベクトルにする</span>
   <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">read_excel</span>, path <span class="op">=</span>  <span class="va">path_name</span><span class="op">)</span>
 
 <span class="va">df_list</span> <span class="co"># 作成したリストの表示</span></code></pre></div>
 <pre><code>## $アデリー
 ## # A tibble: 152 × 9
-##   species 種類     island    bill_length_mm bill_depth_mm
-##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;
-## 1 Adelie  アデリー Torgersen           39.1          18.7
-## 2 Adelie  アデリー Torgersen           39.5          17.4
-## 3 Adelie  アデリー Torgersen           40.3          18  
-## # … with 149 more rows, and 4 more variables:
-## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
-## #   year &lt;dbl&gt;
+##   species 種類     island   bill_…¹ bill_…² flipp…³ body_…⁴ sex  
+##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+## 1 Adelie  アデリー Torgers…    39.1    18.7     181    3750 male 
+## 2 Adelie  アデリー Torgers…    39.5    17.4     186    3800 fema…
+## 3 Adelie  アデリー Torgers…    40.3    18       195    3250 fema…
+## # … with 149 more rows, 1 more variable: year &lt;dbl&gt;, and
+## #   abbreviated variable names ¹​bill_length_mm, ²​bill_depth_mm,
+## #   ³​flipper_length_mm, ⁴​body_mass_g
 ## 
 ## $ジェンツー
 ## # A tibble: 124 × 9
-##   species 種類       island bill_length_mm bill_depth_mm
-##   &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
-## 1 Gentoo  ジェンツー Biscoe           46.1          13.2
-## 2 Gentoo  ジェンツー Biscoe           50            16.3
-## 3 Gentoo  ジェンツー Biscoe           48.7          14.1
-## # … with 121 more rows, and 4 more variables:
-## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
-## #   year &lt;dbl&gt;
+##   species 種類       island bill_…¹ bill_…² flipp…³ body_…⁴ sex  
+##   &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+## 1 Gentoo  ジェンツー Biscoe    46.1    13.2     211    4500 fema…
+## 2 Gentoo  ジェンツー Biscoe    50      16.3     230    5700 male 
+## 3 Gentoo  ジェンツー Biscoe    48.7    14.1     210    4450 fema…
+## # … with 121 more rows, 1 more variable: year &lt;dbl&gt;, and
+## #   abbreviated variable names ¹​bill_length_mm, ²​bill_depth_mm,
+## #   ³​flipper_length_mm, ⁴​body_mass_g
 ## 
 ## $ヒゲ
 ## # A tibble: 68 × 9
-##   species   種類  island bill_length_mm bill_depth_mm
-##   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
-## 1 Chinstrap ヒゲ  Dream            46.5          17.9
-## 2 Chinstrap ヒゲ  Dream            50            19.5
-## 3 Chinstrap ヒゲ  Dream            51.3          19.2
-## # … with 65 more rows, and 4 more variables:
-## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
-## #   year &lt;dbl&gt;</code></pre>
+##   species   種類  island bill_len…¹ bill_…² flipp…³ body_…⁴ sex  
+##   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+## 1 Chinstrap ヒゲ  Dream        46.5    17.9     192    3500 fema…
+## 2 Chinstrap ヒゲ  Dream        50      19.5     196    3900 male 
+## 3 Chinstrap ヒゲ  Dream        51.3    19.2     193    3650 male 
+## # … with 65 more rows, 1 more variable: year &lt;dbl&gt;, and
+## #   abbreviated variable names ¹​bill_length_mm, ²​bill_depth_mm,
+## #   ³​flipper_length_mm, ⁴​body_mass_g</code></pre>
 <p>それぞれのExcelシートから読みこまれた3つのデータ（アデリー、ジェンツー、ヒゲ）はデータフレームとして、<code>df_list</code>にリストと呼ばれる形式にてまとめて格納されています。リストは最初は理解が難しいですが、慣れるとなんでもリストにしたくなるくらい便利なものです。リストの中身を個別に取り出してみてみましょう。</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_list</span><span class="op">$</span><span class="va">ジェンツー</span></code></pre></div>
 <pre><code>## # A tibble: 124 × 9
-##   species 種類       island bill_length_mm bill_depth_mm
-##   &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
-## 1 Gentoo  ジェンツー Biscoe           46.1          13.2
-## 2 Gentoo  ジェンツー Biscoe           50            16.3
-## 3 Gentoo  ジェンツー Biscoe           48.7          14.1
-## # … with 121 more rows, and 4 more variables:
-## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
-## #   year &lt;dbl&gt;</code></pre>
+##   species 種類       island bill_…¹ bill_…² flipp…³ body_…⁴ sex  
+##   &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+## 1 Gentoo  ジェンツー Biscoe    46.1    13.2     211    4500 fema…
+## 2 Gentoo  ジェンツー Biscoe    50      16.3     230    5700 male 
+## 3 Gentoo  ジェンツー Biscoe    48.7    14.1     210    4450 fema…
+## # … with 121 more rows, 1 more variable: year &lt;dbl&gt;, and
+## #   abbreviated variable names ¹​bill_length_mm, ²​bill_depth_mm,
+## #   ³​flipper_length_mm, ⁴​body_mass_g</code></pre>
 <p>これは、<code>df_list</code>というリストの中の、<code>ジェンツー</code>という要素（ここではデータフレーム）を取り出す、というコードです。<code>$</code>が「（左側にくるオブジェクト）の中の」という意味を表しています。自分でコードを打つと、<code>df_list$</code>と打った時点で、中の要素の一覧が表示されるはずなので、そこからクリックして選ぶこともできます。</p>
 <p>それでは、先ほど実行した読み込みコードの解説をします。</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
@@ -377,12 +383,12 @@
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_list</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="https://readxl.tidyverse.org/reference/excel_sheets.html">excel_sheets</a></span><span class="op">(</span><span class="va">path_name</span><span class="op">)</span> |&gt;                    
-  <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="op">)</span> |&gt;                           
+  <span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="op">)</span> |&gt;                           
   <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">read_excel</span>, path <span class="op">=</span>  <span class="va">path_name</span><span class="op">)</span> </code></pre></div>
-<p><code><a href="https://readxl.tidyverse.org/reference/excel_sheets.html">excel_sheets()</a></code>は上で実行したのと同じです。実行結果はベクトルとして保存されています。<code><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names()</a></code>は、ベクトルを名前付きベクトルにする働きをします。なので、ここでできるのは、</p>
+<p><code><a href="https://readxl.tidyverse.org/reference/excel_sheets.html">excel_sheets()</a></code>は上で実行したのと同じです。実行結果はベクトルとして保存されています。<code><a href="https://rlang.r-lib.org/reference/set_names.html">set_names()</a></code>は、ベクトルを名前付きベクトルにする働きをします。なので、ここでできるのは、</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readxl.tidyverse.org/reference/excel_sheets.html">excel_sheets</a></span><span class="op">(</span><span class="va">path_name</span><span class="op">)</span> |&gt;                    
-  <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>##     アデリー   ジェンツー         ヒゲ 
 ##   "アデリー" "ジェンツー"       "ヒゲ"</code></pre>
 <p>です。</p>
@@ -391,10 +397,10 @@
 <h4>
 <span class="header-section-number">2.2.4.1</span> 一つのデータフレームにする<a class="anchor" aria-label="anchor" href="#onedflist"><i class="fas fa-link"></i></a>
 </h4>
-<p><code><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows()</a></code>は、データフレームを縦に連結します。データフレームがリストになったものが引数にくると、それらをすべて縦につなげてくれます。引数<code>.id =</code>で、リストの要素名を変数の値として入れることができるので、どのデータフレームから来たのか識別することが可能になります。ここでは<code>group</code>という名前にしています。</p>
+<p><code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code>は、データフレームを縦に連結します。データフレームがリストになったものが引数にくると、それらをすべて縦につなげてくれます。引数<code>.id =</code>で、リストの要素名を変数の値として入れることができるので、どのデータフレームから来たのか識別することが可能になります。ここでは<code>group</code>という名前にしています。</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_all</span> <span class="op">&lt;-</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span><span class="va">df_list</span>, .id <span class="op">=</span> <span class="st">"group"</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">df_list</span>, .id <span class="op">=</span> <span class="st">"group"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="dfcheck" class="section level4" number="2.2.4.2">
 <h4>
@@ -405,39 +411,42 @@
 <code class="sourceCode R"><span class="co"># 最初の3行</span>
 <span class="va">df_all</span> |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 10
-##   group    species 種類     island   bill_length_mm bill_depth_mm
-##   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;             &lt;dbl&gt;         &lt;dbl&gt;
-## 1 アデリー Adelie  アデリー Torgers…           39.1          18.7
-## 2 アデリー Adelie  アデリー Torgers…           39.5          17.4
-## 3 アデリー Adelie  アデリー Torgers…           40.3          18  
-## # … with 4 more variables: flipper_length_mm &lt;dbl&gt;,
-## #   body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
+##   group    species 種類    island bill_…¹ bill_…² flipp…³ body_…⁴
+##   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 アデリー Adelie  アデリ… Torge…    39.1    18.7     181    3750
+## 2 アデリー Adelie  アデリ… Torge…    39.5    17.4     186    3800
+## 3 アデリー Adelie  アデリ… Torge…    40.3    18       195    3250
+## # … with 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;, and
+## #   abbreviated variable names ¹​bill_length_mm, ²​bill_depth_mm,
+## #   ³​flipper_length_mm, ⁴​body_mass_g</code></pre>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 最後の3行</span>
 <span class="va">df_all</span> |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_tail</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 10
-##   group species   種類  island bill_length_mm bill_depth_mm
-##   &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
-## 1 ヒゲ  Chinstrap ヒゲ  Dream            49.6          18.2
-## 2 ヒゲ  Chinstrap ヒゲ  Dream            50.8          19  
-## 3 ヒゲ  Chinstrap ヒゲ  Dream            50.2          18.7
-## # … with 4 more variables: flipper_length_mm &lt;dbl&gt;,
-## #   body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
+##   group species   種類  island bill_len…¹ bill_…² flipp…³ body_…⁴
+##   &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 ヒゲ  Chinstrap ヒゲ  Dream        49.6    18.2     193    3775
+## 2 ヒゲ  Chinstrap ヒゲ  Dream        50.8    19       210    4100
+## 3 ヒゲ  Chinstrap ヒゲ  Dream        50.2    18.7     198    3775
+## # … with 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;, and
+## #   abbreviated variable names ¹​bill_length_mm, ²​bill_depth_mm,
+## #   ³​flipper_length_mm, ⁴​body_mass_g</code></pre>
 <p>一気にやるには<code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice()</a></code>関数が便利です。<code>1:3</code>は1行目から3行目、<code>(n()-2):n()</code>は、列数（ただし現在のgroup内）を表す<code><a href="https://dplyr.tidyverse.org/reference/context.html">n()</a></code>とそれから-2行した<code>(n()-2)</code>で表されています。</p>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_all</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">2</span><span class="op">)</span><span class="op">:</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 10
-##   group    species   種類     island bill_length_mm bill_depth_mm
-##   &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
-## 1 アデリー Adelie    アデリー Torge…           39.1          18.7
-## 2 アデリー Adelie    アデリー Torge…           39.5          17.4
-## 3 アデリー Adelie    アデリー Torge…           40.3          18  
-## 4 ヒゲ     Chinstrap ヒゲ     Dream            49.6          18.2
-## 5 ヒゲ     Chinstrap ヒゲ     Dream            50.8          19  
-## 6 ヒゲ     Chinstrap ヒゲ     Dream            50.2          18.7
-## # … with 4 more variables: flipper_length_mm &lt;dbl&gt;,
-## #   body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
+##   group    species   種類  island bill_…¹ bill_…² flipp…³ body_…⁴
+##   &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 アデリー Adelie    アデ… Torge…    39.1    18.7     181    3750
+## 2 アデリー Adelie    アデ… Torge…    39.5    17.4     186    3800
+## 3 アデリー Adelie    アデ… Torge…    40.3    18       195    3250
+## 4 ヒゲ     Chinstrap ヒゲ  Dream     49.6    18.2     193    3775
+## 5 ヒゲ     Chinstrap ヒゲ  Dream     50.8    19       210    4100
+## 6 ヒゲ     Chinstrap ヒゲ  Dream     50.2    18.7     198    3775
+## # … with 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;, and
+## #   abbreviated variable names ¹​bill_length_mm, ²​bill_depth_mm,
+## #   ³​flipper_length_mm, ⁴​body_mass_g</code></pre>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -490,37 +499,37 @@
 <span class="va">ldata</span></code></pre></div>
 <pre><code>## [[1]]
 ## # A tibble: 152 × 9
-##   species 種類     island    bill_length_mm bill_depth_mm
-##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;
-## 1 Adelie  アデリー Torgersen           39.1          18.7
-## 2 Adelie  アデリー Torgersen           39.5          17.4
-## 3 Adelie  アデリー Torgersen           40.3          18  
-## # … with 149 more rows, and 4 more variables:
-## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
-## #   year &lt;dbl&gt;
+##   species 種類     island   bill_…¹ bill_…² flipp…³ body_…⁴ sex  
+##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+## 1 Adelie  アデリー Torgers…    39.1    18.7     181    3750 male 
+## 2 Adelie  アデリー Torgers…    39.5    17.4     186    3800 fema…
+## 3 Adelie  アデリー Torgers…    40.3    18       195    3250 fema…
+## # … with 149 more rows, 1 more variable: year &lt;dbl&gt;, and
+## #   abbreviated variable names ¹​bill_length_mm, ²​bill_depth_mm,
+## #   ³​flipper_length_mm, ⁴​body_mass_g
 ## 
 ## [[2]]
 ## # A tibble: 124 × 9
-##   species 種類       island bill_length_mm bill_depth_mm
-##   &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
-## 1 Gentoo  ジェンツー Biscoe           46.1          13.2
-## 2 Gentoo  ジェンツー Biscoe           50            16.3
-## 3 Gentoo  ジェンツー Biscoe           48.7          14.1
-## # … with 121 more rows, and 4 more variables:
-## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
-## #   year &lt;dbl&gt;
+##   species 種類       island bill_…¹ bill_…² flipp…³ body_…⁴ sex  
+##   &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+## 1 Gentoo  ジェンツー Biscoe    46.1    13.2     211    4500 fema…
+## 2 Gentoo  ジェンツー Biscoe    50      16.3     230    5700 male 
+## 3 Gentoo  ジェンツー Biscoe    48.7    14.1     210    4450 fema…
+## # … with 121 more rows, 1 more variable: year &lt;dbl&gt;, and
+## #   abbreviated variable names ¹​bill_length_mm, ²​bill_depth_mm,
+## #   ³​flipper_length_mm, ⁴​body_mass_g
 ## 
 ## [[3]]
 ## # A tibble: 68 × 9
-##   species   種類  island bill_length_mm bill_depth_mm
-##   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
-## 1 Chinstrap ヒゲ  Dream            46.5          17.9
-## 2 Chinstrap ヒゲ  Dream            50            19.5
-## 3 Chinstrap ヒゲ  Dream            51.3          19.2
-## # … with 65 more rows, and 4 more variables:
-## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
-## #   year &lt;dbl&gt;</code></pre>
-<p>ここでできた<code>ldata</code>は、<a href="readexcel.html#dflist">2.2.4</a>で作成した<code>df_list</code>と同じ構造です。違いはそれぞれのデータフレームの要素名（アデリー、ジェンツー、ヒゲ）が入っていない点です。各要素の上の部分にある名前が<code>[[1]], [[3]], [[3]]</code>と表示されています（つまり、1, 2, 3の数値が割り当てられている）。要素名が入っていないのは不便なので、以下で要素名を改めてつけます。</p>
+##   species   種類  island bill_len…¹ bill_…² flipp…³ body_…⁴ sex  
+##   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+## 1 Chinstrap ヒゲ  Dream        46.5    17.9     192    3500 fema…
+## 2 Chinstrap ヒゲ  Dream        50      19.5     196    3900 male 
+## 3 Chinstrap ヒゲ  Dream        51.3    19.2     193    3650 male 
+## # … with 65 more rows, 1 more variable: year &lt;dbl&gt;, and
+## #   abbreviated variable names ¹​bill_length_mm, ²​bill_depth_mm,
+## #   ³​flipper_length_mm, ⁴​body_mass_g</code></pre>
+<p>ここでできた<code>ldata</code>は、<a href="readexcel.html#dflist">2.2.4</a>で作成した<code>df_list</code>と同じ構造です。違いはそれぞれのデータフレームの要素名（アデリー、ジェンツー、ヒゲ）が入っていない点です。各要素の上の部分にある名前が<code>[[1]], [[2]], [[3]]</code>と表示されています（つまり、1, 2, 3の数値が割り当てられている）。要素名が入っていないのは不便なので、以下で要素名を改めてつけます。</p>
 <div id="re-extract-filename" class="section level4" number="2.3.2.1">
 <h4>
 <span class="header-section-number">2.3.2.1</span> ファイル名抽出<a class="anchor" aria-label="anchor" href="#re-extract-filename"><i class="fas fa-link"></i></a>
@@ -538,47 +547,47 @@
 <h4>
 <span class="header-section-number">2.3.2.2</span> リストの要素名にファイル名を付与<a class="anchor" aria-label="anchor" href="#re-add-filename"><i class="fas fa-link"></i></a>
 </h4>
-<p><a href="readexcel.html#dflist">2.2.4</a>で使った<code><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names()</a></code>関数は、リストの要素名を付ける時にも使えます。リスト<code>ldata</code>の3つの要素に、<code>file_name</code>の中身を割り当てます。</p>
+<p><a href="readexcel.html#dflist">2.2.4</a>で使った<code><a href="https://rlang.r-lib.org/reference/set_names.html">set_names()</a></code>関数は、リストの要素名を付ける時にも使えます。リスト<code>ldata</code>の3つの要素に、<code>file_name</code>の中身を割り当てます。</p>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ldata</span> <span class="op">&lt;-</span>
-    <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="va">ldata</span>, <span class="va">file_name</span><span class="op">)</span>
+    <span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="va">ldata</span>, <span class="va">file_name</span><span class="op">)</span>
 
 <span class="va">ldata</span></code></pre></div>
 <pre><code>## $アデリー
 ## # A tibble: 152 × 9
-##   species 種類     island    bill_length_mm bill_depth_mm
-##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;
-## 1 Adelie  アデリー Torgersen           39.1          18.7
-## 2 Adelie  アデリー Torgersen           39.5          17.4
-## 3 Adelie  アデリー Torgersen           40.3          18  
-## # … with 149 more rows, and 4 more variables:
-## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
-## #   year &lt;dbl&gt;
+##   species 種類     island   bill_…¹ bill_…² flipp…³ body_…⁴ sex  
+##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+## 1 Adelie  アデリー Torgers…    39.1    18.7     181    3750 male 
+## 2 Adelie  アデリー Torgers…    39.5    17.4     186    3800 fema…
+## 3 Adelie  アデリー Torgers…    40.3    18       195    3250 fema…
+## # … with 149 more rows, 1 more variable: year &lt;dbl&gt;, and
+## #   abbreviated variable names ¹​bill_length_mm, ²​bill_depth_mm,
+## #   ³​flipper_length_mm, ⁴​body_mass_g
 ## 
 ## $ジェンツー
 ## # A tibble: 124 × 9
-##   species 種類       island bill_length_mm bill_depth_mm
-##   &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
-## 1 Gentoo  ジェンツー Biscoe           46.1          13.2
-## 2 Gentoo  ジェンツー Biscoe           50            16.3
-## 3 Gentoo  ジェンツー Biscoe           48.7          14.1
-## # … with 121 more rows, and 4 more variables:
-## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
-## #   year &lt;dbl&gt;
+##   species 種類       island bill_…¹ bill_…² flipp…³ body_…⁴ sex  
+##   &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+## 1 Gentoo  ジェンツー Biscoe    46.1    13.2     211    4500 fema…
+## 2 Gentoo  ジェンツー Biscoe    50      16.3     230    5700 male 
+## 3 Gentoo  ジェンツー Biscoe    48.7    14.1     210    4450 fema…
+## # … with 121 more rows, 1 more variable: year &lt;dbl&gt;, and
+## #   abbreviated variable names ¹​bill_length_mm, ²​bill_depth_mm,
+## #   ³​flipper_length_mm, ⁴​body_mass_g
 ## 
 ## $ヒゲ
 ## # A tibble: 68 × 9
-##   species   種類  island bill_length_mm bill_depth_mm
-##   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
-## 1 Chinstrap ヒゲ  Dream            46.5          17.9
-## 2 Chinstrap ヒゲ  Dream            50            19.5
-## 3 Chinstrap ヒゲ  Dream            51.3          19.2
-## # … with 65 more rows, and 4 more variables:
-## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
-## #   year &lt;dbl&gt;</code></pre>
+##   species   種類  island bill_len…¹ bill_…² flipp…³ body_…⁴ sex  
+##   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+## 1 Chinstrap ヒゲ  Dream        46.5    17.9     192    3500 fema…
+## 2 Chinstrap ヒゲ  Dream        50      19.5     196    3900 male 
+## 3 Chinstrap ヒゲ  Dream        51.3    19.2     193    3650 male 
+## # … with 65 more rows, 1 more variable: year &lt;dbl&gt;, and
+## #   abbreviated variable names ¹​bill_length_mm, ²​bill_depth_mm,
+## #   ³​flipper_length_mm, ⁴​body_mass_g</code></pre>
 <p>このように、ちゃんと要素に名前が付きました。これらを1つのデータフレームにまとめるには、 <a href="readexcel.html#onedflist">2.2.4.1</a>と同じ手順でできます。</p>
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span><span class="va">ldata</span>, .id <span class="op">=</span> <span class="st">"group"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">ldata</span>, .id <span class="op">=</span> <span class="st">"group"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="re-multiple-dir" class="section level3" number="2.3.3">
